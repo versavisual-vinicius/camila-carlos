@@ -12,8 +12,9 @@ import {
 import { generateFullDossierPdf, generateCeremonialAltarPdf } from "@/app/utils/pdfGenerator";
 import { Header, ActiveTab } from "@/app/components/Header";
 import { PreWeddingSection } from "@/app/components/PreWeddingSection";
-import { WeddingLogisticsSection } from "@/app/components/WeddingLogisticsSection";
-import { ActionBacklogSection } from "@/app/components/ActionBacklogSection";
+import { ClustersSection } from "@/app/components/ClustersSection";
+import { CuratedVendorsSection } from "@/app/components/CuratedVendorsSection";
+import { RoteiroPrdSection } from "@/app/components/RoteiroPrdSection";
 import { LightboxModal } from "@/app/components/LightboxModal";
 import { AddItemDialog } from "@/app/components/AddItemDialog";
 import { ManualDaNoivaModal } from "@/app/components/ManualDaNoivaModal";
@@ -30,10 +31,19 @@ export default function App() {
     return saved !== null ? saved === "dark" : false;
   });
 
-  // Active navigation tab
-  const [activeTab, setActiveTab] = useState<ActiveTab>("pre-wedding");
+  // Active navigation tab (Stitch 4 canonical tabs: elementos, clusters, locais, roteiro)
+  const [activeTab, setActiveTab] = useState<ActiveTab>(() => {
+    const saved = localStorage.getItem("camila_carlos_active_tab");
+    if (saved === "clusters" || saved === "locais" || saved === "roteiro" || saved === "elementos") {
+      return saved;
+    }
+    // Backward compatibility with legacy tabs
+    if (saved === "casamento") return "locais";
+    if (saved === "acoes") return "roteiro";
+    return "elementos";
+  });
 
-  // Moodboard items state
+  // Moodboard items state (58 canonical pre-wedding items + user added)
   const [items, setItems] = useState<PreWeddingItem[]>(() => {
     const saved = localStorage.getItem("camila_carlos_moodboard_items");
     if (saved) {
@@ -115,7 +125,7 @@ export default function App() {
     );
   });
 
-  // Checked criteria for all sections
+  // Checked criteria for planning sections
   const [checkedCriteria, setCheckedCriteria] = useState<Record<string, boolean>>(() => {
     const saved = localStorage.getItem("camila_carlos_criteria");
     if (saved) {
@@ -160,6 +170,11 @@ export default function App() {
     }
   }, [isDarkMode]);
 
+  // Persist active tab
+  useEffect(() => {
+    localStorage.setItem("camila_carlos_active_tab", activeTab);
+  }, [activeTab]);
+
   // Persist items
   useEffect(() => {
     localStorage.setItem("camila_carlos_moodboard_items", JSON.stringify(items));
@@ -197,7 +212,7 @@ export default function App() {
     localStorage.setItem("camila_carlos_focal_point", JSON.stringify(data));
   };
 
-  // Toggle favorite / like
+  // Toggle favorite / bookmark
   const handleToggleLike = (id: string) => {
     setLikedIds((prev) => {
       const isLiked = prev.includes(id);
@@ -205,7 +220,7 @@ export default function App() {
         return prev.filter((item) => item !== id);
       } else {
         toast.success("Foto salva nas favoritas de Camila & Carlos!", {
-          description: "Referência adicionada ao painel de prioridades."
+          description: "Referência adicionada ao painel prioritário do atelier."
         });
         return [...prev, id];
       }
@@ -387,7 +402,7 @@ export default function App() {
     setItems((prev) => [...createdItems, ...prev]);
 
     toast.success(
-      `${createdItems.length} ${createdItems.length === 1 ? "nova foto adicionada" : "novas fotos adicionadas"} ao Moodboard!`,
+      `${createdItems.length} ${createdItems.length === 1 ? "nova referência adicionada" : "novas referências adicionadas"} ao Atelier!`,
       {
         description: "Comprimidas com otimização Retina para o roteiro.",
         duration: 6000,
@@ -428,11 +443,11 @@ export default function App() {
   const pendingShotCount = totalShotCount - completedShotCount;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#121212] text-[#222222] dark:text-[#F7F7F7] transition-colors duration-200 selection:bg-[#ff385c]/20 selection:text-[#ff385c] pb-24 md:pb-0">
+    <div className="min-h-screen bg-surface font-body-md text-on-surface antialiased transition-colors duration-200 pb-24 md:pb-0">
       {/* Toast Notification Provider */}
       <Toaster position="top-center" richColors closeButton />
 
-      {/* Global Header com Stepper de Jornada */}
+      {/* Global Header com Branding Atelier Noiva & Abas de Navegação */}
       <Header
         activeTab={activeTab}
         onTabChange={setActiveTab}
@@ -444,11 +459,13 @@ export default function App() {
         totalShotCount={totalShotCount}
         onOpenManual={() => setIsManualOpen(true)}
         onOpenShareModal={() => setIsShareModalOpen(true)}
+        onOpenAddDialog={() => setIsAddDialogOpen(true)}
       />
 
       {/* Main Container */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        {activeTab === "pre-wedding" && (
+        {/* TELA 1: ELEMENTOS SALVOS (Stitch Screen 1) */}
+        {activeTab === "elementos" && (
           <PreWeddingSection
             items={items}
             likedIds={likedIds}
@@ -467,8 +484,30 @@ export default function App() {
           />
         )}
 
-        {activeTab === "casamento" && (
-          <WeddingLogisticsSection
+        {/* TELA 2: PASTAS E CLUSTERS (Stitch Screen 5) */}
+        {activeTab === "clusters" && (
+          <ClustersSection
+            onSelectCluster={() => setActiveTab("elementos")}
+            onDownloadPdf={handleDownloadFullDossier}
+            onOpenShareModal={() => setIsShareModalOpen(true)}
+          />
+        )}
+
+        {/* TELA 3: LOCAIS E FORNECEDORES CURADOS (Stitch Screen 7) */}
+        {activeTab === "locais" && (
+          <CuratedVendorsSection
+            vendors={vendors}
+            onAddVendor={handleAddVendor}
+            onUpdateVendor={handleUpdateVendor}
+            onDeleteVendor={handleDeleteVendor}
+            onResetVendors={handleResetVendors}
+            onSelectCluster={() => setActiveTab("elementos")}
+          />
+        )}
+
+        {/* TELA 4: ROTEIRO, SHOT LIST & PRD (Stitch Screen 3) */}
+        {activeTab === "roteiro" && (
+          <RoteiroPrdSection
             shotListGroups={shotListGroups}
             onUpdateShotItem={handleUpdateShotItem}
             onAddShotItem={handleAddShotItem}
@@ -478,22 +517,9 @@ export default function App() {
             onSaveSensitiveAlerts={handleSaveSensitiveAlerts}
             focalPointData={focalPointData}
             onSaveFocalPoint={handleSaveFocalPoint}
-            vendors={vendors}
-            onAddVendor={handleAddVendor}
-            onUpdateVendor={handleUpdateVendor}
-            onDeleteVendor={handleDeleteVendor}
-            onResetVendors={handleResetVendors}
             onDownloadFullDossier={handleDownloadFullDossier}
             onDownloadCeremonialAltar={handleDownloadCeremonialAltar}
-          />
-        )}
-
-        {activeTab === "acoes" && (
-          <ActionBacklogSection
             onOpenManual={() => setIsManualOpen(true)}
-            onOpenShareModal={() => setIsShareModalOpen(true)}
-            onDownloadFullDossier={handleDownloadFullDossier}
-            onDownloadCeremonialAltar={handleDownloadCeremonialAltar}
           />
         )}
       </main>
@@ -501,7 +527,7 @@ export default function App() {
       {/* Contextual Notes Drawer por Foto */}
       <PhotoNoteDrawer
         item={selectedNoteItem}
-        isOpen={!!selectedNoteItem}
+        isOpen={Boolean(selectedNoteItem)}
         onClose={() => setSelectedNoteItem(null)}
         note={selectedNoteItem ? notes[selectedNoteItem.id] : undefined}
         onSaveNote={handleSavePhotoNote}
@@ -517,27 +543,27 @@ export default function App() {
         totalShotCount={totalShotCount}
       />
 
-      {/* Mobile Bottom Dock (Touch-First 48x48px) */}
+      {/* Mobile Bottom Dock (Stitch 4 canonical tabs + Center +) */}
       <MobileBottomDock
         activeTab={activeTab}
         onTabChange={setActiveTab}
         favoritesCount={likedIds.length}
         pendingShotCount={pendingShotCount}
-        onOpenShareModal={() => setIsShareModalOpen(true)}
+        onOpenAddDialog={() => setIsAddDialogOpen(true)}
       />
 
       {/* Lightbox Modal */}
       <LightboxModal
         item={selectedLightboxItem}
         items={items}
-        isOpen={!!selectedLightboxItem}
+        isOpen={Boolean(selectedLightboxItem)}
         onClose={() => setSelectedLightboxItem(null)}
         onSelect={(item) => setSelectedLightboxItem(item)}
         isLiked={selectedLightboxItem ? likedIds.includes(selectedLightboxItem.id) : false}
         onToggleLike={handleToggleLike}
       />
 
-      {/* Add Item Dialog */}
+      {/* Stitch Screen 2: Add Item Dialog */}
       <AddItemDialog
         isOpen={isAddDialogOpen}
         onClose={() => setIsAddDialogOpen(false)}

@@ -2,3 +2,52 @@
 @source '../**/*.{js,ts,jsx,tsx}';
 
 @import 'tw-animate-css';
+
+@theme {
+  --color-surface: var(--surface);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-bright: var(--surface-bright);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-secondary-container: var(--secondary-container);
+  --color-on-secondary-container: var(--on-secondary-container);
+  --color-primary-container: var(--primary-container);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+  --color-error: var(--error);
+  --color-error-container: var(--error-container);
+  --color-on-error: var(--on-error);
+  --color-on-error-container: var(--on-error-container);
+
+  --font-headline-md: 'Playfair Display', Georgia, serif;
+  --font-headline-lg: 'Playfair Display', Georgia, serif;
+  --font-headline-sm: 'Playfair Display', Georgia, serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-display-mobile: 'Playfair Display', Georgia, serif;
+  --font-headline-lg-mobile: 'Playfair Display', Georgia, serif;
+  --font-body-md: 'Inter', -apple-system, sans-serif;
+  --font-body-lg: 'Inter', -apple-system, sans-serif;
+  --font-label-sm: 'Inter', -apple-system, sans-serif;
+  --font-label-md: 'Inter', -apple-system, sans-serif;
+  --font-title-sm: 'Inter', -apple-system, sans-serif;
+  --font-title-lg: 'Inter', -apple-system, sans-serif;
+
+  --spacing-space-xs: 0.25rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.75rem;
+  --spacing-space-xl: 3rem;
+  --spacing-margin: 1.25rem;
+  --spacing-margin-tablet: 2.5rem;
+  --spacing-margin-desktop: 4rem;
+  --spacing-gutter: 1.5rem;
+  --spacing-gutter-desktop: 2.5rem;
+}
