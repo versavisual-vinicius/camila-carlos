@@ -151,7 +151,6 @@ export default function App() {
   const [selectedLightboxItem, setSelectedLightboxItem] = useState<PreWeddingItem | null>(null);
   const [selectedNoteItem, setSelectedNoteItem] = useState<PreWeddingItem | null>(null);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
-  const [isManualOpen, setIsManualOpen] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   // Sync theme with HTML class
@@ -549,12 +548,6 @@ export default function App() {
         isOpen={isAddDialogOpen}
         onClose={() => setIsAddDialogOpen(false)}
         onAdd={handleAddItem}
-      />
-
-      {/* Manual da Noiva Modal */}
-      <ManualDaNoivaModal
-        isOpen={isManualOpen}
-        onClose={() => setIsManualOpen(false)}
       />
 
       {/* Footer */}

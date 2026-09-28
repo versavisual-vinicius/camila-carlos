@@ -67,7 +67,7 @@ export function MoodboardCard({
           alt={item.title}
           loading={isAboveFold ? undefined : "lazy"}
           decoding={isPriority ? "sync" : "async"}
-          {...(isPriority ? ({ fetchPriority: "high" } as Record<string, string>) : {})}
+          {...(isPriority ? ({ fetchpriority: "high" } as Record<string, string>) : {})}
           onLoad={() => setImageLoaded(true)}
           className={`w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105 ${
             isAboveFold || imageLoaded ? "opacity-100" : "opacity-0"
