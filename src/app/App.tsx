@@ -12,16 +12,13 @@ import {
 import { generateFullDossierPdf, generateCeremonialAltarPdf } from "@/app/utils/pdfGenerator";
 import { Header, ActiveTab } from "@/app/components/Header";
 import { PreWeddingSection } from "@/app/components/PreWeddingSection";
-import { ClustersSection } from "@/app/components/ClustersSection";
 import { CuratedVendorsSection } from "@/app/components/CuratedVendorsSection";
 import { RoteiroPrdSection } from "@/app/components/RoteiroPrdSection";
 import { LightboxModal } from "@/app/components/LightboxModal";
 import { AddItemDialog } from "@/app/components/AddItemDialog";
-import { ManualDaNoivaModal } from "@/app/components/ManualDaNoivaModal";
 import { PhotoNoteDrawer, PhotoNoteData } from "@/app/components/PhotoNoteDrawer";
 import { ShareFabModal } from "@/app/components/ShareFabModal";
 import { MobileBottomDock } from "@/app/components/MobileBottomDock";
-import { FloatingActionMenu } from "@/app/components/FloatingActionMenu";
 import { Footer } from "@/app/components/Footer";
 import { Toaster, toast } from "sonner";
 
@@ -32,16 +29,14 @@ export default function App() {
     return saved !== null ? saved === "dark" : false;
   });
 
-  // Active navigation tab (Stitch 4 canonical tabs: elementos, clusters, locais, roteiro)
+  // Active navigation tab (3 canonical tabs: referencias, roteiro, fornecedores)
   const [activeTab, setActiveTab] = useState<ActiveTab>(() => {
     const saved = localStorage.getItem("camila_carlos_active_tab");
-    if (saved === "clusters" || saved === "locais" || saved === "roteiro" || saved === "elementos") {
+    if (saved === "referencias" || saved === "roteiro" || saved === "fornecedores") {
       return saved;
     }
-    // Backward compatibility with legacy tabs
-    if (saved === "casamento") return "locais";
-    if (saved === "acoes") return "roteiro";
-    return "elementos";
+    if (saved === "locais") return "fornecedores";
+    return "referencias";
   });
 
   // Moodboard items state (58 canonical pre-wedding items + user added)
@@ -465,15 +460,12 @@ export default function App() {
 
       {/* Main Container */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        {/* TELA 1: ELEMENTOS SALVOS (Stitch Screen 1) */}
-        {activeTab === "elementos" && (
+        {/* TELA 1: REFERÊNCIAS VISUAIS (Moodboard Direto) */}
+        {activeTab === "referencias" && (
           <PreWeddingSection
             items={items}
             likedIds={likedIds}
-            cards={preWeddingCards}
-            checkedCriteria={checkedCriteria}
             notes={notes}
-            onToggleCriterion={handleToggleCriterion}
             onToggleLike={handleToggleLike}
             onOpenNotes={(item) => setSelectedNoteItem(item)}
             onDelete={handleDeleteItem}
@@ -485,37 +477,7 @@ export default function App() {
           />
         )}
 
-        {/* TELA 2: PASTAS E CLUSTERS (Stitch Screen 5) */}
-        {activeTab === "clusters" && (
-          <ClustersSection
-            onSelectCluster={() => setActiveTab("elementos")}
-            onDownloadPdf={handleDownloadFullDossier}
-            onOpenShareModal={() => setIsShareModalOpen(true)}
-            onOpenLightbox={(photoUrl, caption) =>
-              setSelectedLightboxItem({
-                id: `cluster-photo-${Date.now()}`,
-                title: caption,
-                category: "natureza",
-                imageUrl: photoUrl,
-                aspectRatio: "square"
-              })
-            }
-          />
-        )}
-
-        {/* TELA 3: LOCAIS E FORNECEDORES CURADOS (Stitch Screen 7) */}
-        {activeTab === "locais" && (
-          <CuratedVendorsSection
-            vendors={vendors}
-            onAddVendor={handleAddVendor}
-            onUpdateVendor={handleUpdateVendor}
-            onDeleteVendor={handleDeleteVendor}
-            onResetVendors={handleResetVendors}
-            onSelectCluster={() => setActiveTab("elementos")}
-          />
-        )}
-
-        {/* TELA 4: ROTEIRO, SHOT LIST & PRD (Stitch Screen 3) */}
+        {/* TELA 2: ROTEIRO DO CASAMENTO */}
         {activeTab === "roteiro" && (
           <RoteiroPrdSection
             shotListGroups={shotListGroups}
@@ -529,7 +491,17 @@ export default function App() {
             onSaveFocalPoint={handleSaveFocalPoint}
             onDownloadFullDossier={handleDownloadFullDossier}
             onDownloadCeremonialAltar={handleDownloadCeremonialAltar}
-            onOpenManual={() => setIsManualOpen(true)}
+          />
+        )}
+
+        {/* TELA 3: FORNECEDORES & LOCAIS */}
+        {activeTab === "fornecedores" && (
+          <CuratedVendorsSection
+            vendors={vendors}
+            onAddVendor={handleAddVendor}
+            onUpdateVendor={handleUpdateVendor}
+            onDeleteVendor={handleDeleteVendor}
+            onResetVendors={handleResetVendors}
           />
         )}
       </main>
@@ -543,7 +515,7 @@ export default function App() {
         onSaveNote={handleSavePhotoNote}
       />
 
-      {/* FAB de Compartilhamento & Exportação WhatsApp */}
+      {/* Compartilhamento WhatsApp */}
       <ShareFabModal
         isOpen={isShareModalOpen}
         onClose={() => setIsShareModalOpen(false)}
@@ -553,16 +525,7 @@ export default function App() {
         totalShotCount={totalShotCount}
       />
 
-      {/* Liquid Morph Floating Action Menu contextual à aba Elementos */}
-      {activeTab === "elementos" && (
-        <FloatingActionMenu
-          onOpenAddDialog={() => setIsAddDialogOpen(true)}
-          onOpenManual={() => setIsManualOpen(true)}
-          onAddBatchItems={handleAddBatchItems}
-        />
-      )}
-
-      {/* Ruixen UI Mobile Bottom Menu (4 canonical tabs in thumb zone) */}
+      {/* Barra de Navegação Inferior Mobile (3 abas essenciais) */}
       <MobileBottomDock
         activeTab={activeTab}
         onTabChange={setActiveTab}
