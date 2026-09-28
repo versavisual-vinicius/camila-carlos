@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { motion } from "motion/react";
 import { 
   ShotListGroup, 
   ShotListItem, 
   SolarTimelineBlock,
   KeyVendor,
-  DELIVERY_STAGES
+  DELIVERY_STAGES,
+  SOLAR_TIMELINE_BLOCKS
 } from "@/app/data/shotListData";
 import { 
   FileText, 
@@ -18,12 +20,16 @@ import {
   Check, 
   Sparkles, 
   BookOpen, 
-  RotateCcw,
-  Trash2,
-  Calendar,
-  CheckCircle2,
-  Compass,
-  FileCheck
+  RotateCcw, 
+  Trash2, 
+  Calendar, 
+  CheckCircle2, 
+  Compass, 
+  FileCheck,
+  Camera,
+  MapPin,
+  ChevronDown,
+  ChevronUp
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -56,7 +62,7 @@ export function RoteiroPrdSection({
   onDownloadCeremonialAltar,
   onOpenManual
 }: RoteiroPrdSectionProps) {
-  const [activeSubTab, setActiveSubTab] = useState<"shotlist" | "solar" | "prd" | "entregas">("shotlist");
+  const [activeSubTab, setActiveSubTab] = useState<"timeline" | "entregas" | "prd">("timeline");
   const [newShotTitles, setNewShotTitles] = useState<Record<string, string>>({});
   const [editingAlerts, setEditingAlerts] = useState(sensitiveAlerts);
   const [isAlertsEditing, setIsAlertsEditing] = useState(false);
@@ -71,138 +77,132 @@ export function RoteiroPrdSection({
   const handleSaveAlerts = () => {
     onSaveSensitiveAlerts(editingAlerts);
     setIsAlertsEditing(false);
-    toast.success("Alertas sensíveis atualizados com sucesso!");
+    toast.success("Alertas operacionais atualizados com sucesso!");
   };
 
   const handleSaveFocal = () => {
     onSaveFocalPoint({ name: focalName, phone: focalPhone });
-    toast.success("Ponto focal atualizado!");
+    toast.success("Ponto focal de coordenação salvo!");
   };
+
+  const subTabOptions = [
+    { value: "timeline" as const, label: "Timeline & Shot List", badge: `${completedCount}/${totalCount}` },
+    { value: "entregas" as const, label: "Esteira de Entregas", badge: "6 etapas" },
+    { value: "prd" as const, label: "Diretrizes & PRD", badge: null }
+  ];
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Stitch Screen 3: PRD & Roteiro Header */}
-      <section className="pt-2 pb-2 border-b border-outline-variant/30 flex flex-col gap-1">
-        <div className="flex items-center gap-2">
-          <span className="inline-block w-2 h-2 rounded-full bg-secondary"></span>
-          <span className="font-label-sm text-[11px] uppercase tracking-widest text-secondary font-semibold">
-            Protocolo Editorial Versa Visual
-          </span>
-        </div>
-        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-          <h1 className="font-headline-md text-2xl sm:text-3xl text-on-surface tracking-tight">
+      {/* 1. Header Editorial (Estilo Airbnb / Versa Visual) */}
+      <section className="pt-1 pb-3 border-b border-outline-variant/30 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-secondary" />
+            <span className="font-body-md text-xs text-secondary font-medium">
+              Protocolo Operacional Versa Visual
+            </span>
+          </div>
+          <h1 className="font-headline-md text-2xl sm:text-3xl text-on-surface font-semibold tracking-tight">
             Roteiro, Shot List & PRD
           </h1>
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={onDownloadCeremonialAltar}
-              className="h-8 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-xs flex items-center gap-1.5 transition-colors border border-outline-variant/30"
-              title="Baixar Ficha de Altar do Cerimonial"
-            >
-              <FileCheck className="size-3.5 text-secondary" />
-              <span>Ficha Altar</span>
-            </button>
-            <button
-              type="button"
-              onClick={onDownloadFullDossier}
-              className="h-8 px-3 rounded-lg bg-primary text-on-primary font-label-md text-xs flex items-center gap-1.5 shadow-xs hover:opacity-90 transition-all active:scale-95"
-              title="Baixar Dossiê Executivo Completo em PDF"
-            >
-              <Download className="size-3.5" />
-              <span>Dossiê PDF</span>
-            </button>
-          </div>
+          <p className="font-body-md text-xs sm:text-sm text-on-surface/80 max-w-xl">
+            Alinhamento milimétrico entre cerimonial, noivos e equipe fotográfica para blindar momentos cruciais e luz solar.
+          </p>
         </div>
-        <p className="font-body-md text-xs sm:text-sm text-on-surface-variant max-w-xl">
-          Alinhamento milimétrico entre cerimonial, noivos e equipe fotográfica para blindar momentos cruciais e luz solar.
-        </p>
+
+        {/* Primary Action Buttons */}
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            type="button"
+            onClick={onDownloadCeremonialAltar}
+            className="h-9 px-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-body-md text-xs font-medium flex items-center gap-1.5 transition-colors border border-outline-variant/30 shadow-xs"
+            title="Baixar Ficha de Altar para o Cerimonial"
+          >
+            <FileCheck className="size-3.5 text-secondary" />
+            <span>Ficha Altar PDF</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={onDownloadFullDossier}
+            className="h-9 px-4 rounded-xl bg-primary text-on-primary font-body-md text-xs font-semibold flex items-center gap-1.5 shadow-xs hover:opacity-90 transition-all active:scale-95"
+            title="Baixar Dossiê Completo de Casamento em PDF"
+          >
+            <Download className="size-3.5" />
+            <span>Dossiê Completo</span>
+          </button>
+        </div>
       </section>
 
-      {/* Sub Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-        <button
-          type="button"
-          onClick={() => setActiveSubTab("shotlist")}
-          className={`px-3.5 py-1.5 rounded-full font-label-md text-xs flex items-center gap-1.5 flex-shrink-0 transition-all ${
-            activeSubTab === "shotlist"
-              ? "bg-primary text-on-primary font-semibold shadow-xs"
-              : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
-          }`}
-        >
-          <span>Shot List do Altar</span>
-          <span className="px-1.5 py-0.2 rounded-full bg-surface-container-highest text-on-surface text-[10px] font-bold">
-            {completedCount}/{totalCount}
-          </span>
-        </button>
+      {/* 2. Filtros com Pílula Deslizante (Tubelight Sliding Pill) */}
+      <div className="overflow-x-auto -mx-3 px-3 sm:mx-0 sm:px-0 py-1 flex items-center no-scrollbar">
+        <div className="bg-surface-container/70 dark:bg-surface-container/40 backdrop-blur-md p-1 rounded-full border border-outline-variant/20 inline-flex items-center gap-1">
+          {subTabOptions.map((tab) => {
+            const isActive = activeSubTab === tab.value;
+            return (
+              <button
+                key={tab.value}
+                type="button"
+                onClick={() => setActiveSubTab(tab.value)}
+                className={`relative px-3.5 py-1.5 rounded-full font-body-md text-xs sm:text-[13px] whitespace-nowrap transition-colors duration-200 flex items-center gap-1.5 ${
+                  isActive
+                    ? "text-on-primary font-semibold"
+                    : "text-on-surface-variant hover:text-on-surface"
+                }`}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="roteiro-subtab-active"
+                    className="absolute inset-0 bg-primary rounded-full shadow-[0_0_12px_rgba(108,91,77,0.3)] -z-0"
+                    transition={{ type: "spring", stiffness: 450, damping: 35 }}
+                  >
+                    <span className="w-3.5 h-0.5 bg-secondary rounded-full absolute -top-0.5 left-1/2 -translate-x-1/2 shadow-[0_0_6px_var(--secondary)]" />
+                  </motion.span>
+                )}
 
-        <button
-          type="button"
-          onClick={() => setActiveSubTab("solar")}
-          className={`px-3.5 py-1.5 rounded-full font-label-md text-xs flex items-center gap-1.5 flex-shrink-0 transition-all ${
-            activeSubTab === "solar"
-              ? "bg-primary text-on-primary font-semibold shadow-xs"
-              : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
-          }`}
-        >
-          <Sun className="size-3.5 text-secondary" />
-          <span>Linha do Tempo Solar</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveSubTab("entregas")}
-          className={`px-3.5 py-1.5 rounded-full font-label-md text-xs flex items-center gap-1.5 flex-shrink-0 transition-all ${
-            activeSubTab === "entregas"
-              ? "bg-primary text-on-primary font-semibold shadow-xs"
-              : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
-          }`}
-        >
-          <Calendar className="size-3.5 text-secondary" />
-          <span>Esteira de Entregas (6)</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveSubTab("prd")}
-          className={`px-3.5 py-1.5 rounded-full font-label-md text-xs flex items-center gap-1.5 flex-shrink-0 transition-all ${
-            activeSubTab === "prd"
-              ? "bg-primary text-on-primary font-semibold shadow-xs"
-              : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
-          }`}
-        >
-          <Sparkles className="size-3.5 text-secondary" />
-          <span>Visão PRD Atelier</span>
-        </button>
+                <span className="relative z-10">{tab.label}</span>
+                {tab.badge && (
+                  <span className={`relative z-10 px-1.5 py-0.2 rounded-full text-[10px] font-semibold ${
+                    isActive ? "bg-surface-container text-on-surface" : "bg-surface-container-high text-on-surface-variant"
+                  }`}>
+                    {tab.badge}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* SUBTAB 1: SHOT LIST */}
-      {activeSubTab === "shotlist" && (
-        <div className="flex flex-col gap-5">
+      {/* SUBTAB 1: TIMELINE SOLAR INTEGRADA COM SHOT LIST */}
+      {activeSubTab === "timeline" && (
+        <div className="flex flex-col gap-6">
           {/* Progress Banner */}
-          <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/30 flex flex-col gap-2 shadow-xs">
+          <div className="bg-surface-container-low rounded-2xl p-4 sm:p-5 border border-outline-variant/20 flex flex-col gap-2.5 shadow-xs">
             <div className="flex items-center justify-between text-xs">
-              <span className="font-label-sm uppercase tracking-wider text-secondary font-semibold">
+              <span className="font-body-md text-secondary font-semibold">
                 Progresso das Fotos Protocoladas
               </span>
-              <span className="font-bold text-on-surface">
+              <span className="font-semibold text-on-surface">
                 {progressPercent}% concluído ({completedCount} de {totalCount})
               </span>
             </div>
-            <div className="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+
+            <div className="w-full h-2.5 rounded-full bg-surface-container overflow-hidden">
               <div
                 className="h-full bg-primary transition-all duration-500 rounded-full"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
-            <div className="flex items-center justify-between pt-1">
-              <p className="text-[11px] text-on-surface-variant italic">
-                Prioridade 01: Liberação imediata de avós e convidados com mobilidade reduzida em até 6 minutos.
+
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-1 gap-1 text-xs">
+              <p className="text-on-surface/80 leading-tight">
+                <strong>Prioridade 01:</strong> Liberação imediata de avós e mobilidade reduzida em até 6 minutos no altar.
               </p>
               <button
                 type="button"
                 onClick={onResetShotList}
-                className="text-[11px] text-secondary hover:underline flex items-center gap-1 flex-shrink-0 ml-2"
+                className="text-secondary hover:underline flex items-center gap-1 font-medium self-start sm:self-auto shrink-0"
               >
                 <RotateCcw className="size-3" />
                 <span>Restaurar Padrão Oficial</span>
@@ -210,133 +210,14 @@ export function RoteiroPrdSection({
             </div>
           </div>
 
-          {/* Groups list */}
-          <div className="space-y-4">
-            {shotListGroups.map((group) => {
-              const grpCompleted = group.items.filter((i) => i.isCompleted).length;
-              return (
-                <div
-                  key={group.id}
-                  className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/30 shadow-xs flex flex-col gap-3"
-                >
-                  <div className="flex items-baseline justify-between border-b border-outline-variant/20 pb-2">
-                    <div>
-                      <h3 className="font-headline-sm text-base text-on-surface">
-                        {group.name}
-                      </h3>
-                      <p className="font-body-md text-xs text-on-surface-variant">
-                        Estimativa: {group.estimatedMinutes} min · {group.targetPhase}
-                      </p>
-                    </div>
-                    {group.badge && (
-                      <span className="px-2 py-0.5 rounded font-label-sm text-[10px] bg-secondary-container text-on-secondary-container uppercase font-semibold">
-                        {group.badge}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Items in group */}
-                  <div className="divide-y divide-outline-variant/15">
-                    {group.items.map((item) => (
-                      <div
-                        key={item.id}
-                        className="py-2.5 flex items-start justify-between gap-3 group/item"
-                      >
-                        <label className="flex items-start gap-2.5 cursor-pointer flex-1">
-                          <input
-                            type="checkbox"
-                            checked={item.isCompleted}
-                            onChange={() =>
-                              onUpdateShotItem(group.id, item.id, {
-                                isCompleted: !item.isCompleted
-                              })
-                            }
-                            className="mt-0.5 rounded text-primary focus:ring-primary h-4 w-4"
-                          />
-                          <div className="flex flex-col">
-                            <span
-                              className={`text-xs font-medium transition-colors ${
-                                item.isCompleted
-                                  ? "line-through text-on-surface-variant/60"
-                                  : "text-on-surface"
-                              }`}
-                            >
-                              {item.title}
-                            </span>
-                            {item.names && (
-                              <span className="text-[11px] text-on-surface-variant">
-                                {item.names}
-                              </span>
-                            )}
-                            {item.priorityBadge && (
-                              <span className="text-[10px] text-secondary font-semibold uppercase tracking-wider mt-0.5">
-                                ★ {item.priorityBadge}
-                              </span>
-                            )}
-                          </div>
-                        </label>
-
-                        {item.id.startsWith("custom-") && (
-                          <button
-                            type="button"
-                            onClick={() => onDeleteShotItem(group.id, item.id)}
-                            className="text-error opacity-0 group-hover/item:opacity-100 transition-opacity p-1"
-                            title="Remover foto personalizada"
-                          >
-                            <Trash2 className="size-3.5" />
-                          </button>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Add item to group */}
-                  <div className="pt-2 flex items-center gap-2">
-                    <input
-                      type="text"
-                      placeholder="Adicionar foto específica a este bloco..."
-                      value={newShotTitles[group.id] || ""}
-                      onChange={(e) =>
-                        setNewShotTitles((prev) => ({
-                          ...prev,
-                          [group.id]: e.target.value
-                        }))
-                      }
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" && newShotTitles[group.id]?.trim()) {
-                          onAddShotItem(group.id, newShotTitles[group.id].trim());
-                          setNewShotTitles((prev) => ({ ...prev, [group.id]: "" }));
-                        }
-                      }}
-                      className="flex-1 bg-surface-container text-xs text-on-surface placeholder:text-secondary/60 px-3 py-1.5 rounded-lg border border-outline-variant/30 focus:outline-none"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        if (newShotTitles[group.id]?.trim()) {
-                          onAddShotItem(group.id, newShotTitles[group.id].trim());
-                          setNewShotTitles((prev) => ({ ...prev, [group.id]: "" }));
-                        }
-                      }}
-                      className="px-3 py-1.5 bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs rounded-lg transition-colors font-medium flex items-center gap-1"
-                    >
-                      <Plus className="size-3" />
-                      <span>Adicionar</span>
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
           {/* Sensitive Alerts & Focal Point Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Sensitive alerts */}
-            <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/30 flex flex-col gap-2">
+            <div className="bg-surface-container-low rounded-2xl p-4 sm:p-5 border border-outline-variant/20 flex flex-col gap-2 shadow-xs">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1.5 text-secondary">
-                  <AlertTriangle className="size-4" />
-                  <span className="font-label-sm text-[11px] uppercase tracking-wider font-semibold">
+                <div className="flex items-center gap-2 text-secondary">
+                  <AlertTriangle className="size-4 shrink-0" />
+                  <span className="font-body-md text-xs font-semibold text-on-surface">
                     Alertas Operacionais Sensíveis
                   </span>
                 </div>
@@ -346,7 +227,7 @@ export function RoteiroPrdSection({
                     if (isAlertsEditing) handleSaveAlerts();
                     else setIsAlertsEditing(true);
                   }}
-                  className="text-xs text-secondary underline"
+                  className="text-xs text-secondary hover:text-on-surface underline font-medium transition-colors"
                 >
                   {isAlertsEditing ? "Salvar" : "Editar"}
                 </button>
@@ -357,34 +238,34 @@ export function RoteiroPrdSection({
                   value={editingAlerts}
                   onChange={(e) => setEditingAlerts(e.target.value)}
                   rows={3}
-                  className="w-full bg-surface text-xs text-on-surface p-2 rounded border border-outline-variant/40 focus:outline-none resize-none"
+                  className="w-full bg-surface text-xs text-on-surface p-2.5 rounded-xl border border-outline-variant/40 focus:outline-none resize-none leading-relaxed mt-1"
                 />
               ) : (
-                <p className="font-body-md text-xs text-on-surface-variant italic leading-relaxed">
+                <p className="font-body-md text-xs text-on-surface/85 leading-relaxed pt-1">
                   "{sensitiveAlerts}"
                 </p>
               )}
             </div>
 
             {/* Focal Point Contact */}
-            <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/30 flex flex-col gap-2">
-              <div className="flex items-center gap-1.5 text-secondary">
-                <UserCheck className="size-4" />
-                <span className="font-label-sm text-[11px] uppercase tracking-wider font-semibold">
+            <div className="bg-surface-container-low rounded-2xl p-4 sm:p-5 border border-outline-variant/20 flex flex-col gap-2 shadow-xs">
+              <div className="flex items-center gap-2 text-secondary">
+                <UserCheck className="size-4 shrink-0" />
+                <span className="font-body-md text-xs font-semibold text-on-surface">
                   Ponto Focal de Coordenação
                 </span>
               </div>
-              <p className="text-xs text-on-surface-variant">
-                Pessoa autorizada a organizar padrinhos e família no momento das fotos protocolares.
+              <p className="font-body-md text-xs text-on-surface-variant">
+                Pessoa autorizada a reunir padrinhos e família no momento das fotos protocolares.
               </p>
-              <div className="grid grid-cols-2 gap-2 mt-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
                 <input
                   type="text"
                   placeholder="Nome do ponto focal"
                   value={focalName}
                   onChange={(e) => setFocalName(e.target.value)}
                   onBlur={handleSaveFocal}
-                  className="bg-surface text-xs text-on-surface px-2.5 py-1.5 rounded border border-outline-variant/30 focus:outline-none"
+                  className="bg-surface text-xs text-on-surface px-3 py-2 rounded-xl border border-outline-variant/30 focus:outline-none"
                 />
                 <input
                   type="text"
@@ -392,91 +273,254 @@ export function RoteiroPrdSection({
                   value={focalPhone}
                   onChange={(e) => setFocalPhone(e.target.value)}
                   onBlur={handleSaveFocal}
-                  className="bg-surface text-xs text-on-surface px-2.5 py-1.5 rounded border border-outline-variant/30 focus:outline-none"
+                  className="bg-surface text-xs text-on-surface px-3 py-2 rounded-xl border border-outline-variant/30 focus:outline-none"
                 />
               </div>
             </div>
           </div>
+
+          {/* Integrated Solar Timeline & Shot List Modules */}
+          <div className="space-y-5">
+            <div className="flex items-center justify-between">
+              <h2 className="font-headline-sm text-lg sm:text-xl text-on-surface font-semibold flex items-center gap-2">
+                <Clock className="size-4 text-secondary" />
+                <span>Cronograma Solar & Blocos de Fotos</span>
+              </h2>
+              <span className="font-body-md text-xs text-on-surface-variant">
+                Pôr do sol estimado às 17:28
+              </span>
+            </div>
+
+            {/* Bloco 1: Making Of */}
+            <div className="bg-surface-container-low rounded-2xl p-4 sm:p-5 border border-outline-variant/20 shadow-xs flex flex-col gap-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-outline-variant/20 gap-2">
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-2">
+                    <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-surface-container text-on-surface">
+                      13:00 — 15:30
+                    </span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
+                    <span className="font-body-md text-xs text-secondary font-medium">
+                      Espaço Lux · Suíte Master
+                    </span>
+                  </div>
+                  <h3 className="font-headline-sm text-base text-on-surface font-semibold pt-0.5">
+                    Making-of da Noiva, Noivo & Detalhes Afetivos
+                  </h3>
+                </div>
+                <span className="self-start sm:self-auto px-2.5 py-1 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">
+                  Luz Difusa Suave
+                </span>
+              </div>
+              <p className="font-body-md text-xs text-on-surface/80 leading-relaxed">
+                Vestido no cabide, alianças, convite, sapatos e buquê fresco. Retratos solo de Camila pronta e brinde descontraído de Carlos com os padrinhos.
+              </p>
+            </div>
+
+            {/* Bloco 2: Trava Técnica & Cortejo */}
+            <div className="bg-secondary-container/30 rounded-2xl p-4 sm:p-5 border border-secondary/30 shadow-xs flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-secondary-container text-on-secondary-container">
+                  16:00 — 16:50
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
+                <span className="font-body-md text-xs text-secondary font-medium">
+                  Altar ao Ar Livre sob Jabuticabeiras
+                </span>
+              </div>
+              <h3 className="font-headline-sm text-base text-on-surface font-semibold">
+                Cortejo, Cerimônia & Troca de Alianças
+              </h3>
+              <p className="font-body-md text-xs text-on-surface/85 leading-relaxed">
+                Início impreterível para blindar a luz solar natural. Entrada emocionante, votos do casal e primeiro beijo sob luz filtrada das árvores.
+              </p>
+            </div>
+
+            {/* Bloco 3: Fotos Protocolares de Altar (Shot List Groups) */}
+            <div className="space-y-4 pt-2">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary text-on-primary">
+                      16:50 — 17:15
+                    </span>
+                    <span className="font-body-md text-xs text-secondary font-medium">
+                      25 minutos cronometrados
+                    </span>
+                  </div>
+                  <h3 className="font-headline-sm text-base sm:text-lg text-on-surface font-semibold mt-1">
+                    Fotos Protocolares de Altar (Família, Avós & Padrinhos)
+                  </h3>
+                </div>
+                <span className="font-body-md text-xs text-secondary font-medium">
+                  Prioridade Máxima
+                </span>
+              </div>
+
+              {shotListGroups.map((group) => {
+                const grpCompleted = group.items.filter((i) => i.isCompleted).length;
+                return (
+                  <div
+                    key={group.id}
+                    className="bg-surface-container-low rounded-2xl p-4 sm:p-5 border border-outline-variant/20 shadow-xs flex flex-col gap-3.5"
+                  >
+                    <div className="flex items-baseline justify-between border-b border-outline-variant/20 pb-2.5 gap-2">
+                      <div>
+                        <h4 className="font-headline-sm text-sm sm:text-base text-on-surface font-semibold">
+                          {group.name}
+                        </h4>
+                        <p className="font-body-md text-xs text-on-surface-variant">
+                          Estimativa: {group.estimatedMinutes} min · {group.targetPhase} ({grpCompleted} de {group.items.length} concluídas)
+                        </p>
+                      </div>
+
+                      {group.badge && (
+                        <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface">
+                          {group.badge}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Items in group */}
+                    <div className="divide-y divide-outline-variant/15">
+                      {group.items.map((item) => (
+                        <div
+                          key={item.id}
+                          className="py-2.5 flex items-start justify-between gap-3 group/item"
+                        >
+                          <label className="flex items-start gap-3 cursor-pointer flex-1">
+                            <input
+                              type="checkbox"
+                              checked={item.isCompleted}
+                              onChange={() =>
+                                onUpdateShotItem(group.id, item.id, {
+                                  isCompleted: !item.isCompleted
+                                })
+                              }
+                              className="mt-0.5 rounded text-primary focus:ring-primary h-4 w-4 shrink-0"
+                            />
+                            <div className="flex-1 min-w-0">
+                              <span
+                                className={`font-body-md text-xs sm:text-[13px] block leading-snug ${
+                                  item.isCompleted
+                                    ? "line-through text-on-surface-variant/60"
+                                    : "text-on-surface font-medium"
+                                }`}
+                              >
+                                {item.title}
+                              </span>
+                              <span className="font-body-md text-xs text-on-surface-variant/80 block mt-0.5">
+                                {item.names}
+                              </span>
+                            </div>
+                          </label>
+
+                          {item.priorityBadge && (
+                            <span className="hidden sm:inline-block px-2 py-0.5 rounded text-[10px] bg-secondary-container/80 text-on-secondary-container font-medium">
+                              {item.priorityBadge}
+                            </span>
+                          )}
+
+                          <button
+                            type="button"
+                            onClick={() => onDeleteShotItem(group.id, item.id)}
+                            className="text-error/70 hover:text-error opacity-0 group-hover/item:opacity-100 transition-opacity p-1"
+                            title="Remover foto"
+                          >
+                            <Trash2 className="size-3.5" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Add item to group */}
+                    <div className="pt-2 flex items-center gap-2">
+                      <input
+                        type="text"
+                        placeholder="Adicionar foto específica a este momento..."
+                        value={newShotTitles[group.id] || ""}
+                        onChange={(e) =>
+                          setNewShotTitles((prev) => ({
+                            ...prev,
+                            [group.id]: e.target.value
+                          }))
+                        }
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" && newShotTitles[group.id]?.trim()) {
+                            onAddShotItem(group.id, newShotTitles[group.id].trim());
+                            setNewShotTitles((prev) => ({ ...prev, [group.id]: "" }));
+                          }
+                        }}
+                        className="flex-1 bg-surface text-xs text-on-surface placeholder:text-on-surface-variant/60 px-3 py-2 rounded-xl border border-outline-variant/30 focus:outline-none"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (newShotTitles[group.id]?.trim()) {
+                            onAddShotItem(group.id, newShotTitles[group.id].trim());
+                            setNewShotTitles((prev) => ({ ...prev, [group.id]: "" }));
+                          }
+                        }}
+                        className="px-3.5 py-2 bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs rounded-xl transition-colors font-medium flex items-center gap-1.5"
+                      >
+                        <Plus className="size-3.5" />
+                        <span>Adicionar</span>
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Bloco 4: Golden Hour Retratos */}
+            <div className="bg-surface-container-low rounded-2xl p-4 sm:p-5 border-2 border-secondary/40 shadow-xs flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-secondary text-on-secondary">
+                  17:15 — 17:40
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
+                <span className="font-body-md text-xs text-secondary font-semibold">
+                  Golden Hour & Falésias Costa Azul
+                </span>
+              </div>
+              <h3 className="font-headline-sm text-base text-on-surface font-semibold">
+                Retratos a Dois de Camila & Carlos
+              </h3>
+              <p className="font-body-md text-xs text-on-surface/85 leading-relaxed">
+                Momento exclusivo do casal na grama e mirante costeiro. Transição para o pôr do sol astronômico às 17:28 com luz cinematográfica.
+              </p>
+            </div>
+
+            {/* Bloco 5: Festa & Celebração */}
+            <div className="bg-surface-container-low rounded-2xl p-4 sm:p-5 border border-outline-variant/20 shadow-xs flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-surface-container text-on-surface">
+                  18:00 — 01:00
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
+                <span className="font-body-md text-xs text-secondary font-medium">
+                  Salão & Área Lounge
+                </span>
+              </div>
+              <h3 className="font-headline-sm text-base text-on-surface font-semibold">
+                Recepção, Brinde, Jantar & Pista de Dança
+              </h3>
+              <p className="font-body-md text-xs text-on-surface/80 leading-relaxed">
+                Abertura da pista com coreografia dos noivos, brinde com padrinhos, buquê e fotos espontâneas dos convidados na festa.
+              </p>
+            </div>
+          </div>
         </div>
       )}
 
-      {/* SUBTAB 2: SOLAR TIMELINE */}
-      {activeSubTab === "solar" && (
-        <div className="flex flex-col gap-4">
-          <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/30 flex flex-col gap-2">
-            <h3 className="font-headline-sm text-base text-on-surface flex items-center gap-2">
-              <Sun className="size-4 text-secondary" />
-              <span>Janela de Iluminação & Golden Hour Blindada</span>
-            </h3>
-            <p className="text-xs text-on-surface-variant leading-relaxed">
-              O pôr do sol em Rio das Ostras acontece às <strong>17:28</strong>. A cerimônia deve iniciar impreterivelmente às <strong>16:00</strong> para garantir luz dourada e natural nos votos, troca de alianças e retratos do casal.
-            </p>
-          </div>
-
-          <div className="space-y-3">
-            <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/30 flex items-start gap-4">
-              <div className="text-center min-w-[70px] border-r border-outline-variant/20 pr-3">
-                <span className="font-bold text-xs text-on-surface block">13:30 - 15:30</span>
-                <span className="text-[10px] uppercase tracking-wider text-secondary">Manhã/Tarde</span>
-              </div>
-              <div className="flex-1">
-                <h4 className="font-headline-sm text-sm text-on-surface">Making-of da Noiva & Detalhes</h4>
-                <p className="text-xs text-on-surface-variant mt-0.5">
-                  Suíte da noiva no Espaço Lux: vestido no cabide, sapatos, alianças, perfume e finalização do véu.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-surface-container-low rounded-xl p-4 border-2 border-secondary/40 shadow-xs flex items-start gap-4">
-              <div className="text-center min-w-[70px] border-r border-outline-variant/20 pr-3">
-                <span className="font-bold text-xs text-secondary block">16:00 - 16:50</span>
-                <span className="text-[10px] uppercase tracking-wider text-secondary font-semibold">Cerimônia</span>
-              </div>
-              <div className="flex-1">
-                <h4 className="font-headline-sm text-sm text-on-surface">Cortejo & Celebração ao Ar Livre</h4>
-                <p className="text-xs text-on-surface-variant mt-0.5">
-                  Luz suave filtrada nas jabuticabeiras do altar. Entrada emocionante, votos e troca de alianças.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-secondary-container/60 rounded-xl p-4 border border-secondary/30 flex items-start gap-4">
-              <div className="text-center min-w-[70px] border-r border-secondary/30 pr-3">
-                <span className="font-bold text-xs text-on-secondary-container block">16:50 - 17:15</span>
-                <span className="text-[10px] uppercase tracking-wider text-on-secondary-container font-bold">Protocolar</span>
-              </div>
-              <div className="flex-1">
-                <h4 className="font-headline-sm text-sm text-on-surface">Fotos de Altar com Família & Avós</h4>
-                <p className="text-xs text-on-surface-variant mt-0.5">
-                  Execução rigorosa dos blocos 01 a 04. Ponto focal organiza convidados enquanto a luz solar permanece perfeita.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/30 flex items-start gap-4">
-              <div className="text-center min-w-[70px] border-r border-outline-variant/20 pr-3">
-                <span className="font-bold text-xs text-on-surface block">17:15 - 17:40</span>
-                <span className="text-[10px] uppercase tracking-wider text-secondary font-bold">Golden Hour</span>
-              </div>
-              <div className="flex-1">
-                <h4 className="font-headline-sm text-sm text-on-surface">Retratos a Dois de Camila & Carlos</h4>
-                <p className="text-xs text-on-surface-variant mt-0.5">
-                  Momento exclusivo do casal na grama e deck do Espaço Lux, capturando a transição dourada do céu.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* SUBTAB 3: DELIVERY STAGES */}
+      {/* SUBTAB 2: DELIVERY STAGES */}
       {activeSubTab === "entregas" && (
         <div className="flex flex-col gap-4">
-          <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/30 flex flex-col gap-1">
-            <h3 className="font-headline-sm text-base text-on-surface">
+          <div className="bg-surface-container-low rounded-2xl p-4 sm:p-5 border border-outline-variant/20 flex flex-col gap-1 shadow-xs">
+            <h3 className="font-headline-sm text-base sm:text-lg text-on-surface font-semibold">
               Esteira de Entregas Oficiais Versa Visual
             </h3>
-            <p className="text-xs text-on-surface-variant">
+            <p className="font-body-md text-xs sm:text-sm text-on-surface/80">
               Cronograma de pós-produção contratual com prazos e entregas garantidas.
             </p>
           </div>
@@ -485,9 +529,9 @@ export function RoteiroPrdSection({
             {DELIVERY_STAGES.map((stg) => (
               <div
                 key={stg.id}
-                className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/30 flex items-start gap-3.5 shadow-xs"
+                className="bg-surface-container-low rounded-2xl p-4 sm:p-5 border border-outline-variant/20 flex items-start gap-3.5 shadow-xs"
               >
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0 ${
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shrink-0 ${
                   stg.status === "completed"
                     ? "bg-primary text-on-primary"
                     : stg.status === "scheduled"
@@ -498,13 +542,13 @@ export function RoteiroPrdSection({
                 </div>
 
                 <div className="flex-1">
-                  <div className="flex items-baseline justify-between gap-2">
-                    <h4 className="font-headline-sm text-sm text-on-surface">{stg.title}</h4>
-                    <span className="font-label-sm text-[11px] uppercase tracking-wider text-secondary">
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                    <h4 className="font-headline-sm text-sm sm:text-base text-on-surface font-semibold">{stg.title}</h4>
+                    <span className="font-body-md text-xs text-secondary font-medium">
                       {stg.dateInfo}
                     </span>
                   </div>
-                  <p className="font-body-md text-xs text-on-surface-variant mt-1 leading-relaxed">
+                  <p className="font-body-md text-xs text-on-surface/80 mt-1 leading-relaxed">
                     {stg.description}
                   </p>
                 </div>
@@ -514,51 +558,57 @@ export function RoteiroPrdSection({
         </div>
       )}
 
-      {/* SUBTAB 4: PRD ATELIER NOIVA */}
+      {/* SUBTAB 3: PRD ATELIER NOIVA */}
       {activeSubTab === "prd" && (
-        <div className="bg-surface-container-low rounded-xl p-5 border border-outline-variant/30 flex flex-col gap-4 shadow-xs">
-          <div className="border-b border-outline-variant/20 pb-3 flex items-center justify-between">
+        <div className="bg-surface-container-low rounded-2xl p-5 sm:p-6 border border-outline-variant/20 flex flex-col gap-5 shadow-xs">
+          <div className="border-b border-outline-variant/20 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <span className="font-label-sm text-[11px] uppercase tracking-widest text-secondary font-semibold">
+              <span className="font-body-md text-xs text-secondary font-semibold block">
                 Documento de Produto & Requisitos
               </span>
-              <h2 className="font-headline-md text-xl text-on-surface">
+              <h2 className="font-headline-md text-xl sm:text-2xl text-on-surface font-semibold mt-0.5">
                 PRD — Atelier Noiva: Curadoria Visual & Gestão Estética
               </h2>
             </div>
             <button
               type="button"
               onClick={onOpenManual}
-              className="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-xs font-medium text-on-surface flex items-center gap-1.5 transition-colors"
+              className="px-3.5 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-xs font-semibold text-on-surface flex items-center gap-1.5 transition-colors border border-outline-variant/30 shrink-0 self-start sm:self-auto"
             >
               <BookOpen className="size-3.5" />
               <span>Manual da Noiva</span>
             </button>
           </div>
 
-          <div className="prose prose-sm max-w-none text-on-surface-variant text-xs space-y-3 leading-relaxed">
+          <div className="text-on-surface/85 text-xs sm:text-sm space-y-4 leading-relaxed font-body-md">
             <p>
-              <strong>Atelier Noiva</strong> é uma plataforma mobile de curadoria visual e direção de arte para noivas contemporâneas. Inspirada na elegância minimalista e na arquitetura de informação de ferramentas de ponta como <em>Cosmos</em> e <em>Are.na</em>, a aplicação transforma o caos de referências soltas em um dossiê estético estruturado, conectado diretamente a fornecedores, orçamentos e locais.
+              <strong>Atelier Noiva</strong> é a plataforma de curadoria visual e direção de arte para casamentos contemporâneos da Versa Visual. A aplicação transforma o caos de referências soltas em um dossiê estético estruturado, conectado diretamente a fornecedores, orçamentos, locais e roteiro do cerimonial.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-              <div className="bg-surface p-3.5 rounded-lg border border-outline-variant/30">
-                <h4 className="font-bold text-on-surface mb-1">Pilares de Experiência</h4>
-                <ul className="list-disc pl-4 space-y-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+              <div className="bg-surface-container/60 p-4 rounded-xl border border-outline-variant/20 space-y-2">
+                <h4 className="font-headline-sm text-sm text-on-surface font-semibold flex items-center gap-1.5">
+                  <Sparkles className="size-4 text-secondary" />
+                  <span>Pilares de Experiência</span>
+                </h4>
+                <ul className="space-y-1.5 text-xs text-on-surface/80">
                   <li><strong>Naturalidade:</strong> Condução sutil sem poses forçadas.</li>
-                  <li><strong>Emoção:</strong> Preservação do afeto espontâneo.</li>
+                  <li><strong>Emoção:</strong> Preservação do afeto espontâneo do casal.</li>
                   <li><strong>Elegância:</strong> Tipografia editorial e respiro visual.</li>
-                  <li><strong>Presença:</strong> Permissão total para viver o momento.</li>
+                  <li><strong>Presença:</strong> Permissão total para viver o momento sem ansiedade fotográfica.</li>
                 </ul>
               </div>
 
-              <div className="bg-surface p-3.5 rounded-lg border border-outline-variant/30">
-                <h4 className="font-bold text-on-surface mb-1">Entregáveis Oficiais</h4>
-                <ul className="list-disc pl-4 space-y-1">
-                  <li>Dossiê Executivo completo em PDF para o cerimonial.</li>
-                  <li>Ficha de Altar com horários e protocolo de avós.</li>
+              <div className="bg-surface-container/60 p-4 rounded-xl border border-outline-variant/20 space-y-2">
+                <h4 className="font-headline-sm text-sm text-on-surface font-semibold flex items-center gap-1.5">
+                  <FileText className="size-4 text-secondary" />
+                  <span>Entregáveis Oficiais</span>
+                </h4>
+                <ul className="space-y-1.5 text-xs text-on-surface/80">
+                  <li>Dossiê Executivo completo em PDF para a assessoria.</li>
+                  <li>Ficha de Altar com horários e protocolo de avós em até 6 min.</li>
                   <li>Prévias em alta resolução em 48h pós-evento.</li>
-                  <li>Diagramação de álbum de casamento em fine art.</li>
+                  <li>Diagramação de álbum de casamento em fine art com papéis nobres.</li>
                 </ul>
               </div>
             </div>

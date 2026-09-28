@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import { motion } from "motion/react";
 import { 
   Bookmark, 
   Plus, 
@@ -8,13 +9,14 @@ import {
   Clock, 
   Camera, 
   Check, 
-  ChevronDown, 
-  ChevronUp,
-  UploadCloud,
-  Sparkles,
-  Loader2,
-  Search,
-  Filter
+  ChevronRight,
+  UploadCloud, 
+  Sparkles, 
+  Loader2, 
+  Search, 
+  Filter,
+  CheckCircle2,
+  X
 } from "lucide-react";
 import { MoodboardCard } from "@/app/components/MoodboardCard";
 import { PreWeddingItem, PreWeddingCategory } from "@/app/data/preWeddingData";
@@ -22,6 +24,14 @@ import { PlanningCard } from "@/app/data/planningData";
 import { PhotoNoteData } from "@/app/components/PhotoNoteDrawer";
 import { compressMultipleFiles } from "@/app/utils/imageCompressor";
 import { toast } from "sonner";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerDescription,
+  DrawerClose
+} from "@/app/components/ui/drawer";
 
 interface PreWeddingSectionProps {
   items: PreWeddingItem[];
@@ -67,7 +77,7 @@ export function PreWeddingSection({
 }: PreWeddingSectionProps) {
   const [selectedFilter, setSelectedFilter] = useState<PreWeddingCategory | "favorites">("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [showRoteiroDetails, setShowRoteiroDetails] = useState(false);
+  const [isRoteiroDrawerOpen, setIsRoteiroDrawerOpen] = useState(false);
   const [isCompressing, setIsCompressing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -129,21 +139,27 @@ export function PreWeddingSection({
   };
 
   return (
-    <div className="flex flex-col gap-6">
-      {/* Stitch Screen 1: Feed Header & Context Meta */}
-      <div className="pt-2 pb-1 flex flex-col gap-1.5 border-b border-outline-variant/30 pb-4">
-        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-          <div className="flex items-baseline gap-3">
-            <h1 className="font-headline-md text-2xl sm:text-3xl text-on-surface tracking-tight">
-              Todos os elementos
-            </h1>
-            <span className="font-label-sm text-[11px] uppercase tracking-widest text-secondary font-semibold">
-              {filteredItems.length} referências
-            </span>
+    <div className="flex flex-col gap-4 sm:gap-5">
+      {/* 1. Header do Acervo: Título editorial, explicação em sans-serif nítida e ações locais */}
+      <div className="pt-1 pb-3 flex flex-col gap-2 border-b border-outline-variant/30">
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3">
+          <div className="flex flex-col gap-1">
+            <div className="flex items-baseline gap-2.5">
+              <h1 className="font-headline text-2xl sm:text-3xl md:text-4xl text-on-surface tracking-tight font-semibold">
+                Todos os elementos
+              </h1>
+              <span className="font-body-md text-xs text-secondary font-medium">
+                {filteredItems.length} referências
+              </span>
+            </div>
+            <p className="font-body-md text-xs sm:text-sm text-on-surface/80 font-normal leading-relaxed max-w-2xl">
+              Coleção sensorial de texturas, luzes e memórias do atelier de Camila & Carlos.
+            </p>
           </div>
 
-          <div className="flex items-center gap-2">
-            {/* Quick Upload */}
+          {/* Ações Locais da Coleção (Desktop) */}
+          <div className="hidden sm:flex items-center gap-2.5 flex-shrink-0">
+            {/* Quick Upload (Ação Secundária: discreta, borda suave) */}
             <input
               type="file"
               ref={fileInputRef}
@@ -160,136 +176,174 @@ export function PreWeddingSection({
               type="button"
               onClick={() => fileInputRef.current?.click()}
               disabled={isCompressing}
-              className="h-9 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-xs flex items-center gap-1.5 transition-colors border border-outline-variant/30 active:scale-95"
+              className="h-9 px-3.5 rounded-lg border border-outline-variant/40 bg-surface hover:bg-surface-container text-on-surface-variant font-body-md text-xs font-medium flex items-center gap-1.5 transition-colors shadow-2xs active:scale-95"
             >
               {isCompressing ? (
                 <>
-                  <Loader2 className="size-3.5 animate-spin" />
+                  <Loader2 className="size-3.5 animate-spin text-secondary" />
                   <span>Comprimindo...</span>
                 </>
               ) : (
                 <>
                   <UploadCloud className="size-3.5 text-secondary" />
-                  <span>Upload Lote</span>
+                  <span>Upload em lote</span>
                 </>
               )}
             </button>
 
-            {/* Nova Referência */}
+            {/* Nova Referência (Ação Primária: sólida, alto contraste) */}
             <button
               type="button"
               onClick={onOpenAddDialog}
-              className="h-9 px-3.5 rounded-lg bg-primary text-on-primary font-label-md text-xs flex items-center gap-1.5 shadow-xs hover:opacity-90 active:scale-95 transition-all"
+              className="h-9 px-4 rounded-lg bg-primary text-on-primary font-body-md text-xs font-semibold flex items-center gap-1.5 shadow-xs hover:opacity-90 active:scale-95 transition-all"
             >
               <Plus className="size-3.5" />
-              <span>Nova Referência</span>
+              <span>Nova referência</span>
             </button>
           </div>
         </div>
-
-        <p className="font-headline-md italic text-sm text-on-surface-variant/90">
-          Coleção sensorial de texturas, luzes e memórias do atelier de Camila & Carlos.
-        </p>
       </div>
 
-      {/* Roteiro & Critérios Acordeom Compacto */}
+      {/* 2. Roteiro Ativo: Explicação imediata antes da escolha e aproximação de Critérios */}
       {cardPW01 && (
-        <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/30 shadow-xs">
-          <div className="flex items-center justify-between cursor-pointer" onClick={() => setShowRoteiroDetails(!showRoteiroDetails)}>
-            <div className="flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-secondary"></span>
-              <div>
-                <h3 className="font-headline-sm text-base text-on-surface">
-                  Roteiro de Locação: Bar Thunder & Orla da Costa Azul
-                </h3>
-                <p className="font-body-md text-xs text-on-surface-variant">
-                  Rio das Ostras · T-60 dias · Luz suave e pôr do sol dourado
-                </p>
-              </div>
-            </div>
-            <button type="button" className="text-on-surface-variant hover:text-on-surface">
-              {showRoteiroDetails ? <ChevronUp className="size-4" /> : <ChevronDown className="size-4" />}
-            </button>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 px-3.5 py-2.5 bg-surface-container-low/90 rounded-xl border border-outline-variant/30 text-xs shadow-2xs">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary/15 text-secondary font-semibold text-[11px] flex-shrink-0">
+              <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
+              Roteiro ativo
+            </span>
+            <span className="font-semibold text-on-surface truncate">
+              Bar Thunder & Orla Costa Azul
+            </span>
+            <span className="hidden md:inline text-on-surface-variant/70 text-[11px] truncate">
+              — Rio das Ostras · T-60 dias · Luz suave e golden hour
+            </span>
           </div>
 
-          {showRoteiroDetails && (
-            <div className="mt-4 pt-3 border-t border-outline-variant/20 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <button
+            type="button"
+            onClick={() => setIsRoteiroDrawerOpen(true)}
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-secondary hover:text-on-surface transition-colors self-start sm:self-auto pl-1 sm:pl-0"
+          >
+            <span>Ver critérios de direção ({Object.values(checkedCriteria).filter(Boolean).length}/{cardPW01.criteria.length})</span>
+            <ChevronRight className="size-3.5" />
+          </button>
+        </div>
+      )}
+
+      {/* Roteiro & Critérios Drawer Sheet (Ruixen UI Drawer) */}
+      <Drawer open={isRoteiroDrawerOpen} onOpenChange={setIsRoteiroDrawerOpen}>
+        <DrawerContent className="max-h-[85vh] p-4 sm:p-6 bg-surface dark:bg-[#1C1A17] border-outline-variant/30">
+          <DrawerHeader className="text-left px-0 pb-3">
+            <DrawerTitle className="font-headline-md text-lg text-on-surface font-bold">
+              Roteiro: Bar Thunder & Costa Azul
+            </DrawerTitle>
+            <DrawerDescription className="font-body-md text-xs text-on-surface-variant">
+              Rio das Ostras · T-60 dias · Luz suave e golden hour
+            </DrawerDescription>
+          </DrawerHeader>
+
+          {cardPW01 && (
+            <div className="overflow-y-auto space-y-4 pt-2">
               <div>
-                <h4 className="font-label-sm text-[11px] uppercase tracking-wider text-secondary mb-2">Critérios de Direção</h4>
-                <div className="space-y-1.5">
+                <h4 className="font-body-md text-xs text-secondary mb-2.5 font-semibold">
+                  Critérios de Direção Fotográfica
+                </h4>
+                <div className="space-y-2">
                   {cardPW01.criteria.map((cr) => (
-                    <label key={cr.id} className="flex items-center gap-2 text-xs text-on-surface cursor-pointer">
+                    <label key={cr.id} className="flex items-start gap-2.5 text-xs text-on-surface cursor-pointer p-2.5 rounded-lg bg-surface-container-low border border-outline-variant/20 hover:border-outline-variant/40 transition-colors">
                       <input
                         type="checkbox"
                         checked={Boolean(checkedCriteria[cr.id])}
                         onChange={() => onToggleCriterion(cr.id)}
-                        className="rounded text-primary focus:ring-primary h-3.5 w-3.5"
+                        className="mt-0.5 rounded text-primary focus:ring-primary h-4 w-4"
                       />
-                      <span>{cr.label}</span>
+                      <span className="leading-snug">{cr.text}</span>
                     </label>
                   ))}
                 </div>
               </div>
 
-              <div className="text-xs text-on-surface-variant space-y-2">
+              <div className="text-xs text-on-surface-variant space-y-2 p-3 rounded-lg bg-surface-container/50 border border-outline-variant/20">
                 <p className="leading-relaxed">
-                  <strong>Objetivo Editorial:</strong> Evitar poses estáticas ou forçadas. O roteiro se divide entre a energia descontraída com a moto no Bar Thunder e a intimidade orgânica nas falésias e areia da Costa Azul.
+                  <strong className="text-on-surface">Objetivo Editorial:</strong> Evitar poses estáticas ou forçadas. O roteiro se divide entre a energia descontraída com a moto no Bar Thunder e a intimidade orgânica nas falésias e areia da Costa Azul.
                 </p>
-                <div className="flex items-center gap-2 pt-1">
+                <div className="flex items-center justify-between pt-2 border-t border-outline-variant/20">
                   <button
                     type="button"
                     onClick={onResetItems}
-                    className="text-xs text-secondary hover:underline flex items-center gap-1"
+                    className="text-xs text-secondary hover:underline flex items-center gap-1 font-medium"
                   >
                     <RotateCcw className="size-3" />
                     <span>Restaurar 58 referências originais</span>
                   </button>
+                  <DrawerClose asChild>
+                    <button
+                      type="button"
+                      className="px-3 py-1 rounded-md bg-primary text-on-primary text-xs font-semibold"
+                    >
+                      Concluído
+                    </button>
+                  </DrawerClose>
                 </div>
               </div>
             </div>
           )}
-        </div>
-      )}
+        </DrawerContent>
+      </Drawer>
 
-      {/* Search & Horizontal Filter Pills (Cosmos Minimalist Aesthetic) */}
+      {/* 3. Filtros e Controles de Exploração: Title Case estável, clareza e ritmo */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-        <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0 py-1 flex items-center gap-2 no-scrollbar">
-          {filterOptions.map((f) => {
-            const isActive = selectedFilter === f.value;
-            const isFav = f.value === "favorites";
-            return (
-              <button
-                key={f.value}
-                type="button"
-                onClick={() => setSelectedFilter(f.value)}
-                className={`px-3.5 py-1.5 rounded-full font-label-sm text-[11px] tracking-wider uppercase whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 ${
-                  isActive
-                    ? "bg-primary text-on-primary shadow-xs font-semibold"
-                    : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
-                }`}
-              >
-                <span>{f.label}</span>
-                {isFav && likedIds.length > 0 && (
-                  <span className={`px-1.5 py-0.2 rounded-full text-[9px] ${
-                    isActive ? "bg-surface-container text-on-surface" : "bg-primary text-on-primary"
-                  }`}>
-                    {likedIds.length}
-                  </span>
-                )}
-              </button>
-            );
-          })}
+        <div className="overflow-x-auto -mx-3 px-3 sm:mx-0 sm:px-0 py-1 flex items-center gap-1.5 no-scrollbar mask-scroll-fade-x">
+          <div className="bg-surface-container/70 dark:bg-surface-container/40 backdrop-blur-md p-1 rounded-full border border-outline-variant/20 inline-flex items-center gap-1">
+            {filterOptions.map((f) => {
+              const isActive = selectedFilter === f.value;
+              const isFav = f.value === "favorites";
+              return (
+                <button
+                  key={f.value}
+                  type="button"
+                  onClick={() => setSelectedFilter(f.value)}
+                  className={`relative px-3.5 py-1.5 rounded-full font-body-md text-xs sm:text-[13px] whitespace-nowrap transition-colors duration-200 flex items-center gap-1.5 ${
+                    isActive
+                      ? "text-on-primary font-semibold"
+                      : "text-on-surface-variant hover:text-on-surface"
+                  }`}
+                >
+                  {/* Tubelight Glow and Sliding Pill */}
+                  {isActive && (
+                    <motion.span
+                      layoutId="tubelight-active"
+                      className="absolute inset-0 bg-primary rounded-full shadow-[0_0_12px_rgba(108,91,77,0.3)] -z-0"
+                      transition={{ type: "spring", stiffness: 450, damping: 35 }}
+                    >
+                      <span className="w-3.5 h-0.5 bg-secondary rounded-full absolute -top-0.5 left-1/2 -translate-x-1/2 shadow-[0_0_6px_var(--secondary)]" />
+                    </motion.span>
+                  )}
+
+                  <span className="relative z-10">{f.label}</span>
+                  {isFav && likedIds.length > 0 && (
+                    <span className={`relative z-10 px-1.5 py-0.2 rounded-full text-[10px] font-semibold ${
+                      isActive ? "bg-surface-container text-on-surface" : "bg-primary text-on-primary"
+                    }`}>
+                      {likedIds.length}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Search input */}
-        <div className="relative min-w-[200px]">
+        {/* Busca contextual */}
+        <div className="relative min-w-[220px]">
           <Search className="size-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Buscar poses, clima, luz..."
-            className="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg pl-8 pr-3 py-1.5 text-xs text-on-surface placeholder:text-secondary/70 focus:outline-none focus:border-primary"
+            className="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg pl-8 pr-3 py-1.5 text-xs text-on-surface placeholder:text-secondary/70 focus:outline-none focus:border-primary transition-colors"
           />
         </div>
       </div>
@@ -323,8 +377,8 @@ export function PreWeddingSection({
                 onOpenNotes={onOpenNotes}
                 onDelete={onDelete}
                 onOpenLightbox={onOpenLightbox}
-                isPriority={index < 4}
-                isAboveFold={index < 8}
+                isPriority={index < 2}
+                isAboveFold={index < 6}
               />
             ))}
           </Masonry>

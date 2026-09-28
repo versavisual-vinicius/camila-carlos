@@ -19,10 +19,12 @@ body {
 
 h1, h2, h3, h4, h5, h6, .font-display, .font-headline, .font-headline-md, .font-headline-lg, .font-headline-sm {
   font-family: var(--font-display);
+  text-wrap: balance;
 }
 
-.font-body-md, .font-body-lg, .font-label-sm, .font-label-md, .font-title-sm, .font-title-lg {
+p, blockquote, li, .font-body-md, .font-body-lg {
   font-family: var(--font-body);
+  text-wrap: pretty;
 }
 
 .material-symbols-outlined {

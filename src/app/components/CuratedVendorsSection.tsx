@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "motion/react";
 import { KeyVendor } from "@/app/data/shotListData";
 import { 
   Building2, 
@@ -16,7 +17,9 @@ import {
   Hotel,
   Compass,
   Bookmark,
-  Share2
+  Share2,
+  Sparkles,
+  Check
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -40,7 +43,7 @@ const vendorPhotos: Record<string, string> = {
 
 const vendorMetrics: Record<string, { guests?: string; highlight1?: string; highlight2?: string }> = {
   "ven-02": { guests: "250 convidados", highlight1: "Capela no local", highlight2: "Suíte da noiva" },
-  "ven-03": { guests: "Equipe Completa", highlight1: "Direção Editorial", highlight2: "Golden Hour Lock" },
+  "ven-03": { guests: "Equipe Completa", highlight1: "Direção Editorial", highlight2: "Luz Solar Blindada" },
   "ven-01": { guests: "Roteiro Integrado", highlight1: "Ficha de Altar", highlight2: "Protocolo Avós" }
 };
 
@@ -52,9 +55,21 @@ export function CuratedVendorsSection({
   onResetVendors,
   onSelectCluster
 }: CuratedVendorsSectionProps) {
-  const [activeFilter, setActiveFilter] = useState<"all" | "contacted" | "confirmed">("all");
+  const [activeFilter, setActiveFilter] = useState<"all" | "confirmed" | "contacted">("all");
   const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
   const [noteDraft, setNoteDraft] = useState("");
+
+  const filterOptions = [
+    { value: "all" as const, label: "Todos os parceiros", count: vendors.length },
+    { value: "confirmed" as const, label: "Confirmados", count: vendors.filter(v => v.id === "ven-02" || v.id === "ven-03").length },
+    { value: "contacted" as const, label: "Em alinhamento", count: vendors.filter(v => v.id !== "ven-02" && v.id !== "ven-03").length }
+  ];
+
+  const filteredVendors = vendors.filter((v) => {
+    if (activeFilter === "confirmed") return v.id === "ven-02" || v.id === "ven-03";
+    if (activeFilter === "contacted") return v.id !== "ven-02" && v.id !== "ven-03";
+    return true;
+  });
 
   const handleOpenWhatsApp = (phone: string, message: string) => {
     const cleanPhone = phone.replace(/\D/g, "");
@@ -70,168 +85,182 @@ export function CuratedVendorsSection({
   const handleSaveNote = (vendorId: string) => {
     onUpdateVendor(vendorId, { whatsappMessage: noteDraft });
     setEditingNoteId(null);
-    toast.success("Anotação pessoal atualizada!");
+    toast.success("Anotação de alinhamento atualizada!");
   };
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Stitch Screen 7: Header Intro */}
-      <div className="pt-2 pb-2 border-b border-outline-variant/30 flex flex-col gap-2">
-        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-          <div>
-            <span className="font-label-sm text-[11px] uppercase tracking-widest text-secondary font-semibold block mb-0.5">
-              Curadoria Afetiva
+      {/* 1. Header Editorial (Estilo Airbnb / Versa Visual) */}
+      <section className="pt-1 pb-3 border-b border-outline-variant/30 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-secondary" />
+            <span className="font-body-md text-xs text-secondary font-medium">
+              Curadoria Afetiva & Logística
             </span>
-            <h1 className="font-headline-md text-2xl sm:text-3xl text-on-surface tracking-tight">
-              Locais & Fornecedores
-            </h1>
           </div>
-          <span className="font-label-md text-xs text-on-surface-variant bg-surface-container px-3 py-1 rounded-full self-start sm:self-auto">
-            {vendors.length} cadastrados no casamento
-          </span>
+          <h1 className="font-headline-md text-2xl sm:text-3xl text-on-surface font-semibold tracking-tight">
+            Locais & Fornecedores
+          </h1>
+          <p className="font-body-md text-xs sm:text-sm text-on-surface/80 max-w-xl">
+            Cenários e profissionais alinhados para orquestrar o casamento de Camila & Carlos com tranquilidade.
+          </p>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pt-2">
-          <button
-            type="button"
-            onClick={() => setActiveFilter("all")}
-            className={`px-3.5 py-1.5 rounded-full font-label-md text-xs transition-all flex-shrink-0 ${
-              activeFilter === "all"
-                ? "bg-primary text-on-primary font-semibold shadow-xs"
-                : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
-            }`}
-          >
-            Todos ({vendors.length})
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveFilter("confirmed")}
-            className={`px-3.5 py-1.5 rounded-full font-label-md text-xs transition-all flex-shrink-0 ${
-              activeFilter === "confirmed"
-                ? "bg-primary text-on-primary font-semibold shadow-xs"
-                : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
-            }`}
-          >
-            Confirmados
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveFilter("contacted")}
-            className={`px-3.5 py-1.5 rounded-full font-label-md text-xs transition-all flex-shrink-0 ${
-              activeFilter === "contacted"
-                ? "bg-primary text-on-primary font-semibold shadow-xs"
-                : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
-            }`}
-          >
-            Em Alinhamento
-          </button>
+        <div className="flex items-center gap-2 shrink-0">
+          <span className="font-body-md text-xs text-on-surface-variant bg-surface-container px-3 py-1.5 rounded-full border border-outline-variant/20 font-medium">
+            {vendors.length} parceiros mapeados
+          </span>
+        </div>
+      </section>
+
+      {/* 2. Filtros com Pílula Deslizante (Tubelight Sliding Pill) */}
+      <div className="overflow-x-auto -mx-3 px-3 sm:mx-0 sm:px-0 py-1 flex items-center no-scrollbar">
+        <div className="bg-surface-container/70 dark:bg-surface-container/40 backdrop-blur-md p-1 rounded-full border border-outline-variant/20 inline-flex items-center gap-1">
+          {filterOptions.map((f) => {
+            const isActive = activeFilter === f.value;
+            return (
+              <button
+                key={f.value}
+                type="button"
+                onClick={() => setActiveFilter(f.value)}
+                className={`relative px-3.5 py-1.5 rounded-full font-body-md text-xs sm:text-[13px] whitespace-nowrap transition-colors duration-200 flex items-center gap-1.5 ${
+                  isActive
+                    ? "text-on-primary font-semibold"
+                    : "text-on-surface-variant hover:text-on-surface"
+                }`}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="vendors-filter-active"
+                    className="absolute inset-0 bg-primary rounded-full shadow-[0_0_12px_rgba(108,91,77,0.3)] -z-0"
+                    transition={{ type: "spring", stiffness: 450, damping: 35 }}
+                  >
+                    <span className="w-3.5 h-0.5 bg-secondary rounded-full absolute -top-0.5 left-1/2 -translate-x-1/2 shadow-[0_0_6px_var(--secondary)]" />
+                  </motion.span>
+                )}
+
+                <span className="relative z-10">{f.label}</span>
+                <span className={`relative z-10 px-1.5 py-0.2 rounded-full text-[10px] font-semibold ${
+                  isActive ? "bg-surface-container text-on-surface" : "bg-surface-container-high text-on-surface-variant"
+                }`}>
+                  {f.count}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* Interactive Map Banner (Stitch Screen 7) */}
-      <div className="relative w-full rounded-xl overflow-hidden shadow-xs bg-surface-container group">
+      {/* 3. Banner Integrado do Local Principal */}
+      <div className="relative w-full rounded-2xl overflow-hidden shadow-xs bg-surface-container group border border-outline-variant/20">
         <div 
           className="w-full h-44 sm:h-52 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
           style={{ 
             backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuA3o9roN3Kvm4Rku_yH82u1xMkRST50-Ka4f5d6lio0Ei40Qs_HtP5srKmSg82T20B1G6o-zCng1ZS7FuXsZYXT6yYGCWuDzEoCeSQ8-vx9KjE9KySwKYUWosk7JdLx1YP4fNqRolFMTPBwdSvGiGBVEj88K64SwA5ALtAul_7csaWKfEylxnT92lKrIcGBhdSgPoBwFe1n-xvg4Jc0Pso9CrGGBeaFG6u1cVDkGg9x06ORkwG1qdw')" 
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent flex flex-col justify-end p-4 sm:p-5 text-on-primary">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[22px] text-tertiary">location_on</span>
-              <div>
-                <p className="font-headline-sm text-base sm:text-lg text-white font-medium leading-tight">
-                  Rio das Ostras · Costa Azul & Espaço Lux
-                </p>
-                <p className="font-label-sm text-xs text-white/80 tracking-wide mt-0.5">
-                  Rota costeira mapeada · Luz solar protegida às 16:30
-                </p>
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent flex flex-col justify-end p-4 sm:p-5 text-on-primary">
+          <div className="flex items-center justify-between gap-3">
+            <div className="space-y-0.5">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-secondary shrink-0" />
+                <span className="font-body-md text-xs text-white/90 font-medium">
+                  Cenário Oficial de Cerimônia & Festa
+                </span>
               </div>
+              <p className="font-headline-sm text-lg sm:text-xl text-white font-semibold leading-tight">
+                Espaço Lux & Falésias da Costa Azul — Rio das Ostras
+              </p>
+              <p className="font-body-md text-xs text-white/80 leading-normal">
+                Rota costeira mapeada · Altar sob luz natural filtrada · Janela dourada às 16:30
+              </p>
             </div>
 
             <a
               href="https://www.google.com/maps/search/?api=1&query=Espa%C3%A7o+Lux+Rio+das+Ostras+RJ"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-surface/90 backdrop-blur-md text-on-surface p-2.5 rounded-full shadow hover:bg-surface transition-transform active:scale-95 flex items-center justify-center"
-              title="Abrir no Google Maps"
+              className="bg-white/95 text-stone-900 px-3.5 py-2 rounded-xl shadow-md hover:bg-white transition-transform active:scale-95 flex items-center gap-1.5 shrink-0 text-xs font-semibold"
+              title="Abrir rota no Google Maps"
             >
-              <Compass className="size-4" />
+              <Compass className="size-4 text-secondary" />
+              <span className="hidden sm:inline">Ver no Mapa</span>
             </a>
           </div>
         </div>
       </div>
 
-      {/* Curation Cards Stack */}
+      {/* 4. Grade de Parceiros & Fornecedores */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {vendors.map((vendor) => {
+        {filteredVendors.map((vendor) => {
           const photoUrl = vendorPhotos[vendor.id] || "https://lh3.googleusercontent.com/aida-public/AB6AXuBxLProZGK2qvTEHrFe38y48n-lfMtfMuT4PdRqQm-jDAmca-K41MuliOX9wAo__X8ZhPqDcx6Tv-c5dl8iutefFe1iA5rUCB1wANomF27mADDnMq8_2DwLeMrMw8J_P_RbjgOLWrZ104MdQTFbAMsHCBTjm2b0RLbO8spEI7mQd2gf05gNUdrVbMfPAfUjZppEJO9R4by8aK4_2K3NN_7iTUespyabyt_dSSKBNVwJg0tCxffBoJc";
           const metrics = vendorMetrics[vendor.id];
+          const isConfirmed = vendor.id === "ven-02" || vendor.id === "ven-03";
 
           return (
             <article
               key={vendor.id}
-              className="flex flex-col bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/30 shadow-xs hover:shadow-md transition-all duration-300"
+              className="flex flex-col bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant/20 shadow-xs hover:shadow-md transition-all duration-300"
             >
               {/* Media Header Cover */}
-              <div className="relative w-full h-48 bg-surface-container overflow-hidden">
+              <div className="relative w-full h-48 sm:h-52 bg-surface-container overflow-hidden">
                 <img
                   src={photoUrl}
                   alt={vendor.name}
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  loading="lazy"
                 />
-                <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-container/95 backdrop-blur-md text-on-secondary-container font-label-sm text-[10px] shadow-xs font-semibold">
-                    <span className="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-                    {vendor.id === "ven-02" || vendor.id === "ven-03" ? "Confirmado Oficial" : "Curadoria Versa"}
+                
+                {/* Top Badges */}
+                <div className="absolute top-3 left-3 flex items-center gap-1.5">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface/90 dark:bg-black/80 backdrop-blur-md text-on-surface font-body-md text-xs shadow-xs font-medium">
+                    <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
+                    {isConfirmed ? "Confirmado oficial" : "Curadoria Versa"}
                   </span>
                 </div>
 
-                <div className="absolute top-2.5 right-2.5">
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/80 backdrop-blur-md text-on-primary font-label-sm text-[10px]">
+                <div className="absolute top-3 right-3">
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-primary/90 text-on-primary font-body-md text-xs font-medium backdrop-blur-xs">
                     {vendor.role}
                   </span>
                 </div>
               </div>
 
               {/* Content Details */}
-              <div className="p-4 flex flex-col gap-3">
+              <div className="p-4 sm:p-5 flex flex-col gap-3.5 flex-1">
                 <div>
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <span className="font-label-sm text-[11px] text-secondary uppercase tracking-wider">
-                      {vendor.role}
-                    </span>
-                  </div>
-                  <h2 className="font-headline-sm text-lg text-on-surface">
+                  <span className="font-body-md text-xs text-secondary font-medium block">
+                    {vendor.role}
+                  </span>
+                  <h2 className="font-headline-sm text-lg sm:text-xl text-on-surface font-semibold mt-0.5">
                     {vendor.name}
                   </h2>
                   {vendor.address && (
-                    <p className="font-body-md text-xs text-on-surface-variant mt-0.5 flex items-center gap-1">
-                      <MapPin className="size-3 text-secondary" />
-                      <span>{vendor.address}</span>
+                    <p className="font-body-md text-xs text-on-surface-variant mt-1 flex items-center gap-1.5">
+                      <MapPin className="size-3.5 text-secondary shrink-0" />
+                      <span className="truncate">{vendor.address}</span>
                     </p>
                   )}
                 </div>
 
                 {/* Metrics Highlights if available */}
                 {metrics && (
-                  <div className="flex items-center gap-4 py-1 text-on-surface-variant text-xs border-y border-outline-variant/20">
+                  <div className="flex items-center gap-4 py-2 text-on-surface-variant text-xs border-y border-outline-variant/20">
                     {metrics.guests && (
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-1.5">
                         <Users className="size-3.5 text-secondary" />
-                        <span>{metrics.guests}</span>
+                        <span className="font-medium text-on-surface/90">{metrics.guests}</span>
                       </div>
                     )}
                     {metrics.highlight1 && (
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-1.5">
                         <Church className="size-3.5 text-secondary" />
                         <span>{metrics.highlight1}</span>
                       </div>
                     )}
                     {metrics.highlight2 && (
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-1.5">
                         <Hotel className="size-3.5 text-secondary" />
                         <span>{metrics.highlight2}</span>
                       </div>
@@ -240,52 +269,52 @@ export function CuratedVendorsSection({
                 )}
 
                 {/* Personal Note Box */}
-                <div className="bg-surface-container rounded-lg p-3 flex flex-col gap-1.5">
+                <div className="bg-surface-container/70 rounded-xl p-3 flex flex-col gap-1.5 border border-outline-variant/20">
                   <div className="flex items-center justify-between">
-                    <span className="font-label-sm text-[10px] text-secondary uppercase tracking-wider font-semibold">
+                    <span className="font-body-md text-xs text-secondary font-semibold">
                       Anotação de Alinhamento
                     </span>
                     <button
                       type="button"
                       onClick={() => handleStartEditNote(vendor.id, vendor.whatsappMessage)}
-                      className="text-secondary hover:text-on-surface text-[10px] uppercase tracking-wider underline"
+                      className="text-secondary hover:text-on-surface text-xs font-medium underline transition-colors"
                     >
                       {editingNoteId === vendor.id ? "Cancelar" : "Editar"}
                     </button>
                   </div>
 
                   {editingNoteId === vendor.id ? (
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-2 mt-1">
                       <textarea
                         value={noteDraft}
                         onChange={(e) => setNoteDraft(e.target.value)}
                         rows={2}
-                        className="w-full bg-surface text-xs text-on-surface p-2 rounded border border-outline-variant/40 focus:outline-none resize-none"
+                        className="w-full bg-surface text-xs text-on-surface p-2.5 rounded-lg border border-outline-variant/40 focus:outline-none resize-none leading-relaxed"
                       />
                       <button
                         type="button"
                         onClick={() => handleSaveNote(vendor.id)}
-                        className="self-end px-3 py-1 bg-primary text-on-primary text-xs rounded"
+                        className="self-end px-3 py-1.5 bg-primary text-on-primary text-xs font-semibold rounded-lg hover:opacity-90 transition-opacity"
                       >
-                        Salvar Nota
+                        Salvar Anotação
                       </button>
                     </div>
                   ) : (
-                    <p className="font-body-md text-xs text-on-surface-variant italic">
+                    <p className="font-body-md text-xs text-on-surface/85 leading-relaxed pt-0.5">
                       "{vendor.whatsappMessage}"
                     </p>
                   )}
                 </div>
 
                 {/* Micro Actions Bar */}
-                <div className="flex items-center gap-2 pt-1">
+                <div className="flex items-center gap-2 pt-1 mt-auto">
                   <button
                     type="button"
                     onClick={() => handleOpenWhatsApp(vendor.phone, vendor.whatsappMessage)}
-                    className="flex-1 py-2 px-3 rounded-lg bg-primary text-on-primary hover:opacity-90 active:scale-95 font-label-md text-xs flex items-center justify-center gap-1.5 shadow-xs transition-all"
+                    className="flex-1 py-2 px-3 rounded-xl bg-primary text-on-primary hover:opacity-90 active:scale-95 font-body-md text-xs font-semibold flex items-center justify-center gap-2 shadow-xs transition-all"
                   >
-                    <MessageCircle className="size-3.5" />
-                    <span>WhatsApp</span>
+                    <MessageCircle className="size-4" />
+                    <span>Conversar no WhatsApp</span>
                   </button>
 
                   {vendor.mapsUrl && (
@@ -293,7 +322,7 @@ export function CuratedVendorsSection({
                       href={vendor.mapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="py-2 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-xs flex items-center gap-1 transition-colors"
+                      className="py-2 px-3 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-body-md text-xs font-medium flex items-center gap-1.5 border border-outline-variant/20 transition-colors"
                       title="Abrir no Google Maps"
                     >
                       <MapPin className="size-3.5 text-secondary" />
@@ -305,8 +334,8 @@ export function CuratedVendorsSection({
                     <button
                       type="button"
                       onClick={() => onDeleteVendor(vendor.id)}
-                      className="p-2 rounded-lg bg-surface-container hover:bg-error-container/30 text-error transition-colors"
-                      title="Remover fornecedor"
+                      className="p-2 rounded-xl bg-surface-container hover:bg-error-container/30 text-error transition-colors border border-outline-variant/20"
+                      title="Remover parceiro"
                     >
                       <Trash2 className="size-3.5" />
                     </button>

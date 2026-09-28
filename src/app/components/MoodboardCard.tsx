@@ -53,7 +53,9 @@ export function MoodboardCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.25 }}
-      className="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/30 shadow-xs hover:shadow-md transition-all duration-300"
+      className={`group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/30 shadow-xs hover:shadow-md transition-all duration-300 ${
+        isAboveFold ? "" : "content-visibility-auto"
+      }`}
     >
       {/* Visual Container */}
       <div
@@ -65,7 +67,7 @@ export function MoodboardCard({
           alt={item.title}
           loading={isAboveFold ? undefined : "lazy"}
           decoding={isPriority ? "sync" : "async"}
-          {...(isPriority ? ({ fetchpriority: "high" } as Record<string, string>) : {})}
+          {...(isPriority ? ({ fetchPriority: "high" } as Record<string, string>) : {})}
           onLoad={() => setImageLoaded(true)}
           className={`w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105 ${
             isAboveFold || imageLoaded ? "opacity-100" : "opacity-0"
@@ -74,7 +76,7 @@ export function MoodboardCard({
 
         {/* Top Badges Overlay */}
         <div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1.5">
-          <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-surface/85 backdrop-blur-md text-on-surface font-label-sm text-[10px] uppercase tracking-wider shadow-xs border border-outline-variant/30">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-surface/90 backdrop-blur-md text-on-surface font-body-md text-[11px] font-medium shadow-2xs border border-outline-variant/30">
             {tagLabel}
           </span>
         </div>
@@ -129,7 +131,7 @@ export function MoodboardCard({
         )}
 
         <div className="flex items-center justify-between text-on-surface-variant pt-1 border-t border-outline-variant/20 mt-1">
-          <span className="font-label-sm text-[11px] uppercase tracking-wider text-secondary truncate max-w-[170px]">
+          <span className="font-body-md text-xs text-secondary truncate max-w-[180px]">
             {attributionLabel}
           </span>
 

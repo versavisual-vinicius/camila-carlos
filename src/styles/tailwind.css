@@ -3,6 +3,18 @@
 
 @import 'tw-animate-css';
 
+/* Modern Web Guidance: Soft Edge Fade for scrollports */
+.mask-scroll-fade-x {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+  mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+}
+
+/* Modern Web Guidance: Content Visibility & Contain Intrinsic Size */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 340px;
+}
+
 @theme {
   --color-surface: var(--surface);
   --color-surface-dim: var(--surface-dim);

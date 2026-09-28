@@ -21,6 +21,7 @@ import { ManualDaNoivaModal } from "@/app/components/ManualDaNoivaModal";
 import { PhotoNoteDrawer, PhotoNoteData } from "@/app/components/PhotoNoteDrawer";
 import { ShareFabModal } from "@/app/components/ShareFabModal";
 import { MobileBottomDock } from "@/app/components/MobileBottomDock";
+import { FloatingActionMenu } from "@/app/components/FloatingActionMenu";
 import { Footer } from "@/app/components/Footer";
 import { Toaster, toast } from "sonner";
 
@@ -490,6 +491,15 @@ export default function App() {
             onSelectCluster={() => setActiveTab("elementos")}
             onDownloadPdf={handleDownloadFullDossier}
             onOpenShareModal={() => setIsShareModalOpen(true)}
+            onOpenLightbox={(photoUrl, caption) =>
+              setSelectedLightboxItem({
+                id: `cluster-photo-${Date.now()}`,
+                title: caption,
+                category: "natureza",
+                imageUrl: photoUrl,
+                aspectRatio: "square"
+              })
+            }
           />
         )}
 
@@ -543,13 +553,21 @@ export default function App() {
         totalShotCount={totalShotCount}
       />
 
-      {/* Mobile Bottom Dock (Stitch 4 canonical tabs + Center +) */}
+      {/* Liquid Morph Floating Action Menu contextual à aba Elementos */}
+      {activeTab === "elementos" && (
+        <FloatingActionMenu
+          onOpenAddDialog={() => setIsAddDialogOpen(true)}
+          onOpenManual={() => setIsManualOpen(true)}
+          onAddBatchItems={handleAddBatchItems}
+        />
+      )}
+
+      {/* Ruixen UI Mobile Bottom Menu (4 canonical tabs in thumb zone) */}
       <MobileBottomDock
         activeTab={activeTab}
         onTabChange={setActiveTab}
         favoritesCount={likedIds.length}
         pendingShotCount={pendingShotCount}
-        onOpenAddDialog={() => setIsAddDialogOpen(true)}
       />
 
       {/* Lightbox Modal */}
