@@ -1,0 +1,171 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Airbnb Design System Palette Tokens (--palette-*) */
+  --palette-bg-primary-core: #ff385c;            /* Rausch Red - Primary CTA & Brand Accent */
+  --palette-bg-tertiary-core: #e00b41;           /* Deep Rausch - Pressed / Dark variant */
+  --palette-text-primary-error: #c13515;         /* Error Red */
+  --palette-text-secondary-error-hover: #b32505; /* Error Dark */
+  
+  --palette-bg-primary-luxe: #460479;            /* Luxe Purple */
+  --palette-bg-primary-plus: #92174d;            /* Plus Magenta */
+
+  --palette-text-primary: #222222;               /* Near Black - warm, not cold */
+  --palette-text-focused: #3f3f3f;               /* Focused state text */
+  --palette-text-secondary: #6a6a6a;             /* Secondary text & descriptions */
+  --palette-text-material-disabled: rgba(0, 0, 0, 0.24);
+  --palette-text-link-disabled: #929292;
+  --palette-text-legal: #428bff;                 /* Legal Blue */
+
+  --palette-border: #ebebeb;                     /* Card & divider border */
+  --palette-border-strong: #c1c1c1;              /* Strong border */
+  --palette-surface-light: #f7f7f7;              /* Light surface / pills */
+  --palette-surface-secondary: #f2f2f2;          /* Circular nav buttons */
+  --palette-surface-white: #ffffff;              /* Page background, cards */
+
+  /* Airbnb Elevation & Shadows */
+  --palette-card-shadow: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 2px 6px, rgba(0, 0, 0, 0.1) 0px 4px 8px;
+  --palette-hover-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+  --palette-active-focus: rgb(255, 255, 255) 0px 0px 0px 4px;
+
+  /* Airbnb Border Radius Scale */
+  --radius-sm: 4px;                              /* Subtle / small links */
+  --radius: 8px;                                 /* Standard buttons, tabs, search elements */
+  --radius-md: 14px;                             /* Status badges, labels */
+  --radius-lg: 20px;                             /* Feature cards, large buttons */
+  --radius-xl: 32px;                             /* Large containers, hero elements */
+  --radius-circle: 50%;                          /* Nav controls, avatars, icons */
+
+  /* Standard Semantic Mappings mapped to Airbnb Tokens */
+  --background: #ffffff;
+  --foreground: #222222;
+  --card: #ffffff;
+  --card-foreground: #222222;
+  --popover: #ffffff;
+  --popover-foreground: #222222;
+  --primary: #ff385c;
+  --primary-foreground: #ffffff;
+  --secondary: #f2f2f2;
+  --secondary-foreground: #222222;
+  --muted: #f7f7f7;
+  --muted-foreground: #6a6a6a;
+  --accent: #ff385c;
+  --accent-foreground: #ffffff;
+  --destructive: #c13515;
+  --destructive-foreground: #ffffff;
+  --border: #ebebeb;
+  --input: #ffffff;
+  --input-background: #f7f7f7;
+  --ring: #ff385c;
+}
+
+.dark {
+  /* Dark Mode adapted with Airbnb warm principles */
+  --palette-text-primary: #f7f7f7;
+  --palette-text-secondary: #a0a0a0;
+  --palette-surface-light: #1f1f1f;
+  --palette-surface-secondary: #2b2b2b;
+  --palette-border: rgba(255, 255, 255, 0.12);
+  --palette-card-shadow: rgba(0, 0, 0, 0.4) 0px 0px 0px 1px, rgba(0, 0, 0, 0.6) 0px 4px 12px;
+  --palette-hover-shadow: rgba(0, 0, 0, 0.7) 0px 6px 16px;
+
+  --background: #121212;
+  --foreground: #f7f7f7;
+  --card: #1c1c1e;
+  --card-foreground: #f7f7f7;
+  --popover: #1c1c1e;
+  --popover-foreground: #f7f7f7;
+  --primary: #ff385c;
+  --primary-foreground: #ffffff;
+  --secondary: #2c2c2e;
+  --secondary-foreground: #f7f7f7;
+  --muted: #242426;
+  --muted-foreground: #a0a0a0;
+  --accent: #ff385c;
+  --accent-foreground: #ffffff;
+  --destructive: #e00b41;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.12);
+  --input: #1c1c1e;
+  --input-background: #242426;
+  --ring: #ff385c;
+}
+
+/* Airbnb Specialized Utilities */
+.shadow-airbnb-card {
+  box-shadow: var(--palette-card-shadow);
+}
+
+.shadow-airbnb-hover {
+  box-shadow: var(--palette-hover-shadow);
+}
+
+.airbnb-card {
+  background-color: var(--card);
+  border-radius: 20px;
+  box-shadow: var(--palette-card-shadow);
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.airbnb-card:hover {
+  box-shadow: var(--palette-hover-shadow);
+}
+
+.airbnb-btn-primary {
+  background-color: #222222;
+  color: #ffffff;
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 0 24px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.airbnb-btn-primary:hover {
+  background-color: #ff385c;
+}
+
+.airbnb-btn-primary:active {
+  transform: scale(0.96);
+}
+
+.airbnb-btn-accent {
+  background-color: #ff385c;
+  color: #ffffff;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.airbnb-btn-accent:hover {
+  background-color: #e00b41;
+}
+
+.airbnb-btn-accent:active {
+  transform: scale(0.96);
+}
+
+.airbnb-btn-circle {
+  background-color: var(--palette-surface-secondary);
+  color: var(--palette-text-primary);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  border: 1px solid transparent;
+}
+
+.airbnb-btn-circle:hover {
+  box-shadow: var(--palette-hover-shadow);
+  background-color: #ffffff;
+  border-color: var(--palette-border);
+  transform: scale(1.04);
+}
+
+.airbnb-btn-circle:active {
+  transform: scale(0.92);
+}
