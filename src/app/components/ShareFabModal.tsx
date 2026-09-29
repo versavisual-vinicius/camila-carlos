@@ -74,33 +74,33 @@ export function ShareFabModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[480px] bg-white dark:bg-[#1c1c1e] text-[#222222] dark:text-white border border-[#ebebeb] dark:border-white/10 rounded-[24px] shadow-airbnb-card p-6">
+      <DialogContent className="sm:max-w-[480px] bg-surface text-on-surface border border-outline-variant/30 rounded-2xl shadow-xl p-6">
         <DialogHeader className="text-left">
-          <div className="flex items-center gap-1.5 text-xs font-semibold text-[#ff385c] uppercase tracking-wider mb-1">
+          <div className="flex items-center gap-1.5 text-xs font-semibold text-secondary uppercase tracking-wider mb-1">
             <Sparkles className="size-3.5" />
             <span>Exportação & Compartilhamento</span>
           </div>
-          <DialogTitle className="text-xl font-bold text-[#222222] dark:text-white tracking-[-0.44px]">
+          <DialogTitle className="font-headline-sm text-xl font-bold text-on-surface tracking-tight">
             Enviar Resumo para o Cerimonial
           </DialogTitle>
-          <DialogDescription className="text-xs sm:text-sm text-[#6a6a6a] dark:text-[#a0a0a0]">
+          <DialogDescription className="text-xs sm:text-sm text-on-surface-variant">
             Compartilhe com 1 clique a seleção de referências, Shot List e rotas de Camila & Carlos com fornecedores.
           </DialogDescription>
         </DialogHeader>
 
         {/* Live Preview Card */}
-        <div className="my-2 p-4 rounded-[14px] bg-[#f7f7f7] dark:bg-[#242426] border border-[#ebebeb] dark:border-white/5 space-y-2 text-xs text-[#222222] dark:text-white">
-          <div className="flex items-center justify-between pb-2 border-b border-[#ebebeb] dark:border-white/10 font-bold">
-            <span className="flex items-center gap-1.5 text-[#ff385c]">
-              <Heart className="size-3.5 fill-[#ff385c]" />
+        <div className="my-2 p-4 rounded-xl bg-surface-container-low border border-outline-variant/20 space-y-2 text-xs text-on-surface">
+          <div className="flex items-center justify-between pb-2 border-b border-outline-variant/20 font-bold">
+            <span className="flex items-center gap-1.5 text-red-500">
+              <Heart className="size-3.5 fill-red-500 text-red-500" />
               {totalFavorites} Favoritas Selecionadas
             </span>
-            <span className="flex items-center gap-1 text-[#6a6a6a] dark:text-[#a0a0a0]">
-              <Users className="size-3.5" />
+            <span className="flex items-center gap-1 text-on-surface-variant">
+              <Users className="size-3.5 text-secondary" />
               {completedShotCount}/{totalShotCount} Shot List
             </span>
           </div>
-          <p className="font-mono text-[11px] text-[#6a6a6a] dark:text-[#a0a0a0] whitespace-pre-line leading-relaxed">
+          <p className="font-mono text-[11px] text-on-surface-variant whitespace-pre-line leading-relaxed">
             {summaryText}
           </p>
         </div>
@@ -111,7 +111,7 @@ export function ShareFabModal({
           <button
             type="button"
             onClick={handleShareWhatsApp}
-            className="w-full h-11 rounded-[12px] bg-[#25D366] hover:bg-[#20ba59] text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-sm transition-all active:scale-98"
+            className="w-full h-11 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-sm transition-all active:scale-98"
           >
             <MessageCircle className="size-4" />
             <span>Enviar no WhatsApp do Cerimonial</span>
@@ -122,9 +122,9 @@ export function ShareFabModal({
             <button
               type="button"
               onClick={handleCopy}
-              className="h-10 rounded-[10px] border border-[#ebebeb] dark:border-white/10 bg-white dark:bg-[#1c1c1e] text-[#222222] dark:text-white hover:border-[#222222] text-xs font-semibold flex items-center justify-center gap-1.5 transition-all shadow-sm"
+              className="h-10 rounded-xl border border-outline-variant/30 bg-surface hover:bg-surface-container text-on-surface text-xs font-semibold flex items-center justify-center gap-1.5 transition-all shadow-xs"
             >
-              {copied ? <Check className="size-3.5 text-emerald-600" /> : <Copy className="size-3.5 text-[#ff385c]" />}
+              {copied ? <Check className="size-3.5 text-emerald-600" /> : <Copy className="size-3.5 text-secondary" />}
               <span>{copied ? "Copiado!" : "Copiar Texto"}</span>
             </button>
 
@@ -132,9 +132,9 @@ export function ShareFabModal({
             <button
               type="button"
               onClick={handlePrint}
-              className="h-10 rounded-[10px] border border-[#ebebeb] dark:border-white/10 bg-white dark:bg-[#1c1c1e] text-[#222222] dark:text-white hover:border-[#222222] text-xs font-semibold flex items-center justify-center gap-1.5 transition-all shadow-sm"
+              className="h-10 rounded-xl border border-outline-variant/30 bg-surface hover:bg-surface-container text-on-surface text-xs font-semibold flex items-center justify-center gap-1.5 transition-all shadow-xs"
             >
-              <Printer className="size-3.5 text-[#ff385c]" />
+              <Printer className="size-3.5 text-secondary" />
               <span>Imprimir / PDF</span>
             </button>
           </div>

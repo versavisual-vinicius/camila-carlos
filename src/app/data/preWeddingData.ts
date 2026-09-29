@@ -9,8 +9,10 @@ export interface PreWeddingItem {
   title: string;
   category: PreWeddingCategory;
   notes?: {
-    description: string;
+    description?: string;
     images?: string[];
+    tags?: string[];
+    location?: string;
   };
 }
 

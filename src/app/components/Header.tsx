@@ -19,9 +19,7 @@ interface HeaderProps {
   totalFavorites: number;
   completedShotCount: number;
   totalShotCount: number;
-  onOpenManual?: () => void;
   onOpenShareModal: () => void;
-  onOpenAddDialog?: () => void;
 }
 
 export function Header({

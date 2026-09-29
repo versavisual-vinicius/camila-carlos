@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { PRE_WEDDING_ITEMS, PreWeddingItem } from "@/app/data/preWeddingData";
-import { PLANNING_SECTIONS } from "@/app/data/planningData";
 import { 
   INITIAL_SHOT_LIST_GROUPS, 
   SOLAR_TIMELINE_BLOCKS,
@@ -121,18 +120,6 @@ export default function App() {
     );
   });
 
-  // Checked criteria for planning sections
-  const [checkedCriteria, setCheckedCriteria] = useState<Record<string, boolean>>(() => {
-    const saved = localStorage.getItem("camila_carlos_criteria");
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch (e) {
-        console.error("Error loading criteria", e);
-      }
-    }
-    return {};
-  });
 
   // Focal point contact for Wedding Logistics
   const [focalPointData, setFocalPointData] = useState<{ name: string; phone: string }>(() => {
@@ -321,20 +308,15 @@ export default function App() {
     }
   };
 
-  // PDF Generator Handlers
+  // PDF Generator Handlers (Dynamic import jsPDF)
   const handleDownloadFullDossier = () => {
     toast.promise(
-      new Promise((resolve) => {
-        setTimeout(() => {
-          generateFullDossierPdf({
-            shotListGroups,
-            timelineBlocks: SOLAR_TIMELINE_BLOCKS,
-            vendors,
-            sensitiveAlerts,
-            focalPoint: focalPointData
-          });
-          resolve(true);
-        }, 200);
+      generateFullDossierPdf({
+        shotListGroups,
+        timelineBlocks: SOLAR_TIMELINE_BLOCKS,
+        vendors,
+        sensitiveAlerts,
+        focalPoint: focalPointData
       }),
       {
         loading: "Gerando Dossiê Executivo em PDF...",
@@ -346,15 +328,10 @@ export default function App() {
 
   const handleDownloadCeremonialAltar = () => {
     toast.promise(
-      new Promise((resolve) => {
-        setTimeout(() => {
-          generateCeremonialAltarPdf({
-            shotListGroups,
-            focalPoint: focalPointData,
-            sensitiveAlerts
-          });
-          resolve(true);
-        }, 200);
+      generateCeremonialAltarPdf({
+        shotListGroups,
+        focalPoint: focalPointData,
+        sensitiveAlerts
       }),
       {
         loading: "Gerando Ficha de Altar do Cerimonial...",
@@ -421,17 +398,6 @@ export default function App() {
     }
   };
 
-  // Toggle criterion
-  const handleToggleCriterion = (id: string) => {
-    setCheckedCriteria((prev) => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
-    toast.success("Critério atualizado no roteiro", { duration: 1500 });
-  };
-
-  const preWeddingCards = PLANNING_SECTIONS.find((s) => s.id === "pre-wedding")?.cards || [];
-
   const allShotItems = shotListGroups.flatMap((g) => g.items);
   const totalShotCount = allShotItems.length;
   const completedShotCount = allShotItems.filter((i) => i.isCompleted).length;
@@ -452,9 +418,7 @@ export default function App() {
         totalFavorites={likedIds.length}
         completedShotCount={completedShotCount}
         totalShotCount={totalShotCount}
-        onOpenManual={() => setIsManualOpen(true)}
         onOpenShareModal={() => setIsShareModalOpen(true)}
-        onOpenAddDialog={() => setIsAddDialogOpen(true)}
       />
 
       {/* Main Container */}

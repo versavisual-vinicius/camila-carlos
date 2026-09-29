@@ -89,10 +89,10 @@ export function PhotoNoteDrawer({
 
   return (
     <Drawer open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DrawerContent className="bg-white dark:bg-[#1c1c1e] text-[#222222] dark:text-white border-t border-[#ebebeb] dark:border-white/10 max-h-[88vh] rounded-t-[28px] focus:outline-none">
+      <DrawerContent className="bg-surface text-on-surface border-t border-outline-variant/30 max-h-[88vh] rounded-t-[28px] focus:outline-none">
         <div className="mx-auto w-full max-w-lg overflow-y-auto px-5 pt-3 pb-8">
           <DrawerHeader className="px-0 pt-1 pb-3 text-left">
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-[#ff385c] uppercase tracking-wider mb-1">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-secondary uppercase tracking-wider mb-1">
               <Sparkles className="size-3.5" />
               <span>Nota de Direção da Noiva</span>
             </div>
@@ -101,13 +101,13 @@ export function PhotoNoteDrawer({
               <img
                 src={item.imageUrl}
                 alt={item.title}
-                className="size-16 object-cover rounded-[12px] border border-[#ebebeb] dark:border-white/10 shadow-sm flex-shrink-0"
+                className="size-16 object-cover rounded-xl border border-outline-variant/30 shadow-xs flex-shrink-0"
               />
               <div className="min-w-0 flex-1">
-                <DrawerTitle className="text-base sm:text-lg font-bold text-[#222222] dark:text-white leading-tight tracking-[-0.44px] truncate">
+                <DrawerTitle className="font-headline-sm text-base sm:text-lg font-bold text-on-surface leading-tight tracking-tight truncate">
                   {item.title}
                 </DrawerTitle>
-                <DrawerDescription className="text-xs text-[#6a6a6a] dark:text-[#a0a0a0] mt-0.5">
+                <DrawerDescription className="text-xs text-on-surface-variant mt-0.5">
                   Foto #{item.id} · Defina o que você mais ama nesta referência
                 </DrawerDescription>
               </div>
@@ -116,8 +116,8 @@ export function PhotoNoteDrawer({
 
           {/* Quick Intention Tags */}
           <div className="space-y-2 py-2">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-[#222222] dark:text-white">
-              <Tag className="size-3.5 text-[#ff385c]" />
+            <div className="flex items-center gap-1.5 text-xs font-bold text-on-surface">
+              <Tag className="size-3.5 text-secondary" />
               <span>Tags Rápidas de Intenção:</span>
             </div>
             
@@ -131,11 +131,11 @@ export function PhotoNoteDrawer({
                     onClick={() => handleToggleTag(tag)}
                     className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 flex items-center gap-1.5 border active:scale-95 ${
                       isSelected
-                        ? "bg-[#222222] text-white border-[#222222] shadow-sm"
-                        : "bg-[#f7f7f7] dark:bg-[#242426] text-[#6a6a6a] dark:text-[#a0a0a0] border-[#ebebeb] dark:border-white/5 hover:border-[#c1c1c1]"
+                        ? "bg-primary text-on-primary border-primary shadow-xs"
+                        : "bg-surface-container text-on-surface-variant border-outline-variant/20 hover:border-outline-variant/50"
                     }`}
                   >
-                    {isSelected && <Check className="size-3 text-[#ff385c]" />}
+                    {isSelected && <Check className="size-3 text-secondary" />}
                     <span>{tag}</span>
                   </button>
                 );
@@ -145,8 +145,8 @@ export function PhotoNoteDrawer({
 
           {/* Custom Short Comment Input */}
           <div className="space-y-1.5 pt-3">
-            <label htmlFor="bride-comment" className="text-xs font-bold text-[#222222] dark:text-white flex items-center gap-1.5">
-              <MessageSquareQuote className="size-3.5 text-[#ff385c]" />
+            <label htmlFor="bride-comment" className="text-xs font-bold text-on-surface flex items-center gap-1.5">
+              <MessageSquareQuote className="size-3.5 text-secondary" />
               <span>Sua observação para a equipe Versa Visual:</span>
             </label>
             <textarea
@@ -155,7 +155,7 @@ export function PhotoNoteDrawer({
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               rows={3}
-              className="w-full text-xs sm:text-sm p-3 rounded-[12px] bg-[#f7f7f7] dark:bg-[#242426] border border-[#ebebeb] dark:border-white/10 text-[#222222] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#ff385c] resize-none leading-relaxed"
+              className="w-full text-xs sm:text-sm p-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-on-surface focus:outline-none focus:ring-1 focus:ring-primary resize-none leading-relaxed"
             />
           </div>
 
@@ -164,7 +164,7 @@ export function PhotoNoteDrawer({
               <button
                 type="button"
                 onClick={handleRemove}
-                className="h-11 px-4 rounded-[12px] border border-[#ebebeb] dark:border-white/10 text-xs font-semibold text-[#c13515] hover:bg-[#fff0f2] transition-colors"
+                className="h-11 px-4 rounded-xl border border-outline-variant/30 text-xs font-semibold text-error hover:bg-error/10 transition-colors"
               >
                 Limpar
               </button>
@@ -173,7 +173,7 @@ export function PhotoNoteDrawer({
             <button
               type="button"
               onClick={handleSave}
-              className="flex-1 h-11 rounded-[12px] bg-[#222222] hover:bg-[#ff385c] text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-sm transition-all active:scale-98"
+              className="flex-1 h-11 rounded-xl bg-primary text-on-primary hover:opacity-90 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-xs transition-all active:scale-98"
             >
               <Check className="size-4" />
               <span>Salvar no Roteiro</span>

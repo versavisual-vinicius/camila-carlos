@@ -30,4 +30,21 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/motion') || id.includes('node_modules/framer-motion')) {
+            return 'vendor-motion';
+          }
+          if (id.includes('node_modules/lucide-react')) {
+            return 'vendor-icons';
+          }
+          if (id.includes('node_modules/@radix-ui') || id.includes('node_modules/vaul') || id.includes('node_modules/sonner')) {
+            return 'vendor-ui';
+          }
+        },
+      },
+    },
+  },
 })

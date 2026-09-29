@@ -2,7 +2,7 @@ import { useState } from "react";
 import { PreWeddingItem } from "@/app/data/preWeddingData";
 import { PhotoNoteData } from "@/app/components/PhotoNoteDrawer";
 import { motion } from "motion/react";
-import { MessageSquareQuote, Bookmark, Heart, Trash2 } from "lucide-react";
+import { MessageSquareQuote, Heart, Trash2 } from "lucide-react";
 
 interface MoodboardCardProps {
   item: PreWeddingItem;
@@ -137,23 +137,19 @@ export function MoodboardCard({
 
           <button
             type="button"
-            aria-label="Favoritar"
+            aria-label={isLiked ? "Remover das favoritas" : "Salvar nas favoritas"}
             className={`w-7 h-7 rounded-full flex items-center justify-center transition-all active:scale-90 ${
               isLiked
-                ? "text-primary bg-secondary-container"
-                : "text-on-surface-variant hover:text-primary hover:bg-surface-container"
+                ? "text-red-500 bg-red-50 dark:bg-red-950/40"
+                : "text-on-surface-variant hover:text-red-500 hover:bg-surface-container"
             }`}
             onClick={(e) => {
               e.stopPropagation();
               onToggleLike(item.id);
             }}
-            title={isLiked ? "Remover dos favoritos" : "Salvar na seleção editorial"}
+            title={isLiked ? "Remover das favoritas" : "Salvar nas favoritas"}
           >
-            {isLiked ? (
-              <Bookmark className="size-4 fill-primary text-primary" />
-            ) : (
-              <Bookmark className="size-4" />
-            )}
+            <Heart className={`size-3.5 transition-transform ${isLiked ? "fill-red-500 text-red-500 scale-110" : ""}`} />
           </button>
         </div>
       </div>
