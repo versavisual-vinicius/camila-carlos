@@ -2,13 +2,11 @@ import { useState, useEffect } from "react";
 import { PRE_WEDDING_ITEMS, PreWeddingItem } from "@/app/data/preWeddingData";
 import { 
   INITIAL_SHOT_LIST_GROUPS, 
-  SOLAR_TIMELINE_BLOCKS,
   KEY_VENDORS,
   ShotListGroup, 
   ShotListItem,
   KeyVendor
 } from "@/app/data/shotListData";
-import { generateFullDossierPdf, generateCeremonialAltarPdf } from "@/app/utils/pdfGenerator";
 import { Header, ActiveTab } from "@/app/components/Header";
 import { PreWeddingSection } from "@/app/components/PreWeddingSection";
 import { CuratedVendorsSection } from "@/app/components/CuratedVendorsSection";
@@ -80,8 +78,8 @@ export default function App() {
   // Shot List modular groups state com migração de versão inteligente
   const [shotListGroups, setShotListGroups] = useState<ShotListGroup[]>(() => {
     const version = localStorage.getItem("camila_carlos_shotlist_version");
-    if (version !== "v2_editorial") {
-      localStorage.setItem("camila_carlos_shotlist_version", "v2_editorial");
+    if (version !== "v3_editorial") {
+      localStorage.setItem("camila_carlos_shotlist_version", "v3_editorial");
       localStorage.setItem("camila_carlos_shotlist", JSON.stringify(INITIAL_SHOT_LIST_GROUPS));
       return INITIAL_SHOT_LIST_GROUPS;
     }
@@ -96,42 +94,25 @@ export default function App() {
     return INITIAL_SHOT_LIST_GROUPS;
   });
 
-  // Fornecedores Chave com persistência local
+  // Fornecedores Chave: Apenas Espaço Lux e Versa Visual pré-preenchidos + customizados da noiva
   const [vendors, setVendors] = useState<KeyVendor[]>(() => {
+    const version = localStorage.getItem("camila_carlos_vendors_version");
+    if (version !== "v3_real_vendors") {
+      localStorage.setItem("camila_carlos_vendors_version", "v3_real_vendors");
+      localStorage.setItem("camila_carlos_vendors", JSON.stringify(KEY_VENDORS));
+      return KEY_VENDORS;
+    }
     const saved = localStorage.getItem("camila_carlos_vendors");
     if (saved) {
       try {
         const parsed: KeyVendor[] = JSON.parse(saved);
-        return parsed.map((v) =>
-          v.id === "ven-03" ? { ...v, phone: "5522997624631" } : v
-        );
+        // Filtrar possíveis resíduos de fornecedores mock antigos
+        return parsed.filter(v => v.id === "ven-01" || v.id === "ven-02" || v.isCustom);
       } catch (e) {
         console.error("Error loading vendors", e);
       }
     }
     return KEY_VENDORS;
-  });
-
-  // Sensitive Operational Alerts text
-  const [sensitiveAlerts, setSensitiveAlerts] = useState<string>(() => {
-    return (
-      localStorage.getItem("camila_carlos_sensitive_notes") ||
-      "Atenção cerimonial: pais separados, evitar fotos lado a lado. Avó materna tem mobilidade reduzida, priorizar cadeiras na frente do altar."
-    );
-  });
-
-
-  // Focal point contact for Wedding Logistics
-  const [focalPointData, setFocalPointData] = useState<{ name: string; phone: string }>(() => {
-    const saved = localStorage.getItem("camila_carlos_focal_point");
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch (e) {
-        console.error("Error loading focal point", e);
-      }
-    }
-    return { name: "", phone: "" };
   });
 
   // Lightbox, Modal & Drawer states
@@ -159,40 +140,48 @@ export default function App() {
 
   // Persist items
   useEffect(() => {
-    localStorage.setItem("camila_carlos_moodboard_items", JSON.stringify(items));
+    try {
+      localStorage.setItem("camila_carlos_moodboard_items", JSON.stringify(items));
+    } catch (e) {
+      console.warn("Aviso de cota ao persistir referências no localStorage", e);
+    }
   }, [items]);
 
   // Persist likes
   useEffect(() => {
-    localStorage.setItem("camila_carlos_liked_ids", JSON.stringify(likedIds));
+    try {
+      localStorage.setItem("camila_carlos_liked_ids", JSON.stringify(likedIds));
+    } catch (e) {
+      console.warn("Erro ao persistir favoritas no localStorage", e);
+    }
   }, [likedIds]);
 
   // Persist notes
   useEffect(() => {
-    localStorage.setItem("camila_carlos_photo_notes", JSON.stringify(notes));
+    try {
+      localStorage.setItem("camila_carlos_photo_notes", JSON.stringify(notes));
+    } catch (e) {
+      console.warn("Erro ao persistir notas no localStorage", e);
+    }
   }, [notes]);
 
   // Persist shot list
   useEffect(() => {
-    localStorage.setItem("camila_carlos_shotlist", JSON.stringify(shotListGroups));
+    try {
+      localStorage.setItem("camila_carlos_shotlist", JSON.stringify(shotListGroups));
+    } catch (e) {
+      console.warn("Erro ao persistir shot list no localStorage", e);
+    }
   }, [shotListGroups]);
 
   // Persist vendors
   useEffect(() => {
-    localStorage.setItem("camila_carlos_vendors", JSON.stringify(vendors));
+    try {
+      localStorage.setItem("camila_carlos_vendors", JSON.stringify(vendors));
+    } catch (e) {
+      console.warn("Erro ao persistir fornecedores no localStorage", e);
+    }
   }, [vendors]);
-
-  // Persist sensitive notes
-  const handleSaveSensitiveAlerts = (text: string) => {
-    setSensitiveAlerts(text);
-    localStorage.setItem("camila_carlos_sensitive_notes", text);
-  };
-
-  // Persist focal point
-  const handleSaveFocalPoint = (data: { name: string; phone: string }) => {
-    setFocalPointData(data);
-    localStorage.setItem("camila_carlos_focal_point", JSON.stringify(data));
-  };
 
   // Toggle favorite / bookmark
   const handleToggleLike = (id: string) => {
@@ -202,7 +191,7 @@ export default function App() {
         return prev.filter((item) => item !== id);
       } else {
         toast.success("Foto salva nas favoritas de Camila & Carlos!", {
-          description: "Referência adicionada ao painel prioritário do atelier."
+          description: "Referência adicionada às inspirações prioritárias."
         });
         return [...prev, id];
       }
@@ -269,7 +258,7 @@ export default function App() {
   const handleResetShotList = () => {
     if (window.confirm("Deseja restaurar a Shot List original com o padrão editorial da Versa Visual?")) {
       setShotListGroups(INITIAL_SHOT_LIST_GROUPS);
-      localStorage.setItem("camila_carlos_shotlist_version", "v2_editorial");
+      localStorage.setItem("camila_carlos_shotlist_version", "v3_editorial");
       localStorage.setItem("camila_carlos_shotlist", JSON.stringify(INITIAL_SHOT_LIST_GROUPS));
       toast.success("Shot List restaurada com o protocolo oficial!");
     }
@@ -301,44 +290,12 @@ export default function App() {
   };
 
   const handleResetVendors = () => {
-    if (window.confirm("Deseja restaurar os fornecedores oficiais recomendados?")) {
+    if (window.confirm("Deseja restaurar os parceiros confirmados?")) {
       setVendors(KEY_VENDORS);
-      localStorage.removeItem("camila_carlos_vendors");
-      toast.success("Catálogo de fornecedores restaurado!");
+      localStorage.setItem("camila_carlos_vendors_version", "v3_real_vendors");
+      localStorage.setItem("camila_carlos_vendors", JSON.stringify(KEY_VENDORS));
+      toast.success("Catálogo restaurado com os parceiros confirmados!");
     }
-  };
-
-  // PDF Generator Handlers (Dynamic import jsPDF)
-  const handleDownloadFullDossier = () => {
-    toast.promise(
-      generateFullDossierPdf({
-        shotListGroups,
-        timelineBlocks: SOLAR_TIMELINE_BLOCKS,
-        vendors,
-        sensitiveAlerts,
-        focalPoint: focalPointData
-      }),
-      {
-        loading: "Gerando Dossiê Executivo em PDF...",
-        success: "Dossiê Executivo baixado no dispositivo!",
-        error: "Erro ao gerar PDF"
-      }
-    );
-  };
-
-  const handleDownloadCeremonialAltar = () => {
-    toast.promise(
-      generateCeremonialAltarPdf({
-        shotListGroups,
-        focalPoint: focalPointData,
-        sensitiveAlerts
-      }),
-      {
-        loading: "Gerando Ficha de Altar do Cerimonial...",
-        success: "Ficha de Altar baixada com sucesso!",
-        error: "Erro ao gerar PDF"
-      }
-    );
   };
 
   // Delete moodboard item
@@ -374,7 +331,7 @@ export default function App() {
     setItems((prev) => [...createdItems, ...prev]);
 
     toast.success(
-      `${createdItems.length} ${createdItems.length === 1 ? "nova referência adicionada" : "novas referências adicionadas"} ao Atelier!`,
+      `${createdItems.length} ${createdItems.length === 1 ? "nova referência adicionada" : "novas referências adicionadas"} ao moodboard!`,
       {
         description: "Comprimidas com otimização Retina para o roteiro.",
         duration: 6000,
@@ -408,7 +365,7 @@ export default function App() {
       {/* Toast Notification Provider */}
       <Toaster position="top-center" richColors closeButton />
 
-      {/* Global Header com Branding Atelier Noiva & Abas de Navegação */}
+      {/* Global Header com Branding Versa Visual & Abas de Navegação */}
       <Header
         activeTab={activeTab}
         onTabChange={setActiveTab}
@@ -440,7 +397,7 @@ export default function App() {
           />
         )}
 
-        {/* TELA 2: ROTEIRO DO CASAMENTO */}
+        {/* TELA 2: ROTEIRO FOTOGRÁFICO DO CASAMENTO & PRÉ-WEDDING */}
         {activeTab === "roteiro" && (
           <RoteiroPrdSection
             shotListGroups={shotListGroups}
@@ -448,12 +405,6 @@ export default function App() {
             onAddShotItem={handleAddShotItem}
             onDeleteShotItem={handleDeleteShotItem}
             onResetShotList={handleResetShotList}
-            sensitiveAlerts={sensitiveAlerts}
-            onSaveSensitiveAlerts={handleSaveSensitiveAlerts}
-            focalPointData={focalPointData}
-            onSaveFocalPoint={handleSaveFocalPoint}
-            onDownloadFullDossier={handleDownloadFullDossier}
-            onDownloadCeremonialAltar={handleDownloadCeremonialAltar}
           />
         )}
 
@@ -469,7 +420,7 @@ export default function App() {
         )}
       </main>
 
-      {/* Contextual Notes Drawer por Foto */}
+      {/* Contextual Notes Drawer por Foto (Foco na Noiva) */}
       <PhotoNoteDrawer
         item={selectedNoteItem}
         isOpen={Boolean(selectedNoteItem)}
@@ -488,7 +439,7 @@ export default function App() {
         totalShotCount={totalShotCount}
       />
 
-      {/* Barra de Navegação Inferior Mobile (3 abas essenciais) */}
+      {/* Barra de Navegação Inferior Mobile */}
       <MobileBottomDock
         activeTab={activeTab}
         onTabChange={setActiveTab}
@@ -496,7 +447,7 @@ export default function App() {
         pendingShotCount={pendingShotCount}
       />
 
-      {/* Lightbox Modal */}
+      {/* Lightbox Modal com Campo Editável da Noiva */}
       <LightboxModal
         item={selectedLightboxItem}
         items={items}
@@ -505,16 +456,18 @@ export default function App() {
         onSelect={(item) => setSelectedLightboxItem(item)}
         isLiked={selectedLightboxItem ? likedIds.includes(selectedLightboxItem.id) : false}
         onToggleLike={handleToggleLike}
+        note={selectedLightboxItem ? notes[selectedLightboxItem.id] : undefined}
+        onSaveNote={handleSavePhotoNote}
       />
 
-      {/* Stitch Screen 2: Add Item Dialog */}
+      {/* Add Item Dialog com Pasta de Destino e Tags Autorais */}
       <AddItemDialog
         isOpen={isAddDialogOpen}
         onClose={() => setIsAddDialogOpen(false)}
         onAdd={handleAddItem}
       />
 
-      {/* Footer */}
+      {/* Footer com Versa Visual */}
       <Footer />
     </div>
   );

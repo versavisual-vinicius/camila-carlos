@@ -1,5 +1,6 @@
 import { ActiveTab } from "@/app/components/Header";
 import { motion } from "motion/react";
+import { LayoutGrid, Clock, Store } from "lucide-react";
 
 interface MobileBottomDockProps {
   activeTab: ActiveTab;
@@ -17,19 +18,19 @@ export function MobileBottomDock({
     {
       id: "referencias" as ActiveTab,
       label: "Referências",
-      icon: "view_quilt",
+      icon: LayoutGrid,
       badge: favoritesCount > 0 ? favoritesCount : null
     },
     {
       id: "roteiro" as ActiveTab,
       label: "Roteiro",
-      icon: "schedule",
+      icon: Clock,
       badge: null
     },
     {
       id: "fornecedores" as ActiveTab,
       label: "Fornecedores",
-      icon: "storefront",
+      icon: Store,
       badge: null
     }
   ];
@@ -39,6 +40,7 @@ export function MobileBottomDock({
       <div className="max-w-sm mx-auto pointer-events-auto bg-surface/90 dark:bg-[#141312]/90 backdrop-blur-2xl border border-outline-variant/30 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] px-2 py-1 flex items-center justify-around">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
+          const Icon = tab.icon;
           return (
             <button
               key={tab.id}
@@ -58,19 +60,16 @@ export function MobileBottomDock({
 
               {/* Icon Container with Badge */}
               <div className="relative flex items-center justify-center">
-                <span
-                  className={`material-symbols-outlined text-[22px] transition-transform duration-200 ${
+                <Icon
+                  className={`size-5 transition-transform duration-200 ${
                     isActive
-                      ? "text-primary scale-105"
+                      ? "text-primary scale-110"
                       : "text-on-surface-variant group-hover:text-on-surface"
                   }`}
-                  style={isActive ? { fontVariationSettings: "'FILL' 1, 'wght' 600" } : {}}
-                >
-                  {tab.icon}
-                </span>
+                />
 
                 {tab.badge !== null && (
-                  <span className="absolute -top-1 -right-2 px-1.5 py-0.2 rounded-full text-[9px] font-bold bg-primary text-on-primary min-w-[15px] text-center leading-tight shadow-xs">
+                  <span className="absolute -top-1.5 -right-2.5 px-1.5 py-0.2 rounded-full text-[9px] font-bold bg-primary text-on-primary min-w-[15px] text-center leading-tight shadow-xs">
                     {tab.badge}
                   </span>
                 )}

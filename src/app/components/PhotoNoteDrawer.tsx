@@ -5,11 +5,10 @@ import {
   DrawerHeader, 
   DrawerTitle, 
   DrawerDescription, 
-  DrawerFooter,
-  DrawerClose
+  DrawerFooter
 } from "@/app/components/ui/drawer";
 import { PreWeddingItem } from "@/app/data/preWeddingData";
-import { Sparkles, Tag, Check, X, MessageSquareQuote } from "lucide-react";
+import { Sparkles, Tag, Check, X, MessageSquareQuote, Plus } from "lucide-react";
 import { toast } from "sonner";
 
 export interface PhotoNoteData {
@@ -26,16 +25,6 @@ interface PhotoNoteDrawerProps {
   onSaveNote: (itemId: string, note: PhotoNoteData) => void;
 }
 
-const AVAILABLE_INTENTION_TAGS = [
-  "Quero essa pose",
-  "Gostei da luz",
-  "Amei o figurino",
-  "Espontânea",
-  "Cenário praia/orla",
-  "Foco no casal",
-  "Movimento & Dinâmica"
-];
-
 export function PhotoNoteDrawer({
   item,
   isOpen,
@@ -45,6 +34,7 @@ export function PhotoNoteDrawer({
 }: PhotoNoteDrawerProps) {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [comment, setComment] = useState("");
+  const [newTagInput, setNewTagInput] = useState("");
 
   useEffect(() => {
     if (note) {
@@ -54,14 +44,24 @@ export function PhotoNoteDrawer({
       setSelectedTags([]);
       setComment("");
     }
+    setNewTagInput("");
   }, [note, item]);
 
   if (!item) return null;
 
-  const handleToggleTag = (tag: string) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-    );
+  const handleAddTag = () => {
+    const trimmed = newTagInput.trim().replace(/^#/, "");
+    if (!trimmed) return;
+    if (selectedTags.includes(trimmed)) {
+      toast.info("Essa tag já foi adicionada.");
+      return;
+    }
+    setSelectedTags((prev) => [...prev, trimmed]);
+    setNewTagInput("");
+  };
+
+  const handleRemoveTag = (tagToRemove: string) => {
+    setSelectedTags((prev) => prev.filter((t) => t !== tagToRemove));
   };
 
   const handleSave = () => {
@@ -94,7 +94,7 @@ export function PhotoNoteDrawer({
           <DrawerHeader className="px-0 pt-1 pb-3 text-left">
             <div className="flex items-center gap-1.5 text-xs font-semibold text-secondary uppercase tracking-wider mb-1">
               <Sparkles className="size-3.5" />
-              <span>Nota de Direção da Noiva</span>
+              <span>Suas Observações</span>
             </div>
             
             <div className="flex items-center gap-3.5 mt-1">
@@ -108,50 +108,82 @@ export function PhotoNoteDrawer({
                   {item.title}
                 </DrawerTitle>
                 <DrawerDescription className="text-xs text-on-surface-variant mt-0.5">
-                  Foto #{item.id} · Defina o que você mais ama nesta referência
+                  Referência #{item.id} · Anote o que você mais gosta nesta foto
                 </DrawerDescription>
               </div>
             </div>
           </DrawerHeader>
 
-          {/* Quick Intention Tags */}
+          {/* Bride's Custom Style Tags (Created by the Bride, No Pre-Tags) */}
           <div className="space-y-2 py-2">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-on-surface">
-              <Tag className="size-3.5 text-secondary" />
-              <span>Tags Rápidas de Intenção:</span>
+            <div className="flex items-center justify-between text-xs font-bold text-on-surface">
+              <span className="flex items-center gap-1.5">
+                <Tag className="size-3.5 text-secondary" />
+                <span>Suas Tags de Estilo:</span>
+              </span>
+              <span className="text-[11px] font-normal text-on-surface-variant">
+                (opcional · crie as suas)
+              </span>
             </div>
             
-            <div className="flex flex-wrap gap-1.5">
-              {AVAILABLE_INTENTION_TAGS.map((tag) => {
-                const isSelected = selectedTags.includes(tag);
-                return (
-                  <button
-                    key={tag}
-                    type="button"
-                    onClick={() => handleToggleTag(tag)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 flex items-center gap-1.5 border active:scale-95 ${
-                      isSelected
-                        ? "bg-primary text-on-primary border-primary shadow-xs"
-                        : "bg-surface-container text-on-surface-variant border-outline-variant/20 hover:border-outline-variant/50"
-                    }`}
-                  >
-                    {isSelected && <Check className="size-3 text-secondary" />}
-                    <span>{tag}</span>
-                  </button>
-                );
-              })}
+            {/* Tag Input */}
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                value={newTagInput}
+                onChange={(e) => setNewTagInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    handleAddTag();
+                  }
+                }}
+                placeholder="Ex.: vestido fluido, pôr do sol, abraço leve..."
+                className="flex-1 bg-surface-container-low border border-outline-variant/30 rounded-xl px-3 py-2 text-xs text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-1 focus:ring-primary"
+              />
+              <button
+                type="button"
+                onClick={handleAddTag}
+                disabled={!newTagInput.trim()}
+                className="px-3 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-xs font-semibold text-on-surface flex items-center gap-1 disabled:opacity-40 transition-colors"
+              >
+                <Plus className="size-3.5 text-secondary" />
+                <span>Adicionar</span>
+              </button>
             </div>
+
+            {/* Render Bride's Tags */}
+            {selectedTags.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {selectedTags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary text-on-primary shadow-xs"
+                  >
+                    <span>#{tag}</span>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveTag(tag)}
+                      className="hover:opacity-75 rounded-full p-0.5"
+                      title="Remover tag"
+                    >
+                      <X className="size-3" />
+                    </button>
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* Custom Short Comment Input */}
+          {/* Bride's Custom Observation Input */}
           <div className="space-y-1.5 pt-3">
             <label htmlFor="bride-comment" className="text-xs font-bold text-on-surface flex items-center gap-1.5">
               <MessageSquareQuote className="size-3.5 text-secondary" />
-              <span>Sua observação para a equipe Versa Visual:</span>
+              <span>O que você mais gosta nesta referência:</span>
             </label>
             <textarea
               id="bride-comment"
-              placeholder="ex.: 'Amei essa conexão, queremos fazer similar na orla de Costa Azul com vento natural...'"
+              placeholder="ex.: 'Amei a conexão leve do casal, a luz dourada do sol e o movimento do vestido ao vento...'"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               rows={3}
@@ -176,7 +208,7 @@ export function PhotoNoteDrawer({
               className="flex-1 h-11 rounded-xl bg-primary text-on-primary hover:opacity-90 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-xs transition-all active:scale-98"
             >
               <Check className="size-4" />
-              <span>Salvar no Roteiro</span>
+              <span>Salvar Observação</span>
             </button>
           </DrawerFooter>
         </div>

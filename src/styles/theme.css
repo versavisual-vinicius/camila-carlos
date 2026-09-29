@@ -1,7 +1,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Bridal Editorial Atelier Design Tokens */
+  /* Versa Visual Design Tokens */
   --surface: #fbf9f6;
   --surface-dim: #dbdad7;
   --surface-bright: #fbf9f6;
@@ -109,7 +109,7 @@
   --hover-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
 }
 
-/* Atelier Editorial Utilities */
+/* Versa Visual Editorial Utilities */
 .editorial-card {
   background-color: var(--card);
   border: var(--card-border);

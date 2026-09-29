@@ -84,7 +84,7 @@ export async function generateFullDossierPdf(data: DossierData): Promise<void> {
       y = 18;
     }
 
-    const isGolden = !!block.isGoldenHourLock;
+    const isGolden = !!(block.isHighlight || (block as any).isGoldenHourLock);
 
     if (isGolden) {
       doc.setFillColor(250, 246, 240);
@@ -99,10 +99,11 @@ export async function generateFullDossierPdf(data: DossierData): Promise<void> {
     }
 
     // Time range badge
+    const timeBadge = (block as any).timeRange || (isGolden ? "Golden Hour" : "Cronograma");
     doc.setFont("helvetica", "bold");
     doc.setFontSize(8.5);
     doc.setTextColor(isGolden ? 108 : 28, isGolden ? 91 : 26, isGolden ? 77 : 23);
-    doc.text(block.timeRange, 19, y + 5);
+    doc.text(timeBadge, 19, y + 5);
 
     // Title
     doc.setFont("helvetica", "bold");
@@ -116,11 +117,12 @@ export async function generateFullDossierPdf(data: DossierData): Promise<void> {
     doc.setTextColor(110, 105, 100);
     doc.text(`Local: ${block.location}`, 55, y + 9.5);
 
-    if (isGolden && block.alertWarning) {
+    const alertMsg = (block as any).readyTimeNotice || (block as any).alertWarning;
+    if (isGolden && alertMsg) {
       doc.setFont("helvetica", "bold");
       doc.setFontSize(7);
       doc.setTextColor(150, 60, 45);
-      doc.text(block.alertWarning, 19, y + 13.5);
+      doc.text(alertMsg, 19, y + 13.5);
       y += 18;
     } else {
       y += 16;
@@ -139,7 +141,7 @@ export async function generateFullDossierPdf(data: DossierData): Promise<void> {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(11);
   doc.setTextColor(28, 26, 23);
-  doc.text("2. SHOT LIST PROTOCOLAR MODULAR (EXECUÇÃO PREVISTA: 35 MIN)", 15, y);
+  doc.text("2. SHOT LIST PROTOCOLAR MODULAR", 15, y);
   doc.line(15, y + 2, pageWidth - 15, y + 2);
   y += 7;
 
@@ -159,7 +161,9 @@ export async function generateFullDossierPdf(data: DossierData): Promise<void> {
     doc.setTextColor(28, 26, 23);
     doc.text(group.name, 18, y + 4.2);
 
-    const groupMeta = `${group.estimatedMinutes} min · Fase: ${group.targetPhase}`;
+    const groupMeta = (group as any).estimatedMinutes
+      ? `${(group as any).estimatedMinutes} min · Fase: ${group.targetPhase}`
+      : `Fase: ${group.targetPhase}`;
     doc.setFont("helvetica", "normal");
     doc.setFontSize(7.5);
     doc.setTextColor(110, 105, 100);
@@ -392,7 +396,7 @@ export async function generateCeremonialAltarPdf(data: {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(7.5);
     doc.setTextColor(205, 197, 188);
-    doc.text(`Tempo est.: ${group.estimatedMinutes} min`, pageWidth - 18, y + 4.2, { align: "right" });
+    doc.text(group.badge || group.targetPhase, pageWidth - 18, y + 4.2, { align: "right" });
 
     y += 8;
 

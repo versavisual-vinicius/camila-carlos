@@ -8,9 +8,9 @@ import {
   Image as ImageIcon, 
   Link as LinkIcon, 
   Search, 
-  Sparkles, 
   Loader2,
-  Check
+  Check,
+  Plus
 } from "lucide-react";
 import { compressImageFile } from "@/app/utils/imageCompressor";
 import { toast } from "sonner";
@@ -21,37 +21,20 @@ interface AddItemDialogProps {
   onAdd: (item: Omit<PreWeddingItem, "id">) => void;
 }
 
-const availableClusters = [
-  { value: "natureza", label: "Cenário & Local (Costa Azul / Espaço Lux)" },
-  { value: "floresta", label: "Luz Suave & Natureza" },
-  { value: "urbano", label: "Bar Thunder & Urbano" },
-  { value: "pb", label: "Preto & Branco Editorial" },
-  { value: "vestido", label: "O Vestido & Véu" },
-  { value: "flores", label: "Flores & Decoração Botânica" },
-  { value: "papelaria", label: "Papelaria & Caligrafia" },
-  { value: "beleza", label: "Beleza & Make da Noiva" }
+const availableFolders = [
+  { value: "natureza", label: "Cenário & Local" },
+  { value: "floresta", label: "Luz Natural" },
+  { value: "urbano", label: "Urbano" },
+  { value: "pb", label: "Preto & Branco" },
+  { value: "vestido", label: "Vestido & Véu" },
+  { value: "flores", label: "Flores & Decoração" },
+  { value: "papelaria", label: "Papelaria" },
+  { value: "beleza", label: "Beleza & Make" }
 ];
 
 const availableVendors = [
   "Espaço Lux — Rio das Ostras (Local)",
-  "Versa Visual — Vinicius Cunha (@v1ncsc) (Foto)",
-  "Cerimonial & Assessoria (Equipe)",
-  "Produção de Cabelo & Maquiagem (Beleza)",
-  "Decoração Floral & Cenografia",
-  "Atelier Alta Costura (Vestido)"
-];
-
-const availableTags = [
-  "Botânico",
-  "Luz Natural",
-  "Pôr do Sol",
-  "Minimalista",
-  "Romântico",
-  "Rústico Chic",
-  "Noturno",
-  "Espontâneo",
-  "Pérolas",
-  "Vento Marítimo"
+  "Versa Visual — Vinicius Cunha (@v1ncsc) (Foto)"
 ];
 
 export function AddItemDialog({ isOpen, onClose, onAdd }: AddItemDialogProps) {
@@ -60,7 +43,8 @@ export function AddItemDialog({ isOpen, onClose, onAdd }: AddItemDialogProps) {
   const [linkUrl, setLinkUrl] = useState("");
   const [category, setCategory] = useState<string>("natureza");
   const [vendorSearch, setVendorSearch] = useState("");
-  const [selectedTags, setSelectedTags] = useState<string[]>(["Luz Natural", "Botânico"]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [newTagInput, setNewTagInput] = useState("");
   const [description, setDescription] = useState("");
   const [isCompressing, setIsCompressing] = useState(false);
   const [showVendorSuggestions, setShowVendorSuggestions] = useState(false);
@@ -94,10 +78,19 @@ export function AddItemDialog({ isOpen, onClose, onAdd }: AddItemDialogProps) {
     toast.success("Link carregado como referência!");
   };
 
-  const toggleTag = (tag: string) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-    );
+  const handleAddTag = () => {
+    const trimmed = newTagInput.trim().replace(/^#/, "");
+    if (!trimmed) return;
+    if (selectedTags.includes(trimmed)) {
+      toast.info("Essa tag já foi adicionada.");
+      return;
+    }
+    setSelectedTags((prev) => [...prev, trimmed]);
+    setNewTagInput("");
+  };
+
+  const handleRemoveTag = (tagToRemove: string) => {
+    setSelectedTags((prev) => prev.filter((t) => t !== tagToRemove));
   };
 
   const handleSubmit = (e?: React.FormEvent) => {
@@ -107,7 +100,7 @@ export function AddItemDialog({ isOpen, onClose, onAdd }: AddItemDialogProps) {
       return;
     }
 
-    // Map cluster to PreWeddingCategory
+    // Map folder to PreWeddingCategory
     let cat: PreWeddingCategory = "natureza";
     if (category === "floresta" || category === "urbano" || category === "pb") {
       cat = category;
@@ -134,7 +127,8 @@ export function AddItemDialog({ isOpen, onClose, onAdd }: AddItemDialogProps) {
     setLinkUrl("");
     setCategory("natureza");
     setVendorSearch("");
-    setSelectedTags(["Luz Natural", "Botânico"]);
+    setSelectedTags([]);
+    setNewTagInput("");
     setDescription("");
     onClose();
   };
@@ -142,7 +136,7 @@ export function AddItemDialog({ isOpen, onClose, onAdd }: AddItemDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={handleReset}>
       <DialogContent className="sm:max-w-[620px] max-h-[92vh] overflow-y-auto bg-surface text-on-surface border border-outline-variant/40 rounded-2xl p-0 shadow-lg">
-        {/* Stitch Screen 2: Top Bar */}
+        {/* Top Bar */}
         <div className="sticky top-0 z-20 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/20 px-5 py-3.5 flex items-center justify-between">
           <button
             type="button"
@@ -152,13 +146,13 @@ export function AddItemDialog({ isOpen, onClose, onAdd }: AddItemDialogProps) {
             Fechar
           </button>
           <span className="font-label-sm text-[11px] uppercase tracking-widest text-secondary font-semibold">
-            Moodboard Curado
+            Moodboard de Referências
           </span>
           <button
             type="button"
             onClick={() => handleSubmit()}
             disabled={!title.trim() || !imageUrl.trim() || isCompressing}
-            className="bg-primary text-on-primary font-label-md text-xs px-4 py-1.5 rounded-lg transition-transform active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed shadow-xs"
+            className="bg-primary text-on-primary font-label-md text-xs px-4 py-1.5 rounded-lg transition-transform active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed shadow-xs font-semibold"
           >
             Salvar
           </button>
@@ -171,7 +165,7 @@ export function AddItemDialog({ isOpen, onClose, onAdd }: AddItemDialogProps) {
               Nova Referência
             </h2>
             <p className="font-body-md text-xs text-on-surface-variant mt-1">
-              Capture a essência, memorize a atmosfera e organize os detalhes do grande dia.
+              Adicione fotos e inspirações visuais que você ama para o seu casamento e ensaio.
             </p>
           </div>
 
@@ -257,39 +251,39 @@ export function AddItemDialog({ isOpen, onClose, onAdd }: AddItemDialogProps) {
             {/* Title */}
             <div className="bg-surface-container-lowest p-3 rounded-xl border border-outline-variant/30 flex flex-col gap-1 shadow-xs">
               <label className="font-label-sm text-[10px] uppercase tracking-wider text-secondary font-semibold">
-                Título ou Visão da Inspiração *
+                Título ou Descrição Curta *
               </label>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Ex: Véu bordado vintage com renda floral"
+                placeholder="Ex: Véu delicado com renda floral, abraço na praia..."
                 className="bg-transparent font-title-sm text-sm text-on-surface focus:outline-none placeholder:text-secondary/60 w-full"
               />
             </div>
 
-            {/* Cluster / Pasta */}
+            {/* Pasta de Destino (sem Cluster) */}
             <div className="bg-surface-container-lowest p-3 rounded-xl border border-outline-variant/30 flex flex-col gap-1 shadow-xs">
               <label className="font-label-sm text-[10px] uppercase tracking-wider text-secondary font-semibold">
-                Cluster / Pasta de Destino
+                Pasta de Destino
               </label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 className="w-full bg-transparent font-title-sm text-xs text-on-surface focus:outline-none cursor-pointer pr-4"
               >
-                {availableClusters.map((c) => (
-                  <option key={c.value} value={c.value} className="bg-surface text-on-surface">
-                    {c.label}
+                {availableFolders.map((f) => (
+                  <option key={f.value} value={f.value} className="bg-surface text-on-surface">
+                    {f.label}
                   </option>
                 ))}
               </select>
             </div>
 
-            {/* Local ou Fornecedor Associado */}
+            {/* Local ou Fornecedor Associado (Opcional) */}
             <div className="bg-surface-container-lowest p-3 rounded-xl border border-outline-variant/30 flex flex-col gap-1 shadow-xs relative">
               <label className="font-label-sm text-[10px] uppercase tracking-wider text-secondary font-semibold">
-                Local ou Fornecedor Associado
+                Local ou Fornecedor Associado (Opcional)
               </label>
               <div className="flex items-center gap-2">
                 <Search className="size-3.5 text-secondary" />
@@ -298,7 +292,7 @@ export function AddItemDialog({ isOpen, onClose, onAdd }: AddItemDialogProps) {
                   value={vendorSearch}
                   onFocus={() => setShowVendorSuggestions(true)}
                   onChange={(e) => setVendorSearch(e.target.value)}
-                  placeholder="Ex: Espaço Lux, Versa Visual, Atelier..."
+                  placeholder="Ex: Espaço Lux, Versa Visual..."
                   className="w-full bg-transparent text-xs text-on-surface placeholder:text-secondary/60 focus:outline-none"
                 />
               </div>
@@ -323,41 +317,70 @@ export function AddItemDialog({ isOpen, onClose, onAdd }: AddItemDialogProps) {
               )}
             </div>
 
-            {/* Tags de Estilo */}
-            <div className="flex flex-col gap-1.5 pt-1">
-              <span className="font-label-sm text-[10px] uppercase tracking-wider text-secondary font-semibold">
-                Tags de Estilo & Clima
-              </span>
-              <div className="flex flex-wrap gap-1.5">
-                {availableTags.map((tag) => {
-                  const isSelected = selectedTags.includes(tag);
-                  return (
-                    <button
-                      key={tag}
-                      type="button"
-                      onClick={() => toggleTag(tag)}
-                      className={`px-2.5 py-1 rounded-full font-label-md text-[11px] tracking-wider uppercase transition-all ${
-                        isSelected
-                          ? "bg-primary text-on-primary shadow-xs font-semibold"
-                          : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
-                      }`}
-                    >
-                      {tag}
-                    </button>
-                  );
-                })}
+            {/* Tags de Estilo Criadas pela Noiva (Sem Pré-Tags) */}
+            <div className="bg-surface-container-lowest p-3 rounded-xl border border-outline-variant/30 flex flex-col gap-2 shadow-xs">
+              <div className="flex items-center justify-between">
+                <label className="font-label-sm text-[10px] uppercase tracking-wider text-secondary font-semibold">
+                  Tags de Estilo (Criadas por você · Opcional)
+                </label>
               </div>
+
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={newTagInput}
+                  onChange={(e) => setNewTagInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleAddTag();
+                    }
+                  }}
+                  placeholder="Digite uma tag (ex: pôr do sol, abraço, buquê...) e clique em Adicionar"
+                  className="flex-1 bg-surface text-xs text-on-surface placeholder:text-on-surface-variant/50 px-3 py-1.5 rounded-lg border border-outline-variant/30 focus:outline-none"
+                />
+                <button
+                  type="button"
+                  onClick={handleAddTag}
+                  disabled={!newTagInput.trim()}
+                  className="px-3 py-1.5 bg-surface-container hover:bg-surface-container-high text-xs font-semibold text-on-surface rounded-lg flex items-center gap-1 disabled:opacity-40 transition-colors"
+                >
+                  <Plus className="size-3 text-secondary" />
+                  <span>Adicionar</span>
+                </button>
+              </div>
+
+              {selectedTags.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {selectedTags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary text-on-primary shadow-xs"
+                    >
+                      <span>#{tag}</span>
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveTag(tag)}
+                        className="hover:opacity-75 rounded-full"
+                        title="Remover tag"
+                      >
+                        <X className="size-3" />
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {/* Anotação Pessoal */}
+            {/* Anotação Pessoal da Noiva */}
             <div className="bg-surface-container-lowest p-3 rounded-xl border border-outline-variant/30 flex flex-col gap-1 shadow-xs">
               <label className="font-label-sm text-[10px] uppercase tracking-wider text-secondary font-semibold">
-                Anotações de Direção / Observações
+                O que você mais gosta nesta referência
               </label>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Detalhes que chamaram sua atenção (tecido, enquadramento, ângulo...)"
+                placeholder="Conte o que chamou sua atenção (estilo do vestido, luz natural, atmosfera de romance...)"
                 rows={2}
                 className="w-full bg-transparent text-xs text-on-surface placeholder:text-secondary/60 focus:outline-none resize-none"
               />

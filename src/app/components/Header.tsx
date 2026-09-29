@@ -43,15 +43,15 @@ export function Header({
             onClick={() => onTabChange("referencias")}
           >
             <img
-              src="/stitch/logo.png"
-              alt="Logo Atelier Noiva"
-              className="h-7 md:h-8 w-auto object-contain shrink-0"
+              src="/brand-assets/vv-icon-teal-1000px.png"
+              alt="Versa Visual"
+              className="h-7 md:h-8 w-7 md:w-8 object-contain shrink-0 rounded-lg"
             />
             <div className="flex flex-col min-w-0">
               <span className="font-headline-sm text-sm sm:text-base text-on-surface truncate font-semibold leading-tight">
                 Camila & Carlos
               </span>
-              <span className="font-body-md text-[11px] text-secondary leading-none">
+              <span className="font-body-md text-[11px] text-secondary leading-none font-medium">
                 Versa Visual
               </span>
             </div>

@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, ChevronLeft, ChevronRight, Heart, Sparkles, MapPin } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Heart, Sparkles, MapPin, Check, MessageSquareQuote } from "lucide-react";
 import { PreWeddingItem } from "@/app/data/preWeddingData";
+import { PhotoNoteData } from "@/app/components/PhotoNoteDrawer";
+import { toast } from "sonner";
 
 interface LightboxModalProps {
   item: PreWeddingItem | null;
@@ -11,12 +13,14 @@ interface LightboxModalProps {
   onSelect: (item: PreWeddingItem) => void;
   isLiked: boolean;
   onToggleLike: (id: string) => void;
+  note?: PhotoNoteData;
+  onSaveNote?: (itemId: string, note: PhotoNoteData) => void;
 }
 
 const categoryLabels: Record<string, string> = {
-  natureza: "Campos & Montanhas",
-  floresta: "Floresta & Luz",
-  urbano: "Bar, Urbano & Moto",
+  natureza: "Costa Azul & Praia",
+  floresta: "Luz Natural & Natureza",
+  urbano: "Bar Thunder & Urbano",
   pb: "Preto & Branco"
 };
 
@@ -27,8 +31,22 @@ export function LightboxModal({
   onClose,
   onSelect,
   isLiked,
-  onToggleLike
+  onToggleLike,
+  note,
+  onSaveNote
 }: LightboxModalProps) {
+  const [commentDraft, setCommentDraft] = useState("");
+  const [isSaved, setIsSaved] = useState(false);
+
+  useEffect(() => {
+    if (note?.comment) {
+      setCommentDraft(note.comment);
+    } else {
+      setCommentDraft("");
+    }
+    setIsSaved(false);
+  }, [note, item]);
+
   useEffect(() => {
     if (!isOpen || !item) return;
 
@@ -61,6 +79,21 @@ export function LightboxModal({
     } else {
       onSelect(items[total - 1]);
     }
+  };
+
+  const handleSaveObservation = () => {
+    if (!onSaveNote) return;
+    onSaveNote(item.id, {
+      tags: note?.tags || [],
+      comment: commentDraft.trim(),
+      updatedAt: new Date().toISOString()
+    });
+    setIsSaved(true);
+    toast.success("Observação salva!", {
+      description: `Referência #${item.id}: "${item.title}"`,
+      duration: 2000
+    });
+    setTimeout(() => setIsSaved(false), 2500);
   };
 
   return (
@@ -151,41 +184,79 @@ export function LightboxModal({
             />
           </div>
 
-          {/* Details Sidebar / Overlay */}
-          <div className="w-full md:w-80 flex flex-col justify-between bg-surface/95 dark:bg-[#141312]/95 border border-outline-variant/30 p-6 rounded-2xl backdrop-blur-md text-on-surface max-h-[70vh] overflow-y-auto shadow-2xl">
-            <div>
-              <div className="flex items-center gap-1.5 text-secondary text-xs font-semibold uppercase tracking-wider mb-2">
-                <Sparkles className="size-3.5" />
-                <span>Direção Artística</span>
-              </div>
-              <h3 className="font-headline-sm text-xl font-bold text-on-surface mb-3 leading-snug tracking-tight">
-                {item.title}
-              </h3>
-              
-              <div className="mb-4">
-                <span className="inline-block px-3 py-1 rounded-full bg-secondary/15 text-secondary border border-secondary/30 text-xs font-medium">
+          {/* Details Sidebar: Foco na Noiva com Campo Editável */}
+          <div className="w-full md:w-84 flex flex-col justify-between bg-surface/95 dark:bg-[#141312]/95 border border-outline-variant/30 p-5 sm:p-6 rounded-2xl backdrop-blur-md text-on-surface max-h-[70vh] overflow-y-auto shadow-2xl">
+            <div className="flex flex-col gap-3">
+              <div>
+                <div className="flex items-center gap-1.5 text-secondary text-xs font-semibold uppercase tracking-wider mb-1.5">
+                  <Sparkles className="size-3.5" />
+                  <span>Referência Visual</span>
+                </div>
+                <h3 className="font-headline-sm text-lg sm:text-xl font-bold text-on-surface leading-snug tracking-tight">
+                  {item.title}
+                </h3>
+                <span className="inline-block px-2.5 py-0.5 mt-1.5 rounded-full bg-surface-container text-on-surface-variant border border-outline-variant/20 text-xs font-medium">
                   {categoryLabels[item.category] || item.category}
                 </span>
               </div>
 
-              {item.notes?.description && (
-                <div className="space-y-2 border-t border-outline-variant/20 pt-4">
-                  <span className="text-xs uppercase tracking-wider text-secondary font-semibold block">
-                    Notas de Cena & Luz
-                  </span>
-                  <p className="text-xs sm:text-sm text-on-surface/85 leading-relaxed font-normal">
-                    {item.notes.description}
-                  </p>
+              {/* Tags da Noiva se existirem */}
+              {note?.tags && note.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {note.tags.map((tag: string) => (
+                    <span
+                      key={tag}
+                      className="px-2.5 py-0.5 rounded-full bg-secondary/15 text-secondary border border-secondary/30 text-[11px] font-medium"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
                 </div>
               )}
+
+              {/* Campo Editável: O que ela gosta na referência */}
+              <div className="border-t border-outline-variant/20 pt-3 flex flex-col gap-2">
+                <label className="text-xs font-bold text-on-surface flex items-center gap-1.5">
+                  <MessageSquareQuote className="size-3.5 text-secondary" />
+                  <span>O que você mais gosta nesta referência:</span>
+                </label>
+                <textarea
+                  value={commentDraft}
+                  onChange={(e) => {
+                    setCommentDraft(e.target.value);
+                    setIsSaved(false);
+                  }}
+                  placeholder="Escreva aqui o que você amou nesta referência (a conexão, o estilo do vestido, a luz suave, a pose espontânea...)"
+                  rows={3}
+                  className="w-full text-xs p-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-1 focus:ring-primary resize-none leading-relaxed"
+                />
+
+                {onSaveNote && (
+                  <button
+                    type="button"
+                    onClick={handleSaveObservation}
+                    className={`self-end px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all shadow-xs ${
+                      isSaved
+                        ? "bg-secondary text-on-secondary"
+                        : "bg-primary text-on-primary hover:opacity-90 active:scale-95"
+                    }`}
+                  >
+                    <Check className="size-3.5" />
+                    <span>{isSaved ? "Salvo!" : "Salvar Observação"}</span>
+                  </button>
+                )}
+              </div>
             </div>
 
-            <div className="border-t border-outline-variant/20 pt-4 mt-6 flex items-center justify-between text-xs text-on-surface-variant">
-              <span className="flex items-center gap-1.5">
-                <MapPin className="size-3.5 text-secondary" />
-                Rio das Ostras (Thunder / Costa Azul)
+            {/* Bottom Signature */}
+            <div className="border-t border-outline-variant/20 pt-3.5 mt-5 flex items-center justify-between text-xs text-on-surface-variant">
+              <span className="flex items-center gap-1 text-[11px]">
+                <MapPin className="size-3 text-secondary" />
+                Rio das Ostras · Costa Azul
               </span>
-              <span className="text-secondary font-medium">Versa Visual</span>
+              <span className="text-secondary font-semibold text-[11px]">
+                Versa Visual (@v1ncsc)
+              </span>
             </div>
           </div>
         </div>

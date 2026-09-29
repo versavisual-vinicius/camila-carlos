@@ -6,12 +6,19 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-on-surface-variant">
           <div className="flex items-center gap-2.5 flex-wrap">
-            <span className="text-on-surface font-semibold tracking-tight">
-              Atelier Noiva · Versa Visual
-            </span>
+            <div className="flex items-center gap-2">
+              <img
+                src="/brand-assets/vv-icon-teal-1000px.png"
+                alt="Versa Visual"
+                className="size-5 object-contain rounded-md"
+              />
+              <span className="text-on-surface font-semibold tracking-tight text-sm">
+                Versa Visual
+              </span>
+            </div>
             <span className="text-outline-variant">|</span>
             <span>
-              Direção Fotográfica & Curadoria Visual de Casamento
+              Direção Fotográfica de Casamento
             </span>
             <span className="text-outline-variant">|</span>
             <a 
@@ -27,7 +34,7 @@ export function Footer() {
           <div className="flex items-center gap-4 text-xs">
             <span className="flex items-center gap-1.5 text-on-surface-variant">
               <MapPin className="size-3.5 text-secondary" />
-              Rio das Ostras · Costa Azul, RJ
+              Rio das Ostras · Macaé, RJ
             </span>
             <span className="flex items-center gap-1.5 text-on-surface-variant">
               <Database className="size-3.5 text-secondary" />
@@ -37,7 +44,7 @@ export function Footer() {
         </div>
 
         <div className="mt-6 pt-4 border-t border-outline-variant/20 text-center text-[11px] text-on-surface-variant">
-          Curadoria Visual & Gestão Estética · Camila & Carlos · Acervo Exclusivo Versa Visual (@v1ncsc)
+          Curadoria Visual & Direção Fotográfica · Camila & Carlos · Versa Visual (@v1ncsc)
         </div>
       </div>
     </footer>

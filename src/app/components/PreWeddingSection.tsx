@@ -56,8 +56,14 @@ export function PreWeddingSection({
       const q = searchQuery.toLowerCase();
       const matchTitle = item.title.toLowerCase().includes(q);
       const matchDesc = item.notes?.description?.toLowerCase().includes(q);
-      const matchTags = item.notes?.tags?.some(t => t.toLowerCase().includes(q));
-      if (!matchTitle && !matchDesc && !matchTags) return false;
+      const matchTags = item.notes?.tags?.some((t) => t.toLowerCase().includes(q));
+      const brideNote = notes[item.id];
+      const matchBrideComment = brideNote?.comment?.toLowerCase().includes(q);
+      const matchBrideTags = brideNote?.tags?.some((t) => t.toLowerCase().includes(q));
+
+      if (!matchTitle && !matchDesc && !matchTags && !matchBrideComment && !matchBrideTags) {
+        return false;
+      }
     }
 
     return true;

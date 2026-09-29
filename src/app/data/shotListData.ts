@@ -2,7 +2,7 @@ export interface ShotListItem {
   id: string;
   title: string;
   names: string;
-  isMandatory: boolean; // true = Obrigatória, false = Se der tempo
+  isMandatory: boolean;
   isCompleted: boolean;
   priorityBadge?: string;
   note?: string;
@@ -11,22 +11,23 @@ export interface ShotListItem {
 export interface ShotListGroup {
   id: string;
   name: string;
-  estimatedMinutes: number;
   targetPhase: string;
   badge?: string;
   items: ShotListItem[];
 }
 
-export interface SolarTimelineBlock {
+export interface PhotographyTimelineBlock {
   id: string;
-  phase: "manha" | "tarde" | "golden-hour" | "noite";
-  timeRange: string;
+  phase: "pre-wedding" | "making-of" | "cerimonia" | "altar" | "golden-hour" | "festa";
   title: string;
   location: string;
-  description: string;
-  isGoldenHourLock?: boolean;
-  alertWarning?: string;
+  teamDivision: string;
+  whatWillBeDone: string;
+  isHighlight?: boolean;
 }
+
+// Manter alias retrocompatível
+export type SolarTimelineBlock = PhotographyTimelineBlock;
 
 export interface KeyVendor {
   id: string;
@@ -41,74 +42,63 @@ export interface KeyVendor {
   isCustom?: boolean;
 }
 
-export interface DeliveryStage {
-  id: string;
-  stepNumber: number;
-  title: string;
-  status: "completed" | "scheduled" | "pending";
-  dateInfo: string;
-  description: string;
-}
-
-// Initial Shot List modular data organizada pelo protocolo editorial Versa Visual
+// Shot List com foco na noiva e dinâmica fluida (sem imposição de minutos rígidos)
 export const INITIAL_SHOT_LIST_GROUPS: ShotListGroup[] = [
   {
     id: "avos-mobilidade",
-    name: "01 · Prioridade Máxima: Avós & Mobilidade Reduzida",
-    estimatedMinutes: 6,
+    name: "01 · Prioridade de Conforto: Avós",
     targetPhase: "Altar Imediato",
-    badge: "Liberar em 6 min",
+    badge: "Prioridade de Conforto",
     items: [
       {
         id: "am-01",
         title: "Noivos + Avós da Noiva",
-        names: "Avó [Nome] e Avô [Nome]",
+        names: "Avó e Avô da Noiva",
         isMandatory: true,
         isCompleted: false,
-        priorityBadge: "Prioridade 01 · Mobilidade"
+        priorityBadge: "Prioridade 01"
       },
       {
         id: "am-02",
         title: "Noivos + Avós do Noivo",
-        names: "Avó [Nome] e Avô [Nome]",
+        names: "Avó e Avô do Noivo",
         isMandatory: true,
         isCompleted: false,
-        priorityBadge: "Prioridade 02 · Mobilidade"
+        priorityBadge: "Prioridade 02"
       }
     ]
   },
   {
     id: "familia-noiva",
-    name: "02 · Família Nuclear da Noiva",
-    estimatedMinutes: 8,
+    name: "02 · Família da Noiva",
     targetPhase: "Altar Principal",
-    badge: "8 minutos",
+    badge: "Família da Noiva",
     items: [
       {
         id: "fn-01",
         title: "Noivos + Pais da Noiva",
-        names: "Mãe [Nome] e Pai [Nome]",
+        names: "Mãe e Pai da Noiva",
         isMandatory: true,
         isCompleted: false
       },
       {
         id: "fn-02",
-        title: "Noiva + Mãe da Noiva (Retrato Íntimo & Detalhes)",
-        names: "Mãe [Nome]",
+        title: "Noiva + Mãe da Noiva (Retrato Íntimo)",
+        names: "Mãe da Noiva",
         isMandatory: true,
         isCompleted: false
       },
       {
         id: "fn-03",
         title: "Noiva + Pai da Noiva (Abraço & Emoção)",
-        names: "Pai [Nome]",
+        names: "Pai da Noiva",
         isMandatory: true,
         isCompleted: false
       },
       {
         id: "fn-04",
-        title: "Noivos + Pais e Irmãos da Noiva (Família Completa)",
-        names: "Pais e Irmãos [Nomes]",
+        title: "Noivos + Pais e Irmãos da Noiva",
+        names: "Família da Noiva Completa",
         isMandatory: true,
         isCompleted: false
       }
@@ -116,36 +106,35 @@ export const INITIAL_SHOT_LIST_GROUPS: ShotListGroup[] = [
   },
   {
     id: "familia-noivo",
-    name: "03 · Família Nuclear do Noivo",
-    estimatedMinutes: 8,
+    name: "03 · Família do Noivo",
     targetPhase: "Altar Principal",
-    badge: "8 minutos",
+    badge: "Família do Noivo",
     items: [
       {
         id: "fno-01",
         title: "Noivos + Pais do Noivo",
-        names: "Mãe [Nome] e Pai [Nome]",
+        names: "Mãe e Pai do Noivo",
         isMandatory: true,
         isCompleted: false
       },
       {
         id: "fno-02",
         title: "Noivo + Mãe do Noivo (Retrato de Afeto)",
-        names: "Mãe [Nome]",
+        names: "Mãe do Noivo",
         isMandatory: true,
         isCompleted: false
       },
       {
         id: "fno-03",
-        title: "Noivo + Pai do Noivo (Cúmplice & Postura)",
-        names: "Pai [Nome]",
+        title: "Noivo + Pai do Noivo (Abraço & Cumplicidade)",
+        names: "Pai do Noivo",
         isMandatory: true,
         isCompleted: false
       },
       {
         id: "fno-04",
-        title: "Noivos + Pais e Irmãos do Noivo (Família Completa)",
-        names: "Pais e Irmãos [Nomes]",
+        title: "Noivos + Pais e Irmãos do Noivo",
+        names: "Família do Noivo Completa",
         isMandatory: true,
         isCompleted: false
       }
@@ -154,13 +143,12 @@ export const INITIAL_SHOT_LIST_GROUPS: ShotListGroup[] = [
   {
     id: "padrinhos-madrinhas",
     name: "04 · Padrinhos, Madrinhas & Cortejo",
-    estimatedMinutes: 10,
     targetPhase: "Altar & Gramado",
-    badge: "10 minutos",
+    badge: "Cortejo",
     items: [
       {
         id: "pm-01",
-        title: "Noivos + Todas as Madrinhas e Padrinhos (Composição Editorial Aberta)",
+        title: "Noivos + Todas as Madrinhas e Padrinhos",
         names: "Todos os casais de padrinhos",
         isMandatory: true,
         isCompleted: false,
@@ -168,46 +156,37 @@ export const INITIAL_SHOT_LIST_GROUPS: ShotListGroup[] = [
       },
       {
         id: "pm-02",
-        title: "Noiva + Madrinhas (Composição Editorial com Buquês & Risadas)",
+        title: "Noiva + Madrinhas (Descontração & Alegria)",
         names: "Todas as Madrinhas",
         isMandatory: true,
         isCompleted: false
       },
       {
         id: "pm-03",
-        title: "Noivo + Padrinhos (Espontânea, Brinde & Descontração)",
+        title: "Noivo + Padrinhos (Brinde & Espontaneidade)",
         names: "Todos os Padrinhos",
         isMandatory: true,
         isCompleted: false
       },
       {
         id: "pm-04",
-        title: "Noivos + Daminhas e Pajens (Cortejo Infantil)",
-        names: "Daminhas e Pajens [Nomes]",
+        title: "Noivos + Daminhas e Pajens",
+        names: "Crianças do cortejo",
         isMandatory: false,
-        isCompleted: false,
-        priorityBadge: "Liberar logo após o clique"
+        isCompleted: false
       }
     ]
   },
   {
     id: "amigos-especiais",
     name: "05 · Amigos Especiais & Grupos Afetivos",
-    estimatedMinutes: 5,
     targetPhase: "Lounge / Coquetel",
-    badge: "5 minutos (Opcional)",
+    badge: "Opcional",
     items: [
       {
         id: "ae-01",
-        title: "Noivos + Amigos de Infância / Faculdade",
-        names: "Grupo de amigos próximos",
-        isMandatory: false,
-        isCompleted: false
-      },
-      {
-        id: "ae-02",
-        title: "Noivos + Conexões de Trabalho / Amigos Especiais",
-        names: "Convidados de honra",
+        title: "Noivos + Amigos Próximos",
+        names: "Grupo de amigos",
         isMandatory: false,
         isCompleted: false
       }
@@ -215,187 +194,98 @@ export const INITIAL_SHOT_LIST_GROUPS: ShotListGroup[] = [
   }
 ];
 
-// Solar Daylight Timeline of Rio das Ostras com engenharia solar Versa Visual
-export const SOLAR_TIMELINE_BLOCKS: SolarTimelineBlock[] = [
+// Cronograma Fotográfico: Pré-Wedding e Fotografia do Casamento
+// Detalha o que será feito e como a equipe se divide, sem regras ou horários rígidos
+export const PHOTOGRAPHY_TIMELINE_BLOCKS: PhotographyTimelineBlock[] = [
   {
-    id: "time-01",
-    phase: "manha",
-    timeRange: "13:00 — 15:30",
-    title: "Making Of da Noiva",
-    location: "Espaço Lux / Suíte Master da Noiva",
-    description: "Preparação de cabelo, maquiagem, robe e detalhes afetivos (vestido no cabide, alianças, convite, sapatos e buquê fresco). Margem de segurança de 45 min para retratos com o vestido impecável e sem correria.",
-    isGoldenHourLock: false
+    id: "time-prewedding",
+    phase: "pre-wedding",
+    title: "Ensaio Pré-Wedding",
+    location: "Bar Thunder & Orla / Falésias de Costa Azul — Rio das Ostras",
+    whatWillBeDone: "Um ensaio intimista e leve. Começamos com a textura autêntica do Bar Thunder e seguimos para o entardecer nas falésias e orla da Costa Azul, com luz suave e vento natural.",
+    teamDivision: "Direção fotográfica por Vinicius Cunha. Uma experiência leve para vocês se acostumarem com a câmera, entenderem nossa dinâmica e criarem fotos com a personalidade do casal.",
+    isHighlight: false
   },
   {
-    id: "time-02",
-    phase: "tarde",
-    timeRange: "14:30 — 16:00",
-    title: "Making Of do Noivo & Brinde com Padrinhos",
-    location: "Espaço Lux / Suíte do Noivo ou Lounge de Apoio",
-    description: "Alfaiataria, abotoaduras, relógio, ajuste de gravata e perfume. Retratos solo de elegância, afeto com os pais e brinde descontraído com os padrinhos antes da cerimônia.",
-    isGoldenHourLock: false
+    id: "time-makingof",
+    phase: "making-of",
+    title: "Preparação & Making-of da Noiva e do Noivo",
+    location: "Espaço Lux · Suíte da Noiva & Espaço do Noivo",
+    whatWillBeDone: "Registro afetivo e com calma dos detalhes que vocês escolheram com tanto carinho (vestido, alianças, convite, sapatos, buquê) e retratos individuais da noiva e do noivo já prontos, com tranquilidade antes da cerimônia.",
+    teamDivision: "Como a equipe se divide: Vinicius Cunha fica dedicado à noiva na suíte. O segundo fotógrafo acompanha o noivo e registra a cenografia do espaço antes da chegada dos convidados.",
+    isHighlight: false
   },
   {
-    id: "time-03",
-    phase: "tarde",
-    timeRange: "15:45 — 16:15",
-    title: "Retratos Solo da Noiva & Detalhes do Véu",
-    location: "Espaço Lux (Área Verde & Arquitetura)",
-    description: "Vestido 100% impecável, maquiagem intacta e luz natural suave antes da movimentação dos convidados nos jardins.",
-    isGoldenHourLock: false
+    id: "time-cerimonia",
+    phase: "cerimonia",
+    title: "Cortejo & Cerimônia de Casamento",
+    location: "Altar ao Ar Livre — Espaço Lux",
+    whatWillBeDone: "Cobertura documental e sensível das entradas, olhares emocionados, votos sinceros e troca de alianças sob luz natural, registrando a verdade de cada momento.",
+    teamDivision: "Como a equipe se divide: Dois ângulos sincronizados — um fotógrafo dedicado às expressões da noiva e cortejo; outro focado no noivo no altar, emoção dos pais e convidados.",
+    isHighlight: false
   },
   {
-    id: "time-04",
-    phase: "tarde",
-    timeRange: "16:15 — 16:30",
-    title: "⚠️ Trava Técnica: Alinhamento de Cortejo & Blindagem de Horário",
-    location: "Espaço Lux / Concentração dos Padrinhos",
-    description: "Buffer preventivo de 15 minutos. Cerimonial posiciona cortejo na fila. Entrada impreterível às 16:30 para garantir o pôr do sol astronômico.",
-    isGoldenHourLock: false,
-    alertWarning: "⚠️ Trava Técnica: Qualquer atraso na entrada compromete diretamente a luz dourada do casal no mirante."
+    id: "time-altar",
+    phase: "altar",
+    title: "Fotos Protocolares com Família & Padrinhos",
+    location: "Altar Principal",
+    whatWillBeDone: "Registros essenciais com a família e padrinhos logo após o sim, conduzidos de maneira ágil e leve para que todos possam aproveitar o coquetel com tranquilidade.",
+    teamDivision: "Como a equipe se divide: Um fotógrafo conduz as combinações com leveza; o segundo fotógrafo apoia na organização para não cansar ninguém.",
+    isHighlight: false
   },
   {
-    id: "time-05",
-    phase: "tarde",
-    timeRange: "16:30 — 17:15",
-    title: "Cerimônia Integrada ao Ar Livre",
-    location: "Espaço Lux (Altar Externo)",
-    description: "Entrada dos padrinhos, cortejo dos noivos, votos autorais com luz natural dourando e bênção final.",
-    isGoldenHourLock: false
-  },
-  {
-    id: "time-06",
+    id: "time-couple",
     phase: "golden-hour",
-    timeRange: "17:15 — 17:45",
-    title: "☀️ Pôr do Sol & Retratos Exclusivos do Casal (Janela Crítica)",
-    location: "Espaço Lux / Mirante Costa Azul",
-    description: "Janela dourada imperdível! Horário astronômico do pôr do sol em Rio das Ostras travado às 17:35. Trinta minutos sagrados dos recém-casados a sós com a direção de fotografia da Versa Visual (@v1ncsc).",
-    isGoldenHourLock: true,
-    alertWarning: "⚠️ Trava Técnica Máxima: Não permitir fotos protocolares com familiares ou cumprimentos de mesa nesta janela. A luz dourada dura apenas 30 minutos."
+    title: "Retratos dos Noivos ao Pôr do Sol",
+    location: "Gramado Externo & Mirante Costa Azul",
+    whatWillBeDone: "Um momento a dois de Camila & Carlos com a fotografia para aproveitar a luz dourada do entardecer. Uma pausa deliciosa para respirarem recém-casados e criarem retratos inesquecíveis.",
+    teamDivision: "Direção atenta de Vinicius Cunha explorando a luz suave, o movimento do vestido e a conexão autêntica de vocês dois.",
+    isHighlight: true
   },
   {
-    id: "time-07",
-    phase: "golden-hour",
-    timeRange: "17:45 — 18:25",
-    title: "Execução da Shot List Protocolar no Altar",
-    location: "Espaço Lux (Altar / Painel Cenográfico)",
-    description: "Execução ágil e cronometrada: Avós e idosos liberados em 6 minutos; famílias nucleares em 16 minutos; padrinhos em 10 minutos. Total de 32 a 35 min para liberar os convidados ao coquetel.",
-    isGoldenHourLock: false
-  },
-  {
-    id: "time-08",
-    phase: "noite",
-    timeRange: "18:30 em diante",
-    title: "Recepção, Brinde dos Noivos, Jantar & Pista",
-    location: "Espaço Lux (Salão Principal & Lounge)",
-    description: "Transição para iluminação cênica noturna, flash off-camera editorial e cobertura documental viva da festa e da pista de dança.",
-    isGoldenHourLock: false
+    id: "time-festa",
+    phase: "festa",
+    title: "Recepção, Brinde & Pista de Dança",
+    location: "Salão Principal & Lounge — Espaço Lux",
+    whatWillBeDone: "Entrada dos noivos, brinde com padrinhos, corte do bolo e cobertura animada da pista com muita espontaneidade, abraços e alegria com os amigos.",
+    teamDivision: "Como a equipe se divide: Iluminação dedicada para registrar o ritmo da pista e as melhores comemorações sem interferir na festa.",
+    isHighlight: false
   }
 ];
 
-// Key Vendors of Camila & Carlos com comunicação 1-clique
+// Alias para retrocompatibilidade
+export const SOLAR_TIMELINE_BLOCKS = PHOTOGRAPHY_TIMELINE_BLOCKS;
+
+// Fornecedores Chave: Apenas Espaço Lux e Versa Visual
 export const KEY_VENDORS: KeyVendor[] = [
   {
     id: "ven-01",
-    role: "Cerimonial & Assessoria",
-    name: "Cerimonial do Evento",
-    phone: "5522998877665",
-    whatsappMessage: "Olá! Segue o link com a Shot List e o Roteiro Logístico consolidado de Camila & Carlos para o casamento no Espaço Lux: ",
-    category: "cerimonial"
-  },
-  {
-    id: "ven-02",
     role: "Local do Evento",
     name: "Espaço Lux — Rio das Ostras",
     phone: "5522997766554",
-    whatsappMessage: "Olá, equipe Espaço Lux! Aqui é sobre a logística fotográfica do casamento de Camila & Carlos.",
+    whatsappMessage: "Olá, equipe Espaço Lux! Aqui é a Camila, sobre o casamento no espaço.",
     address: "Espaço Lux, Rio das Ostras - RJ",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Espa%C3%A7o+Lux+Rio+das+Ostras+RJ",
     wazeUrl: "https://waze.com/ul?q=Espaço+Lux+Rio+das+Ostras",
     category: "espaco"
   },
   {
-    id: "ven-03",
+    id: "ven-02",
     role: "Direção Fotográfica",
     name: "Versa Visual — Vinicius Cunha (@v1ncsc)",
     phone: "5522997624631",
-    whatsappMessage: "Oi Vini! Estou acompanhando o moodboard e a Shot List de Camila & Carlos no app.",
+    whatsappMessage: "Oi Vini! Estou acompanhando o moodboard e roteiro de fotografia de Camila & Carlos.",
+    address: "Rio das Ostras & Macaé, RJ",
     category: "foto"
-  },
-  {
-    id: "ven-04",
-    role: "Beleza & Make da Noiva",
-    name: "Produção de Cabelo & Maquiagem",
-    phone: "5522999881122",
-    whatsappMessage: "Olá! Segue o alinhamento de horários do Making-of da Noiva no Espaço Lux (término impreterível às 15:30): ",
-    category: "beleza"
-  },
-  {
-    id: "ven-05",
-    role: "Decoração & Cenografia",
-    name: "Equipe de Decoração & Flores",
-    phone: "5522999883344",
-    whatsappMessage: "Olá! Alinhamento de fotos dos detalhes da mesa posta e altar externo antes da chegada dos convidados: ",
-    category: "decoracao"
-  },
-  {
-    id: "ven-06",
-    role: "Música & DJ",
-    name: "DJ & Iluminação Cênica",
-    phone: "5522999885566",
-    whatsappMessage: "Olá! Alinhamento dos momentos de cortejo, entrada dos noivos no salão e abertura da pista de dança: ",
-    category: "musica"
   }
 ];
 
-// Delivery Lifecycle Stages (Esteira de Entregas Versa Visual)
-export const DELIVERY_STAGES: DeliveryStage[] = [
-  {
-    id: "stage-1",
-    stepNumber: 1,
-    title: "Briefing, Locações & Moodboard",
-    status: "completed",
-    dateInfo: "Concluído",
-    description: "Curadoria das referências, definição de rota (Bar Thunder & Costa Azul) e alinhamento de estilo fotográfico."
-  },
-  {
-    id: "stage-2",
-    stepNumber: 2,
-    title: "Ensaio Pré-Wedding",
-    status: "completed",
-    dateInfo: "Agendado (T-60 dias)",
-    description: "Execução do ensaio fotográfico no Bar Thunder e orla da Costa Azul ao entardecer com luz suave."
-  },
-  {
-    id: "stage-3",
-    stepNumber: 3,
-    title: "Cobertura Completa do Casamento",
-    status: "scheduled",
-    dateInfo: "Dia D (Espaço Lux)",
-    description: "Do making-of duplo à festa final com equipe Versa Visual completa, blindagem solar e direção editorial."
-  },
-  {
-    id: "stage-4",
-    stepNumber: 4,
-    title: "Prévias em Alta Resolução em 48h",
-    status: "pending",
-    dateInfo: "Entrega: D+2 dias",
-    description: "Pacote de 30 a 50 fotos tratadas com curadoria ágil para redes sociais e envio à família."
-  },
-  {
-    id: "stage-5",
-    stepNumber: 5,
-    title: "Galeria Completa para Seleção",
-    status: "pending",
-    dateInfo: "Entrega: D+30 dias",
-    description: "Acesso à plataforma online protegida por senha com todas as fotos tratadas em cor, contraste e nitidez."
-  },
-  {
-    id: "stage-6",
-    stepNumber: 6,
-    title: "Diagramação & Entrega do Álbum",
-    status: "pending",
-    dateInfo: "Pós-seleção",
-    description: "Design editorial personalizado das lâminas do álbum físico, revisão fina e impressão em papel fine art."
-  }
+// Categorias sugeridas para preenchimento opcional da noiva
+export const OPTIONAL_VENDOR_CATEGORIES = [
+  { key: "cerimonial", label: "Cerimonial & Assessoria" },
+  { key: "beleza", label: "Beleza & Make da Noiva" },
+  { key: "decoracao", label: "Decoração & Cenografia" },
+  { key: "musica", label: "Música, DJ & Iluminação" },
+  { key: "buffet", label: "Buffet & Gastronomia" },
+  { key: "celebrante", label: "Celebrante do Casamento" }
 ];

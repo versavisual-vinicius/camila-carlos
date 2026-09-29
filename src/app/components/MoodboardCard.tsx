@@ -16,16 +16,9 @@ interface MoodboardCardProps {
   isAboveFold?: boolean;
 }
 
-const categoryTags: Record<string, string> = {
-  natureza: "#Campos",
-  floresta: "#LuzNatural",
-  urbano: "#Urbano",
-  pb: "#PretoEBranco"
-};
-
 const categoryAttributions: Record<string, string> = {
   natureza: "Costa Azul · Rio das Ostras",
-  floresta: "Luz Suave · Ensaio",
+  floresta: "Luz Natural · Ensaio",
   urbano: "Bar Thunder · Rota",
   pb: "Versa Visual Editorial"
 };
@@ -43,8 +36,6 @@ export function MoodboardCard({
 }: MoodboardCardProps) {
   const [imageLoaded, setImageLoaded] = useState(isAboveFold);
   const hasNote = Boolean(note && ((note.tags && note.tags.length > 0) || note.comment));
-
-  const tagLabel = categoryTags[item.category] || "#Referência";
   const attributionLabel = categoryAttributions[item.category] || "Versa Visual (@v1ncsc)";
 
   return (
@@ -74,12 +65,24 @@ export function MoodboardCard({
           }`}
         />
 
-        {/* Top Badges Overlay */}
-        <div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1.5">
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-surface/90 backdrop-blur-md text-on-surface font-body-md text-[11px] font-medium shadow-2xs border border-outline-variant/30">
-            {tagLabel}
-          </span>
-        </div>
+        {/* Tags de Estilo Criadas pela Noiva (Apenas se a noiva criou, sem pré-tags) */}
+        {note?.tags && note.tags.length > 0 && (
+          <div className="absolute top-2.5 right-2.5 z-10 flex flex-wrap gap-1 max-w-[80%] justify-end">
+            {note.tags.slice(0, 2).map((tag) => (
+              <span
+                key={tag}
+                className="inline-flex items-center px-2 py-0.5 rounded-full bg-primary/90 text-on-primary backdrop-blur-md font-body-md text-[10px] font-medium shadow-2xs"
+              >
+                #{tag}
+              </span>
+            ))}
+            {note.tags.length > 2 && (
+              <span className="inline-flex items-center px-1.5 py-0.5 rounded-full bg-primary/90 text-on-primary font-body-md text-[9px] font-medium">
+                +{note.tags.length - 2}
+              </span>
+            )}
+          </div>
+        )}
 
         {/* Quick Actions Floating Bar */}
         <div 
@@ -95,7 +98,7 @@ export function MoodboardCard({
                 : "bg-surface/90 text-on-surface hover:bg-surface-container-highest"
             }`}
             onClick={() => onOpenNotes(item)}
-            title={hasNote ? "Ver/Editar anotação da noiva" : "Adicionar anotação de estilo"}
+            title={hasNote ? "Ver suas observações nesta referência" : "Anotar o que você mais gosta nesta foto"}
           >
             <MessageSquareQuote className="size-3.5" />
           </button>
