@@ -1,7 +1,6 @@
 import { PageHeader } from "./PageHeader";
 import { useState, useRef } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import { motion } from "motion/react";
 import { 
   Heart, 
   Plus, 
@@ -27,7 +26,6 @@ interface PreWeddingSectionProps {
   onOpenAddDialog: () => void;
   onAddItem: (item: Omit<PreWeddingItem, "id">) => void;
   onAddBatchItems?: (items: Omit<PreWeddingItem, "id">[]) => void;
-  onResetItems: () => void;
 }
 
 export function PreWeddingSection({
@@ -40,8 +38,7 @@ export function PreWeddingSection({
   onOpenLightbox,
   onOpenAddDialog,
   onAddItem,
-  onAddBatchItems,
-  onResetItems
+  onAddBatchItems
 }: PreWeddingSectionProps) {
   const [activeView, setActiveView] = useState<"all" | "favorites">("all");
   const [searchQuery, setSearchQuery] = useState("");

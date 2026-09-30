@@ -1,5 +1,5 @@
 // Source: Google Maps Platform Code Assist
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { 
   APIProvider, 
   Map, 

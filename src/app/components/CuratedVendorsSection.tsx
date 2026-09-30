@@ -4,17 +4,13 @@ import { KeyVendor, OPTIONAL_VENDOR_CATEGORIES } from "@/app/data/shotListData";
 import { WeddingInteractiveMap } from "./WeddingInteractiveMap";
 import { 
   MapPin, 
-  Phone, 
   MessageCircle, 
   Plus, 
   Trash2, 
-  Compass, 
   Check, 
   X, 
-  ExternalLink,
   Store,
   Sparkles,
-  Navigation,
   RotateCcw
 } from "lucide-react";
 import { toast } from "sonner";
@@ -22,7 +18,6 @@ import { toast } from "sonner";
 interface CuratedVendorsSectionProps {
   vendors: KeyVendor[];
   onAddVendor: (vendor: Omit<KeyVendor, "id">) => void;
-  onUpdateVendor: (id: string, updates: Partial<KeyVendor>) => void;
   onDeleteVendor: (id: string) => void;
   onResetVendors: () => void;
   isDarkMode?: boolean;
@@ -36,7 +31,6 @@ const vendorPhotos: Record<string, string> = {
 export function CuratedVendorsSection({
   vendors,
   onAddVendor,
-  onUpdateVendor,
   onDeleteVendor,
   onResetVendors,
   isDarkMode = false

@@ -88,3 +88,11 @@ O produto responde a quatro perguntas essenciais:
 5. **Saída e Compartilhamento**:
    * Exportação de **Resumo do Roteiro Fotográfico** via `jsPDF`, limpo e focado na cobertura e lista de retratos.
    * Resiliência de estado contínua via `localStorage` versionado, sem perda de anotações ou uploads ao recarregar.
+
+## 6. Dados e persistência
+
+- A aplicação é client-side e não possui backend ou autenticação. Preferências, notas, favoritos, referências adicionadas, roteiro e fornecedores ficam no `localStorage` do navegador.
+- Os contratos canônicos são `src/app/data/preWeddingData.ts` e `src/app/data/shotListData.ts`. Alterações estruturais exigem migração ou atualização das chaves `camila_carlos_shotlist_version` e `camila_carlos_vendors_version`.
+- As chaves persistidas são `camila_carlos_theme`, `camila_carlos_active_tab`, `camila_carlos_moodboard_items`, `camila_carlos_liked_ids`, `camila_carlos_photo_notes`, `camila_carlos_shotlist`, `camila_carlos_shotlist_version`, `camila_carlos_vendors` e `camila_carlos_vendors_version`.
+- Toda imagem adicionada pelo usuário passa por `compressImageFile`, limitada a 1600 px e JPEG 0,82, antes da persistência para proteger a cota do navegador.
+- `public/pre-wedding`, `public/brand-assets` e `_archive` são acervos protegidos. O redesign deve preservar favoritos, observações, upload, roteiro, fornecedores, compartilhamento e exportação em PDF.

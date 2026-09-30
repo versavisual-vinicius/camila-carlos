@@ -59,14 +59,15 @@ Este documento registra as principais decisões de design, arquitetura e produto
 
 ---
 
-### ADR 006: Simplificação Radical da Navegação em 3 Abas Canônicas
+### ADR 006: Simplificação da Navegação em 3 Abas Canônicas — substituída
 
 * **Contexto**: Telas com muitas subdivisões e categorias confusas dispersam a atenção dos noivos durante o planejamento.
 * **Decisão**: Consolidar a arquitetura em três abas essenciais:
   1. `referencias`: Moodboard, fotos favoritas, tags e anotações.
   2. `roteiro`: Shot list interativa e cronograma fotográfico.
   3. `fornecedores`: Locais e catálogo de parceiros.
-* **Consequências**:
+* **Status**: Substituída pela ADR 008, que acrescentou a Visão Geral e definiu quatro áreas canônicas.
+* **Consequências históricas**:
   * Redução da carga cognitiva e aumento significativo na usabilidade em telas móveis.
   * O dock inferior mobile acomoda perfeitamente as três abas com ícones e contadores de pendências.
 
@@ -96,7 +97,9 @@ Este documento registra as principais decisões de design, arquitetura e produto
 
 ---
 
-### ADR 007 — Aplicação do Padrão Stitch Taste-Design & Anti-Slop (30/09/2026)
+### ADR 009 — Aplicação do Padrão Stitch Taste-Design & Anti-Slop (30/09/2026)
+
+* **Contexto documental**: Esta decisão consolida a direção visual em `DESIGN_SYSTEM.md`, sua fonte canônica.
 
 * **Contexto**: O projeto Stitch e a interface possuíam resquícios de convenções genéricas de IA (como a fonte `Inter` como padrão, cartões com preenchimento em caixas repetitivas e resíduos de `#000000`).
 * **Decisão**:

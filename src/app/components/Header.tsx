@@ -18,7 +18,6 @@ interface HeaderProps {
   onTabChange: (tab: ActiveTab) => void;
   isDarkMode: boolean;
   onToggleTheme: () => void;
-  totalPhotos: number;
   totalFavorites: number;
   completedShotCount: number;
   totalShotCount: number;
@@ -32,7 +31,6 @@ export function Header({
   onTabChange,
   isDarkMode,
   onToggleTheme,
-  totalPhotos,
   totalFavorites,
   completedShotCount,
   totalShotCount,

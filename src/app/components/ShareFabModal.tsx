@@ -4,11 +4,9 @@ import {
   DialogContent, 
   DialogHeader, 
   DialogTitle, 
-  DialogDescription,
-  DialogFooter
+  DialogDescription
 } from "@/app/components/ui/dialog";
 import { 
-  Share2, 
   MessageCircle, 
   Printer, 
   Copy, 

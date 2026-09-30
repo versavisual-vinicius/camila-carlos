@@ -6,10 +6,15 @@ Este arquivo rastreia o status das tarefas técnicas e operacionais para a entre
 
 ## 🟢 Concluído
 
+- [x] **Preparação segura para o redesign**:
+  - [x] Contratos funcionais e de dados consolidados em `PROJECT_CONTEXT.md`.
+  - [x] Direção visual e responsabilidades consolidadas em `DESIGN_SYSTEM.md`.
+  - [x] Acervo Stitch consolidado em `.stitch` e código órfão removido.
+
 - [x] **Arquitetura Base**: Setup com React 18, Vite 6, TypeScript e Tailwind CSS v4.
 - [x] **Consolidação do PRD Stitch**:
   - [x] Definição de limites e escopo em `PRD.md` e atualização de `PROJECT_CONTEXT.md`.
-  - [x] Download e arquivamento das 5 telas do Stitch (códigos e capturas) em `stitch-screens/`.
+  - [x] Download e consolidação das telas do Stitch em `.stitch/designs/`.
   - [x] Eliminação formal de dados fictícios e especulativos (118 dias, 14 semanas, 80 vagas, etc.).
 - [x] **Aba Referências**:
   - [x] Grid Masonry responsivo com fotografias do acervo.

@@ -8,9 +8,13 @@ O sistema unifica a curadoria visual de referências, o roteiro fotográfico pro
 
 ## 📌 Visão Geral dos Módulos
 
-A aplicação é organizada em três abas essenciais de navegação:
+A aplicação é organizada em quatro áreas essenciais de navegação:
 
-### 1. Referências Visuais (`referencias`)
+### 1. Visão Geral (`visao-geral`)
+
+Apresenta o contexto do casal, próximos alinhamentos e atalhos para as demais áreas, sem métricas ou progresso artificiais.
+
+### 2. Referências Visuais (`referencias`)
 * **Acervo Curado**: 58 fotografias oficiais em alta definição selecionadas para o Pré-Wedding de Camila & Carlos, dispostas em layout *Masonry* responsivo.
 * **Favoritas & Filtros**: Sistema de marcação de fotos favoritas (coração) com filtro instantâneo e busca por texto em tempo real (título, descrição e notas da noiva).
 * **Notas Contextuais da Noiva (`PhotoNoteDrawer`)**: Gaveta lateral acessível por foto que permite à noiva adicionar tags rápidas (`#pose`, `#luz`, `#detalhe`, `#espontanea`, etc.) e comentários personalizados.
@@ -18,7 +22,7 @@ A aplicação é organizada em três abas essenciais de navegação:
 * **Upload em Lote com Compressão Retina**: Upload de novas referências diretamente pelo navegador com compressão automática em Canvas (máximo 1600px a 82% de qualidade JPEG), reduzindo fotos de 15MB para ~150KB para persistência instantânea no `localStorage`. Inclui notificação com ação "Desfazer" via Sonner.
 * **Restauração de Acervo**: Botão com confirmação para restaurar as 58 fotos originais do acervo.
 
-### 2. Roteiro da Fotografia (`roteiro`)
+### 3. Roteiro da Fotografia (`roteiro`)
 * **Shot List Hierárquica e Modular**: Lista de fotos protocolares organizada estrategicamente por momentos e prioridade humana:
   1. *01 · Prioridade de Conforto: Avós e Mobilidade Reduzida* (Altar Imediato, liberando os avós para descansar com agilidade).
   2. *02 · Família da Noiva* (Pais, retratos individuais com a noiva e família completa).
@@ -31,7 +35,7 @@ A aplicação é organizada em três abas essenciais de navegação:
   * **Dossiê Executivo Completo**: Relatório A4 multipágina em formato editorial com cronograma de cobertura, divisão da equipe, shot list completa e contatos-chave.
   * **Guia Rápido do Altar**: Resumo de 1 página A4 ultra-objetivo com a ordem exata de fotos protocolares pós-cerimônia, otimizado para o Cerimonial e Assessoria.
 
-### 3. Fornecedores & Locais (`fornecedores`)
+### 4. Fornecedores & Locais (`fornecedores`)
 * **Parceiros Confirmados**:
   * **Espaço Lux — Rio das Ostras** (Local da Cerimônia & Recepção).
   * **Versa Visual — Vinicius Cunha** (Direção Fotográfica).
@@ -49,7 +53,7 @@ A aplicação é organizada em três abas essenciais de navegação:
 | **Linguagem** | [TypeScript 5.7](https://www.typescriptlang.org/) | Tipagem estrita de dados e contratos |
 | **Framework UI** | [React 18.3](https://react.dev/) | Arquitetura funcional baseada em hooks |
 | **Estilização** | [Tailwind CSS v4](https://tailwindcss.com/) + CSS Modules | Tokens semânticos, `@theme` nativo e modo claro/escuro |
-| **Tipografia** | [Playfair Display](https://fonts.google.com/specimen/Playfair+Display) & [Inter](https://fonts.google.com/specimen/Inter) | Google Fonts com renderização editorial |
+| **Tipografia** | [Playfair Display](https://fonts.google.com/specimen/Playfair+Display) & [DM Sans](https://fonts.google.com/specimen/DM+Sans) | Google Fonts com renderização editorial |
 | **Animações** | [Motion](https://motion.dev/) (Framer Motion) | Microinterações e transições de layout fluidas |
 | **Primitivos UI** | [Radix UI](https://www.radix-ui.com/) & [Vaul](https://vaul.emilkowal.ski/) | Dialog, Drawer, Tooltips e Acessibilidade WAI-ARIA |
 | **Ícones** | [Lucide React](https://lucide.dev/) | Iconografia consistente e moderna |
@@ -93,7 +97,8 @@ pnpm run build
 
 ```
 wedding-moodboard/
-├── index.html                   # HTML base, fontes Google (Playfair + Inter) e preload LCP
+├── .stitch/                     # Metadados e referências visuais canônicas do Stitch
+├── index.html                   # HTML base, fontes Google e preload LCP
 ├── package.json                 # Dependências e scripts do projeto
 ├── tsconfig.json                # Configuração do TypeScript
 ├── vite.config.ts               # Plugins Vite e alias de caminhos (@/ -> src/)
@@ -138,7 +143,7 @@ Todos os dados interativos da noiva são salvos no `localStorage` do navegador c
 | Chave no `localStorage` | Conteúdo | Estratégia de Versão |
 |---|---|---|
 | `camila_carlos_theme` | Tema ativo (`light` ou `dark`) | Padrão: `light` com sincronização no `<html class="dark">` |
-| `camila_carlos_active_tab` | Aba ativa (`referencias`, `roteiro`, `fornecedores`) | Preserva a navegação do usuário |
+| `camila_carlos_active_tab` | Área ativa (`visao-geral`, `referencias`, `roteiro`, `fornecedores`) | Preserva a navegação do usuário |
 | `camila_carlos_liked_ids` | IDs das fotos favoritadas | Array de strings JSON |
 | `camila_carlos_photo_notes` | Notas, tags e comentários por foto | Dicionário indexado por `itemId` |
 | `camila_carlos_shotlist` | Grupos e itens da Shot List | Controlado por `camila_carlos_shotlist_version: "v3_editorial"` |

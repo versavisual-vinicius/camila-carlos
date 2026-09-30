@@ -2,7 +2,7 @@ import { useState } from "react";
 import { PreWeddingItem } from "@/app/data/preWeddingData";
 import { PhotoNoteData } from "@/app/components/PhotoNoteDrawer";
 import { motion } from "motion/react";
-import { MessageSquareQuote, Heart, Trash2, Maximize2 } from "lucide-react";
+import { MessageSquareQuote, Heart, Trash2 } from "lucide-react";
 
 interface MoodboardCardProps {
   item: PreWeddingItem;

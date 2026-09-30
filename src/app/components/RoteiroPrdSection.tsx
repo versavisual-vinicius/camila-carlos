@@ -19,14 +19,11 @@ import {
   Church,
   Sun,
   PartyPopper,
-  Check,
   ArrowRight,
   Shield,
-  HeartHandshake,
   Share2,
   ChevronDown,
   ChevronUp,
-  Download,
   FileText,
   Loader2
 } from "lucide-react";

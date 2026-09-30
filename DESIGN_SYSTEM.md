@@ -1,6 +1,6 @@
 # Design System Editorial — Versa Visual (`camila-carlos`)
 
-> **Referência Canônica**: Este arquivo documenta as diretrizes visuais e tokens do projeto. O arquivo [design.md](file:///Users/viniciuscunha/3_DEV/wedding-moodboard/design.md) contém o espelho detalhado com o guia de componentes.
+> **Referência Canônica**: Este arquivo concentra as diretrizes visuais, os tokens e o guia de componentes do projeto.
 
 ---
 
@@ -114,3 +114,13 @@ Conforme a referência visual indicada por Vini, todas as quatro áreas comparti
 - Galeria, roteiro e catálogo mantêm suas estruturas funcionais. A altura dos blocos acompanha o conteúdo, sem alturas artificiais para igualar textos de comprimentos distintos.
 
 Verificação complementar: as quatro áreas em 320, 390, 870 e 1440 px, nos dois temas; comparação dos estilos computados de títulos, descrições e intervalos, além de capturas na largura de 870 px usada na anotação de Vini.
+
+## 6. Responsabilidade e restrições do redesign
+
+- `src/styles/theme.css` responde por cores, superfícies, raios e sombras; `fonts.css`, pela tipografia global; `tailwind.css`, pelos utilitários compartilhados.
+- `App.tsx`, `Header.tsx` e `MobileBottomDock.tsx` respondem pela moldura e navegação; `PageHeader.tsx`, pelo cabeçalho comum; os componentes de seção preservam o conteúdo de cada área.
+- Fotografias mantêm a proporção original. Contêineres não podem esticar imagens nem cortar arbitrariamente rostos ou véu.
+- O layout usa `max-w-7xl`, composição assimétrica e `min-height: 100dvh` quando ocupar a viewport. No mobile, alvos de toque têm no mínimo 44 × 44 px e não pode existir rolagem horizontal da página.
+- Animações usam `transform` e `opacity`, respeitam `prefers-reduced-motion` e evitam movimento linear mecânico.
+- São proibidos preto puro, gradientes neon, métricas inventadas, nomes de preenchimento, links mortos, heróis genéricos centralizados e fileiras de três cartões idênticos.
+- Estados de carregamento, vazio e erro devem reproduzir a estrutura real, orientar a ação seguinte e manter foco visível e navegação por teclado.

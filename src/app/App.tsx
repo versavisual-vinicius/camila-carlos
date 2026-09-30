@@ -280,13 +280,6 @@ export default function App() {
     toast.success("Fornecedor adicionado com sucesso!");
   };
 
-  const handleUpdateVendor = (id: string, updates: Partial<KeyVendor>) => {
-    setVendors((prev) =>
-      prev.map((v) => (v.id === id ? { ...v, ...updates } : v))
-    );
-    toast.success("Dados do fornecedor atualizados!");
-  };
-
   const handleDeleteVendor = (id: string) => {
     if (window.confirm("Deseja remover este fornecedor da lista?")) {
       setVendors((prev) => prev.filter((v) => v.id !== id));
@@ -351,15 +344,6 @@ export default function App() {
     );
   };
 
-  // Reset to original 58 items
-  const handleResetItems = () => {
-    if (window.confirm("Deseja restaurar as 58 referências originais do Pré-Wedding de Camila & Carlos?")) {
-      setItems(PRE_WEDDING_ITEMS);
-      localStorage.removeItem("camila_carlos_moodboard_items");
-      toast.success("Acervo original restaurado com sucesso!");
-    }
-  };
-
   // Exportar Roteiro em PDF (Stitch Desktop & Mobile Reference)
   const [isExportingPdf, setIsExportingPdf] = useState(false);
   const handleExportRoteiro = async () => {
@@ -404,7 +388,6 @@ export default function App() {
         onTabChange={setActiveTab}
         isDarkMode={isDarkMode}
         onToggleTheme={() => setIsDarkMode(!isDarkMode)}
-        totalPhotos={items.length}
         totalFavorites={likedIds.length}
         completedShotCount={completedShotCount}
         totalShotCount={totalShotCount}
@@ -575,7 +558,6 @@ export default function App() {
                 onOpenAddDialog={() => setIsAddDialogOpen(true)}
                 onAddItem={handleAddItem}
                 onAddBatchItems={handleAddBatchItems}
-                onResetItems={handleResetItems}
               />
             )}
 
@@ -597,7 +579,6 @@ export default function App() {
               <CuratedVendorsSection
                 vendors={vendors}
                 onAddVendor={handleAddVendor}
-                onUpdateVendor={handleUpdateVendor}
                 onDeleteVendor={handleDeleteVendor}
                 onResetVendors={handleResetVendors}
                 isDarkMode={isDarkMode}
