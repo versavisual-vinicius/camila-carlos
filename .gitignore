@@ -6,3 +6,14 @@ dist
 .env*
 .vscode
 _archive
+.stitch/screens/1_visao_geral_desktop_full.png
+.stitch/screens/1_visao_geral_desktop.png
+.stitch/screens/1_visao_geral_mobile.png
+.stitch/screens/2_referencias_desktop.png
+.stitch/screens/2_referencias_mobile.png
+.stitch/screens/3_roteiro_desktop.png
+.stitch/screens/3_roteiro_mobile.png
+.stitch/screens/4_locais_mapa_desktop.png
+.stitch/screens/4_locais_mapa_mobile.png
+.stitch/DESIGN.md
+.stitch/README.md

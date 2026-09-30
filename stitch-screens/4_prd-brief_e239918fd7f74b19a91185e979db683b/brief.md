@@ -57,13 +57,12 @@ O produto é estruturado em **5 Módulos Centrais (Tabs)**:
   │     ├── Painel Lateral: Decisões em Aberto (Making-of, Janela de Beleza, Guardião)
   │     ├── Caderno de Inspirações (Floral & Detalhes, Altar Matriz)
   │     └── Resumo de Ações & Contatos
-  ├── 2. Detalhes do Marco (Deep Dive // Ex: Igreja de São João)
-  │     ├── Hero Fotográfico Imersivo da Igreja Matriz
-  │     ├── Barra de Progresso & Janela Luminosa (Golden Hour 16h45)
-  │     ├── Mapa Vetorial Interativo de Tráfego, Estacionamento & Rampa da Avó
-  │     ├── Feed de Notas & Alinhamentos Vivos
-  │     ├── Fornecedores Vinculados com WhatsApp Direto
-  │     └── Diretrizes & Documentos Canônicos (Batismo, Curso de Noivos, Proclamas)
+  ├── 2. Detalhes do Cenário (Espaço Lux — Rio das Ostras)
+  │     ├── Hero Fotográfico Imersivo do Espaço Lux
+  │     ├── Luz Natural & Altar ao Ar Livre
+  │     ├── Localização, Rotas Oficiais (Google Maps & Waze) e Contato
+  │     ├── Suíte da Noiva & Área de Preparação
+  │     └── Fornecedores Vinculados com WhatsApp Direto
   ├── 3. Referências & Caderno de Inspirações
   ├── 4. Pré-wedding & Scouting (Locações Costa Azul & Harley)
   └── 5. Fornecedores & Contatos de Emergência
@@ -75,11 +74,11 @@ O produto é estruturado em **5 Módulos Centrais (Tabs)**:
 
 ### FR-01: Gestão de Marcos Estratégicos Integrados (5 Milestones)
 A plataforma organiza a jornada em 5 capítulos cronológicos e operacionais:
-1. **Marco 01 — Igreja em São João Oficializada:** Cenário sacramentado, validação canônica, scouting acústico e de iluminação da paróquia.
-2. **Marco 02 — Acolhimento Estratégico das Famílias:** Logística de pais separados no cortejo, rampa de acessibilidade e assento prioritário acolchoado para a avó, ensaio de padrinhos em blocos sem fila.
-3. **Marco 03 — Ensaio Pré-Wedding & Visita Técnica:** Spots de campo e praia na Costa Azul, fotos com a moto Harley-Davidson de Carlos, aproveitamento do Golden Hour (16h45).
-4. **Marco 04 — Timeline Minuto a Minuto & Cortejo:** Making-of com luz natural ampla, imposição da regra de ouro de 1h30 de término de beleza, nomeação do guardião das alianças e kit de hidratação.
-5. **Marco 05 — Entrega de Prévia & Álbum Master:** Checklist de segurança do fotógrafo (redundância RAID em cartões duplos), mapa de luz do beijo e entrega de galeria digital em até 48 horas.
+1. **Marco 01 — Espaço Lux Oficializado:** Cenário ao ar livre confirmado, luz natural, suíte dos noivos e infraestrutura integrada em Rio das Ostras.
+2. **Marco 02 — Acolhimento Estratégico das Famílias:** Logística afetiva de famílias, conforto e prioridade para avós, retratos em blocos leves sem cansar convidados.
+3. **Marco 03 — Ensaio Pré-Wedding & Visita Técnica:** Spots no Bar Thunder e Falésias da Costa Azul, fotos com a moto Harley-Davidson de Carlos e luz do entardecer.
+4. **Marco 04 — Roteiro Fotográfico & Cerimônia:** Cobertura documental com equipe sincronizada (Vinicius dedicado à noiva e momentos centrais; segundo fotógrafo nos ângulos complementares).
+5. **Marco 05 — Entrega de Prévia & Álbum Master:** Curadoria com narrativa autoral e entrega de galeria digital em alta resolução.
 
 ### FR-02: Checklist Operacional Integrado com Atribuição Dupla
 * Cada tarefa pertence a um marco específico, eliminando duplicidade de listas.
@@ -88,13 +87,13 @@ A plataforma organiza a jornada em 5 capítulos cronológicos e operacionais:
 
 ### FR-03: Módulo "Decisões em Aberto" (Fast Decision Box)
 Campos de entrada direta para destravar gargalos críticos da produção:
-* **Sala de Preparação do Noivo/Noiva:** Registro do local com luz favorável.
-* **Janela de Beleza com Regra de Ouro:** Horário fixo estrito (término às 15h30 para fotos serenas com os pais).
-* **Ponto de Apoio Guardião (Alianças):** Nome e contato telefônico de emergência do responsável.
+* **Sala de Preparação do Noivo/Noiva:** Suíte no Espaço Lux com luz natural.
+* **Janela de Beleza:** Término combinado com tranquilidade para permitir os retratos com os pais.
+* **Ponto de Apoio Guardião (Alianças):** Nome e contato do responsável pelas alianças.
 
-### FR-04: Ficha Técnica & Mapas Operacionais
-* Renderização de mapa vetorial estilizado com pontos de interesse: *Igreja Matriz*, *Rampa de Acesso da Avó*, *Bolsão de Estacionamento para Convidados (80 vagas)* e *Vantage Point Fotográfico*.
-* Exportação com um clique em **PDF de Alta Resolução** para impressão e distribuição aos coordenadores de cerimônia.
+### FR-04: Ficha Técnica & Rotas Oficiais
+* Mapa interativo e links com 1 clique para navegação direta no **Google Maps** e **Waze** até o Espaço Lux.
+* Exportação do **Resumo do Roteiro Fotográfico** com divisão da equipe e lista de retratos essenciais.
 
 ---
 

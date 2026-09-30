@@ -39,44 +39,15 @@ export const WEDDING_LOCATIONS: WeddingLocation[] = [
     title: "Espaço Lux — Rio das Ostras",
     subtitle: "Cenário Oficial de Cerimônia & Recepção",
     role: "Local do Evento",
-    description: "Altar sob luz natural ao ar livre, salão integrado para recepção e suíte para making of da noiva.",
+    description: "Altar sob luz natural ao ar livre, salão integrado para recepção e suíte para preparação e making-of.",
     position: { lat: -22.5268, lng: -41.9442 },
     pinColor: "#059669",
     pinBorder: "#047857",
     icon: "🏛️",
-    timeContext: "16:15 · Cerimônia e Altar ao Ar Livre",
+    timeContext: "Cenário Oficial Confirmado",
     imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuA3o9roN3Kvm4Rku_yH82u1xMkRST50-Ka4f5d6lio0Ei40Qs_HtP5srKmSg82T20B1G6o-zCng1ZS7FuXsZYXT6yYGCWuDzEoCeSQ8-vx9KjE9KySwKYUWosk7JdLx1YP4fNqRolFMTPBwdSvGiGBVEj88K64SwA5ALtAul_7csaWKfEylxnT92lKrIcGBhdSgPoBwFe1n-xvg4Jc0Pso9CrGGBeaFG6u1cVDkGg9x06ORkwG1qdw",
     mapsUrl: "https://www.google.com/maps/dir/?api=1&destination=Espa%C3%A7o+Lux+Rio+das+Ostras+RJ",
     wazeUrl: "https://waze.com/ul?q=Espaço+Lux+Rio+das+Ostras"
-  },
-  {
-    id: "costa-azul",
-    title: "Falésias & Mirante da Costa Azul",
-    subtitle: "Locação de Ensaio Pré-Wedding & Pôr do Sol",
-    role: "Ensaio & Pôr do Sol",
-    description: "Monumento Natural dos Costões Rochosos. Ponto auge do caderno de referências para a golden hour com a noiva.",
-    position: { lat: -22.5317, lng: -41.9215 },
-    pinColor: "#d97706",
-    pinBorder: "#b45309",
-    icon: "🌅",
-    timeContext: "17:15 · Mini Ensaio do Pôr do Sol",
-    imageUrl: "/pre-wedding/01_451d03f1a458a64838b28633e494ceb2.jpg",
-    mapsUrl: "https://www.google.com/maps/dir/?api=1&destination=Mirante+da+Costa+Azul+Rio+das+Ostras+RJ",
-    wazeUrl: "https://waze.com/ul?q=Mirante+da+Costa+Azul+Rio+das+Ostras"
-  },
-  {
-    id: "bar-thunder",
-    title: "Bar Thunder & Costa Azul",
-    subtitle: "Ponto de Encontro & Making of do Noivo",
-    role: "Making of Noivo",
-    description: "Espaço descontraído para o brinde inicial com os padrinhos e preparação do Carlos antes de seguir para o Espaço Lux.",
-    position: { lat: -22.5285, lng: -41.9280 },
-    pinColor: "#4f46e5",
-    pinBorder: "#4338ca",
-    icon: "🍸",
-    timeContext: "14:30 · Encontro com Padrinhos",
-    mapsUrl: "https://www.google.com/maps/dir/?api=1&destination=Bar+Thunder+Rio+das+Ostras+RJ",
-    wazeUrl: "https://waze.com/ul?q=Costa+Azul+Rio+das+Ostras"
   }
 ];
 
@@ -90,13 +61,8 @@ function MapCameraController({
 
   useEffect(() => {
     if (!map) return;
-    if (selectedLocation) {
-      map.panTo(selectedLocation.position);
-      map.setZoom(15);
-    } else {
-      map.panTo({ lat: -22.529, lng: -41.933 });
-      map.setZoom(13.2);
-    }
+    map.panTo({ lat: -22.5268, lng: -41.9442 });
+    map.setZoom(15.5);
   }, [map, selectedLocation]);
 
   return null;
@@ -217,14 +183,14 @@ export function WeddingInteractiveMap({ isDarkMode = false }: WeddingInteractive
             <span className="size-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
             <span className="font-body-md text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
               <Sparkles className="size-3" />
-              <span>Google Maps Platform · Rotas Oficiais</span>
+              <span>Google Maps Platform · Rota Oficial</span>
             </span>
           </div>
           <h3 className="font-headline-sm text-lg sm:text-xl text-on-surface font-bold leading-tight">
-            Espaço Lux & Roteiro Costeiro — Rio das Ostras
+            Espaço Lux — Rio das Ostras
           </h3>
           <p className="font-body-md text-xs text-secondary">
-            Navegue pelos 3 pontos da cobertura fotográfica: cerimônia, falésias ao pôr do sol e making of.
+            Cenário oficial da cerimônia e recepção com rotas diretas no Google Maps e Waze com 1 clique.
           </p>
         </div>
 
@@ -314,8 +280,8 @@ export function WeddingInteractiveMap({ isDarkMode = false }: WeddingInteractive
             >
               <Map
                 mapId="DEMO_MAP_ID"
-                defaultCenter={{ lat: -22.529, lng: -41.933 }}
-                defaultZoom={13.2}
+                defaultCenter={{ lat: -22.5268, lng: -41.9442 }}
+                defaultZoom={15.5}
                 gestureHandling="cooperative"
                 disableDefaultUI={false}
                 colorScheme={isDarkMode ? ColorScheme.DARK : ColorScheme.LIGHT}
@@ -338,41 +304,12 @@ export function WeddingInteractiveMap({ isDarkMode = false }: WeddingInteractive
           </div>
         )}
 
-        {/* Quick Location Pills Floating on the Map */}
+        {/* Quick Location Badge Floating on the Map */}
         <div className="absolute bottom-3 inset-x-3 sm:inset-x-auto sm:left-4 z-10 flex items-center gap-1.5 overflow-x-auto py-1 scrollbar-none pointer-events-auto">
-          <button
-            type="button"
-            onClick={() => setSelectedLocationId(null)}
-            className={`px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md border shadow-md transition-all whitespace-nowrap active:scale-95 ${
-              selectedLocationId === null
-                ? "bg-stone-900 text-white border-stone-800"
-                : "bg-surface-container-lowest/90 dark:bg-card/90 text-on-surface border-outline-variant/30 hover:bg-surface-container"
-            }`}
-          >
-            <span>📍 Todos os Pontos</span>
-          </button>
-
-          {WEDDING_LOCATIONS.map((loc) => {
-            const isSelected = selectedLocationId === loc.id;
-            return (
-              <button
-                key={loc.id}
-                type="button"
-                onClick={() => {
-                  setSelectedLocationId(loc.id);
-                  if (activeView !== "mapa") setActiveView("mapa");
-                }}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md border shadow-md transition-all whitespace-nowrap flex items-center gap-1.5 active:scale-95 ${
-                  isSelected
-                    ? "bg-stone-900 text-white border-stone-800"
-                    : "bg-surface-container-lowest/90 dark:bg-card/90 text-on-surface border-outline-variant/30 hover:bg-surface-container"
-                }`}
-              >
-                <span>{loc.icon}</span>
-                <span className="truncate max-w-[120px] sm:max-w-none">{loc.title.split("—")[0].trim()}</span>
-              </button>
-            );
-          })}
+          <div className="px-3.5 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md border border-stone-800 bg-stone-900 text-white shadow-md flex items-center gap-1.5">
+            <span>🏛️</span>
+            <span>Espaço Lux · Local Oficial Confirmado</span>
+          </div>
         </div>
       </div>
     </div>

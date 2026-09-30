@@ -84,6 +84,6 @@ Ficam fora do núcleo: gestão completa do casamento, documentação religiosa, 
 
 Usar somente dados confirmados. Não fixar os exemplos antigos de **118 dias, 14 semanas, 15 tarefas, 15h30, 16h45, 80 vagas ou prévia em 48 horas**. Calcular indicadores a partir dos registros reais.
 
-Há divergência entre **Igreja em São João** e **Espaço Lux** como local da cerimônia. Manter o Espaço Lux entre os locais conhecidos, mas definir a função de cada espaço apenas após confirmação. Não assumir “São João da Boa Vista”, nome de assessora ou data do casamento como fatos consolidados.
+O cenário oficial e confirmado de cerimônia, recepção e suíte dos noivos é o **Espaço Lux** (Rio das Ostras). Locações hipotéticas de igrejas ou dados fictícios de cerimonial foram descartados. Não assumir nomes de assessores ou datas não confirmadas como fatos consolidados.
 
 A adaptação está concluída quando as telas mantêm a direção visual do Stitch, a curadoria continua editável e preservada, o roteiro explica a cobertura com clareza, fornecedores adicionais permanecem opcionais e mobile e desktop oferecem paridade funcional. Essa validação depende das telas e da implementação; este documento consolida os requisitos.
