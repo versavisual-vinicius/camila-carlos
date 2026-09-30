@@ -1,0 +1,587 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Camila &amp; Carlos — Locais &amp; Fornecedores | Versa Visual</title>
+<meta content="Planejamento executivo e moodboard editorial de direção fotográfica para o casamento de Camila &amp; Carlos em Rio das Ostras por Versa Visual (@v1ncsc)." name="description">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surface: '#fbf9f6',
+            'surface-warm': '#f7f4ee',
+            'card-bg': '#ffffff',
+            'border-subtle': '#e8e4dc',
+            'border-light': '#ece7df',
+            primary: '#1c1a17',
+            secondary: '#6c5b4d',
+            'text-main': '#1c1a17',
+            'text-muted': '#5c554e',
+            'brand-emerald': '#059669',
+          },
+          fontFamily: {
+            headline: ['"Playfair Display"', 'Georgia', 'serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- Leaflet CSS & JS for realistic clear interactive map -->
+<link crossorigin="" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script crossorigin="" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+    body {
+      background-color: #fbf9f6;
+      color: #1c1a17;
+      font-family: 'Inter', sans-serif;
+    }
+    .shadow-luxury {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.03);
+    }
+    .leaflet-container {
+      background-color: #e5e3df !important;
+      font-family: 'Inter', sans-serif;
+    }
+    /* Hide leaflet attribution subtly for clean screenshot look */
+    .leaflet-control-attribution {
+      font-size: 9px !important;
+      background: rgba(255,255,255,0.7) !important;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #fbf9f6;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #d8d3ca;
+      border-radius: 9999px;
+    }
+  </style>
+<meta content="web_standard" name="shell-type"></head>
+<body class="bg-surface text-text-main antialiased selection:bg-stone-200">
+<!-- HEADER / NAVBAR -->
+<header class="sticky top-0 z-50 bg-[#fbf9f6]/90 backdrop-blur-md border-b border-[#e5e0d8] transition-colors">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="h-20 flex items-center justify-between gap-4">
+<!-- Logo & Title -->
+<div class="flex items-center gap-3.5 min-w-0 cursor-pointer select-none group">
+<div class="relative size-10 shrink-0 overflow-hidden rounded-full bg-[#1c1a17] text-white flex items-center justify-center font-bold text-sm tracking-tight shadow-sm transition-transform group-hover:scale-105">
+<span class="">V</span>
+</div>
+<div class="flex flex-col min-w-0 justify-center">
+<h1 class="font-headline font-bold text-base text-[#1c1a17] tracking-tight leading-tight">Camila &amp; Carlos</h1>
+<p class="text-xs text-[#6c5b4d] font-normal leading-tight truncate">
+              Fotografia autoral por <strong class="font-medium text-[#1c1a17]">Vinicius Cunha — Versa Visual</strong>
+</p>
+</div>
+</div>
+<!-- Central Capsule Navigation (Pill Bar) -->
+<nav class="hidden lg:flex shrink-0 items-center gap-1 bg-[#efeeeb] p-1.5 rounded-full border border-[#e2ddd5] shadow-xs text-xs font-medium text-[#4b463f]">
+<a class="px-4 py-1.5 rounded-full hover:text-black hover:bg-white/70 transition-all duration-200 flex items-center gap-1.5" href="#">
+<svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Visão Geral</span>
+</a>
+<a class="px-4 py-1.5 rounded-full hover:text-black hover:bg-white/70 transition-all duration-200 flex items-center gap-1.5" href="#">
+<svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Referências</span>
+<span class="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-[#ffdad6] text-[#ba1a1a] flex items-center gap-0.5">
+<span class="">❤️</span> 1
+            </span>
+</a>
+<a class="px-4 py-1.5 rounded-full hover:text-black hover:bg-white/70 transition-all duration-200 flex items-center gap-1.5" href="#">
+<svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Roteiro</span>
+<span class="text-[10px] text-stone-500 font-semibold">0/15</span>
+</a>
+<button class="px-4 py-1.5 rounded-full bg-[#1c1a17] text-white shadow-xs font-semibold flex items-center gap-1.5" type="button">
+<svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Locais</span>
+</button>
+</nav>
+<!-- Right Side Actions -->
+<div class="flex items-center gap-2.5 shrink-0">
+<button class="hidden sm:inline-flex items-center gap-1.5 rounded-xl border border-[#e2ddd5] bg-white hover:bg-stone-50 py-2 px-3.5 text-xs font-semibold text-[#1c1a17] shadow-xs transition-all" type="button">
+<svg class="size-3.5 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Exportar Roteiro</span>
+</button>
+<button class="inline-flex items-center gap-1.5 rounded-xl border border-[#e2ddd5] bg-white hover:bg-stone-50 py-2 px-3.5 text-xs font-semibold text-[#1c1a17] shadow-xs transition-all" type="button">
+<svg class="size-3.5 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Compartilhar</span>
+</button>
+<button class="size-9 rounded-full border border-[#e2ddd5] bg-white hover:bg-stone-50 flex items-center justify-center text-stone-600 shadow-xs" title="Alternar tema" type="button">
+<svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- MAIN CONTENT CONTAINER -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8"><div class="flex flex-col w-full space-y-10">
+<!-- TOP COUPLE PROFILE HERO CARD -->
+<section class="bg-surface-container-lowest rounded-full p-6 sm:p-7 shadow-sm transition-all duration-300">
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+<!-- Left: Avatar & Identity -->
+<div class="flex items-center gap-5 min-w-0">
+<div class="relative shrink-0 size-20 sm:size-24 rounded-full overflow-hidden shadow-sm bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Editorial wedding portrait of Camila and Carlos embracing tenderly under soft natural diffused sunlight outdoors in Rio das Ostras, subtle wind in her hair, warm neutral linen and ivory tones, fine art wedding film photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUXCqxpPckq5k0zs7BlzaqMHLw-2ZNgdezAOFHMyOSuA2aZgT5wpAlxOaImOs7Ws8dUwYMHKees9Ug9Myny63sDmC12hyaSMXs0mPEGrfeBgEAgEnevbeztjqp0wBZaAPRiKgciNYJDltmrFQ73P6929pHvn394w7pKqM9utpCdw1oB463zSAWJl_IlquoUkMzYVacxmgFpsBc1QOcN9WXCLp4wMxMrWs2LklxJeyPClvlW546NMjZ4w">
+</div>
+<div class="flex flex-col gap-1.5 min-w-0">
+<div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-surface-container-low text-brand-teal text-label-caps tracking-wider self-start">
+<span class="size-2 rounded-full bg-brand-teal animate-pulse"></span>
+<span class="">Jornada Ativa</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight font-normal">
+            Camila &amp; Carlos
+          </h1>
+<div class="flex flex-wrap items-center gap-x-2 gap-y-1 font-body-sm text-body-sm text-secondary">
+<span class="">Fotografia autoral por <strong class="font-medium text-on-surface">Vinicius Cunha — Versa Visual</strong></span>
+<span class="text-outline-variant">•</span>
+<span class="">Rio das Ostras &amp; Costa Azul</span>
+<span class="text-outline-variant">•</span>
+<span class="text-brand-teal font-medium">Espaço Lux</span>
+</div>
+</div>
+</div>
+<!-- Right: Summary Metric Counters -->
+<div class="flex items-center gap-3 sm:gap-4 shrink-0 self-start lg:self-center">
+<!-- 58 Fotos -->
+<div class="bg-surface-container-low px-6 py-4 rounded-xl flex flex-col items-center justify-center min-w-[90px] sm:min-w-[102px]">
+<span class="font-headline-md text-headline-md font-semibold text-on-surface leading-tight">58</span>
+<span class="font-label-caps text-label-caps text-secondary tracking-widest uppercase mt-0.5">Fotos</span>
+</div>
+<!-- 1 Favoritas -->
+<div class="bg-surface-container-low px-6 py-4 rounded-xl flex flex-col items-center justify-center min-w-[90px] sm:min-w-[102px]">
+<span class="font-headline-md text-headline-md font-semibold text-error leading-tight">1</span>
+<span class="font-label-caps text-label-caps text-secondary tracking-widest uppercase mt-0.5">Favoritas</span>
+</div>
+<!-- 0/15 Altar -->
+<div class="bg-surface-container-low px-6 py-4 rounded-xl flex flex-col items-center justify-center min-w-[90px] sm:min-w-[102px]">
+<span class="font-headline-md text-headline-md font-semibold text-on-surface leading-tight">0/15</span>
+<span class="font-label-caps text-label-caps text-secondary tracking-widest uppercase mt-0.5">Altar</span>
+</div>
+</div>
+</div>
+</section>
+<!-- EDITORIAL INTRO & STATUS -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-label-caps text-secondary tracking-widest uppercase">
+        Direção Fotográfica Versa Visual
+      </span>
+</div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-5">
+<div class="max-w-3xl space-y-2">
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+          Passos até o altar <span class="font-headline-lg font-light text-secondary">(01 a 06)</span>
+</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl leading-relaxed">
+          Como orquestramos a fotografia no Pré-Wedding e no Casamento de Camila &amp; Carlos: o que faremos em cada momento e como a equipe se divide, com tranquilidade, presença e conexão.
+        </p>
+</div>
+<!-- Verified Counter Pill -->
+<div class="shrink-0 self-start md:self-auto inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-lowest shadow-sm text-on-surface-variant font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-brand-teal text-[18px]">check_circle</span>
+<span class="font-medium text-on-surface">0 de 15 fotos confirmadas</span>
+</div>
+</div>
+</section>
+<!-- SECTION TITLE: MOMENTOS & DINÂMICA -->
+<section class="space-y-1 pt-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">
+      Momentos da Cobertura &amp; Dinâmica
+    </h3>
+<p class="font-body-sm text-body-sm text-secondary">
+      Sem regras engessadas • Respeito à luz natural e à verdade de cada instante
+    </p>
+</section>
+<!-- MAIN 2-COLUMN EDITORIAL GRID -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- LEFT COLUMN: FLOW & STEP CARDS (8 COLS) -->
+<div class="lg:col-span-8 flex flex-col space-y-6">
+<!-- CARD 01: Ensaio Pré-Wedding -->
+<article class="bg-surface-container-lowest rounded-full p-7 sm:p-8 shadow-sm flex flex-col space-y-6 transition-all hover:shadow-md">
+<!-- Card Top Bar -->
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-xl bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[22px]">photo_camera</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">
+                Ensaio Pré-Wedding
+              </h4>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[15px] text-secondary">location_on</span>
+<span class="">Bar Thunder &amp; Orla / Falésias de Costa Azul — Rio das Ostras</span>
+</p>
+</div>
+</div>
+<span class="px-3.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider">
+            Agendado
+          </span>
+</div>
+<!-- Pill Badges -->
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[16px] text-secondary">place</span>
+            Bar Thunder &amp; Costa Azul
+          </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[16px] text-secondary">wb_sunny</span>
+            Luz Suave de Fim de Tarde
+          </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[16px] text-secondary">camera</span>
+            Direção Íntima &amp; Leve
+          </span>
+</div>
+<!-- Main Narrative Description -->
+<div class="space-y-1.5">
+<h5 class="font-label-caps text-label-caps uppercase tracking-widest text-secondary font-semibold">
+            O que faremos neste momento:
+          </h5>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+            Um ensaio intimista e leve. Começamos com a textura autêntica do Bar Thunder e seguimos para o entardecer nas falésias e orla da Costa Azul, com luz suave e vento natural.
+          </p>
+</div>
+<!-- Team Division Callout -->
+<div class="bg-surface-container-low rounded-xl p-5 space-y-2">
+<div class="flex items-center gap-2 text-on-surface font-label-caps text-label-caps uppercase tracking-wider font-semibold">
+<span class="material-symbols-outlined text-[17px] text-secondary">group</span>
+<span class="">Como a equipe se divide:</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Direção fotográfica por Vinicius Cunha. Uma experiência leve para vocês se acostumarem com a câmera, entenderem nossa dinâmica e criarem fotos com a personalidade do casal.
+          </p>
+</div>
+</article>
+<!-- CARD 02: Making Of Camila & Carlos -->
+<article class="bg-surface-container-lowest rounded-full p-7 sm:p-8 shadow-sm flex flex-col space-y-6 transition-all hover:shadow-md">
+<!-- Card Top Bar -->
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-xl bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[22px]">dry_cleaning</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">
+                Making of dos Noivos
+              </h4>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[15px] text-secondary">location_on</span>
+<span class="">Suíte Presidencial &amp; Sala de Preparação — Espaço Lux</span>
+</p>
+</div>
+</div>
+<span class="px-3.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-label-caps uppercase tracking-wider">
+            Confirmado
+          </span>
+</div>
+<!-- Pill Badges -->
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[16px] text-secondary">timelapse</span>
+            14:30 às 16:30
+          </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[16px] text-secondary">style</span>
+            Detalhes: Vestido, Joias &amp; Carta
+          </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[16px] text-secondary">family_restroom</span>
+            Brinde com Padrinhos &amp; Mãe
+          </span>
+</div>
+<!-- Main Narrative Description -->
+<div class="space-y-1.5">
+<h5 class="font-label-caps text-label-caps uppercase tracking-widest text-secondary font-semibold">
+            O que faremos neste momento:
+          </h5>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+            Cobertura documental dos preparativos. Sem pausas artificiais: os olhares, o nervosismo sereno, a colocação do véu e momentos de abraço genuíno com os familiares mais próximos.
+          </p>
+</div>
+<!-- Team Division Callout -->
+<div class="bg-surface-container-low rounded-xl p-5 space-y-2">
+<div class="flex items-center gap-2 text-on-surface font-label-caps text-label-caps uppercase tracking-wider font-semibold">
+<span class="material-symbols-outlined text-[17px] text-secondary">splitscreen</span>
+<span class="">Como a equipe se divide:</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Vinicius Cunha conduz a noiva e suas minúcias estilísticas; segundo fotógrafo acompanha o noivo no lounge do Espaço Lux, capturando o brinde com os padrinhos e a montagem do traje.
+          </p>
+</div>
+</article>
+<!-- CARD 03: Cerimônia ao Pôr do Sol & Protocolo no Altar -->
+<article class="bg-surface-container-lowest rounded-full p-7 sm:p-8 shadow-sm flex flex-col space-y-6 transition-all hover:shadow-md">
+<!-- Card Top Bar -->
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-xl bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[22px]">church</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">
+                Cerimônia ao Pôr do Sol &amp; Altar
+              </h4>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[15px] text-secondary">location_on</span>
+<span class="">Deck Panorâmico — Espaço Lux</span>
+</p>
+</div>
+</div>
+<span class="px-3.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider">
+            Prioritário
+          </span>
+</div>
+<!-- Pill Badges -->
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[16px] text-secondary">routine</span>
+            15 Fotos Oficiais Protocoladas
+          </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[16px] text-secondary">wb_twilight</span>
+            Golden Hour &amp; Crepúsculo
+          </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[16px] text-secondary">favorite</span>
+            Prioridade Absoluta: Avós
+          </span>
+</div>
+<!-- Narrative & Shotlist breakdown -->
+<div class="space-y-1.5">
+<h5 class="font-label-caps text-label-caps uppercase tracking-widest text-secondary font-semibold">
+            O que faremos neste momento:
+          </h5>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+            Entrada fluida, votos com captura de reações espontâneas dos convidados e a lista de 15 fotos de família no altar imediatamente após a bênção, antes de perder o tom dourado do céu.
+          </p>
+</div>
+<!-- Mini list of altar priorities -->
+<div class="bg-surface-container-low rounded-xl p-5 space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-secondary font-semibold">
+              Roteiro de Altar Agilizado (0/15)
+            </span>
+<span class="font-caption text-caption text-brand-teal font-medium">Estimativa: 12 min</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-body-sm text-on-surface"><div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-[16px] text-outline-variant">check_box_outline_blank</span><span class="">1. Noivos + Pais da Noiva</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-[16px] text-outline-variant">check_box_outline_blank</span><span class="">2. Noivos + Pais do Noivo</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-[16px] text-brand-teal">star</span><span class="font-medium">3. Noivos + Avós (Prioridade)</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-[16px] text-outline-variant">check_box_outline_blank</span><span class="">4. Noivos + Ambos os Pais reunidos</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-[16px] text-outline-variant">check_box_outline_blank</span><span class="">5. Noivos + Irmãos e Cunhados</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-[16px] text-outline-variant">check_box_outline_blank</span><span class="">6. Noivos + Padrinhos (Geral)</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-[16px] text-outline-variant">check_box_outline_blank</span><span class="">7. Noivos + Madrinhas</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-[16px] text-outline-variant">check_box_outline_blank</span><span class="">8. Noivos + Padrinhos</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-[16px] text-outline-variant">check_box_outline_blank</span><span class="">9. Noivo + Padrinhos (Foto descontraída)</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-[16px] text-outline-variant">check_box_outline_blank</span><span class="">10. Noiva + Madrinhas (Com buquê)</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-[16px] text-outline-variant">check_box_outline_blank</span><span class="">11. Noivos + Daminhas &amp; Pajens</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-[16px] text-outline-variant">check_box_outline_blank</span><span class="">12. Noivos + Família Extensa da Noiva</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-[16px] text-outline-variant">check_box_outline_blank</span><span class="">13. Noivos + Família Extensa do Noivo</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-[16px] text-outline-variant">check_box_outline_blank</span><span class="">14. Noivos + Melhores Amigos / Convidados Especiais</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-lowest sm:col-span-2"><span class="material-symbols-outlined text-[16px] text-outline-variant">check_box_outline_blank</span><span class="">15. Noivos a Sós no Altar (Último clique antes da recepção)</span></div></div>
+</div>
+</article>
+</div>
+<!-- RIGHT COLUMN: EDITORIAL SIDEBAR (4 COLS) -->
+<aside class="lg:col-span-4 flex flex-col space-y-6">
+<!-- Caderno de Inspirações Card -->
+<div class="bg-surface-container-lowest rounded-full p-6 sm:p-7 shadow-sm flex flex-col space-y-5">
+<div class="flex items-center justify-between">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">
+            Caderno de Inspirações
+          </h4>
+<a class="font-label-ui text-label-ui text-on-surface font-semibold hover:text-brand-teal flex items-center gap-1 transition-colors" href="#">
+<span class="">Ver todas</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<p class="font-body-sm text-body-sm text-secondary -mt-3">
+          Moodboard curado para paleta e iluminação
+        </p>
+<!-- Visual References Grid -->
+<div class="grid grid-cols-2 gap-3.5 pt-1">
+<!-- Item 1 -->
+<div class="group flex flex-col space-y-2">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden bg-surface-container shadow-xs">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Editorial wedding photo reference showing an intimate romantic couple embrace in Costa Azul pine groves with backlit golden hour warmth, minimal aesthetic, cinematic fine art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0xdusQ_MQhCmGJYmAdQgA2pMONq9slLbgAqOLJwmdNj-xLLBO_bphwF18Jcf-KKtBzjeHSqq3sWxvvkJY2rujb5wjQtOLBU1PZD1e3vp-P9m6BO8l3jdjPd7YgKvb204CeQ6CRwBiyHejY7XEzd4NPmkkSHkJ2WI9PROriVKI4piic7ScTzGB5f2291EH5etUrcwn5Foja3g-5YN9urN40VUg5d-50CjY0Zlto0OVv5nZJlU9Aw9tsQ">
+<div class="absolute top-2 right-2 size-6 rounded-full bg-surface-container-lowest/80 backdrop-blur-sm flex items-center justify-center text-error text-xs shadow-xs">
+                ❤️
+              </div>
+</div>
+<div>
+<p class="font-label-ui text-label-ui font-medium text-on-surface leading-tight line-clamp-1">
+                Abraço íntimo nas Alturas
+              </p>
+<span class="font-caption text-caption text-secondary">Costa Azul</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group flex flex-col space-y-2">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden bg-surface-container shadow-xs">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Fine art wedding editorial silhouette of bride and groom embracing amidst deep lush green Atlantic forest palms and coastal foliage in Rio das Ostras with soft ethereal morning daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYo4qGovD0KY6_V7SuZszncxOevQcx4pjoOZFhLQ_2muOYNXdiJeDgpiMx3i8p2MwMnjZRPB2MrjFz7f3Ie9o1iIl7j3Lo5ymmOs0zpBtCgy69blzTKq8fcLjy_jzA34xjbqpMKqZPbKti3EhHdyM05NoVViTB3j4U1gA4jNuLu2Ipji2SEk6GVRoUcKD8C2fLHvqUNi_VDKSM1QtrR_Wn-yjxxefpPmK1_bNpPdAhLqvz44hnFAj4Yg">
+</div>
+<div>
+<p class="font-label-ui text-label-ui font-medium text-on-surface leading-tight line-clamp-1">
+                Silhueta em Fundo Verde
+              </p>
+<span class="font-caption text-caption text-secondary">Luz Natural</span>
+</div>
+</div>
+</div>
+<!-- Editorial Quote Divider -->
+<div class="pt-4 border-t border-surface-container text-center">
+<blockquote class="font-subtitle-serif text-subtitle-serif italic text-secondary px-2 leading-snug">
+            “A beleza não reside na rigidez, mas na verdade de cada instante registrado com afeto.”
+          </blockquote>
+</div>
+</div>
+<!-- Divisão de Ações Card -->
+<div class="bg-surface-container-lowest rounded-full p-6 sm:p-7 shadow-sm flex flex-col space-y-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-xl bg-surface-container flex items-center justify-center text-on-surface shrink-0">
+<span class="material-symbols-outlined text-[20px]">shield</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface leading-tight">
+              Divisão de Ações
+            </h4>
+<p class="font-caption text-caption text-secondary mt-0.5">
+              Alinhamento de equipe e cerimonial
+            </p>
+</div>
+</div>
+<div class="space-y-3 pt-2 font-body-sm text-body-sm text-on-surface">
+<div class="flex items-start gap-3 p-3 rounded-xl bg-surface-container-low">
+<span class="material-symbols-outlined text-[18px] text-brand-teal shrink-0 mt-0.5">person</span>
+<div class="space-y-0.5">
+<span class="font-semibold block text-on-surface">Vinicius Cunha (@v1ncsc)</span>
+<p class="text-secondary text-caption leading-relaxed">Liderança de direção visual, noiva, retratos artísticos dos noivos e momentos chave de emoção.</p>
+</div>
+</div>
+<div class="flex items-start gap-3 p-3 rounded-xl bg-surface-container-low">
+<span class="material-symbols-outlined text-[18px] text-secondary shrink-0 mt-0.5">camera_outdoor</span>
+<div class="space-y-0.5">
+<span class="font-semibold block text-on-surface">2º Fotógrafo (Versa Visual)</span>
+<p class="text-secondary text-caption leading-relaxed">Noivo, visão geral arquitetônica do Espaço Lux, reações de pais, avós e convidados.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Location Badge Card -->
+<div class="bg-surface-container-lowest rounded-full p-6 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-xl bg-surface-container flex items-center justify-center text-brand-teal">
+<span class="material-symbols-outlined text-[20px]">map</span>
+</div>
+<div>
+<h5 class="font-label-ui text-label-ui font-semibold text-on-surface">Espaço Lux &amp; Costa Azul</h5>
+<p class="font-caption text-caption text-secondary">Pontos marcados no mapa interativo</p>
+</div>
+</div>
+<button class="size-8 rounded-full bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface transition-colors" onclick="if(window.focusMarker){window.focusMarker(0);}" title="Ver no mapa" type="button">
+<span class="material-symbols-outlined text-[18px]">near_me</span>
+</button>
+</div>
+</aside>
+</div>
+</div></main>
+<!-- EDITORIAL FOOTER -->
+<footer class="mt-16 border-t border-[#e5e0d8] bg-white py-10 transition-colors">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+<div class="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#6c5b4d]">
+<div class="flex items-center gap-2.5 flex-wrap justify-center md:justify-start">
+<span class="text-[#1c1a17] font-bold text-sm">Versa Visual</span>
+<span class="text-stone-300">•</span>
+<span class="">Direção Fotográfica de Casamento</span>
+<span class="text-stone-300">•</span>
+<a class="text-[#1c1a17] hover:underline font-semibold" href="https://instagram.com/v1ncsc" rel="noreferrer" target="_blank">@v1ncsc</a>
+</div>
+<div class="flex items-center gap-3 text-xs">
+<span class="">📍 Rio das Ostras &amp; Costa Azul, RJ</span>
+<span class="text-stone-300">•</span>
+<span class="flex items-center gap-1">
+<span class="size-1.5 rounded-full bg-emerald-500"></span>
+            Sincronizado Localmente
+          </span>
+</div>
+</div>
+<div class="pt-4 border-t border-stone-100 text-center text-[11px] text-[#8c827a]">
+        Planejamento Executivo &amp; Moodboard Editorial · Camila &amp; Carlos · Versa Visual (@v1ncsc)
+      </div>
+</div>
+</footer>
+<!-- Leaflet Map Initialization Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Coordenadas centrais aproximadas de Rio das Ostras / Costa Azul
+      const centerCoords = [-22.5250, -41.9300];
+      
+      const map = L.map('interactive-map', {
+        center: centerCoords,
+        zoom: 14,
+        zoomControl: false,
+        attributionControl: false
+      });
+
+      // Add Zoom control at bottom right
+      L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+      // Light elegant OpenStreetMap / CartoDB Positron style tile layer
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        subdomains: 'abcd',
+        attribution: '&copy; CartoDB &copy; OpenStreetMap'
+      }).addTo(map);
+
+      // Custom marker icon creator
+      function createCustomIcon(emoji, bgClass, borderColor) {
+        return L.divIcon({
+          className: 'custom-map-pin',
+          html: `<div style="background-color: ${borderColor}; border: 2px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.25); border-radius: 9999px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 16px;">
+                  ${emoji}
+                 </div>`,
+          iconSize: [36, 36],
+          iconAnchor: [18, 18]
+        });
+      }
+
+      // Location points
+      window.locations = [
+        {
+          name: "Espaço Lux",
+          coords: [-22.5220, -41.9380],
+          icon: createCustomIcon("🏛️", "bg-emerald-600", "#059669")
+        },
+        {
+          name: "Falésias & Mirante da Costa Azul",
+          coords: [-22.5330, -41.9120],
+          icon: createCustomIcon("🌅", "bg-amber-600", "#d97706")
+        },
+        {
+          name: "Bar Thunder & Costa Azul",
+          coords: [-22.5280, -41.9210],
+          icon: createCustomIcon("🍸", "bg-sky-700", "#0284c7")
+        }
+      ];
+
+      window.markers = [];
+      locations.forEach((loc, index) => {
+        const marker = L.marker(loc.coords, { icon: loc.icon }).addTo(map);
+        marker.bindTooltip(`<strong>${loc.name}</strong>`, { direction: 'top', offset: [0, -16] });
+        markers.push(marker);
+      });
+
+      window.focusMarker = function(index) {
+        if (markers[index]) {
+          map.flyTo(locations[index].coords, 15, { duration: 1 });
+        }
+      };
+
+      window.resetMapView = function() {
+        map.flyTo(centerCoords, 14, { duration: 1 });
+      };
+    });
+  </script>
+
+
+</body></html>

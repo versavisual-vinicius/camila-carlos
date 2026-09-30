@@ -57,13 +57,34 @@ O produto responde a quatro perguntas essenciais:
 
 ---
 
-## 5. Pilares Arquiteturais da Aplicação
+## 5. Recomendação Estrutural e Arquitetura Mobile-First
 
-1. **Zero Atrito e Funcionamento Offline**:
-   * Acesso direto no navegador móvel ou desktop sem login ou senhas obrigatórias.
-   * Persistência em `localStorage` com controle de versão.
-2. **Upload Mobile Simplificado com Compressão Retina**:
-   * Fluxo ágil: selecionar foto → visualizar → salvar.
-   * Compressão automática em Canvas HTML5 (1600px / 0.82) para preservar espaço e fluidez.
-3. **Exportação Executiva Limpa**:
-   * **Resumo do Roteiro Fotográfico** em PDF vetorial via `jsPDF`, focado estritamente na cobertura e lista de retratos, sem invadir funções de cerimonial.
+> **Prioridade:** Jornada centrada em mobile com navegação inferior fixa de 4 abas, gavetas de edição (Vaul/Radix) e ausência de bloqueios por autenticação para maximizar a conversão da noiva em curadoria visual.
+
+1. **Ponto de Entrada & Onboarding (Visão Geral / Home)**:
+   * Acesso direto no navegador do smartphone sem login/senha (persistência em `localStorage`).
+   * Banner editorial acolhedor; contagem regressiva somente quando data estiver confirmada (omitida caso contrário).
+   * Card de próximo passo em destaque (*"Continuar curadoria visual"* ou *"Próximo alinhamento da cobertura"*).
+   * Atalhos rápidos em cards limpos para *Referências*, *Pré-wedding* e *Roteiro*.
+
+2. **Ciclo de Curadoria Visual (Referências)**:
+   * Grid fluido em *masonry* responsivo com rolagem contínua. Filtros táteis por texto/tags e favoritos.
+   * Toque na foto $\rightarrow$ gaveta/modal expandido (Vaul). Favorito instantâneo com feedback visual.
+   * Pergunta central para Camila: *"O que você gosta nesta foto?"* com texto livre.
+   * Tags livres dinâmicas e seleção de *"Pasta de destino"*. Navegação lateral contínua (swipe/setas).
+   * FAB *"Adicionar referência"* mobile: câmera/rolo $\rightarrow$ compressão transparente no client-side $\rightarrow$ preview $\rightarrow$ salvar com toast Sonner.
+
+3. **Alinhamento de Cobertura (Roteiro Fotográfico)**:
+   * Linha do tempo vertical em cards expansíveis (*Pré-wedding*, *Preparação*, *Cerimônia*, *Retratos*, *Casal*, *Recepção*).
+   * Leitura clara da divisão de equipe: Vinicius (noiva, preparação, cerimônia e principais) vs. Segundo fotógrafo (noivo, decoração, convidados e reações). Horários flexíveis vinculados à luz e beleza.
+   * Retratos de grupo ergonômicos: idosos e pessoas com mobilidade reduzida em 1º lugar (#3 Avós - Prioridade).
+   * Painel dedicado de Pré-wedding: vestuário, Harley-Davidson e locações (Bar Thunder e Costa Azul).
+
+4. **Consulta Logística & Acesso Prático (Locais & Fornecedores)**:
+   * Local oficial confirmado: **Espaço Lux** (Rio das Ostras).
+   * Ações com 1 toque: rotas diretas no Google Maps e Waze, e botão de WhatsApp com a Versa Visual.
+   * Campo opcional e desimpedido para anotações de contatos extras.
+
+5. **Saída e Compartilhamento**:
+   * Exportação de **Resumo do Roteiro Fotográfico** via `jsPDF`, limpo e focado na cobertura e lista de retratos.
+   * Resiliência de estado contínua via `localStorage` versionado, sem perda de anotações ou uploads ao recarregar.

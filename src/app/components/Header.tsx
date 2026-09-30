@@ -41,7 +41,7 @@ export function Header({
   isExporting = false
 }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-40 bg-surface/95 dark:bg-[#141312]/95 backdrop-blur-md border-b border-outline-variant/20 transition-colors shadow-airbnb-header pt-[env(safe-area-inset-top,0px)]">
+    <header className="sticky top-0 z-40 bg-surface/95 dark:bg-[#111414]/95 backdrop-blur-md border-b border-outline-variant/20 transition-colors shadow-airbnb-header pt-[env(safe-area-inset-top,0px)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="h-16 md:h-18 flex items-center justify-between gap-4">
           

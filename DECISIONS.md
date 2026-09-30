@@ -75,7 +75,36 @@ Este documento registra as principais decisões de design, arquitetura e produto
 ### ADR 007: Priorização Humana de Mobilidade dos Avós no Altar
 
 * **Contexto**: A sessão de fotos formais após o "sim" é frequentemente desgastante para convidados idosos ou com mobilidade reduzida.
-* **Decisão**: Definir como prioridade absoluta (Grupo 01 da Shot List) as fotos com os avós da noiva e do noivo, garantindo que sejam fotografados imediatamente após o encerramento da cerimônia e liberados para descansar no lounge ou coquetel com assento reservado.
+* **Decisão**: Definir como prioridade absoluta (Item #3 da Lista do Altar) as fotos com os avós da noiva e do noivo, garantindo que sejam fotografados imediatamente após o encerramento da cerimônia e liberados para descansar no lounge ou coquetel com assento reservado.
 * **Consequências**:
   * Experiência humanizada e empática no casamento.
-  * Cerimonial ciente da prioridade de transporte e posicionamento dos idosos no altar.
+  * Cerimonial ciente da prioridade de posicionamento dos idosos no altar.
+
+---
+
+### ADR 008: Jornada Mobile-First com 4 Abas Fixas e Gavetas Vaul (Sem Autenticação)
+
+* **Contexto**: Para maximizar a conversão da noiva em curadoria visual ativa e eliminar qualquer atrito de acesso em smartphones.
+* **Decisão**:
+  1. Padronizar o dock inferior fixo com **4 abas canônicas**: *Início* (Visão Geral), *Referências* (com badge de favoritos), *Roteiro* e *Locais*.
+  2. Eliminar telas e barreiras de login/senha; o acesso é imediato via link no navegador móvel com persistência em `localStorage`.
+  3. Adotar gavetas bottom-sheet via **Vaul** para detalhamento de fotos, registro de notas (*"O que você gosta nesta foto?"*) e tags dinâmicas.
+* **Consequências**:
+  * Navegação rápida com o polegar, sem sobrecarga cognitiva.
+  * Feedback imediato via Sonner e transições fluidas com Motion.
+  * Preservação da autoria do casal sem fricções cadastrais.
+
+---
+
+### ADR 007 — Aplicação do Padrão Stitch Taste-Design & Anti-Slop (30/09/2026)
+
+* **Contexto**: O projeto Stitch e a interface possuíam resquícios de convenções genéricas de IA (como a fonte `Inter` como padrão, cartões com preenchimento em caixas repetitivas e resíduos de `#000000`).
+* **Decisão**:
+  1. Sintetizar o `DESIGN.md` semântico nos padrões rígidos da skill `taste-design` (Densidade: 3, Variância: 7, Movimento: 6).
+  2. Substituir `Inter` por `DM Sans` (corpo e interface) pareada com `Playfair Display` (títulos editoriais) e `Outfit` / `DM Sans Tabular` (dados e numerais).
+  3. Erradicar pure black (`#000000`) em favor de `Espresso Noir (#1C1A17)` no tema claro e `Velvet Charcoal (#141312)` no escuro.
+  4. Preservar o acento de autoria único Versa Visual Teal (`#5E7F8C`).
+* **Consequências**:
+  * Eliminação de vícios visuais genéricos de IA / SaaS corporativo.
+  * Alinhamento estrito com os princípios de curadoria autoral de fotografia da Versa Visual (`@v1ncsc`).
+  * Geração e edição no Stitch agora ancoradas em tokens semânticos anti-slop rigorosos.

@@ -185,7 +185,7 @@ export function LightboxModal({
           </div>
 
           {/* Details Sidebar: Foco na Noiva com Campo Editável */}
-          <div className="w-full md:w-84 shrink-0 flex flex-col justify-between bg-surface/95 dark:bg-[#141312]/95 border border-outline-variant/30 p-5 sm:p-6 rounded-2xl backdrop-blur-md text-on-surface md:max-h-[70dvh] md:overflow-y-auto shadow-2xl">
+          <div className="w-full md:w-84 shrink-0 flex flex-col justify-between bg-surface/95 dark:bg-[#111414]/95 border border-outline-variant/30 p-5 sm:p-6 rounded-2xl backdrop-blur-md text-on-surface md:max-h-[70dvh] md:overflow-y-auto shadow-2xl">
             <div className="flex flex-col gap-3">
               <div>
                 <div className="flex items-center gap-1.5 text-secondary text-xs font-semibold uppercase tracking-wider mb-1.5">

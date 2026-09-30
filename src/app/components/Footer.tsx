@@ -2,7 +2,7 @@ import { MapPin, Database } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="mt-8 sm:mt-12 border-t border-outline-variant/20 bg-surface-container-lowest dark:bg-[#141312] py-10 transition-colors shadow-2xs">
+    <footer className="mt-8 sm:mt-12 border-t border-outline-variant/20 bg-surface-container-lowest dark:bg-[#111414] py-10 transition-colors shadow-2xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-5 text-xs text-on-surface-variant">
           <div className="flex items-center gap-3 flex-wrap justify-center sm:justify-start">

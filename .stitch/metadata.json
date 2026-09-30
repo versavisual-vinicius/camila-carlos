@@ -1,0 +1,107 @@
+{
+  "projectId": "13098707149538551916",
+  "title": "Camila e Carlos wedding app",
+  "lastSyncTime": "2026-09-30T17:40:00Z",
+  "screens": [
+    {
+      "id": "626b15a6b064467a9caccbd69507e5b6",
+      "title": "Roteiro (Mobile) — Camila & Carlos",
+      "deviceType": "MOBILE",
+      "width": 780,
+      "height": 4804,
+      "localScreensPath": "stitch-screens/01_roteiro-mobile_626b15a6b064467a9caccbd69507e5b6",
+      "localDesignsHtml": ".stitch/designs/01_roteiro_mobile.html",
+      "localDesignsPng": ".stitch/designs/01_roteiro_mobile.png"
+    },
+    {
+      "id": "1465456f563942158c9b1997a3f706cc",
+      "title": "Visão Geral — Camila & Carlos",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 3160,
+      "localScreensPath": "stitch-screens/02_visao-geral_1465456f563942158c9b1997a3f706cc",
+      "localDesignsHtml": ".stitch/designs/02_visao_geral.html",
+      "localDesignsPng": ".stitch/designs/02_visao_geral.png"
+    },
+    {
+      "id": "32e672654d2b46d48b4938fb1f098949",
+      "title": "Roteiro (Mobile) — Camila & Carlos",
+      "deviceType": "MOBILE",
+      "width": 780,
+      "height": 4506,
+      "localScreensPath": "stitch-screens/03_roteiro-mobile_32e672654d2b46d48b4938fb1f098949",
+      "localDesignsHtml": ".stitch/designs/03_roteiro_mobile_alt.html",
+      "localDesignsPng": ".stitch/designs/03_roteiro_mobile_alt.png"
+    },
+    {
+      "id": "457d1402957746268c188670fde246a7",
+      "title": "Referências Visuais — Camila & Carlos",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 2156,
+      "localScreensPath": "stitch-screens/04_referencias-visuais_457d1402957746268c188670fde246a7",
+      "localDesignsHtml": ".stitch/designs/04_referencias_visuais.html",
+      "localDesignsPng": ".stitch/designs/04_referencias_visuais.png"
+    },
+    {
+      "id": "776cc29e0cac4d889518fb484d787b80",
+      "title": "Referências (Mobile) — Camila & Carlos",
+      "deviceType": "MOBILE",
+      "width": 780,
+      "height": 2568,
+      "localScreensPath": "stitch-screens/05_referencias-mobile_776cc29e0cac4d889518fb484d787b80",
+      "localDesignsHtml": ".stitch/designs/05_referencias_mobile.html",
+      "localDesignsPng": ".stitch/designs/05_referencias_mobile.png"
+    },
+    {
+      "id": "76a6bd0351a246feaa475b81a20847d5",
+      "title": "Visão Geral (Mobile) — Camila & Carlos",
+      "deviceType": "MOBILE",
+      "width": 780,
+      "height": 3362,
+      "localScreensPath": "stitch-screens/06_visao-geral-mobile_76a6bd0351a246feaa475b81a20847d5",
+      "localDesignsHtml": ".stitch/designs/06_visao_geral_mobile.html",
+      "localDesignsPng": ".stitch/designs/06_visao_geral_mobile.png"
+    },
+    {
+      "id": "8eef9839b00a497d8de8290c30babacd",
+      "title": "Locais & Fornecedores (Mobile) — Camila & Carlos",
+      "deviceType": "MOBILE",
+      "width": 780,
+      "height": 2346,
+      "localScreensPath": "stitch-screens/07_locais-fornecedores-mobile_8eef9839b00a497d8de8290c30babacd",
+      "localDesignsHtml": ".stitch/designs/07_locais_fornecedores_mobile.html",
+      "localDesignsPng": ".stitch/designs/07_locais_fornecedores_mobile.png"
+    },
+    {
+      "id": "9be535f03bd042b29a008245e9c50711",
+      "title": "Roteiro — Camila & Carlos",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 4608,
+      "localScreensPath": "stitch-screens/08_roteiro_9be535f03bd042b29a008245e9c50711",
+      "localDesignsHtml": ".stitch/designs/08_roteiro.html",
+      "localDesignsPng": ".stitch/designs/08_roteiro.png"
+    },
+    {
+      "id": "a729b2aa21354f169da45c1ae66fc64e",
+      "title": "Locais & Fornecedores — Camila & Carlos",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 2436,
+      "localScreensPath": "stitch-screens/09_locais-fornecedores_a729b2aa21354f169da45c1ae66fc64e",
+      "localDesignsHtml": ".stitch/designs/09_locais_fornecedores.html",
+      "localDesignsPng": ".stitch/designs/09_locais_fornecedores.png"
+    },
+    {
+      "id": "6c12d575d95343018d6ac5aba8f4299a",
+      "title": "PRD & Product Brief — Camila & Carlos (Versa Visual)",
+      "deviceType": "DESKTOP",
+      "width": 0,
+      "height": 0,
+      "localScreensPath": "stitch-screens/10_prd-product-brief_6c12d575d95343018d6ac5aba8f4299a",
+      "localDesignsHtml": ".stitch/designs/10_prd_brief.md",
+      "localDesignsPng": null
+    }
+  ]
+}

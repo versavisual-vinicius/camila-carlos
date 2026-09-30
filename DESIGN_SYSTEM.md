@@ -14,33 +14,40 @@ O design deste projeto estabelece um equilíbrio entre a estética autoral da **
 
 Valores declarados em [src/styles/theme.css](file:///Users/viniciuscunha/3_DEV/wedding-moodboard/src/styles/theme.css):
 
-### Tema Claro (`:root`)
-* **Superfície Principal**: `--surface: #fbf9f6` (linho quente e acolhedor).
-* **Superfície de Contêineres**: `--surface-container: #efeeeb`.
-* **Superfície Elevada**: `--surface-container-high: #eae8e5`.
-* **Texto Primário**: `--on-surface: #1b1c1a` (quase preto quente, alto contraste).
-* **Texto Secundário**: `--on-surface-variant: #4b463f`.
-* **Botões & Destaques Primários**: `--primary: #1c1a17` com `--on-primary: #ffffff`.
-* **Acento Editorial / Bronze**: `--secondary: #6c5b4d` e `--secondary-container: #f2dcca`.
-* **Borda Sutil**: `--card-border: 1px solid rgba(28, 26, 23, 0.08)`.
-* **Sombra de Card**: `0 4px 16px rgba(28, 26, 23, 0.04)`.
-* **Sombra ao Hover**: `0 12px 32px rgba(28, 26, 23, 0.06)`.
-* **Sombra Airbnb Card (Stitch)**: `0 0 0 1px rgba(0, 0, 0, 0.05), 0 2px 6px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.06)`.
-* **Sombra Airbnb Header (Stitch)**: `0 1px 0 0 rgba(0, 0, 0, 0.06)`.
-* **Sombra Airbnb Float (Stitch)**: `0 6px 20px rgba(0, 0, 0, 0.08)`.
+### Tema Claro (`:root` — Camila & Carlos Editorial Wedding)
+* **Superfície Principal**: `--surface: #f8faf9` (mineral claro, limpo e editorial).
+* **Superfície de Contêineres**: `--surface-container: #eceeee` e `--surface-container-low: #f2f4f4`.
+* **Superfície Elevada**: `--surface-container-high: #e6e8e8` e `--surface-container-highest: #e1e3e3`.
+* **Texto Primário**: `--on-surface: #191c1c` (alto contraste sem agressividade).
+* **Texto Secundário**: `--on-surface-variant: #3f4849`.
+* **Botões & Destaques Primários**: `--primary: #1e656c` com `--on-primary: #ffffff`.
+* **Acento Editorial Slate**: `--secondary: #4c6265` e `--secondary-container: #cee7ea`.
+* **Acento Quente (Terciária)**: `--tertiary: #844e30` e `--tertiary-container: #a16646`.
+* **Borda Sutil**: `--card-border: 1px solid rgba(63, 72, 73, 0.15)`.
+* **Sombra de Card**: `0 4px 16px rgba(25, 28, 28, 0.04)`.
+* **Sombra ao Hover**: `0 12px 32px rgba(25, 28, 28, 0.08)`.
+* **Sombra Airbnb Card (Stitch)**: `0 0 0 1px rgba(63, 72, 73, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.06)`.
+* **Sombra Airbnb Header (Stitch)**: `0 1px 0 0 rgba(63, 72, 73, 0.15)`.
+* **Sombra Airbnb Float (Stitch)**: `0 6px 20px rgba(25, 28, 28, 0.1)`.
 
-### Tema Escuro (`.dark`)
-* **Superfície Principal**: `--surface: #141312` (carvão escuro aveludado).
-* **Superfície de Contêineres**: `--surface-container: #292624`.
-* **Texto Primário**: `--on-surface: #f5f3f0`.
-* **Texto Secundário**: `--on-surface-variant: #cdc5bc`.
-* **Botões & Destaques Primários**: `--primary: #f5f3f0` com `--on-primary: #1c1a17`.
-* **Acento Editorial Claro**: `--secondary: #d8c3b2`.
-* **Borda Noturna**: `1px solid rgba(255, 255, 255, 0.08)`.
-* **Sombra Airbnb Card Noturna**: `0 0 0 1px rgba(255, 255, 255, 0.08), 0 2px 6px rgba(0, 0, 0, 0.35), 0 4px 14px rgba(0, 0, 0, 0.5)`.
+### Tema Escuro (`.dark` — Editorial Wedding)
+* **Superfície Principal**: `--surface: #111414` (carvão mineral profundo).
+* **Superfícies Escalonadas**: 
+  * `--surface-container-lowest: #0b0f0f`
+  * `--surface-container-low: #191c1c`
+  * `--surface-container: #1d2020`
+  * `--surface-container-high: #272b2b`
+  * `--surface-container-highest: #323535`
+* **Texto Primário**: `--on-surface: #e1e3e3`.
+* **Texto Secundário**: `--on-surface-variant: #bfc8c9`.
+* **Botões & Destaques Primários**: `--primary: #90d1d9` com `--on-primary: #00363b`.
+* **Acento Secundário**: `--secondary: #b3cbce` com `--secondary-container: #374d50`.
+* **Acento Quente (Terciária)**: `--tertiary: #feb691` com `--tertiary-container: #c1825f`.
+* **Borda Estrutural**: `--border: #3f4849` (`outline-variant`).
+* **Sombra Airbnb Card Noturna**: `0 0 0 1px #3f4849, 0 2px 6px rgba(0, 0, 0, 0.35), 0 4px 14px rgba(0, 0, 0, 0.5)`.
 
 ### Acento da Marca
-* **Versa Visual Teal**: `#5E7F8C` (aplicado nos ícones institucionais e favicons).
+* **Versa Visual Teal**: `#5E7F8C` no Light Mode e `#90D1D9` luminoso no Dark Mode.
 
 ---
 

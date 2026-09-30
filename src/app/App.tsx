@@ -22,6 +22,7 @@ import { MobileBottomDock } from "@/app/components/MobileBottomDock";
 import { Footer } from "@/app/components/Footer";
 import { Toaster, toast } from "sonner";
 import { Download, Share2, Loader2 } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 
 export default function App() {
   // Theme state: default to light
@@ -538,61 +539,72 @@ export default function App() {
             </div>
           </section>
 
-        {/* TELA 0: VISÃO GERAL (HOME LEVE EDITORIAL STITCH) */}
-        {activeTab === "visao-geral" && (
-          <OverviewSection
-            onNavigateTab={setActiveTab}
-            itemsCount={items.length}
-            favoritesCount={likedIds.length}
-            completedShotsCount={completedShotCount}
-            totalShotsCount={totalShotCount}
-            onExportPdf={handleExportRoteiro}
-            isExportingPdf={isExportingPdf}
-            onOpenShareModal={() => setIsShareModalOpen(true)}
-          />
-        )}
+        {/* TAB CONTENT TRANSITIONS WITH MOTION */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {/* TELA 0: VISÃO GERAL (HOME LEVE EDITORIAL STITCH) */}
+            {activeTab === "visao-geral" && (
+              <OverviewSection
+                onNavigateTab={setActiveTab}
+                itemsCount={items.length}
+                favoritesCount={likedIds.length}
+                completedShotsCount={completedShotCount}
+                totalShotsCount={totalShotCount}
+                onExportPdf={handleExportRoteiro}
+                isExportingPdf={isExportingPdf}
+                onOpenShareModal={() => setIsShareModalOpen(true)}
+              />
+            )}
 
-        {/* TELA 1: REFERÊNCIAS VISUAIS (Moodboard Direto) */}
-        {activeTab === "referencias" && (
-          <PreWeddingSection
-            items={items}
-            likedIds={likedIds}
-            notes={notes}
-            onToggleLike={handleToggleLike}
-            onOpenNotes={(item) => setSelectedNoteItem(item)}
-            onDelete={handleDeleteItem}
-            onOpenLightbox={(item) => setSelectedLightboxItem(item)}
-            onOpenAddDialog={() => setIsAddDialogOpen(true)}
-            onAddItem={handleAddItem}
-            onAddBatchItems={handleAddBatchItems}
-            onResetItems={handleResetItems}
-          />
-        )}
+            {/* TELA 1: REFERÊNCIAS VISUAIS (Moodboard Direto) */}
+            {activeTab === "referencias" && (
+              <PreWeddingSection
+                items={items}
+                likedIds={likedIds}
+                notes={notes}
+                onToggleLike={handleToggleLike}
+                onOpenNotes={(item) => setSelectedNoteItem(item)}
+                onDelete={handleDeleteItem}
+                onOpenLightbox={(item) => setSelectedLightboxItem(item)}
+                onOpenAddDialog={() => setIsAddDialogOpen(true)}
+                onAddItem={handleAddItem}
+                onAddBatchItems={handleAddBatchItems}
+                onResetItems={handleResetItems}
+              />
+            )}
 
-        {/* TELA 2: ROTEIRO FOTOGRÁFICO DO CASAMENTO & PRÉ-WEDDING */}
-        {activeTab === "roteiro" && (
-          <RoteiroPrdSection
-            shotListGroups={shotListGroups}
-            onUpdateShotItem={handleUpdateShotItem}
-            onAddShotItem={handleAddShotItem}
-            onDeleteShotItem={handleDeleteShotItem}
-            onResetShotList={handleResetShotList}
-            onNavigateToReferencias={() => setActiveTab("referencias")}
-            onOpenShareModal={() => setIsShareModalOpen(true)}
-          />
-        )}
+            {/* TELA 2: ROTEIRO FOTOGRÁFICO DO CASAMENTO & PRÉ-WEDDING */}
+            {activeTab === "roteiro" && (
+              <RoteiroPrdSection
+                shotListGroups={shotListGroups}
+                onUpdateShotItem={handleUpdateShotItem}
+                onAddShotItem={handleAddShotItem}
+                onDeleteShotItem={handleDeleteShotItem}
+                onResetShotList={handleResetShotList}
+                onNavigateToReferencias={() => setActiveTab("referencias")}
+                onOpenShareModal={() => setIsShareModalOpen(true)}
+              />
+            )}
 
-        {/* TELA 3: FORNECEDORES & LOCAIS */}
-        {activeTab === "fornecedores" && (
-          <CuratedVendorsSection
-            vendors={vendors}
-            onAddVendor={handleAddVendor}
-            onUpdateVendor={handleUpdateVendor}
-            onDeleteVendor={handleDeleteVendor}
-            onResetVendors={handleResetVendors}
-            isDarkMode={isDarkMode}
-          />
-        )}
+            {/* TELA 3: FORNECEDORES & LOCAIS */}
+            {activeTab === "fornecedores" && (
+              <CuratedVendorsSection
+                vendors={vendors}
+                onAddVendor={handleAddVendor}
+                onUpdateVendor={handleUpdateVendor}
+                onDeleteVendor={handleDeleteVendor}
+                onResetVendors={handleResetVendors}
+                isDarkMode={isDarkMode}
+              />
+            )}
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       {/* Contextual Notes Drawer por Foto (Foco na Noiva) */}

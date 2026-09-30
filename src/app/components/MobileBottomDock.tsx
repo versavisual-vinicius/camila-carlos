@@ -47,7 +47,7 @@ export function MobileBottomDock({
 
   return (
     <nav className="fixed bottom-0 inset-x-0 z-50 xl:hidden pointer-events-none pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))] px-4">
-      <div className="max-w-sm mx-auto pointer-events-auto bg-surface/95 dark:bg-[#141312]/95 backdrop-blur-2xl border border-outline-variant/30 rounded-2xl shadow-airbnb-float px-2 py-1.5 flex items-center justify-around">
+      <div className="max-w-sm mx-auto pointer-events-auto bg-surface/95 dark:bg-[#111414]/95 backdrop-blur-2xl border border-outline-variant/30 rounded-2xl shadow-airbnb-float px-2 py-1.5 flex items-center justify-around">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
           const Icon = tab.icon;

@@ -14,7 +14,55 @@ As telas do Stitch são a referência visual para a evolução da interface; est
 
 As observações do PDF são diretrizes de produto já aplicadas, não uma nova lista de correções. Elas prevalecem sobre trechos anteriores que ampliam o aplicativo para gestão de cerimonial.
 
-## 3. Navegação e conteúdo
+## 3. Recomendação Estrutural e Arquitetura de Interação
+
+> **Recomendação estrutural:** priorizar a jornada centrada em mobile com navegação inferior fixa de 4 abas, gavetas de edição (Vaul/Radix) e ausência de bloqueios por autenticação para maximizar a conversão da noiva em curadoria visual.
+
+### 1. Ponto de Entrada & Onboarding (Visão Geral / Home)
+* **Entrada:** Acesso direto via link web no navegador do smartphone, sem barreira de login/senha (persistência em `localStorage`).
+* **Visão Inicial:** Banner editorial acolhedor com a identidade de Camila & Carlos.
+  * Se a data estiver confirmada, exibe contagem regressiva; se não, omite o bloco para evitar ruído.
+  * Card de próximo passo em destaque: *"Continuar curadoria visual"* ou *"Próximo alinhamento da cobertura"*.
+* **Microinteração:** Atalhos rápidos em cards limpos para *Referências*, *Pré-wedding* e *Roteiro*, sem checklists administrativos soltos.
+
+### 2. Ciclo de Curadoria Visual (Referências)
+* **Navegação na Galeria:**
+  * Grid fluido em *masonry* responsivo, com rolagem contínua.
+  * Filtros de topo táteis: busca por texto/tags e atalho para ver apenas "Favoritos".
+* **Fluxo de Detalhe e Registro de Preferência:**
+  1. Camila toca em uma fotografia $\rightarrow$ abre visualização expandida ou modal/drawer (Vaul).
+  2. Toque no ícone de favorito (toggle instantâneo com feedback háptico/visual).
+  3. Preenchimento do campo de texto livre: *"O que você gosta nesta foto?"* (auto-save ou botão de confirmação claro).
+  4. Adição/seleção de tags livres (chips dinâmicos reutilizáveis) e escolha da *"Pasta de destino"*.
+  5. Navegação lateral (swipe no mobile ou setas no desktop) para a foto anterior/próxima sem fechar o visualizador.
+* **Fluxo de Upload Mobile (Adicionar Referência):**
+  1. Toque no botão de ação flutuante (FAB) *"Adicionar referência"*.
+  2. Seleção no rolo de câmera do celular $\rightarrow$ compressão e redimensionamento transparentes no client-side.
+  3. Pré-visualização imediata com preenchimento opcional do motivo do gosto $\rightarrow$ confirmação (*Salvar*).
+  4. Toast discreto de sucesso via Sonner; card inserido no topo da galeria.
+
+### 3. Alinhamento de Cobertura (Roteiro Fotográfico)
+* **Visualização da Jornada do Evento:** Linha do tempo vertical em cards expansíveis, cobrindo sequencialmente: *Pré-wedding*, *Preparação*, *Cerimônia*, *Retratos*, *Casal* e *Recepção*.
+* **Leitura da Divisão de Equipe:**
+  * Indicador claro de responsabilidade: Vinicius (foco na noiva, preparação, cerimônia e momentos principais) vs. Segundo fotógrafo (noivo, decoração, convidados e reações).
+  * Horários flexíveis vinculados exclusivamente à luz e à conclusão da beleza, sem travas rígidas de cerimonial.
+* **Organização de Retratos de Grupo:**
+  * Ordem ergonômica pré-estabelecida com foco no conforto: primeiro idosos/mobilidade reduzida (#3 Avós - Prioridade) $\rightarrow$ famílias $\rightarrow$ padrinhos $\rightarrow$ amigos.
+* **Subjornada Pré-wedding:**
+  * Toque no card de Pré-wedding abre painel dedicado: referências de vestuário, uso da Harley-Davidson e locações confirmadas (Bar Thunder e Falésias/Costa Azul).
+
+### 4. Consulta Logística & Acesso Prático (Locais & Fornecedores)
+* **Consulta Rápida:** Visualização do local oficial confirmado (**Espaço Lux**, em Rio das Ostras, integrando cerimônia, festa e suíte dos noivos).
+* **Ações com 1 Toque:**
+  * Botão direto para traçar rota no Google Maps ou Waze.
+  * Botão direto para conversa no WhatsApp com a Versa Visual.
+* **Personalização Controlada:** Campo opcional e não obrigatório para a noiva salvar contatos extras se desejar.
+
+### 5. Saída e Compartilhamento
+* **Exportação do Roteiro:** Ação simples de exportação via jsPDF, gerando documento enxuto contendo apenas divisão de equipe, lista prioritária de retratos e horários-chave alinhados.
+* **Resiliência de Estado:** Feedback visual contínuo de dados preservados localmente, garantindo que o fechamento ou recarregamento da aba não gere perda de anotações ou uploads.
+
+## 3.1. Navegação e Conteúdo Geral
 
 Quatro áreas principais. O pré-wedding tem destaque na jornada e pode abrir uma página própria, sem exigir uma quinta aba. Detalhes de momentos, fotos e locais são páginas ou painéis dessas áreas.
 

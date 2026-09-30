@@ -1,0 +1,426 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Visão Geral — Camila &amp; Carlos | Versa Visual</title>
+<!-- Google Fonts: Inter & Playfair Display -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS v3 CDN with forms & container queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            sand: {
+              50: '#FDFBF9',
+              100: '#F7F4EF',
+              200: '#EFEAE2',
+              300: '#E2DBD0',
+            },
+            editorial: {
+              charcoal: '#171717',
+              gray: '#737373',
+              lightGray: '#A3A3A3',
+              border: '#EAE6DF',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Typography & Layout Adjustments -->
+<style data-purpose="editorial-refinements">
+    body {
+      background-color: #FBF9F6;
+      color: #1F1F1F;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .custom-card-shadow {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(0, 0, 0, 0.015);
+    }
+    .pill-nav-shadow {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between font-sans selection:bg-neutral-200">
+<!-- BEGIN: TopHeader -->
+<header class="w-full bg-[#FBF9F6]/90 backdrop-blur-md border-b border-[#EFECE6] sticky top-0 z-50 transition-all">
+<div class="max-w-[1360px] mx-auto px-6 h-20 flex items-center justify-between">
+<!-- Brand & Project Details -->
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-full bg-neutral-900 text-white flex items-center justify-center font-serif text-lg font-medium shadow-sm">
+          V
+        </div>
+<div class="flex flex-col">
+<h1 class="font-serif text-[17px] font-semibold tracking-tight text-neutral-900 leading-snug">Camila &amp; Carlos</h1>
+<p class="text-xs text-neutral-500 font-light">
+            Fotografia autoral por <span class="text-neutral-800 font-normal">Vinicius Cunha — Versa Visual</span>
+</p>
+</div>
+</div>
+<!-- Center Pill Navigation -->
+<nav class="hidden md:flex items-center bg-[#F3EFEA] p-1.5 rounded-full border border-[#E8E2D8] text-xs font-medium text-neutral-600 gap-1 pill-nav-shadow">
+<button class="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white text-neutral-900 shadow-sm transition-all">
+<svg class="w-3.5 h-3.5 text-neutral-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+          Visão Geral
+        </button>
+<button class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full hover:text-neutral-900 transition-colors">
+<svg class="w-3.5 h-3.5 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<rect height="7" rx="1.5" stroke-width="1.8" width="7" x="3" y="3"></rect>
+<rect height="7" rx="1.5" stroke-width="1.8" width="7" x="14" y="3"></rect>
+<rect height="7" rx="1.5" stroke-width="1.8" width="7" x="14" y="14"></rect>
+<rect height="7" rx="1.5" stroke-width="1.8" width="7" x="3" y="14"></rect>
+</svg>
+          Referências
+          <span class="inline-flex items-center gap-0.5 px-1.5 py-0.2 text-[10px] bg-[#FCE8E8] text-[#E03E3E] font-semibold rounded-full">
+<svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+            1
+          </span>
+</button>
+<button class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full hover:text-neutral-900 transition-colors">
+<svg class="w-3.5 h-3.5 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9" stroke-width="1.8"></circle>
+<path d="M12 7v5l3 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+          Roteiro
+          <span class="text-[11px] text-neutral-400 font-normal">0/15</span>
+</button>
+<button class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full hover:text-neutral-900 transition-colors">
+<svg class="w-3.5 h-3.5 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+          Locais
+        </button>
+</nav>
+<!-- Action Buttons -->
+<div class="flex items-center gap-2.5">
+<button class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-[#E5E0D7] hover:bg-[#FAF8F5] text-xs font-medium text-neutral-700 shadow-sm transition">
+<svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+          Exportar Roteiro
+        </button>
+<button class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-[#E5E0D7] hover:bg-[#FAF8F5] text-xs font-medium text-neutral-700 shadow-sm transition">
+<svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+          Compartilhar
+        </button>
+<button class="w-9 h-9 rounded-xl bg-white border border-[#E5E0D7] flex items-center justify-center text-neutral-600 hover:text-neutral-900 hover:bg-[#FAF8F5] shadow-sm transition">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+</button>
+</div>
+</div>
+</header>
+<!-- END: TopHeader -->
+<!-- BEGIN: MainContent -->
+<main class="max-w-[1360px] mx-auto px-6 py-10 w-full flex-1 flex flex-col gap-10">
+<!-- BEGIN: HeroCard -->
+<section class="bg-white rounded-3xl border border-[#EDE8E0] p-7 md:p-8 custom-card-shadow flex flex-col md:flex-row md:items-center justify-between gap-6">
+<!-- Left: Avatar & Meta -->
+<div class="flex items-center gap-6">
+<!-- Couple Avatar with ring -->
+<div class="relative w-20 h-20 rounded-full overflow-hidden p-1 ring-2 ring-[#EBE5DB]">
+<img alt="Camila &amp; Carlos" class="w-full h-full object-cover rounded-full object-[15%_6%]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAshNRQuMxURJeyB9g_Fa1bgOnUznCFW79vh5KsdSj1s0B5yv7PViOK0vInse2Klw1MR8cn-QMJ-V1gJVyrVlaoNEitMkj2CUTjr4vTAEDiERw92J5ZHwvNeCvIc0MPwuKDS0MmHwTWIz2OVnAtb4DNVfEkTkptESC6JY4PiTMijXDSP7ttn63VrgmdHAknY5n7-coVjZTttO20UyS6c8rphweCiebUOEwNFSB4vVkd9UwYAm9LHhll82_M2QJsyapXVF0">
+</div>
+<div class="flex flex-col gap-1.5">
+<!-- Active Status Badge -->
+<div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#EBF6EE] border border-[#CEEAD4] text-[#1E7E34] text-xs font-semibold w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-[#28A745] animate-pulse"></span>
+            Jornada Ativa
+          </div>
+<h2 class="font-serif text-3xl font-semibold text-neutral-900 tracking-tight">Camila &amp; Carlos</h2>
+<p class="text-xs text-neutral-500 font-normal">
+            Fotografia autoral por <span class="text-neutral-800 font-medium">Vinicius Cunha — Versa Visual</span>
+<span class="mx-2 text-neutral-300">•</span>
+            Rio das Ostras &amp; Costa Azul
+            <span class="mx-2 text-neutral-300">•</span>
+<span class="text-[#0E7A4A] font-medium">Espaço Lux</span>
+</p>
+</div>
+</div>
+<!-- Right: Three Metrics Blocks -->
+<div class="flex items-center gap-3">
+<!-- Metric 1: Fotos -->
+<div class="bg-[#FAF8F5] border border-[#EFEBE3] rounded-2xl w-24 h-24 flex flex-col items-center justify-center text-center">
+<span class="text-2xl font-bold font-sans text-neutral-900 leading-tight">58</span>
+<span class="text-[10px] tracking-wider text-neutral-500 font-semibold uppercase mt-0.5">Fotos</span>
+</div>
+<!-- Metric 2: Favoritas -->
+<div class="bg-[#FAF8F5] border border-[#EFEBE3] rounded-2xl w-24 h-24 flex flex-col items-center justify-center text-center">
+<span class="text-2xl font-bold font-sans text-[#E03E3E] leading-tight">1</span>
+<span class="text-[10px] tracking-wider text-neutral-500 font-semibold uppercase mt-0.5">Favoritas</span>
+</div>
+<!-- Metric 3: Altar -->
+<div class="bg-[#FAF8F5] border border-[#EFEBE3] rounded-2xl w-24 h-24 flex flex-col items-center justify-center text-center">
+<span class="text-2xl font-bold font-sans text-neutral-900 leading-tight">0/15</span>
+<span class="text-[10px] tracking-wider text-neutral-500 font-semibold uppercase mt-0.5">Altar</span>
+</div>
+</div>
+</section>
+<!-- END: HeroCard -->
+<!-- BEGIN: CadernoEditorialHeader -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-6 pt-2">
+<div class="max-w-2xl flex flex-col gap-2">
+<span class="text-xs uppercase tracking-wider font-semibold text-neutral-400 flex items-center gap-2">
+<span class="text-neutral-500">•</span> CADERNO EDITORIAL DE FOTOGRAFIA
+        </span>
+<h3 class="font-serif text-4xl text-neutral-900 font-semibold tracking-tight">Visão Geral</h3>
+<p class="text-sm text-neutral-600 leading-relaxed font-light mt-1">
+          Este é o espaço de curadoria visual e planejamento da fotografia do casal. Um hub leve para reunir o que Camila e Carlos gostam, orientar o olhar da equipe e alinhar cada detalhe da cobertura com leveza.
+        </p>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<button class="bg-[#171717] hover:bg-black text-white px-5 py-2.5 rounded-full text-xs font-medium flex items-center gap-2 shadow-sm transition">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<rect height="7" rx="1.5" stroke-width="1.8" width="7" x="3" y="3"></rect>
+<rect height="7" rx="1.5" stroke-width="1.8" width="7" x="14" y="3"></rect>
+<rect height="7" rx="1.5" stroke-width="1.8" width="7" x="14" y="14"></rect>
+<rect height="7" rx="1.5" stroke-width="1.8" width="7" x="3" y="14"></rect>
+</svg>
+          Explorar Referências
+          <span class="text-sm">→</span>
+</button>
+<button class="bg-white hover:bg-neutral-50 text-neutral-800 border border-[#E2DCCE] px-4 py-2.5 rounded-full text-xs font-medium flex items-center gap-2 shadow-sm transition">
+<svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+          Resumo do Roteiro (PDF)
+        </button>
+<button class="w-9 h-9 rounded-full bg-white border border-[#E2DCCE] flex items-center justify-center text-neutral-600 hover:text-neutral-900 shadow-sm transition">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+</button>
+</div>
+</section>
+<!-- END: CadernoEditorialHeader -->
+<!-- BEGIN: AreasDePlanejamento -->
+<section class="flex flex-col gap-5">
+<div>
+<h4 class="font-serif text-2xl font-semibold text-neutral-900">Áreas de Planejamento</h4>
+<p class="text-xs text-neutral-500 font-light mt-0.5">Acesse a curadoria visual, a estrutura de cobertura e os locais confirmados</p>
+</div>
+<!-- 3 Columns Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1: Referências Visuais -->
+<div class="bg-white rounded-2xl border border-[#EDE8E0] p-6 custom-card-shadow flex flex-col justify-between hover:border-neutral-300 transition-all group">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="w-10 h-10 rounded-xl bg-[#FAF8F5] border border-[#EFEBE3] flex items-center justify-center text-neutral-700">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<rect height="7" rx="1.5" stroke-width="1.8" width="7" x="3" y="3"></rect>
+<rect height="7" rx="1.5" stroke-width="1.8" width="7" x="14" y="3"></rect>
+<rect height="7" rx="1.5" stroke-width="1.8" width="7" x="14" y="14"></rect>
+<rect height="7" rx="1.5" stroke-width="1.8" width="7" x="3" y="14"></rect>
+</svg>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#FCE8E8] text-[#D93025] text-xs font-semibold">
+<svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+                1 favoritas
+              </span>
+</div>
+<h5 class="font-serif text-lg font-semibold text-neutral-900 mb-2">Referências Visuais</h5>
+<p class="text-xs text-neutral-600 leading-relaxed font-light">
+              Galeria de fotografias, seleção de favoritas e suas observações com suas próprias palavras para orientar o olhar da equipe.
+            </p>
+</div>
+<div class="mt-8 pt-4 border-t border-[#F2EEE9] flex items-center justify-between text-xs">
+<span class="text-neutral-500 font-light">58 fotos no acervo</span>
+<span class="font-medium text-neutral-800 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+              Abrir galeria →
+            </span>
+</div>
+</div>
+<!-- Card 2: Roteiro da Cobertura -->
+<div class="bg-white rounded-2xl border border-[#EDE8E0] p-6 custom-card-shadow flex flex-col justify-between hover:border-neutral-300 transition-all group">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="w-10 h-10 rounded-xl bg-[#FAF8F5] border border-[#EFEBE3] flex items-center justify-center text-neutral-700">
+<svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9" stroke-width="1.8"></circle>
+<path d="M12 7v5l3 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-neutral-100 text-neutral-600 text-xs font-medium">
+                0/15 fotos
+              </span>
+</div>
+<h5 class="font-serif text-lg font-semibold text-neutral-900 mb-2">Roteiro da Cobertura</h5>
+<p class="text-xs text-neutral-600 leading-relaxed font-light">
+              O que será fotografado, como a equipe se divide (Vinicius + 2º fotógrafo) e a lista de fotos protocolares de família no altar.
+            </p>
+</div>
+<div class="mt-8 pt-4 border-t border-[#F2EEE9] flex items-center justify-between text-xs">
+<span class="text-neutral-500 font-light">Prioridade aos avós</span>
+<span class="font-medium text-neutral-800 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+              Ver roteiro →
+            </span>
+</div>
+</div>
+<!-- Card 3: Locais & Contatos -->
+<div class="bg-white rounded-2xl border border-[#EDE8E0] p-6 custom-card-shadow flex flex-col justify-between hover:border-neutral-300 transition-all group">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="w-10 h-10 rounded-xl bg-[#FAF8F5] border border-[#EFEBE3] flex items-center justify-center text-neutral-700">
+<svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-[#EBF6EE] text-[#0E7A4A] text-xs font-medium">
+                Espaço Lux
+              </span>
+</div>
+<h5 class="font-serif text-lg font-semibold text-neutral-900 mb-2">Locais &amp; Contatos</h5>
+<p class="text-xs text-neutral-600 leading-relaxed font-light">
+              Espaço Lux em Rio das Ostras e contato direto com a Versa Visual. Rotas no Google Maps e Waze com 1 clique.
+            </p>
+</div>
+<div class="mt-8 pt-4 border-t border-[#F2EEE9] flex items-center justify-between text-xs">
+<span class="text-neutral-500 font-light">Rotas e WhatsApp</span>
+<span class="font-medium text-neutral-800 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+              Consultar locais →
+            </span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: AreasDePlanejamento -->
+<!-- BEGIN: PreWeddingBanner -->
+<section class="bg-white rounded-2xl border border-[#EDE8E0] p-7 md:p-8 custom-card-shadow flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="max-w-3xl flex flex-col gap-2">
+<span class="text-[11px] font-semibold text-amber-700 uppercase tracking-wider flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="4" stroke-width="1.8"></circle>
+<path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+          ENSAIO PRÉ-WEDDING
+        </span>
+<h4 class="font-serif text-2xl font-semibold text-neutral-900">Bar Thunder &amp; Falésias de Costa Azul</h4>
+<p class="text-xs text-neutral-600 leading-relaxed font-light mt-0.5">
+          O ensaio de Camila &amp; Carlos foi planejado em dois momentos especiais: a textura autêntica e descontraída do Bar Thunder, seguida do entardecer nas falésias e orla da Costa Azul com luz suave e vento natural.
+        </p>
+<p class="text-xs italic text-neutral-400 font-light">
+          * A moto Harley-Davidson de Carlos poderá integrar os registros conforme o desejo do casal.
+        </p>
+</div>
+<div class="shrink-0">
+<button class="bg-[#FAF8F5] hover:bg-neutral-100 border border-[#E2DCCE] text-neutral-900 text-xs font-medium px-4 py-2.5 rounded-xl flex items-center gap-1.5 transition">
+          Ver Fotos do Ensaio
+          <span class="text-sm">→</span>
+</button>
+</div>
+</section>
+<!-- END: PreWeddingBanner -->
+<!-- BEGIN: ProximosPassos -->
+<section class="bg-white rounded-3xl border border-[#EDE8E0] p-7 md:p-8 custom-card-shadow flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<div>
+<h4 class="font-serif text-2xl font-semibold text-neutral-900">Próximos Passos com a Equipe</h4>
+<p class="text-xs text-neutral-500 font-light mt-0.5">Como transformamos as preferências do casal em direção prática de cobertura</p>
+</div>
+<div class="w-8 h-8 rounded-full border border-neutral-300 flex items-center justify-center text-neutral-500">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 14.5V16a1 1 0 011-1h1.5a1.5 1.5 0 000-3H14a2 2 0 01-2-2V8.5a1.5 1.5 0 013 0V9m-3 5h.01" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+</div>
+</div>
+<!-- 4 Step Boxes -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Step 1 -->
+<div class="bg-[#FAF8F5] rounded-xl p-5 border border-[#EDE8DF] flex flex-col gap-2.5">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-full bg-neutral-200 text-neutral-700 text-[10px] font-semibold flex items-center justify-center">1</span>
+<span class="text-xs font-semibold text-neutral-800">Curadoria da Noiva</span>
+</div>
+<p class="text-[11px] text-neutral-600 leading-relaxed font-light">
+            Camila escolhe suas fotos preferidas e anota o que mais gosta (poses, enquadramentos, luz ou movimento).
+          </p>
+</div>
+<!-- Step 2 -->
+<div class="bg-[#FAF8F5] rounded-xl p-5 border border-[#EDE8DF] flex flex-col gap-2.5">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-full bg-neutral-200 text-neutral-700 text-[10px] font-semibold flex items-center justify-center">2</span>
+<span class="text-xs font-semibold text-neutral-800">Ensaio Pré-Wedding</span>
+</div>
+<p class="text-[11px] text-neutral-600 leading-relaxed font-light">
+            Definição de figurinos leves e horário do ensaio no Bar Thunder e nas Falésias para aproveitar a luz natural.
+          </p>
+</div>
+<!-- Step 3 -->
+<div class="bg-[#FAF8F5] rounded-xl p-5 border border-[#EDE8DF] flex flex-col gap-2.5">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-full bg-neutral-200 text-neutral-700 text-[10px] font-semibold flex items-center justify-center">3</span>
+<span class="text-xs font-semibold text-neutral-800">Fotos de Família</span>
+</div>
+<p class="text-[11px] text-neutral-600 leading-relaxed font-light">
+            Confirmação das fotos protocolares no altar com prioridade para avós e pessoas com mobilidade reduzida.
+          </p>
+</div>
+<!-- Step 4 -->
+<div class="bg-[#FAF8F5] rounded-xl p-5 border border-[#EDE8DF] flex flex-col gap-2.5">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-full bg-neutral-200 text-neutral-700 text-[10px] font-semibold flex items-center justify-center">4</span>
+<span class="text-xs font-semibold text-neutral-800">O Grande Dia</span>
+</div>
+<p class="text-[11px] text-neutral-600 leading-relaxed font-light">
+            Cobertura completa no Espaço Lux: Vinicius com a noiva e momentos principais; segundo fotógrafo com o noivo e detalhes.
+          </p>
+</div>
+</div>
+</section>
+<!-- END: ProximosPassos -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: Footer -->
+<footer class="w-full bg-[#FAF8F5] border-t border-[#ECE7DE] mt-12 py-7">
+<div class="max-w-[1360px] mx-auto px-6 flex flex-col gap-4">
+<div class="flex flex-col md:flex-row items-center justify-between text-xs text-neutral-500 gap-3 font-light">
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center font-serif text-[9px] font-bold">V</div>
+<span class="font-medium text-neutral-800">Versa Visual</span>
+<span class="text-neutral-300">•</span>
+<span>Direção Fotográfica de Casamento</span>
+<span class="text-neutral-300">•</span>
+<span class="text-neutral-600">@v1ncsc</span>
+</div>
+<div class="flex items-center gap-4 text-xs">
+<span class="flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+            Rio das Ostras &amp; Costa Azul, RJ
+          </span>
+<span class="flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7c0-2-1-3-3-3H7C5 4 4 5 4 7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+<path d="M9 12h6m-3-3v6" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+            Sincronizado Localmente
+          </span>
+</div>
+</div>
+<div class="text-center border-t border-[#F0EBE2] pt-4">
+<p class="text-[11px] text-neutral-400 font-light">
+          Planejamento Executivo &amp; Moodboard Editorial · Camila &amp; Carlos · Versa Visual (@v1ncsc)
+        </p>
+</div>
+</div>
+</footer>
+<!-- END: Footer -->
+</body></html>
