@@ -152,7 +152,7 @@ export function LightboxModal({
             e.stopPropagation();
             handlePrev();
           }}
-          className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 size-11 sm:size-12 rounded-full bg-surface/90 hover:bg-surface text-on-surface flex items-center justify-center transition-all duration-200 shadow-md hover:scale-105 active:scale-92 focus:outline-none"
+          className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 size-11 sm:size-12 rounded-full bg-surface/90 hover:bg-surface text-on-surface flex items-center justify-center transition-all duration-200 shadow-md hover:scale-105 active:scale-92 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
           aria-label="Foto anterior"
         >
           <ChevronLeft className="size-6" />
@@ -164,7 +164,7 @@ export function LightboxModal({
             e.stopPropagation();
             handleNext();
           }}
-          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 size-11 sm:size-12 rounded-full bg-surface/90 hover:bg-surface text-on-surface flex items-center justify-center transition-all duration-200 shadow-md hover:scale-105 active:scale-92 focus:outline-none"
+          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 size-11 sm:size-12 rounded-full bg-surface/90 hover:bg-surface text-on-surface flex items-center justify-center transition-all duration-200 shadow-md hover:scale-105 active:scale-92 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
           aria-label="Próxima foto"
         >
           <ChevronRight className="size-6" />
@@ -214,11 +214,11 @@ export function LightboxModal({
                 </div>
               )}
 
-              {/* Campo Editável: O que ela gosta na referência */}
+              {/* Campo Central Conforme PRD: "O que você gosta nesta foto?" */}
               <div className="border-t border-outline-variant/20 pt-3 flex flex-col gap-2">
                 <label className="text-xs font-bold text-on-surface flex items-center gap-1.5">
                   <MessageSquareQuote className="size-3.5 text-secondary" />
-                  <span>O que você mais gosta nesta referência:</span>
+                  <span>O que você gosta nesta foto?</span>
                 </label>
                 <textarea
                   value={commentDraft}
@@ -226,9 +226,9 @@ export function LightboxModal({
                     setCommentDraft(e.target.value);
                     setIsSaved(false);
                   }}
-                  placeholder="Escreva aqui o que você amou nesta referência (a conexão, o estilo do vestido, a luz suave, a pose espontânea...)"
+                  placeholder="Escreva com suas próprias palavras o que você gosta nesta foto (a conexão, a luz, o vestido, a pose espontânea...)"
                   rows={3}
-                  className="w-full text-xs p-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-1 focus:ring-primary resize-none leading-relaxed"
+                  className="w-full text-xs p-3 rounded-xl bg-surface-container-low dark:bg-surface-container border border-outline-variant/30 text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none leading-relaxed transition-all"
                 />
 
                 {onSaveNote && (
@@ -242,7 +242,7 @@ export function LightboxModal({
                     }`}
                   >
                     <Check className="size-3.5" />
-                    <span>{isSaved ? "Salvo!" : "Salvar Observação"}</span>
+                    <span>{isSaved ? "Salvo!" : "Salvar"}</span>
                   </button>
                 )}
               </div>

@@ -135,24 +135,24 @@ export function AddItemDialog({ isOpen, onClose, onAdd }: AddItemDialogProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleReset}>
-      <DialogContent className="sm:max-w-[620px] max-h-[92vh] overflow-y-auto bg-surface text-on-surface border border-outline-variant/40 rounded-2xl p-0 shadow-lg">
+      <DialogContent className="sm:max-w-[620px] max-h-[92vh] overflow-y-auto bg-surface text-on-surface border border-outline-variant/30 rounded-3xl p-0 shadow-airbnb-card">
         {/* Top Bar */}
-        <div className="sticky top-0 z-20 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/20 px-5 py-3.5 flex items-center justify-between">
+        <div className="sticky top-0 z-20 bg-surface/95 backdrop-blur-xl border-b border-outline-variant/20 px-5 py-3.5 flex items-center justify-between">
           <button
             type="button"
             onClick={handleReset}
-            className="text-on-surface-variant hover:text-on-surface font-label-md text-xs uppercase tracking-wider transition-colors"
+            className="text-on-surface-variant hover:text-on-surface font-body-md text-xs font-semibold uppercase tracking-wider transition-colors px-2 py-1 rounded-lg hover:bg-surface-container"
           >
             Fechar
           </button>
-          <span className="font-label-sm text-[11px] uppercase tracking-widest text-secondary font-semibold">
+          <span className="font-body-md text-[11px] uppercase tracking-widest text-secondary font-bold">
             Moodboard de Referências
           </span>
           <button
             type="button"
             onClick={() => handleSubmit()}
             disabled={!title.trim() || !imageUrl.trim() || isCompressing}
-            className="bg-primary text-on-primary font-label-md text-xs px-4 py-1.5 rounded-lg transition-transform active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed shadow-xs font-semibold"
+            className="bg-primary text-on-primary font-body-md text-xs px-4 py-2 rounded-xl transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed shadow-xs font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
           >
             Salvar
           </button>
@@ -161,7 +161,7 @@ export function AddItemDialog({ isOpen, onClose, onAdd }: AddItemDialogProps) {
         <div className="p-6 flex flex-col gap-5">
           {/* Header Title & Subtitle */}
           <div>
-            <h2 className="font-headline-md text-2xl text-on-surface tracking-tight">
+            <h2 className="font-headline-md text-2xl text-on-surface font-bold tracking-tight">
               Nova Referência
             </h2>
             <p className="font-body-md text-xs text-on-surface-variant mt-1">

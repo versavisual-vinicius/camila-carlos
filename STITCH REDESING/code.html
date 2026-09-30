@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jornada de Casamento — Camila & Carlos (Desktop)</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-bright": "#fbf9f8",
+            "tertiary-container": "#008558",
+            "tertiary-fixed-dim": "#62dca3",
+            "on-primary-fixed-variant": "#920029",
+            "primary-fixed": "#ffdada",
+            "error-red": "#c13515",
+            "on-tertiary-fixed": "#002113",
+            "surface-container-lowest": "#ffffff",
+            "primary": "#ba0036",
+            "luxe-purple": "#460479",
+            "on-background": "#1b1c1c",
+            "error": "#ba1a1a",
+            "on-primary-fixed": "#40000d",
+            "primary-fixed-dim": "#ffb2b6",
+            "on-primary": "#ffffff",
+            "secondary-fixed-dim": "#c8c6c5",
+            "surface-tint": "#be0038",
+            "error-container": "#ffdad6",
+            "on-secondary-container": "#636262",
+            "outline-variant": "#e5bdbe",
+            "inverse-primary": "#ffb2b6",
+            "primary-container": "#e21e4a",
+            "tertiary-fixed": "#80f9bd",
+            "on-error-container": "#93000a",
+            "rausch-deep": "#e00b41",
+            "surface-container-high": "#e9e8e7",
+            "on-primary-container": "#fffbff",
+            "on-error": "#ffffff",
+            "plus-magenta": "#92174d",
+            "on-secondary": "#ffffff",
+            "pure-white": "#ffffff",
+            "surface": "#fbf9f8",
+            "inverse-surface": "#303031",
+            "surface-dim": "#dbdad9",
+            "on-surface": "#1b1c1c",
+            "outline": "#906f70",
+            "legal-blue": "#428bff",
+            "secondary-fixed": "#e5e2e1",
+            "on-secondary-fixed-variant": "#474746",
+            "border-gray": "#c1c1c1",
+            "surface-light": "#f2f2f2",
+            "surface-variant": "#e4e2e2",
+            "on-tertiary": "#ffffff",
+            "text-focused": "#3f3f3f",
+            "on-tertiary-fixed-variant": "#005234",
+            "surface-container-low": "#f5f3f3",
+            "error-dark": "#b32505",
+            "background": "#fbf9f8",
+            "surface-container": "#efeded",
+            "surface-container-highest": "#e4e2e2",
+            "secondary-container": "#e2dfde",
+            "secondary": "#5f5e5e",
+            "on-surface-variant": "#5c3f41",
+            "on-secondary-fixed": "#1b1c1c",
+            "tertiary": "#006a45",
+            "inverse-on-surface": "#f2f0f0",
+            "on-tertiary-container": "#f6fff6"
+          },
+          boxShadow: {
+            'airbnb-card': '0 0 0 1px rgba(0,0,0,0.04), 0 2px 6px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06)',
+            'airbnb-header': '0 1px 0 0 rgba(0,0,0,0.06)',
+            'airbnb-float': '0 6px 20px rgba(0,0,0,0.08)'
+          }
+        }
+      }
+    }
+</script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .custom-scroll {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+</style>
+</head>
+<body class="bg-[#fcf8f9] text-on-surface font-['Plus_Jakarta_Sans',sans-serif] antialiased selection:bg-primary-fixed selection:text-on-primary-fixed min-h-screen">
+
+  <!-- Desktop Top Navigation Bar (Fidelidade do App + estilo Airbnb) -->
+  <header class="sticky top-0 z-40 w-full border-b border-[#f4e6e9] bg-pure-white/95 backdrop-blur-md shadow-airbnb-header">
+    <div class="max-w-7xl mx-auto px-6 h-18 py-3.5 flex items-center justify-between">
+      <!-- Brand & Project Identity -->
+      <div class="flex items-center gap-4">
+        <div class="flex size-10 items-center justify-center rounded-full bg-primary-fixed/40 text-primary">
+          <span class="material-symbols-outlined text-[22px]">favorite</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-base font-bold text-on-surface leading-tight">Camila & Carlos</h1>
+            <span class="inline-flex items-center gap-1 rounded-full bg-primary-fixed/50 px-2 py-0.5 text-[10px] font-bold text-primary">
+              <span class="size-1.5 rounded-full bg-primary animate-pulse"></span>
+              Jornada Ativa
+            </span>
+          </div>
+          <p class="text-xs text-secondary font-medium">Fotografia oficial por <span class="text-on-surface font-semibold">Vinicius Foto</span> • São João</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs (Idêntico às 5 abas do app mobile) -->
+      <nav class="hidden md:flex items-center gap-1 bg-[#fcf8f9] p-1.5 rounded-full border border-[#f4e6e9]">
+        <a href="#" class="flex items-center gap-2 px-4 py-2 rounded-full bg-pure-white text-primary font-bold text-xs shadow-sm">
+          <svg fill="currentColor" height="18px" viewBox="0 0 256 256" width="18px" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm51.58,57.79-32,64a4.08,4.08,0,0,1-1.79,1.79l-64,32a4,4,0,0,1-5.37-5.37l32-64a4.08,4.08,0,0,1,1.79-1.79l64-32A4,4,0,0,1,179.58,81.79Z"></path>
+          </svg>
+          Jornada
+        </a>
+        <a href="#" class="flex items-center gap-2 px-4 py-2 rounded-full text-[#a14556] hover:text-primary hover:bg-pure-white/60 font-semibold text-xs transition">
+          <svg fill="currentColor" height="18px" viewBox="0 0 256 256" width="18px" xmlns="http://www.w3.org/2000/svg">
+            <path d="M184,32H72A16,16,0,0,0,56,48V224a8,8,0,0,0,12.24,6.78L128,193.43l59.77,37.35A8,8,0,0,0,200,224V48A16,16,0,0,0,184,32Zm0,16V161.57l-51.77-32.35a8,8,0,0,0-8.48,0L72,161.56V48ZM132.23,177.22a8,8,0,0,0-8.48,0L72,209.57V180.43l56-35,56,35v29.14Z"></path>
+          </svg>
+          Referências
+        </a>
+        <a href="#" class="flex items-center gap-2 px-4 py-2 rounded-full text-[#a14556] hover:text-primary hover:bg-pure-white/60 font-semibold text-xs transition">
+          <svg fill="currentColor" height="18px" viewBox="0 0 256 256" width="18px" xmlns="http://www.w3.org/2000/svg">
+            <path d="M208,56H180.28L166.65,35.56A8,8,0,0,0,160,32H96a8,8,0,0,0-6.65,3.56L75.71,56H48A24,24,0,0,0,24,80V192a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V80A24,24,0,0,0,208,56Zm8,136a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V80a8,8,0,0,1,8-8H80a8,8,0,0,0,6.66-3.56L100.28,48h55.43l13.63,20.44A8,8,0,0,0,176,72h32a8,8,0,0,1,8,8ZM128,88a44,44,0,1,0,44,44A44.05,44.05,0,0,0,128,88Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,128,160Z"></path>
+          </svg>
+          Préwedding
+        </a>
+        <a href="#" class="flex items-center gap-2 px-4 py-2 rounded-full text-[#a14556] hover:text-primary hover:bg-pure-white/60 font-semibold text-xs transition">
+          <svg fill="currentColor" height="18px" viewBox="0 0 256 256" width="18px" xmlns="http://www.w3.org/2000/svg">
+            <path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-96-88v64a8,8,0,0,1-16,0V132.94l-4.42,2.22a8,8,0,0,1-7.16-14.32l16-8A8,8,0,0,1,112,120Zm59.16,30.45L152,176h16a8,8,0,0,1,0,16H136a8,8,0,0,1-6.4-12.8l28.78-38.37A8,8,0,1,0,145.07,132a8,8,0,1,1-13.85-8A24,24,0,0,1,176,136,23.76,23.76,0,0,1,171.16,150.45Z"></path>
+          </svg>
+          Roteiro
+        </a>
+        <a href="#" class="flex items-center gap-2 px-4 py-2 rounded-full text-[#a14556] hover:text-primary hover:bg-pure-white/60 font-semibold text-xs transition">
+          <svg fill="currentColor" height="18px" viewBox="0 0 256 256" width="18px" xmlns="http://www.w3.org/2000/svg">
+            <path d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,98.7a8,8,0,0,1-11.07-2.33A79.83,79.83,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,206.7Z"></path>
+          </svg>
+          Fornecedores
+        </a>
+      </nav>
+
+      <!-- Action Buttons Desktop -->
+      <div class="flex items-center gap-3">
+        <button class="inline-flex items-center gap-2 rounded-xl border border-surface-container bg-pure-white py-2 px-3.5 text-xs font-semibold text-on-surface hover:bg-surface-light shadow-sm transition">
+          <span class="material-symbols-outlined text-primary text-[18px]">download</span>
+          Exportar Roteiro
+        </button>
+        <button class="inline-flex items-center gap-2 rounded-xl bg-rausch-deep py-2 px-3.5 text-xs font-semibold text-pure-white hover:bg-primary transition shadow-sm">
+          <span class="material-symbols-outlined text-[18px]">share</span>
+          Compartilhar
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout (Desktop Grid) -->
+  <main class="max-w-7xl mx-auto px-6 py-8">
+    
+    <!-- Top Hero Banner: Perfil e Contadores em Linha -->
+    <div class="rounded-3xl border border-[#e5e5e5] bg-pure-white p-6 shadow-airbnb-card mb-8">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <!-- Couple & Photographer Identification -->
+        <div class="flex items-center gap-5">
+          <div class="relative size-20 shrink-0 overflow-hidden rounded-full ring-2 ring-primary/20 shadow-inner">
+            <img class="h-full w-full object-cover" data-alt="Editorial candid medium close-up photo of bride Camila and groom Carlos smiling tenderly together in warm golden-hour lighting. The background reveals rustic historic architectural arches of São João with lush bougainvillea accents. Crisp clean daylight aesthetic adhering to airy bright luxury wedding editorial photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbN9_K73Rs_II9yZb59yryRd8KDttCORIqEoYDjzjla0itDr2FjGtY01LAGwiuRb6iyXZ7zJpgK0309Puz7SyXXr6fDIGOtf2CyOPT0K5mFJ4KfmHmOfv3DLGUODbyUHx3UlW1aMbElDLX54qycxoXoaaGaMOVZNh5RuofSjOyeAS0M3OidX-XehmWUpges_ou_b_C-fwjR3-_KaRr0Qvh0932cuU3KBHwHdM3IU4yEc39dJgjxg"/>
+          </div>
+          <div>
+            <div class="inline-flex items-center gap-1.5 rounded-full bg-primary-fixed/40 px-3 py-0.5 text-xs font-semibold text-primary mb-1.5">
+              <span class="size-2 rounded-full bg-primary animate-pulse"></span>
+              Jornada Ativa
+            </div>
+            <h2 class="text-2xl font-bold tracking-tight text-on-surface">Camila & Carlos</h2>
+            <div class="flex flex-wrap items-center gap-x-3 text-xs text-secondary mt-1">
+              <span>Fotografia oficial por <strong class="text-on-surface">Vinicius Foto</strong></span>
+              <span>•</span>
+              <span>Casamento em São João</span>
+              <span>•</span>
+              <span class="text-tertiary font-semibold">Cerimônia prevista para Outubro</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Triple Metric Counters (Desktop Row) -->
+        <div class="grid grid-cols-3 gap-4 min-w-[380px]">
+          <div class="flex flex-col items-center justify-center rounded-2xl border border-[#e5e5e5] bg-[#faf8f8]/60 py-3.5 px-4 text-center shadow-sm">
+            <span class="text-3xl font-extrabold tracking-tight text-on-surface">118</span>
+            <span class="mt-1 text-[11px] font-bold uppercase tracking-wider text-secondary">DIAS</span>
+          </div>
+          <div class="flex flex-col items-center justify-center rounded-2xl border border-[#e5e5e5] bg-[#faf8f8]/60 py-3.5 px-4 text-center shadow-sm">
+            <span class="text-3xl font-extrabold tracking-tight text-rausch-deep">14</span>
+            <span class="mt-1 text-[11px] font-bold uppercase tracking-wider text-secondary">SEMANAS</span>
+          </div>
+          <div class="flex flex-col items-center justify-center rounded-2xl border border-[#e5e5e5] bg-[#faf8f8]/60 py-3.5 px-4 text-center shadow-sm">
+            <span class="text-3xl font-extrabold tracking-tight text-on-surface">1/15</span>
+            <span class="mt-1 text-[11px] font-bold uppercase tracking-wider text-secondary">AÇÕES</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Layout Grid: 2 Colunas (Esquerda: Marcos 01 a 05 com Checklist Integrado; Direita: Painel Lateral com Inspirações & Resumo) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Coluna Principal (Marcos Integrados com Checklist) - 8 colunas -->
+      <div class="lg:col-span-8 space-y-6">
+        
+        <!-- Header da Seção de Marcos -->
+        <div class="flex items-center justify-between pb-1">
+          <div>
+            <h3 class="text-xl font-bold tracking-tight text-on-surface">Passos até o altar <span class="text-secondary font-semibold text-base">(01 a 05)</span></h3>
+            <p class="text-xs text-secondary mt-0.5">Cronograma estratégico integrado com checklist operacional de Camila & Carlos e Vinicius Foto</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-tertiary-container/10 text-tertiary">
+              2 concluídos
+            </span>
+          </div>
+        </div>
+
+        <!-- LISTA DOS 5 MARCOS INTEGRADOS -->
+
+        <!-- Card 01: Igreja em São João Oficializada -->
+        <div class="rounded-3xl border border-[#e5e5e5] bg-pure-white p-6 shadow-airbnb-card space-y-5 transition hover:shadow-md">
+          <div class="flex items-start gap-4">
+            <div class="flex size-12 shrink-0 items-center justify-center rounded-full border border-gray-100 bg-[#f7f7f7] text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[26px]">church</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between gap-2">
+                <h4 class="text-lg font-bold text-on-surface leading-snug">Igreja em São João Oficializada</h4>
+                <span class="shrink-0 text-xs font-semibold text-tertiary bg-tertiary-container/10 px-3 py-0.5 rounded-full">Pronto</span>
+              </div>
+              <p class="text-xs text-secondary mt-1 leading-relaxed">Cenário sacramentado. O roteiro agora orbita a atmosfera solene e acolhedora do templo.</p>
+            </div>
+          </div>
+
+          <!-- Tags de Contexto do Marco 01 -->
+          <div class="flex flex-wrap gap-2 pt-2 border-t border-surface-container/60">
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-pure-white px-3.5 py-1 text-xs font-medium text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-rausch-deep">location_on</span>
+              Locação Costa Azul
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-pure-white px-3.5 py-1 text-xs font-medium text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-rausch-deep">wb_twilight</span>
+              Tábua de Marés
+            </span>
+          </div>
+
+          <!-- Checklist Integrado Marco 01 -->
+          <div class="space-y-2.5 pt-3 border-t border-surface-container/60">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-bold uppercase tracking-wider text-secondary">Ações do Marco</span>
+              <span class="text-xs font-semibold text-tertiary">1 de 3 concluído</span>
+            </div>
+            
+            <label class="flex items-center justify-between gap-4 rounded-xl p-3 border border-surface-container bg-surface-bright/60 transition cursor-pointer hover:bg-surface-bright">
+              <div class="flex items-start gap-3 min-w-0">
+                <input checked="" class="mt-0.5 size-4 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+                <div>
+                  <p class="text-xs font-medium text-secondary line-through">1. Reserva da Paróquia de São João confirmada</p>
+                  <p class="text-[11px] text-secondary/80 mt-0.5">Concluído com protocolo da secretaria</p>
+                </div>
+              </div>
+              <span class="shrink-0 text-[11px] text-tertiary font-semibold bg-tertiary-container/10 px-2.5 py-0.5 rounded-md">Noivos C&C</span>
+            </label>
+
+            <label class="flex items-center justify-between gap-4 rounded-xl p-3 border border-surface-container bg-pure-white hover:bg-surface-bright transition cursor-pointer">
+              <div class="flex items-start gap-3 min-w-0">
+                <input class="mt-0.5 size-4 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+                <div>
+                  <p class="text-xs font-medium text-on-surface">4. Visita técnica do fotógrafo na igreja São João</p>
+                  <p class="text-[11px] text-secondary mt-0.5">Checagem de temperatura de cor e pontos de luz</p>
+                </div>
+              </div>
+              <span class="shrink-0 text-[11px] text-primary font-semibold bg-primary-fixed/40 px-2.5 py-0.5 rounded-md">Vinicius Foto</span>
+            </label>
+
+            <label class="flex items-center justify-between gap-4 rounded-xl p-3 border border-surface-container bg-pure-white hover:bg-surface-bright transition cursor-pointer">
+              <div class="flex items-start gap-3 min-w-0">
+                <input class="mt-0.5 size-4 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+                <div>
+                  <p class="text-xs font-medium text-on-surface">Confirmação de regras de fotografia e som na paróquia</p>
+                  <p class="text-[11px] text-secondary mt-0.5">Verificação de permissão de uso de flash e limites de aproximação</p>
+                </div>
+              </div>
+              <span class="shrink-0 text-[11px] text-rausch-deep font-semibold bg-primary-fixed/40 px-2.5 py-0.5 rounded-md">Noivos C&C</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Card 02: Acolhimento Estratégico das Famílias -->
+        <div class="rounded-3xl border border-[#e5e5e5] bg-pure-white p-6 shadow-airbnb-card space-y-5 transition hover:shadow-md">
+          <div class="flex items-start gap-4">
+            <div class="flex size-12 shrink-0 items-center justify-center rounded-full border border-gray-100 bg-[#f7f7f7] text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[26px]">family_restroom</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between gap-2">
+                <h4 class="text-lg font-bold text-on-surface leading-snug">Acolhimento Estratégico das Famílias</h4>
+                <span class="shrink-0 text-xs font-semibold text-rausch-deep bg-primary-fixed/60 px-3 py-0.5 rounded-full">Em foco</span>
+              </div>
+              <p class="text-xs text-secondary mt-1 leading-relaxed">Ajuste de assentos para pais separados e garantia de mobilidade e conforto prioritário para a avó.</p>
+            </div>
+          </div>
+
+          <!-- Tags de Contexto Marco 02 -->
+          <div class="flex flex-wrap gap-2 pt-2 border-t border-surface-container/60">
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-pure-white px-3.5 py-1 text-xs font-medium text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-rausch-deep">accessible</span>
+              Mobilidade Avó
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-pure-white px-3.5 py-1 text-xs font-medium text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-rausch-deep">diversity_1</span>
+              Pai & Mãe
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-pure-white px-3.5 py-1 text-xs font-medium text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-rausch-deep">event_seat</span>
+              Bancos da Nave
+            </span>
+          </div>
+
+          <!-- Checklist Integrado Marco 02 -->
+          <div class="space-y-2.5 pt-3 border-t border-surface-container/60">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-bold uppercase tracking-wider text-rausch-deep">Prioridades Imediatas (Prazo 7 a 15 dias)</span>
+              <span class="text-xs font-semibold text-secondary">0 de 3 concluído</span>
+            </div>
+
+            <label class="flex items-center justify-between gap-4 rounded-xl p-3 border border-surface-container bg-pure-white hover:bg-surface-bright transition cursor-pointer">
+              <div class="flex items-start gap-3 min-w-0">
+                <input class="mt-0.5 size-4 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+                <div>
+                  <p class="text-xs font-medium text-on-surface">2. Definir itinerário do cortejo para famílias e pais separados</p>
+                  <p class="text-[11px] text-secondary mt-0.5">Posicionamento harmonioso nos bancos da frente sem constrangimentos</p>
+                </div>
+              </div>
+              <span class="shrink-0 text-[11px] text-rausch-deep font-semibold bg-primary-fixed/40 px-2.5 py-0.5 rounded-md">Noivos C&C</span>
+            </label>
+
+            <label class="flex items-center justify-between gap-4 rounded-xl p-3 border border-surface-container bg-pure-white hover:bg-surface-bright transition cursor-pointer">
+              <div class="flex items-start gap-3 min-w-0">
+                <input class="mt-0.5 size-4 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+                <div>
+                  <p class="text-xs font-medium text-on-surface">3. Avaliação da rampa de mobilidade e poltrona reservada para a avó na igreja</p>
+                  <p class="text-[11px] text-secondary mt-0.5">Garantir acesso sem degraus até o 1º banco com apoio do cerimonial</p>
+                </div>
+              </div>
+              <span class="shrink-0 text-[11px] text-rausch-deep font-semibold bg-primary-fixed/40 px-2.5 py-0.5 rounded-md">Noivos C&C</span>
+            </label>
+
+            <label class="flex items-center justify-between gap-4 rounded-xl p-3 border border-surface-container bg-pure-white hover:bg-surface-bright transition cursor-pointer">
+              <div class="flex items-start gap-3 min-w-0">
+                <input class="mt-0.5 size-4 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+                <div>
+                  <p class="text-xs font-medium text-on-surface">12. Ensaio de fotos com padrinhos organizado em blocos sem fila exaustiva</p>
+                  <p class="text-[11px] text-secondary mt-0.5">Roteiro dinâmico de 12 minutos para liberar os convidados rapidamente</p>
+                </div>
+              </div>
+              <span class="shrink-0 text-[11px] text-primary font-semibold bg-primary-fixed/40 px-2.5 py-0.5 rounded-md">Vinicius Foto</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Card 03: Ensaio Pré-Wedding & Visita Técnica -->
+        <div class="rounded-3xl border border-[#e5e5e5] bg-pure-white p-6 shadow-airbnb-card space-y-5 transition hover:shadow-md">
+          <div class="flex items-start gap-4">
+            <div class="flex size-12 shrink-0 items-center justify-center rounded-full border border-gray-100 bg-[#f7f7f7] text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[26px]">photo_camera</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between gap-2">
+                <h4 class="text-lg font-bold text-on-surface leading-snug">Ensaio Pré-Wedding & Visita Técnica</h4>
+                <span class="shrink-0 text-xs font-semibold text-secondary bg-surface-container px-3 py-0.5 rounded-full">Agendado</span>
+              </div>
+              <p class="text-xs text-secondary mt-1 leading-relaxed">Locações externas selecionadas em São João, alinhando luz e paleta com Vinicius Foto.</p>
+            </div>
+          </div>
+
+          <!-- Tags de Contexto Marco 03 -->
+          <div class="flex flex-wrap gap-2 pt-2 border-t border-surface-container/60">
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-pure-white px-3.5 py-1 text-xs font-medium text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-rausch-deep">landscape</span>
+              Campo Aberto
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-pure-white px-3.5 py-1 text-xs font-medium text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-rausch-deep">two_wheeler</span>
+              Ensaio com Harley
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-pure-white px-3.5 py-1 text-xs font-medium text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-rausch-deep">wb_sunny</span>
+              Golden Hour 16h45
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-pure-white px-3.5 py-1 text-xs font-medium text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-rausch-deep">check_circle</span>
+              Paleta C&C
+            </span>
+          </div>
+
+          <!-- Checklist Integrado Marco 03 -->
+          <div class="space-y-2.5 pt-3 border-t border-surface-container/60">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-bold uppercase tracking-wider text-secondary">Ações do Marco</span>
+              <span class="text-xs font-semibold text-secondary">0 de 3 concluído</span>
+            </div>
+
+            <label class="flex items-center justify-between gap-4 rounded-xl p-3 border border-surface-container bg-pure-white hover:bg-surface-bright transition cursor-pointer">
+              <div class="flex items-start gap-3 min-w-0">
+                <input class="mt-0.5 size-4 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+                <div>
+                  <p class="text-xs font-medium text-on-surface">9. Seleção prévia de spots do pré-wedding no campo / Costa Azul</p>
+                  <p class="text-[11px] text-secondary mt-0.5">Roteiro visual e scout de luz natural prévio</p>
+                </div>
+              </div>
+              <span class="shrink-0 text-[11px] text-primary font-semibold bg-primary-fixed/40 px-2.5 py-0.5 rounded-md">Vinicius Foto</span>
+            </label>
+
+            <label class="flex items-center justify-between gap-4 rounded-xl p-3 border border-surface-container bg-pure-white hover:bg-surface-bright transition cursor-pointer">
+              <div class="flex items-start gap-3 min-w-0">
+                <input class="mt-0.5 size-4 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+                <div>
+                  <p class="text-xs font-medium text-on-surface">10. Aprovação da paleta e traje do noivo com Carlos & moto Harley</p>
+                  <p class="text-[11px] text-secondary mt-0.5">Harmonização dos tons terrosos e acessórios</p>
+                </div>
+              </div>
+              <span class="shrink-0 text-[11px] text-rausch-deep font-semibold bg-primary-fixed/40 px-2.5 py-0.5 rounded-md">Noivos C&C</span>
+            </label>
+
+            <label class="flex items-center justify-between gap-4 rounded-xl p-3 border border-surface-container bg-pure-white hover:bg-surface-bright transition cursor-pointer">
+              <div class="flex items-start gap-3 min-w-0">
+                <input class="mt-0.5 size-4 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+                <div>
+                  <p class="text-xs font-medium text-on-surface">Alinhamento de luz dourada (Golden hour 16h45) e marés</p>
+                  <p class="text-[11px] text-secondary mt-0.5">Sincronização do deslocamento para a praia</p>
+                </div>
+              </div>
+              <span class="shrink-0 text-[11px] text-primary font-semibold bg-primary-fixed/40 px-2.5 py-0.5 rounded-md">Vinicius Foto</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Card 04: Timeline Minuto a Minuto & Cortejo -->
+        <div class="rounded-3xl border border-[#e5e5e5] bg-pure-white p-6 shadow-airbnb-card space-y-5 transition hover:shadow-md">
+          <div class="flex items-start gap-4">
+            <div class="flex size-12 shrink-0 items-center justify-center rounded-full border border-gray-100 bg-[#f7f7f7] text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[26px]">schedule</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between gap-2">
+                <h4 class="text-lg font-bold text-on-surface leading-snug">Timeline Minuto a Minuto & Cortejo</h4>
+                <span class="shrink-0 text-xs font-semibold text-secondary bg-surface-container px-3 py-0.5 rounded-full">Pendente</span>
+              </div>
+              <p class="text-xs text-secondary mt-1 leading-relaxed">Alinhamento rigoroso com cerimonial e guardião das alianças para fotos pontuais e sem correria.</p>
+            </div>
+          </div>
+
+          <!-- Tags de Contexto Marco 04 -->
+          <div class="flex flex-wrap gap-2 pt-2 border-t border-surface-container/60">
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-pure-white px-3.5 py-1 text-xs font-medium text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-rausch-deep">hourglass_top</span>
+              Regra 1h30 Término
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-pure-white px-3.5 py-1 text-xs font-medium text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-rausch-deep">shield</span>
+              Guardião Alianças
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-pure-white px-3.5 py-1 text-xs font-medium text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-rausch-deep">notifications_active</span>
+              Checklist Cerimonial
+            </span>
+          </div>
+
+          <!-- Checklist Integrado Marco 04 -->
+          <div class="space-y-2.5 pt-3 border-t border-surface-container/60">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-bold uppercase tracking-wider text-rausch-deep">Decisões Práticas do Dia</span>
+              <span class="text-xs font-semibold text-secondary">0 de 4 concluído</span>
+            </div>
+
+            <label class="flex items-center justify-between gap-4 rounded-xl p-3 border border-surface-container bg-pure-white hover:bg-surface-bright transition cursor-pointer">
+              <div class="flex items-start gap-3 min-w-0">
+                <input class="mt-0.5 size-4 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+                <div>
+                  <p class="text-xs font-medium text-on-surface">5. Confirmação da suíte da noiva com luz natural para making-of</p>
+                  <p class="text-[11px] text-secondary mt-0.5">Espaço amplo para retratos individuais serenos da noiva</p>
+                </div>
+              </div>
+              <span class="shrink-0 text-[11px] text-rausch-deep font-semibold bg-primary-fixed/40 px-2.5 py-0.5 rounded-md">Noivos C&C</span>
+            </label>
+
+            <label class="flex items-center justify-between gap-4 rounded-xl p-3 border border-surface-container bg-pure-white hover:bg-surface-bright transition cursor-pointer">
+              <div class="flex items-start gap-3 min-w-0">
+                <input class="mt-0.5 size-4 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+                <div>
+                  <p class="text-xs font-medium text-on-surface">6. Alinhar regra de ouro de 1h30 com a maquiadora</p>
+                  <p class="text-[11px] text-secondary mt-0.5">Término da produção às 15:30 para fotos com o vestido calmas</p>
+                </div>
+              </div>
+              <span class="shrink-0 text-[11px] text-rausch-deep font-semibold bg-primary-fixed/40 px-2.5 py-0.5 rounded-md">Noivos C&C</span>
+            </label>
+
+            <label class="flex items-center justify-between gap-4 rounded-xl p-3 border border-surface-container bg-pure-white hover:bg-surface-bright transition cursor-pointer">
+              <div class="flex items-start gap-3 min-w-0">
+                <input class="mt-0.5 size-4 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+                <div>
+                  <p class="text-xs font-medium text-on-surface">7. Nomeação formal e contato do guardião das alianças</p>
+                  <p class="text-[11px] text-secondary mt-0.5">Ponto focal com contato direto com o fotógrafo e cerimonial</p>
+                </div>
+              </div>
+              <span class="shrink-0 text-[11px] text-rausch-deep font-semibold bg-primary-fixed/40 px-2.5 py-0.5 rounded-md">Noivos C&C</span>
+            </label>
+
+            <label class="flex items-center justify-between gap-4 rounded-xl p-3 border border-surface-container bg-pure-white hover:bg-surface-bright transition cursor-pointer">
+              <div class="flex items-start gap-3 min-w-0">
+                <input class="mt-0.5 size-4 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+                <div>
+                  <p class="text-xs font-medium text-on-surface">13. Kits de retoque e água fresca para o cortejo</p>
+                  <p class="text-[11px] text-secondary mt-0.5">Itens essenciais guardados na sacristia para pós-cerimônia</p>
+                </div>
+              </div>
+              <span class="shrink-0 text-[11px] text-rausch-deep font-semibold bg-primary-fixed/40 px-2.5 py-0.5 rounded-md">Noivos C&C</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Card 05: Entrega de Prévia e Álbum Master -->
+        <div class="rounded-3xl border border-[#e5e5e5] bg-pure-white p-6 shadow-airbnb-card space-y-5 transition hover:shadow-md">
+          <div class="flex items-start gap-4">
+            <div class="flex size-12 shrink-0 items-center justify-center rounded-full border border-gray-100 bg-[#f7f7f7] text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[26px]">auto_stories</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between gap-2">
+                <h4 class="text-lg font-bold text-on-surface leading-snug">Entrega de Prévia & Álbum Master</h4>
+                <span class="shrink-0 text-xs font-semibold text-secondary bg-surface-container px-3 py-0.5 rounded-full">Final</span>
+              </div>
+              <p class="text-xs text-secondary mt-1 leading-relaxed">Pós-produção com curadoria fina por Vinicius Foto, galeria digital em 48h e encadernação artesanal.</p>
+            </div>
+          </div>
+
+          <!-- Tags de Contexto Marco 05 -->
+          <div class="flex flex-wrap gap-2 pt-2 border-t border-surface-container/60">
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-pure-white px-3.5 py-1 text-xs font-medium text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-rausch-deep">bolt</span>
+              Prévia em 48h
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-pure-white px-3.5 py-1 text-xs font-medium text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-rausch-deep">menu_book</span>
+              Álbum Panorâmico
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-pure-white px-3.5 py-1 text-xs font-medium text-on-surface shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-rausch-deep">cloud_download</span>
+              Backup RAID
+            </span>
+          </div>
+
+          <!-- Checklist Integrado Marco 05 -->
+          <div class="space-y-2.5 pt-3 border-t border-surface-container/60">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-bold uppercase tracking-wider text-secondary">Retratos & Pós-Produção</span>
+              <span class="text-xs font-semibold text-secondary">0 de 4 concluído</span>
+            </div>
+
+            <label class="flex items-center justify-between gap-4 rounded-xl p-3 border border-surface-container bg-pure-white hover:bg-surface-bright transition cursor-pointer">
+              <div class="flex items-start gap-3 min-w-0">
+                <input class="mt-0.5 size-4 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+                <div>
+                  <p class="text-xs font-medium text-on-surface">8. Checklist de lentes e baterias reservas de backup</p>
+                  <p class="text-[11px] text-secondary mt-0.5">3 corpos Sony e óticas prime 35mm / 85mm</p>
+                </div>
+              </div>
+              <span class="shrink-0 text-[11px] text-primary font-semibold bg-primary-fixed/40 px-2.5 py-0.5 rounded-md">Vinicius Foto</span>
+            </label>
+
+            <label class="flex items-center justify-between gap-4 rounded-xl p-3 border border-surface-container bg-pure-white hover:bg-surface-bright transition cursor-pointer">
+              <div class="flex items-start gap-3 min-w-0">
+                <input class="mt-0.5 size-4 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+                <div>
+                  <p class="text-xs font-medium text-on-surface">11. Mapa de iluminação para o beijo no altar</p>
+                  <p class="text-[11px] text-secondary mt-0.5">Posicionamento sem obstrução dos convidados</p>
+                </div>
+              </div>
+              <span class="shrink-0 text-[11px] text-primary font-semibold bg-primary-fixed/40 px-2.5 py-0.5 rounded-md">Vinicius Foto</span>
+            </label>
+
+            <label class="flex items-center justify-between gap-4 rounded-xl p-3 border border-surface-container bg-pure-white hover:bg-surface-bright transition cursor-pointer">
+              <div class="flex items-start gap-3 min-w-0">
+                <input class="mt-0.5 size-4 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+                <div>
+                  <p class="text-xs font-medium text-on-surface">14. Planejamento dos cartões de memória duplos (RAID)</p>
+                  <p class="text-[11px] text-secondary mt-0.5">Gravação redundante e espelhada simultânea</p>
+                </div>
+              </div>
+              <span class="shrink-0 text-[11px] text-primary font-semibold bg-primary-fixed/40 px-2.5 py-0.5 rounded-md">Vinicius Foto</span>
+            </label>
+
+            <label class="flex items-center justify-between gap-4 rounded-xl p-3 border border-surface-container bg-pure-white hover:bg-surface-bright transition cursor-pointer">
+              <div class="flex items-start gap-3 min-w-0">
+                <input class="mt-0.5 size-4 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+                <div>
+                  <p class="text-xs font-medium text-on-surface">15. Alinhamento de prévia digital em até 48 horas</p>
+                  <p class="text-[11px] text-secondary mt-0.5">30 fotos com tratamento de cor final para redes sociais</p>
+                </div>
+              </div>
+              <span class="shrink-0 text-[11px] text-primary font-semibold bg-primary-fixed/40 px-2.5 py-0.5 rounded-md">Vinicius Foto</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Coluna Lateral Desktop: Painel Operacional & Caderno de Inspirações - 4 colunas -->
+      <aside class="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
+        
+        <!-- Caderno de Inspirações (Do código mobile, adaptado para card desktop) -->
+        <div class="rounded-3xl border border-[#e5e5e5] bg-pure-white p-6 shadow-airbnb-card space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-base font-bold tracking-tight text-on-surface">Caderno de Inspirações</h3>
+              <p class="text-xs text-secondary mt-0.5">Moodboard curado para paleta e iluminação</p>
+            </div>
+            <a class="text-xs font-semibold text-rausch-deep hover:underline" href="#">Ver todas (12)</a>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3.5">
+            <!-- Item 1: Floral & Detalhes -->
+            <div class="group relative overflow-hidden rounded-2xl border border-surface-container bg-surface-bright shadow-airbnb-card">
+              <div class="aspect-[4/3] w-full overflow-hidden bg-surface-container">
+                <img class="h-full w-full object-cover transition duration-300 group-hover:scale-105" data-alt="Editorial visual of an intimate wedding bouquet with garden roses, eucalyptus, and delicate lace ribbons resting on an antique wooden table. Warm soft morning light streaming across the textures. Crisp light mode Airbnb style wedding editorial photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnQTLkJM4ZfgYSu138oqObVKkZLKF8MLA5GEkIoMe_a6htjMzgZUBaismNc-AYUCRw1AcpFJGBbTeMGdf9s3J5AExfwFdEAnOjG2GB8nlGKkzABHlR07mKkvKl7flPhKsnpFl1y-k3SJR-KVH5ACP_mk82NzkL3p5m3dgSnuPaiVDIA4xNI63R-WB7Qfs_n5pUCIP1_B4dO8adcz84-z-gEjJMFJLKA_6GVDsyh4WCKNCenOWMzA"/>
+              </div>
+              <div class="p-3">
+                <p class="text-xs font-bold text-on-surface truncate">Floral & Detalhes</p>
+                <p class="text-[11px] text-secondary mt-0.5">12 fotos salvas</p>
+              </div>
+            </div>
+
+            <!-- Item 2: Altar da Matriz -->
+            <div class="group relative overflow-hidden rounded-2xl border border-surface-container bg-surface-bright shadow-airbnb-card">
+              <div class="aspect-[4/3] w-full overflow-hidden bg-surface-container">
+                <img class="h-full w-full object-cover transition duration-300 group-hover:scale-105" data-alt="Photographic moodboard image of historic colonial church aisle decorated with subtle gypsophila and warm candle pillars on terracotta tile flooring. Natural sun rays filtering through stained glass windows. Airy modern high-key aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9iW_4jKuB4qCjrqI7TVS45gv0Z-chl-lHfXmhcxO0f4BoIdzbx9DoNyHcIZsd8VO8m02hPZDJIJmD6nXHYVZWSqss3XaCklyqZwCM0YR-tAlf7Uiiu4rPqh1BHvzzQTLicjXFPgXNsPYgVfHHAXNhhC1QwXdEgl2qESteKiSCbp7Zl9wNSzXyhMZs3rYdtROiOwRsNjk42YCXqWtDMCDWhHD8mTRJp9s016kdMFQ48-Ks4kXrw"/>
+              </div>
+              <div class="p-3">
+                <p class="text-xs font-bold text-on-surface truncate">Altar da Matriz</p>
+                <p class="text-[11px] text-secondary mt-0.5">8 referências</p>
+              </div>
+            </div>
+          </div>
+          <p class="text-[11px] text-secondary italic text-center pt-1">
+            "A beleza não reside na rigidez, mas na verdade de cada instante registrado com afeto."
+          </p>
+        </div>
+
+        <!-- Decisões Operacionais Rápidas do Dia -->
+        <div class="rounded-3xl border border-[#e5e5e5] bg-pure-white p-6 shadow-airbnb-card space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-bold tracking-tight text-on-surface flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-[20px]">edit_note</span>
+              Decisões em Aberto
+            </h3>
+            <span class="text-xs font-semibold text-rausch-deep bg-primary-fixed/50 px-2.5 py-0.5 rounded-full">3 pendências</span>
+          </div>
+
+          <div class="space-y-3.5 text-xs">
+            <!-- Input 1 -->
+            <div class="space-y-1.5">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-on-surface">Sala de Preparação</span>
+                <span class="text-[10px] text-secondary">Making-of</span>
+              </div>
+              <input type="text" value="Pousada Colonial Suíte 04" class="w-full text-xs rounded-xl border-surface-container bg-[#faf8f8] py-2 px-3 focus:border-primary focus:ring-primary text-on-surface" placeholder="Local do making-of com luz natural..."/>
+            </div>
+
+            <!-- Input 2 -->
+            <div class="space-y-1.5">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-on-surface">Janela de Beleza (Regra de Ouro)</span>
+                <span class="text-[10px] text-rausch-deep font-semibold">Término 15:30</span>
+              </div>
+              <input type="text" value="Conclusão estrita às 15:30" class="w-full text-xs rounded-xl border-surface-container bg-[#faf8f8] py-2 px-3 focus:border-primary focus:ring-primary text-on-surface" placeholder="Horário limite maquiadora..."/>
+            </div>
+
+            <!-- Input 3 -->
+            <div class="space-y-1.5">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-on-surface">Ponto de Apoio Guardião</span>
+                <span class="text-[10px] text-tertiary font-semibold">Alianças</span>
+              </div>
+              <input type="text" value="Irmão Rodrigo (+55 11 99999-0001)" class="w-full text-xs rounded-xl border-surface-container bg-[#faf8f8] py-2 px-3 focus:border-primary focus:ring-primary text-on-surface" placeholder="Nome e WhatsApp do guardião..."/>
+            </div>
+
+            <button class="w-full mt-2 py-2.5 rounded-xl bg-rausch-deep hover:bg-primary text-pure-white font-bold text-xs shadow-sm transition">
+              Salvar Alterações
+            </button>
+          </div>
+        </div>
+
+        <!-- Card de Resumo de Responsabilidades -->
+        <div class="rounded-3xl border border-[#e5e5e5] bg-pure-white p-6 shadow-airbnb-card space-y-4">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[20px] text-secondary">assignment_ind</span>
+            <h4 class="text-sm font-bold text-on-surface">Divisão de Ações</h4>
+          </div>
+          <div class="space-y-2.5 text-xs">
+            <div class="flex items-center justify-between p-2.5 rounded-xl bg-[#faf8f8] border border-surface-container">
+              <div class="flex items-center gap-2">
+                <span class="size-2 rounded-full bg-rausch-deep"></span>
+                <span class="font-semibold text-on-surface">Noivos C&C</span>
+              </div>
+              <span class="font-bold text-on-surface">8 tarefas</span>
+            </div>
+            <div class="flex items-center justify-between p-2.5 rounded-xl bg-[#faf8f8] border border-surface-container">
+              <div class="flex items-center gap-2">
+                <span class="size-2 rounded-full bg-primary"></span>
+                <span class="font-semibold text-on-surface">Vinicius Foto</span>
+              </div>
+              <span class="font-bold text-on-surface">7 tarefas</span>
+            </div>
+            <div class="flex items-center justify-between p-2.5 rounded-xl bg-[#faf8f8] border border-surface-container">
+              <div class="flex items-center gap-2">
+                <span class="size-2 rounded-full bg-tertiary"></span>
+                <span class="font-semibold text-on-surface">Cerimonial</span>
+              </div>
+              <span class="text-tertiary font-bold">Sincronizado</span>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- Desktop Footer -->
+  <footer class="mt-16 border-t border-[#f4e6e9] bg-pure-white py-8 text-xs text-secondary">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-on-surface">Camila & Carlos</span>
+        <span>•</span>
+        <span>Jornada Oficial de Casamento</span>
+        <span>•</span>
+        <span>Fotografia Vinicius Foto</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="#" class="hover:text-primary transition">Privacidade do Casal</a>
+        <a href="#" class="hover:text-primary transition">Manual da Noiva</a>
+        <a href="#" class="hover:text-primary transition">Suporte Direto</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

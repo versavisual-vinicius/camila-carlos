@@ -5,9 +5,12 @@ import {
   KEY_VENDORS,
   ShotListGroup, 
   ShotListItem,
-  KeyVendor
+  KeyVendor,
+  PHOTOGRAPHY_TIMELINE_BLOCKS
 } from "@/app/data/shotListData";
+import { generateFullDossierPdf } from "@/app/utils/pdfGenerator";
 import { Header, ActiveTab } from "@/app/components/Header";
+import { OverviewSection } from "@/app/components/OverviewSection";
 import { PreWeddingSection } from "@/app/components/PreWeddingSection";
 import { CuratedVendorsSection } from "@/app/components/CuratedVendorsSection";
 import { RoteiroPrdSection } from "@/app/components/RoteiroPrdSection";
@@ -18,6 +21,7 @@ import { ShareFabModal } from "@/app/components/ShareFabModal";
 import { MobileBottomDock } from "@/app/components/MobileBottomDock";
 import { Footer } from "@/app/components/Footer";
 import { Toaster, toast } from "sonner";
+import { Download, Share2, Loader2 } from "lucide-react";
 
 export default function App() {
   // Theme state: default to light
@@ -26,14 +30,14 @@ export default function App() {
     return saved !== null ? saved === "dark" : false;
   });
 
-  // Active navigation tab (3 canonical tabs: referencias, roteiro, fornecedores)
+  // Active navigation tab (4 canonical areas: visao-geral, referencias, roteiro, fornecedores)
   const [activeTab, setActiveTab] = useState<ActiveTab>(() => {
     const saved = localStorage.getItem("camila_carlos_active_tab");
-    if (saved === "referencias" || saved === "roteiro" || saved === "fornecedores") {
+    if (saved === "visao-geral" || saved === "referencias" || saved === "roteiro" || saved === "fornecedores") {
       return saved;
     }
     if (saved === "locais") return "fornecedores";
-    return "referencias";
+    return "visao-geral";
   });
 
   // Moodboard items state (58 canonical pre-wedding items + user added)
@@ -355,10 +359,38 @@ export default function App() {
     }
   };
 
+  // Exportar Roteiro em PDF (Stitch Desktop & Mobile Reference)
+  const [isExportingPdf, setIsExportingPdf] = useState(false);
+  const handleExportRoteiro = async () => {
+    try {
+      setIsExportingPdf(true);
+      toast.loading("Gerando Resumo do Roteiro em PDF...", { id: "export-pdf" });
+      await generateFullDossierPdf({
+        shotListGroups,
+        timelineBlocks: PHOTOGRAPHY_TIMELINE_BLOCKS,
+        vendors
+      });
+      toast.success("Resumo do Roteiro baixado com sucesso!", {
+        id: "export-pdf",
+        description: "Documento formatado em A4 pronto para impressão física ou envio ao cerimonial."
+      });
+    } catch (error) {
+      console.error("Erro ao gerar PDF", error);
+      toast.error("Não foi possível gerar o PDF.", { id: "export-pdf" });
+    } finally {
+      setIsExportingPdf(false);
+    }
+  };
+
   const allShotItems = shotListGroups.flatMap((g) => g.items);
   const totalShotCount = allShotItems.length;
   const completedShotCount = allShotItems.filter((i) => i.isCompleted).length;
   const pendingShotCount = totalShotCount - completedShotCount;
+
+  // Todas as tags únicas criadas pela noiva para reutilização rápida
+  const allExistingTags = Array.from(
+    new Set(Object.values(notes).flatMap((n) => n.tags || []))
+  );
 
   return (
     <div className="min-h-screen bg-surface font-body-md text-on-surface antialiased transition-colors duration-200 pb-24 md:pb-0">
@@ -376,10 +408,152 @@ export default function App() {
         completedShotCount={completedShotCount}
         totalShotCount={totalShotCount}
         onOpenShareModal={() => setIsShareModalOpen(true)}
+        onExportRoteiro={handleExportRoteiro}
+        isExporting={isExportingPdf}
       />
 
       {/* Main Container */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        {/* Top Hero Banner: Apenas nas abas internas (Referências, Roteiro, Fornecedores) */}
+        {activeTab !== "visao-geral" && (
+          <section className="rounded-3xl border border-outline-variant/25 bg-surface-container-lowest dark:bg-card p-5 sm:p-6 shadow-airbnb-card mb-6 sm:mb-8 transition-all duration-300 hover:shadow-md">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-6">
+              {/* Couple & Photographer Identification */}
+              <div className="flex items-center gap-4 sm:gap-5">
+                <div className="relative size-16 sm:size-20 shrink-0 overflow-hidden rounded-full ring-2 ring-secondary/30 dark:ring-secondary/50 shadow-inner bg-surface-container">
+                  <img
+                    src="/pre-wedding/01_451d03f1a458a64838b28633e494ceb2.jpg"
+                    alt="Camila & Carlos"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div>
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 dark:bg-emerald-400/15 px-3 py-0.5 text-xs font-bold text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 mb-1.5">
+                    <span className="size-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Jornada Ativa
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-on-surface">Camila & Carlos</h2>
+                  <div className="flex flex-wrap items-center gap-x-2 text-xs text-secondary mt-1">
+                    <span>Fotografia autoral por <strong className="text-on-surface font-semibold">Vinicius Cunha — Versa Visual</strong></span>
+                    <span>•</span>
+                    <span>Rio das Ostras & Costa Azul</span>
+                    <span>•</span>
+                    <span className="text-emerald-700 dark:text-emerald-400 font-semibold">Espaço Lux</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Triple Metric Counters (Stitch Airbnb Style with Keyboard Access) */}
+              <div className="grid grid-cols-3 gap-2.5 sm:gap-4 min-w-[280px] sm:min-w-[360px]">
+                <div 
+                  onClick={() => setActiveTab("referencias")}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveTab("referencias");
+                    }
+                  }}
+                  className={`flex flex-col items-center justify-center rounded-2xl border py-3 sm:py-3.5 px-3 text-center shadow-xs cursor-pointer hover:bg-surface-container active:scale-98 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 transition-all select-none ${
+                    activeTab === "referencias"
+                      ? "border-primary/40 bg-surface-container-low dark:bg-surface-container/70 ring-1 ring-primary/20"
+                      : "border-outline-variant/20 bg-surface-container-low/70 dark:bg-surface-container/40"
+                  }`}
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Ver todas as fotos no acervo"
+                  aria-selected={activeTab === "referencias"}
+                >
+                  <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-on-surface">{items.length}</span>
+                  <span className="mt-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-secondary">FOTOS</span>
+                </div>
+                <div 
+                  onClick={() => setActiveTab("referencias")}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveTab("referencias");
+                    }
+                  }}
+                  className={`flex flex-col items-center justify-center rounded-2xl border py-3 sm:py-3.5 px-3 text-center shadow-xs cursor-pointer hover:bg-surface-container active:scale-98 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 transition-all select-none ${
+                    activeTab === "referencias" && likedIds.length > 0
+                      ? "border-red-500/30 bg-surface-container-low dark:bg-surface-container/70 ring-1 ring-red-500/20"
+                      : "border-outline-variant/20 bg-surface-container-low/70 dark:bg-surface-container/40"
+                  }`}
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Ver fotos favoritas da noiva"
+                  aria-selected={activeTab === "referencias"}
+                >
+                  <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-red-500">
+                    {likedIds.length}
+                  </span>
+                  <span className="mt-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-secondary">FAVORITAS</span>
+                </div>
+                <div 
+                  onClick={() => setActiveTab("roteiro")}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveTab("roteiro");
+                    }
+                  }}
+                  className={`flex flex-col items-center justify-center rounded-2xl border py-3 sm:py-3.5 px-3 text-center shadow-xs cursor-pointer hover:bg-surface-container active:scale-98 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 transition-all select-none ${
+                    activeTab === "roteiro"
+                      ? "border-primary/40 bg-surface-container-low dark:bg-surface-container/70 ring-1 ring-primary/20"
+                      : "border-outline-variant/20 bg-surface-container-low/70 dark:bg-surface-container/40"
+                  }`}
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Ver progresso da shot list de altar"
+                  aria-selected={activeTab === "roteiro"}
+                >
+                  <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-on-surface">{completedShotCount}/{totalShotCount}</span>
+                  <span className="mt-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-secondary">ALTAR</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Actions / Export Buttons on Mobile (Stitch Screen 5 Reference) */}
+            <div className="flex sm:hidden items-center gap-2.5 mt-4 pt-4 border-t border-outline-variant/15">
+              <button
+                type="button"
+                onClick={handleExportRoteiro}
+                disabled={isExportingPdf}
+                className="flex-1 flex items-center justify-center gap-2 rounded-xl border border-outline-variant/30 bg-surface-container-lowest dark:bg-card hover:bg-surface-container py-2.5 px-3 text-xs font-semibold text-on-surface shadow-xs transition-all active:scale-95 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+              >
+                {isExportingPdf ? (
+                  <Loader2 className="size-3.5 animate-spin text-secondary" />
+                ) : (
+                  <Download className="size-3.5 text-secondary" />
+                )}
+                <span>{isExportingPdf ? "Gerando..." : "Exportar Roteiro"}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsShareModalOpen(true)}
+                className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-primary text-on-primary hover:opacity-90 py-2.5 px-3 text-xs font-semibold shadow-xs transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+              >
+                <Share2 className="size-3.5 text-on-primary" />
+                <span>Compartilhar</span>
+              </button>
+            </div>
+          </section>
+        )}
+
+        {/* TELA 0: VISÃO GERAL (HOME LEVE EDITORIAL STITCH) */}
+        {activeTab === "visao-geral" && (
+          <OverviewSection
+            onNavigateTab={setActiveTab}
+            itemsCount={items.length}
+            favoritesCount={likedIds.length}
+            completedShotsCount={completedShotCount}
+            totalShotsCount={totalShotCount}
+            onExportPdf={handleExportRoteiro}
+            isExportingPdf={isExportingPdf}
+            onOpenShareModal={() => setIsShareModalOpen(true)}
+          />
+        )}
+
         {/* TELA 1: REFERÊNCIAS VISUAIS (Moodboard Direto) */}
         {activeTab === "referencias" && (
           <PreWeddingSection
@@ -405,6 +579,8 @@ export default function App() {
             onAddShotItem={handleAddShotItem}
             onDeleteShotItem={handleDeleteShotItem}
             onResetShotList={handleResetShotList}
+            onNavigateToReferencias={() => setActiveTab("referencias")}
+            onOpenShareModal={() => setIsShareModalOpen(true)}
           />
         )}
 
@@ -427,9 +603,10 @@ export default function App() {
         onClose={() => setSelectedNoteItem(null)}
         note={selectedNoteItem ? notes[selectedNoteItem.id] : undefined}
         onSaveNote={handleSavePhotoNote}
+        existingTags={allExistingTags}
       />
 
-      {/* Compartilhamento WhatsApp */}
+      {/* Compartilhamento WhatsApp & Dossiê PDF */}
       <ShareFabModal
         isOpen={isShareModalOpen}
         onClose={() => setIsShareModalOpen(false)}
@@ -437,6 +614,8 @@ export default function App() {
         totalFavorites={likedIds.length}
         completedShotCount={completedShotCount}
         totalShotCount={totalShotCount}
+        onExportPdf={handleExportRoteiro}
+        isExportingPdf={isExportingPdf}
       />
 
       {/* Barra de Navegação Inferior Mobile */}

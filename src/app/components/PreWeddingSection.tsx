@@ -102,20 +102,26 @@ export function PreWeddingSection({
   };
 
   return (
-    <div className="flex flex-col gap-4 sm:gap-5">
-      {/* 1. Header do Moodboard: Simples e Direto */}
-      <div className="pt-1 pb-3 flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-outline-variant/30">
-        <div>
-          <h1 className="font-headline-md text-2xl sm:text-3xl text-on-surface font-semibold tracking-tight">
-            Referências
+    <div className="flex flex-col gap-5 sm:gap-6">
+      {/* 1. Header do Moodboard: Simples, Direto e Refinado */}
+      <div className="pt-1 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-outline-variant/20">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="size-2 rounded-full bg-secondary" />
+            <span className="font-body-md text-xs text-secondary font-semibold uppercase tracking-wider">
+              Caderno de Inspirações & Referências
+            </span>
+          </div>
+          <h1 className="font-headline-md text-2xl sm:text-3xl text-on-surface font-bold tracking-tight">
+            Referências Visuais
           </h1>
-          <p className="font-body-md text-xs sm:text-sm text-on-surface/80 mt-0.5">
-            Inspirações visuais para o casamento e ensaio de Camila & Carlos. Toque no coração para salvar as favoritas.
+          <p className="font-body-md text-xs sm:text-sm text-on-surface-variant max-w-2xl leading-relaxed">
+            Curadoria autoral para o casamento e ensaio de Camila & Carlos. Toque no coração em cada foto para eleger as favoritas da noiva.
           </p>
         </div>
 
-        {/* Ações Rápidas de Adição */}
-        <div className="flex items-center gap-2 shrink-0">
+        {/* Ações Rápidas de Adição com Taste-Design */}
+        <div className="flex items-center gap-2.5 shrink-0">
           <input
             type="file"
             ref={fileInputRef}
@@ -133,7 +139,7 @@ export function PreWeddingSection({
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={isCompressing}
-            className="h-8 px-3 rounded-lg border border-outline-variant/40 bg-surface hover:bg-surface-container text-on-surface-variant font-body-md text-xs font-medium flex items-center gap-1.5 transition-colors"
+            className="h-9 px-3.5 rounded-xl border border-outline-variant/30 bg-surface-container-lowest dark:bg-card hover:bg-surface-container text-on-surface font-body-md text-xs font-semibold flex items-center gap-2 transition-all shadow-xs active:scale-95 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             title="Upload de fotos do celular ou computador"
           >
             {isCompressing ? (
@@ -152,7 +158,7 @@ export function PreWeddingSection({
           <button
             type="button"
             onClick={onOpenAddDialog}
-            className="h-8 px-3 rounded-lg bg-primary text-on-primary font-body-md text-xs font-semibold flex items-center gap-1.5 shadow-xs hover:opacity-90 transition-opacity"
+            className="h-9 px-3.5 rounded-xl bg-primary text-on-primary font-body-md text-xs font-semibold flex items-center gap-1.5 shadow-xs hover:opacity-90 transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
           >
             <Plus className="size-3.5" />
             <span>Adicionar</span>
@@ -160,29 +166,21 @@ export function PreWeddingSection({
         </div>
       </div>
 
-      {/* 2. Filtros Essenciais: Apenas "Todas" e "Favoritas" */}
+      {/* 2. Filtros Essenciais & Barra de Busca com Tactile Styling */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-        <div className="inline-flex items-center gap-1 bg-surface-container/70 dark:bg-surface-container/40 backdrop-blur-md p-1 rounded-full border border-outline-variant/20 self-start">
+        {/* Pills de Filtro: "Todas as fotos" e "Favoritas" */}
+        <div className="inline-flex items-center gap-1 bg-surface-container/60 dark:bg-surface-container/30 p-1 rounded-full border border-outline-variant/20 shadow-2xs self-start">
           <button
             type="button"
             onClick={() => setActiveView("all")}
-            className={`relative px-4 py-1.5 rounded-full font-body-md text-xs sm:text-[13px] transition-colors duration-200 flex items-center gap-1.5 ${
+            className={`relative px-4 py-2 rounded-full font-body-md text-xs font-semibold transition-all duration-200 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
               activeView === "all"
-                ? "text-on-primary font-semibold"
-                : "text-on-surface-variant hover:text-on-surface"
+                ? "bg-surface-container-lowest dark:bg-card text-on-surface shadow-xs"
+                : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-lowest/60"
             }`}
           >
-            {activeView === "all" && (
-              <motion.span
-                layoutId="ref-filter-active"
-                className="absolute inset-0 bg-primary rounded-full shadow-[0_0_12px_rgba(108,91,77,0.3)] -z-0"
-                transition={{ type: "spring", stiffness: 450, damping: 35 }}
-              />
-            )}
-            <span className="relative z-10">Todas as fotos</span>
-            <span className={`relative z-10 px-1.5 py-0.2 rounded-full text-[10px] font-semibold ${
-              activeView === "all" ? "bg-surface-container text-on-surface" : "bg-surface-container-high text-on-surface-variant"
-            }`}>
+            <span>Todas as fotos</span>
+            <span className="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-surface-container dark:bg-surface-container-high text-on-surface-variant">
               {items.length}
             </span>
           </button>
@@ -190,70 +188,74 @@ export function PreWeddingSection({
           <button
             type="button"
             onClick={() => setActiveView("favorites")}
-            className={`relative px-4 py-1.5 rounded-full font-body-md text-xs sm:text-[13px] transition-colors duration-200 flex items-center gap-1.5 ${
+            className={`relative px-4 py-2 rounded-full font-body-md text-xs font-semibold transition-all duration-200 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
               activeView === "favorites"
-                ? "text-on-primary font-semibold"
-                : "text-on-surface-variant hover:text-on-surface"
+                ? "bg-surface-container-lowest dark:bg-card text-on-surface shadow-xs"
+                : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-lowest/60"
             }`}
           >
-            {activeView === "favorites" && (
-              <motion.span
-                layoutId="ref-filter-active"
-                className="absolute inset-0 bg-primary rounded-full shadow-[0_0_12px_rgba(108,91,77,0.3)] -z-0"
-                transition={{ type: "spring", stiffness: 450, damping: 35 }}
-              />
-            )}
-            <span className="relative z-10 flex items-center gap-1">
+            <span className="flex items-center gap-1.5">
               <span>Favoritas</span>
-              <Heart className={`size-3 ${likedIds.length > 0 ? "fill-red-500 text-red-500" : ""}`} />
+              <Heart className={`size-3 ${likedIds.length > 0 ? "fill-red-500 text-red-500" : "text-secondary"}`} />
             </span>
             {likedIds.length > 0 && (
-              <span className={`relative z-10 px-1.5 py-0.2 rounded-full text-[10px] font-semibold ${
-                activeView === "favorites" ? "bg-surface-container text-on-surface" : "bg-primary text-on-primary"
-              }`}>
+              <span className="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-red-500/15 text-red-600 dark:text-red-400">
                 {likedIds.length}
               </span>
             )}
           </button>
         </div>
 
-        {/* Busca Rápida Opcional */}
-        <div className="relative min-w-[200px] sm:w-64">
+        {/* Busca Rápida com Botão de Limpeza */}
+        <div className="relative min-w-[220px] sm:w-72">
           <Search className="size-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Buscar referências..."
-            className="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg pl-8 pr-3 py-1.5 text-xs text-on-surface placeholder:text-secondary/70 focus:outline-none focus:border-primary transition-colors"
+            className="w-full bg-surface-container-low dark:bg-surface-container border border-outline-variant/30 rounded-xl pl-8.5 pr-8 py-2 text-xs text-on-surface placeholder:text-secondary/70 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
           />
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => setSearchQuery("")}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 text-secondary hover:text-on-surface rounded-full transition-colors"
+              title="Limpar busca"
+            >
+              <X className="size-3.5" />
+            </button>
+          )}
         </div>
       </div>
 
       {/* 3. Grade Masonry Imediata */}
       {filteredItems.length === 0 ? (
-        <div className="p-12 text-center bg-surface-container-low rounded-xl border border-outline-variant/30 flex flex-col items-center gap-2">
-          <p className="font-headline-sm text-base text-on-surface">
+        <div className="p-12 text-center bg-surface-container-lowest dark:bg-card rounded-3xl border border-outline-variant/25 shadow-airbnb-card flex flex-col items-center gap-3">
+          <div className="size-12 rounded-full bg-surface-container flex items-center justify-center text-secondary">
+            {activeView === "favorites" ? <Heart className="size-5" /> : <Search className="size-5" />}
+          </div>
+          <p className="font-headline-sm text-base sm:text-lg font-bold text-on-surface">
             {activeView === "favorites" ? "Nenhuma foto favoritada ainda" : "Nenhuma foto encontrada"}
           </p>
-          <p className="text-xs text-on-surface-variant max-w-sm">
+          <p className="text-xs text-on-surface-variant max-w-sm leading-relaxed">
             {activeView === "favorites" 
-              ? "Toque no ícone de coração nas fotos que mais gostar para montar sua seleção favorita."
-              : "Tente buscar por outro termo ou limpe a busca."}
+              ? "Toque no ícone de coração nas fotos do acervo para montar a seleção prioritária da noiva."
+              : "Tente buscar por outro termo ou limpe os filtros."}
           </p>
           {activeView === "favorites" ? (
             <button
               type="button"
               onClick={() => setActiveView("all")}
-              className="mt-2 text-xs font-semibold text-secondary hover:underline"
+              className="mt-2 px-4 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-xs font-semibold text-on-surface transition-colors"
             >
-              Ver todas as fotos
+              Ver todas as fotos ({items.length})
             </button>
           ) : (
             <button
               type="button"
               onClick={() => setSearchQuery("")}
-              className="mt-2 text-xs font-semibold text-secondary hover:underline"
+              className="mt-2 px-4 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-xs font-semibold text-on-surface transition-colors"
             >
               Limpar busca
             </button>
@@ -261,7 +263,7 @@ export function PreWeddingSection({
         </div>
       ) : (
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 3, 1100: 4 }}>
-          <Masonry gutter="12px">
+          <Masonry gutter="16px">
             {filteredItems.map((item, index) => (
               <MoodboardCard
                 key={item.id}

@@ -53,7 +53,7 @@ export async function generateFullDossierPdf(data: DossierData): Promise<void> {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(7.5);
   doc.setTextColor(186, 155, 126); // Warm Bronze / Terracotta accent
-  doc.text("DOSSIÊ EXECUTIVO DE LOGÍSTICA & DIREÇÃO FOTOGRÁFICA", 20, y + 7);
+  doc.text("RESUMO DO ROTEIRO FOTOGRÁFICO // COBERTURA & RETRATOS", 20, y + 7);
 
   doc.setFontSize(14);
   doc.setTextColor(255, 255, 255);
@@ -62,7 +62,7 @@ export async function generateFullDossierPdf(data: DossierData): Promise<void> {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8.5);
   doc.setTextColor(205, 197, 188);
-  doc.text("Rio das Ostras - RJ · Direção Fotográfica: Versa Visual (@v1ncsc) · Pôr do Sol Astronômico: 17:35", 20, y + 21);
+  doc.text("Rio das Ostras - RJ · Direção Fotográfica: Vinicius Cunha — Versa Visual (@v1ncsc)", 20, y + 21);
 
   y += 33;
 
@@ -345,18 +345,18 @@ export async function generateCeremonialAltarPdf(data: {
   doc.roundedRect(15, y, pageWidth - 30, 20, 2, 2, "F");
 
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(13);
+  doc.setFontSize(11);
   doc.setTextColor(255, 255, 255);
-  doc.text("FICHA DE ALTAR · SHOT LIST PROTOCOLAR DO CERIMONIAL", 20, y + 7.5);
+  doc.text("RESUMO DE FOTOS PROTOCOLARES // CAMILA & CARLOS", 20, y + 7.5);
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);
   doc.setTextColor(215, 205, 195);
-  doc.text("Casamento Camila & Carlos · Espaço Lux (Rio das Ostras) · Meta: 35 minutos cronometrados", 20, y + 14);
+  doc.text("Casamento Camila & Carlos · Espaço Lux (Rio das Ostras) · Direção: Vinicius Cunha — Versa Visual", 20, y + 14);
 
   y += 25;
 
-  // Card de Trava Operacional
+  // Card de Prioridade Humana
   doc.setFillColor(250, 246, 240);
   doc.setDrawColor(108, 91, 77); // #6c5b4d
   doc.setLineWidth(0.5);
@@ -365,12 +365,12 @@ export async function generateCeremonialAltarPdf(data: {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(8);
   doc.setTextColor(108, 91, 77);
-  doc.text("REGRA DE OURO DO ALTAR:", 18, y + 4.5);
+  doc.text("DIRETRIZ DE CONFORTO HUMANO:", 18, y + 4.5);
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(7.5);
   doc.setTextColor(28, 26, 23);
-  doc.text("1. Avós e idosos fotografam PRIMEIRO (liberação em 6 min). 2. Manter lista sequencial sem dispersar convidados.", 18, y + 9);
+  doc.text("1. Avós e pessoas com mobilidade reduzida fotografam PRIMEIRO para descanso ágil. 2. Sequência fluida e leve.", 18, y + 9);
 
   y += 18;
 

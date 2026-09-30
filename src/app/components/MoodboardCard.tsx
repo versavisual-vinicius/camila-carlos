@@ -2,7 +2,7 @@ import { useState } from "react";
 import { PreWeddingItem } from "@/app/data/preWeddingData";
 import { PhotoNoteData } from "@/app/components/PhotoNoteDrawer";
 import { motion } from "motion/react";
-import { MessageSquareQuote, Heart, Trash2 } from "lucide-react";
+import { MessageSquareQuote, Heart, Trash2, Maximize2 } from "lucide-react";
 
 interface MoodboardCardProps {
   item: PreWeddingItem;
@@ -40,11 +40,11 @@ export function MoodboardCard({
 
   return (
     <motion.article
-      initial={isAboveFold ? false : { opacity: 0, y: 14 }}
+      initial={isAboveFold ? false : { opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.25 }}
-      className={`group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/30 shadow-xs hover:shadow-md transition-all duration-300 ${
+      className={`group relative flex flex-col bg-surface-container-lowest dark:bg-card rounded-2xl overflow-hidden border border-outline-variant/25 shadow-airbnb-card hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 ${
         isAboveFold ? "" : "content-visibility-auto"
       }`}
     >
@@ -65,19 +65,19 @@ export function MoodboardCard({
           }`}
         />
 
-        {/* Tags de Estilo Criadas pela Noiva (Apenas se a noiva criou, sem pré-tags) */}
+        {/* Tags de Estilo Criadas pela Noiva */}
         {note?.tags && note.tags.length > 0 && (
-          <div className="absolute top-2.5 right-2.5 z-10 flex flex-wrap gap-1 max-w-[80%] justify-end">
+          <div className="absolute top-2.5 right-2.5 z-10 flex flex-wrap gap-1 max-w-[80%] justify-end pointer-events-none">
             {note.tags.slice(0, 2).map((tag) => (
               <span
                 key={tag}
-                className="inline-flex items-center px-2 py-0.5 rounded-full bg-primary/90 text-on-primary backdrop-blur-md font-body-md text-[10px] font-medium shadow-2xs"
+                className="inline-flex items-center px-2 py-0.5 rounded-full bg-primary/90 text-on-primary backdrop-blur-md font-body-md text-[10px] font-semibold shadow-2xs"
               >
                 #{tag}
               </span>
             ))}
             {note.tags.length > 2 && (
-              <span className="inline-flex items-center px-1.5 py-0.5 rounded-full bg-primary/90 text-on-primary font-body-md text-[9px] font-medium">
+              <span className="inline-flex items-center px-1.5 py-0.5 rounded-full bg-primary/90 text-on-primary font-body-md text-[9px] font-semibold">
                 +{note.tags.length - 2}
               </span>
             )}
@@ -86,19 +86,20 @@ export function MoodboardCard({
 
         {/* Quick Actions Floating Bar */}
         <div 
-          className="absolute bottom-2.5 right-2.5 z-10 flex items-center gap-1 opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200"
+          className="absolute bottom-2.5 right-2.5 z-10 flex items-center gap-1.5 opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Note button */}
           <button
             type="button"
-            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 backdrop-blur-md active:scale-95 shadow-xs ${
+            className={`size-8 rounded-full flex items-center justify-center transition-all duration-200 backdrop-blur-md active:scale-95 shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
               hasNote
-                ? "bg-primary text-on-primary ring-1 ring-secondary"
-                : "bg-surface/90 text-on-surface hover:bg-surface-container-highest"
+                ? "bg-primary text-on-primary ring-2 ring-secondary/50"
+                : "bg-surface/90 text-on-surface hover:bg-surface-container"
             }`}
             onClick={() => onOpenNotes(item)}
-            title={hasNote ? "Ver suas observações nesta referência" : "Anotar o que você mais gosta nesta foto"}
+            title={hasNote ? "Ver observações nesta referência" : "Anotar o que você mais gosta nesta foto"}
+            aria-label="Anotar observações nesta referência"
           >
             <MessageSquareQuote className="size-3.5" />
           </button>
@@ -107,9 +108,10 @@ export function MoodboardCard({
           {item.id.startsWith("custom-") && (
             <button
               type="button"
-              className="w-8 h-8 rounded-full bg-surface/90 text-error hover:bg-error-container/40 flex items-center justify-center transition-all backdrop-blur-md active:scale-95 shadow-xs"
+              className="size-8 rounded-full bg-surface/90 text-red-500 hover:bg-red-500 hover:text-white flex items-center justify-center transition-all backdrop-blur-md active:scale-95 shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500/40"
               onClick={() => onDelete(item.id)}
               title="Excluir referência personalizada"
+              aria-label="Excluir referência personalizada"
             >
               <Trash2 className="size-3.5" />
             </button>
@@ -118,9 +120,9 @@ export function MoodboardCard({
       </div>
 
       {/* Editorial Content Info */}
-      <div className="p-3 flex flex-col gap-1 bg-surface-container-low">
+      <div className="p-3 sm:p-3.5 flex flex-col gap-1 bg-surface-container-lowest dark:bg-card">
         <h2 
-          className="font-headline-sm text-title-sm text-on-surface line-clamp-2 leading-snug cursor-pointer hover:text-secondary transition-colors"
+          className="font-headline-sm text-xs sm:text-sm font-bold text-on-surface line-clamp-2 leading-snug cursor-pointer hover:text-secondary transition-colors"
           onClick={() => onOpenLightbox(item)}
         >
           {item.title}
@@ -128,20 +130,20 @@ export function MoodboardCard({
 
         {/* Contextual Note preview if present */}
         {hasNote && note?.comment && (
-          <p className="text-xs italic text-on-surface-variant line-clamp-1 border-l-2 border-secondary/50 pl-1.5 my-0.5">
+          <p className="text-[11px] sm:text-xs italic text-on-surface-variant line-clamp-1 border-l-2 border-secondary/60 pl-2 my-0.5 bg-surface-container-low/50 dark:bg-surface-container/30 py-0.5 rounded-r-md">
             "{note.comment}"
           </p>
         )}
 
-        <div className="flex items-center justify-between text-on-surface-variant pt-1 border-t border-outline-variant/20 mt-1">
-          <span className="font-body-md text-xs text-secondary truncate max-w-[180px]">
+        <div className="flex items-center justify-between text-on-surface-variant pt-1.5 border-t border-outline-variant/15 mt-1">
+          <span className="font-body-md text-[11px] text-secondary font-medium truncate max-w-[170px]">
             {attributionLabel}
           </span>
 
           <button
             type="button"
             aria-label={isLiked ? "Remover das favoritas" : "Salvar nas favoritas"}
-            className={`w-7 h-7 rounded-full flex items-center justify-center transition-all active:scale-90 ${
+            className={`size-7 rounded-full flex items-center justify-center transition-all active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500/40 ${
               isLiked
                 ? "text-red-500 bg-red-50 dark:bg-red-950/40"
                 : "text-on-surface-variant hover:text-red-500 hover:bg-surface-container"

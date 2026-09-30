@@ -77,20 +77,25 @@ A tipografia do projeto é carregada via Google Fonts no [index.html](file:///Us
 
 ## 4. Componentes e Padrões de Elevação
 
-### Cartão Editorial (`.editorial-card`)
-Cartões fotográficos do moodboard e blocos de cronograma:
+### Cartão Editorial & Elevação Tátil Stitch (`.editorial-card` / `.shadow-airbnb-card`)
+Cartões fotográficos do moodboard, blocos de cronograma e cartões de fornecedores:
 ```css
 .editorial-card {
   background-color: var(--card);
   border: var(--card-border);
-  box-shadow: 0 4px 16px rgba(28, 26, 23, 0.04);
+  box-shadow: var(--shadow-airbnb-card);
   transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s cubic-bezier(0.2, 0, 0, 1);
 }
 
 .editorial-card:hover {
-  box-shadow: 0 12px 32px rgba(28, 26, 23, 0.06);
+  box-shadow: var(--hover-shadow);
   transform: translateY(-2px);
 }
+
+/* Tokens de Elevação Stitch */
+--shadow-airbnb-card: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 2px 6px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.06);
+--shadow-airbnb-header: 0 1px 0 0 rgba(0, 0, 0, 0.06);
+--shadow-airbnb-float: 0 6px 20px rgba(0, 0, 0, 0.08);
 ```
 
 ### Dock Móvel com Vidro Fosco (`.glass-dock`)
