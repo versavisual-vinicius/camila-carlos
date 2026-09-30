@@ -79,7 +79,7 @@ export function ShareFabModal({
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-[480px] bg-surface text-on-surface border border-outline-variant/30 rounded-3xl shadow-airbnb-card p-6">
-        <DialogHeader className="text-left">
+        <DialogHeader className="text-left pr-6">
           <div className="flex items-center gap-1.5 text-xs font-semibold text-secondary uppercase tracking-wider mb-1">
             <Sparkles className="size-3.5" />
             <span>Exportação & Compartilhamento</span>
@@ -104,7 +104,7 @@ export function ShareFabModal({
               {completedShotCount}/{totalShotCount} Shot List
             </span>
           </div>
-          <p className="font-mono text-[11px] text-on-surface-variant whitespace-pre-line leading-relaxed">
+          <p className="font-body-md text-sm text-on-surface-variant whitespace-pre-line leading-relaxed">
             {summaryText}
           </p>
         </div>

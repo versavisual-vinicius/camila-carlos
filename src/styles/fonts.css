@@ -5,24 +5,30 @@
   --font-brand: 'Playfair Display', Georgia, serif;
 }
 
-body {
-  font-family: var(--font-body);
-  color: var(--foreground);
-  background-color: var(--background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@layer base {
+  body {
+    font-family: var(--font-body);
+    color: var(--foreground);
+    background-color: var(--background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-.font-brand {
-  font-family: var(--font-brand);
-}
+  .font-brand {
+    font-family: var(--font-brand);
+  }
 
-h1, h2, h3, h4, h5, h6, .font-display, .font-headline, .font-headline-md, .font-headline-lg, .font-headline-sm {
-  font-family: var(--font-display);
-  text-wrap: balance;
-}
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
 
-p, blockquote, li, .font-body-md, .font-body-lg {
-  font-family: var(--font-body);
-  text-wrap: pretty;
+  p, blockquote, li {
+    text-wrap: pretty;
+  }
+
+  :where(button, a, input, textarea, select, [role="button"]):focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
 }

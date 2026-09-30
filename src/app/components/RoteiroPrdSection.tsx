@@ -1,3 +1,4 @@
+import { PageHeader } from "./PageHeader";
 import { useState } from "react";
 import { 
   ShotListGroup, 
@@ -158,31 +159,16 @@ export function RoteiroPrdSection({
   const previewPhoto2 = PRE_WEDDING_ITEMS[1];
 
   return (
-    <div className="flex flex-col gap-6 sm:gap-8">
+    <div className="page-stack">
       {/* 1. Header do Roteiro Fotográfico (Taste-Design com Hierarquia Clara) */}
-      <section className="pt-1 pb-4 border-b border-outline-variant/20 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-        <div className="space-y-1.5 max-w-3xl">
-          <div className="flex items-center gap-2">
-            <span className="size-2 rounded-full bg-secondary" />
-            <span className="font-body-md text-xs text-secondary font-semibold uppercase tracking-wider">
-              Direção Fotográfica Versa Visual
-            </span>
-          </div>
-          <h1 className="font-headline-md text-2xl sm:text-3xl lg:text-4xl text-on-surface font-bold tracking-tight">
-            Passos até o altar <span className="text-secondary font-semibold text-xl sm:text-2xl">(01 a 06)</span>
-          </h1>
-          <p className="font-body-md text-xs sm:text-sm text-on-surface-variant leading-relaxed">
-            Como orquestramos a fotografia no Pré-Wedding e no Casamento de Camila & Carlos: o que faremos em cada momento e como a equipe se divide, com tranquilidade, presença e conexão.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2 shrink-0">
+      <PageHeader eyebrow="Direção Fotográfica Versa Visual" title={<>Passos até o altar <span className="text-secondary font-semibold text-xl sm:text-2xl">(01 a 06)</span></>}
+        description="Como orquestramos a fotografia no Pré-Wedding e no Casamento de Camila & Carlos: o que faremos em cada momento e como a equipe se divide, com tranquilidade, presença e conexão."
+      >
           <span className="font-body-md text-xs text-on-surface font-semibold bg-surface-container-lowest dark:bg-card px-3.5 py-1.5 rounded-full border border-outline-variant/30 shadow-xs flex items-center gap-1.5">
             <CheckCircle2 className="size-3.5 text-emerald-600 dark:text-emerald-400" />
             <span>{completedCount} de {totalCount} fotos confirmadas</span>
           </span>
-        </div>
-      </section>
+      </PageHeader>
 
       {/* 2. Grid de Conteúdo: 2 Colunas no Desktop (Stitch Screen 6 Reference) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -191,10 +177,10 @@ export function RoteiroPrdSection({
         <div className="lg:col-span-8 space-y-6">
           <div className="flex items-center justify-between pb-1">
             <div>
-              <h2 className="text-lg sm:text-xl font-bold tracking-tight text-on-surface">
+              <h2 className="editorial-section-title">
                 Momentos da Cobertura & Dinâmica
               </h2>
-              <p className="text-xs text-secondary mt-0.5">
+              <p className="editorial-caption mt-1.5">
                 Sem regras engessadas · Respeito à luz natural e à verdade de cada instante
               </p>
             </div>
@@ -213,7 +199,7 @@ export function RoteiroPrdSection({
               return (
                 <article
                   key={block.id}
-                  className={`rounded-3xl border border-outline-variant/25 bg-surface-container-lowest dark:bg-card p-5 sm:p-6 shadow-airbnb-card space-y-4 transition-all duration-300 hover:shadow-md ${
+                  className={`editorial-panel space-y-4 transition-all duration-300 hover:shadow-md ${
                     block.isHighlight
                       ? "ring-1 ring-amber-500/30 dark:ring-amber-500/40 bg-gradient-to-br from-surface-container-lowest via-surface-container-lowest to-amber-50/20 dark:to-amber-950/10"
                       : ""
@@ -227,7 +213,7 @@ export function RoteiroPrdSection({
 
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-2 flex-wrap">
-                        <h3 className="text-base sm:text-lg font-bold text-on-surface leading-snug tracking-tight">
+                        <h3 className="editorial-card-title">
                           {block.title}
                         </h3>
                         <span className={`shrink-0 text-[11px] font-semibold px-2.5 py-0.5 rounded-full ${status.className}`}>
@@ -267,7 +253,7 @@ export function RoteiroPrdSection({
                     <span className="text-[11px] font-bold uppercase tracking-wider text-secondary">
                       O que faremos neste momento:
                     </span>
-                    <p className="font-body-md text-xs sm:text-[13px] text-on-surface/90 leading-relaxed">
+                    <p className="editorial-body">
                       {block.whatWillBeDone}
                     </p>
                   </div>
@@ -278,7 +264,7 @@ export function RoteiroPrdSection({
                       <Users className="size-3.5 text-secondary shrink-0" />
                       <span>Como a equipe se divide:</span>
                     </div>
-                    <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
+                    <p className="editorial-body">
                       {block.teamDivision}
                     </p>
                   </div>
@@ -454,7 +440,7 @@ export function RoteiroPrdSection({
                                   </div>
 
                                   {/* Adicionar Foto Personalizada ao Grupo */}
-                                  <div className="pt-1 flex items-center gap-2">
+                                  <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                                     <input
                                       type="text"
                                       placeholder="Adicionar foto específica a este grupo..."
@@ -472,7 +458,7 @@ export function RoteiroPrdSection({
                                           setNewShotTitles((prev) => ({ ...prev, [group.id]: "" }));
                                         }
                                       }}
-                                      className="flex-1 bg-surface-container-low dark:bg-surface-container text-xs text-on-surface placeholder:text-on-surface-variant/50 px-3.5 py-2 rounded-xl border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                                      className="min-w-0 flex-1 bg-surface-container-low dark:bg-surface-container text-xs text-on-surface placeholder:text-on-surface-variant/50 px-3.5 py-2 rounded-xl border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                                     />
                                     <button
                                       type="button"
@@ -506,13 +492,13 @@ export function RoteiroPrdSection({
         <aside className="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
           
           {/* Card 1: Caderno de Inspirações (Fiel ao Stitch Screen 6) */}
-          <div className="rounded-3xl border border-outline-variant/25 bg-surface-container-lowest dark:bg-card p-6 shadow-airbnb-card space-y-4">
+          <div className="editorial-panel space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-base font-bold tracking-tight text-on-surface">
+                <h3 className="editorial-card-title">
                   Caderno de Inspirações
                 </h3>
-                <p className="text-xs text-secondary mt-0.5">
+                <p className="editorial-caption mt-1.5">
                   Moodboard curado para paleta e iluminação
                 </p>
               </div>
@@ -576,7 +562,7 @@ export function RoteiroPrdSection({
           </div>
 
           {/* Card 2: Divisão de Responsabilidades (Fiel ao Stitch Screen 6) */}
-          <div className="rounded-3xl border border-outline-variant/25 bg-surface-container-lowest dark:bg-card p-6 shadow-airbnb-card space-y-4">
+          <div className="editorial-panel space-y-4">
             <div className="flex items-center gap-2">
               <Shield className="size-4.5 text-secondary" />
               <div>

@@ -47,7 +47,7 @@ export function Header({
           
           {/* Brand & Identidade do Casal */}
           <div 
-            className="flex items-center gap-3.5 min-w-0 cursor-pointer select-none group" 
+            className="flex items-center gap-3 min-w-0 flex-1 cursor-pointer select-none group"
             onClick={() => onTabChange("visao-geral")}
             role="button"
             tabIndex={0}
@@ -68,23 +68,23 @@ export function Header({
             </div>
             
             <div className="flex flex-col min-w-0 justify-center">
-              <div className="flex items-center gap-2">
+              <div className="flex min-w-0 items-center gap-2">
                 <span className="font-headline-sm text-sm sm:text-base text-on-surface truncate font-bold leading-tight tracking-tight">
                   Camila & Carlos
                 </span>
-                <span className="hidden sm:inline-flex items-center gap-1 rounded-full bg-emerald-500/10 dark:bg-emerald-400/15 px-2 py-0.5 text-[10px] font-bold text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
+                <span className="hidden 2xl:inline-flex items-center gap-1 rounded-full bg-emerald-500/10 dark:bg-emerald-400/15 px-2 py-0.5 text-[10px] font-bold text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
                   <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                   Jornada Ativa
                 </span>
               </div>
-              <p className="font-body-md text-[11px] text-secondary leading-tight truncate">
+              <p className="font-body-md text-xs text-secondary leading-tight truncate">
                 Fotografia autoral por <strong className="font-semibold text-on-surface">Vinicius Cunha — Versa Visual</strong>
               </p>
             </div>
           </div>
 
           {/* Desktop Navigation Tabs: 4 Áreas Canônicas (Stitch Pill) */}
-          <nav className="hidden md:flex items-center gap-1 bg-surface-container/60 dark:bg-surface-container/30 p-1.5 rounded-full border border-outline-variant/20 shadow-2xs">
+          <nav className="hidden xl:flex shrink-0 items-center whitespace-nowrap gap-1 bg-surface-container/60 dark:bg-surface-container/30 p-1.5 rounded-full border border-outline-variant/20 shadow-2xs">
             <button
               type="button"
               onClick={() => onTabChange("visao-geral")}
@@ -110,7 +110,7 @@ export function Header({
               <LayoutGrid className="size-3.5 text-secondary" />
               <span>Referências</span>
               {totalFavorites > 0 && (
-                <span className="inline-flex items-center gap-0.5 px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-red-500/15 text-red-600 dark:text-red-400">
+                <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-red-500/15 text-red-600 dark:text-red-400">
                   <Heart className="size-2.5 fill-current" />
                   {totalFavorites}
                 </span>
@@ -129,7 +129,7 @@ export function Header({
               <Clock className="size-3.5 text-secondary" />
               <span>Roteiro</span>
               {totalShotCount > 0 && (
-                <span className="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-surface-container dark:bg-surface-container-high text-on-surface-variant">
+                <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-surface-container dark:bg-surface-container-high text-on-surface-variant">
                   {completedShotCount}/{totalShotCount}
                 </span>
               )}
@@ -165,8 +165,8 @@ export function Header({
                 ) : (
                   <Download className="size-3.5 text-secondary" />
                 )}
-                <span className="hidden md:inline">{isExporting ? "Gerando..." : "Exportar Roteiro"}</span>
-                <span className="md:hidden">{isExporting ? "..." : "PDF"}</span>
+                <span className="hidden xl:inline">{isExporting ? "Gerando..." : "Exportar Roteiro"}</span>
+                <span className="xl:hidden">{isExporting ? "..." : "PDF"}</span>
               </button>
             )}
 
@@ -176,9 +176,10 @@ export function Header({
               onClick={onOpenShareModal}
               className="inline-flex items-center gap-2 rounded-xl border border-outline-variant/30 bg-surface-container-lowest dark:bg-card hover:bg-surface-container py-2 px-3 sm:px-3.5 text-xs font-semibold text-on-surface shadow-xs transition-all active:scale-98 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
               title="Compartilhar resumo e roteiro"
+              aria-label="Compartilhar resumo e roteiro"
             >
               <Share2 className="size-3.5 text-secondary" />
-              <span className="hidden sm:inline">Compartilhar</span>
+              <span className="hidden lg:inline">Compartilhar</span>
             </button>
 
             {/* Dark/Light mode toggle */}

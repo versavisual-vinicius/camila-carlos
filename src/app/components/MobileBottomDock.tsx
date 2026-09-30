@@ -46,7 +46,7 @@ export function MobileBottomDock({
   ];
 
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-50 md:hidden pointer-events-none pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))] px-4">
+    <nav className="fixed bottom-0 inset-x-0 z-50 xl:hidden pointer-events-none pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))] px-4">
       <div className="max-w-sm mx-auto pointer-events-auto bg-surface/95 dark:bg-[#141312]/95 backdrop-blur-2xl border border-outline-variant/30 rounded-2xl shadow-airbnb-float px-2 py-1.5 flex items-center justify-around">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
@@ -58,6 +58,7 @@ export function MobileBottomDock({
               onClick={() => onTabChange(tab.id)}
               className="relative flex-1 py-1.5 flex flex-col items-center justify-center min-h-[48px] rounded-xl transition-colors duration-200 select-none group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
               aria-label={tab.label}
+              aria-current={isActive ? "page" : undefined}
             >
               {/* Active Tab Background Pill */}
               {isActive && (
@@ -79,7 +80,7 @@ export function MobileBottomDock({
                 />
 
                 {tab.badge !== null && (
-                  <span className="absolute -top-1.5 -right-3 px-1.5 py-0.2 rounded-full text-[9px] font-bold bg-red-500 text-white min-w-[15px] text-center leading-tight shadow-xs flex items-center gap-0.5">
+                  <span className="absolute -top-1.5 -right-3 px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-red-500 text-white min-w-[15px] text-center leading-tight shadow-xs flex items-center gap-0.5">
                     <Heart className="size-2 fill-white text-white" />
                     {tab.badge}
                   </span>
@@ -88,7 +89,7 @@ export function MobileBottomDock({
 
               {/* Label */}
               <span
-                className={`font-body-md text-[10px] mt-1 tracking-tight transition-colors ${
+                className={`font-body-md text-xs mt-1 tracking-tight transition-colors ${
                   isActive
                     ? "font-bold text-primary dark:text-on-surface"
                     : "text-on-surface-variant group-hover:text-on-surface font-medium"

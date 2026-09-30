@@ -89,6 +89,10 @@
   --outline-variant: #494643;
   --primary: #f5f3f0;
   --on-primary: #1c1a17;
+  --primary-foreground: #1c1a17;
+  --secondary-foreground: #f5decd;
+  --accent: #4a3e34;
+  --accent-foreground: #f5decd;
   --primary-container: #2d2a27;
   --on-primary-container: #cbc5c0;
   --secondary: #d8c3b2;

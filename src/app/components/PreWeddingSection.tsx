@@ -1,3 +1,4 @@
+import { PageHeader } from "./PageHeader";
 import { useState, useRef } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { motion } from "motion/react";
@@ -102,26 +103,11 @@ export function PreWeddingSection({
   };
 
   return (
-    <div className="flex flex-col gap-5 sm:gap-6">
+    <div className="page-stack">
       {/* 1. Header do Moodboard: Simples, Direto e Refinado */}
-      <div className="pt-1 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-outline-variant/20">
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <span className="size-2 rounded-full bg-secondary" />
-            <span className="font-body-md text-xs text-secondary font-semibold uppercase tracking-wider">
-              Caderno de Inspirações & Referências
-            </span>
-          </div>
-          <h1 className="font-headline-md text-2xl sm:text-3xl text-on-surface font-bold tracking-tight">
-            Referências Visuais
-          </h1>
-          <p className="font-body-md text-xs sm:text-sm text-on-surface-variant max-w-2xl leading-relaxed">
-            Curadoria autoral para o casamento e ensaio de Camila & Carlos. Toque no coração em cada foto para eleger as favoritas da noiva.
-          </p>
-        </div>
-
-        {/* Ações Rápidas de Adição com Taste-Design */}
-        <div className="flex items-center gap-2.5 shrink-0">
+      <PageHeader eyebrow="Caderno de Inspirações & Referências" title="Referências Visuais"
+        description="Curadoria autoral para o casamento e ensaio de Camila & Carlos. Toque no coração em cada foto para eleger as favoritas da noiva."
+      >
           <input
             type="file"
             ref={fileInputRef}
@@ -163,8 +149,7 @@ export function PreWeddingSection({
             <Plus className="size-3.5" />
             <span>Adicionar</span>
           </button>
-        </div>
-      </div>
+      </PageHeader>
 
       {/* 2. Filtros Essenciais & Barra de Busca com Tactile Styling */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
@@ -180,7 +165,7 @@ export function PreWeddingSection({
             }`}
           >
             <span>Todas as fotos</span>
-            <span className="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-surface-container dark:bg-surface-container-high text-on-surface-variant">
+            <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-surface-container dark:bg-surface-container-high text-on-surface-variant">
               {items.length}
             </span>
           </button>
@@ -199,7 +184,7 @@ export function PreWeddingSection({
               <Heart className={`size-3 ${likedIds.length > 0 ? "fill-red-500 text-red-500" : "text-secondary"}`} />
             </span>
             {likedIds.length > 0 && (
-              <span className="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-red-500/15 text-red-600 dark:text-red-400">
+              <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-red-500/15 text-red-600 dark:text-red-400">
                 {likedIds.length}
               </span>
             )}

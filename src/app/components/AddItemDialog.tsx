@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Dialog, DialogContent } from "@/app/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/app/components/ui/dialog";
 import { PreWeddingItem, PreWeddingCategory } from "@/app/data/preWeddingData";
 import { 
   X, 
@@ -135,9 +135,9 @@ export function AddItemDialog({ isOpen, onClose, onAdd }: AddItemDialogProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleReset}>
-      <DialogContent className="sm:max-w-[620px] max-h-[92vh] overflow-y-auto bg-surface text-on-surface border border-outline-variant/30 rounded-3xl p-0 shadow-airbnb-card">
+      <DialogContent showCloseButton={false} className="sm:max-w-[620px] max-h-[92dvh] overflow-y-auto bg-surface text-on-surface border border-outline-variant/30 rounded-3xl p-0 shadow-airbnb-card">
         {/* Top Bar */}
-        <div className="sticky top-0 z-20 bg-surface/95 backdrop-blur-xl border-b border-outline-variant/20 px-5 py-3.5 flex items-center justify-between">
+        <div className="sticky top-0 z-20 bg-surface/95 backdrop-blur-xl border-b border-outline-variant/20 px-4 sm:px-5 py-4 gap-2 flex items-center justify-between">
           <button
             type="button"
             onClick={handleReset}
@@ -145,7 +145,7 @@ export function AddItemDialog({ isOpen, onClose, onAdd }: AddItemDialogProps) {
           >
             Fechar
           </button>
-          <span className="font-body-md text-[11px] uppercase tracking-widest text-secondary font-bold">
+          <span className="font-body-md text-xs text-center uppercase tracking-wide text-secondary font-bold">
             Moodboard de Referências
           </span>
           <button
@@ -161,12 +161,12 @@ export function AddItemDialog({ isOpen, onClose, onAdd }: AddItemDialogProps) {
         <div className="p-6 flex flex-col gap-5">
           {/* Header Title & Subtitle */}
           <div>
-            <h2 className="font-headline-md text-2xl text-on-surface font-bold tracking-tight">
+            <DialogTitle className="font-headline-md text-2xl text-on-surface font-bold tracking-tight">
               Nova Referência
-            </h2>
-            <p className="font-body-md text-xs text-on-surface-variant mt-1">
+            </DialogTitle>
+            <DialogDescription className="font-body-md text-sm text-on-surface-variant mt-1">
               Adicione fotos e inspirações visuais que você ama para o seu casamento e ensaio.
-            </p>
+            </DialogDescription>
           </div>
 
           {/* Visual Dropzone */}

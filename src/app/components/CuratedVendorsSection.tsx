@@ -1,3 +1,4 @@
+import { PageHeader } from "./PageHeader";
 import { useState } from "react";
 import { KeyVendor, OPTIONAL_VENDOR_CATEGORIES } from "@/app/data/shotListData";
 import { 
@@ -77,31 +78,16 @@ export function CuratedVendorsSection({
   };
 
   return (
-    <div className="flex flex-col gap-6 sm:gap-8">
+    <div className="page-stack">
       {/* 1. Header da Seção */}
-      <section className="pt-1 pb-4 border-b border-outline-variant/20 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-        <div className="space-y-1.5 max-w-2xl">
-          <div className="flex items-center gap-2">
-            <span className="size-2 rounded-full bg-secondary" />
-            <span className="font-body-md text-xs text-secondary font-semibold uppercase tracking-wider">
-              Logística & Cenários
-            </span>
-          </div>
-          <h1 className="font-headline-md text-2xl sm:text-3xl text-on-surface font-bold tracking-tight">
-            Locais & Fornecedores
-          </h1>
-          <p className="font-body-md text-xs sm:text-sm text-on-surface-variant leading-relaxed">
-            Cenário oficial do casamento e equipe de fotografia da Versa Visual, com espaço dedicado para você registrar e centralizar seus outros parceiros contratados.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2 shrink-0">
+      <PageHeader eyebrow="Logística & Cenários" title="Locais & Fornecedores"
+        description="Cenário oficial do casamento e equipe de fotografia da Versa Visual, com espaço dedicado para você registrar e centralizar seus outros parceiros contratados."
+      >
           <span className="font-body-md text-xs text-on-surface font-semibold bg-surface-container-lowest dark:bg-card px-3.5 py-1.5 rounded-full border border-outline-variant/30 shadow-xs flex items-center gap-1.5">
             <MapPin className="size-3.5 text-secondary" />
             <span>Rio das Ostras · Costa Azul, RJ</span>
           </span>
-        </div>
-      </section>
+      </PageHeader>
 
       {/* 2. Banner Integrado do Local Principal (Espaço Lux com Rota no Mapa) */}
       <div className="relative w-full rounded-3xl overflow-hidden shadow-airbnb-card bg-surface-container group border border-outline-variant/20">
@@ -111,7 +97,7 @@ export function CuratedVendorsSection({
             backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuA3o9roN3Kvm4Rku_yH82u1xMkRST50-Ka4f5d6lio0Ei40Qs_HtP5srKmSg82T20B1G6o-zCng1ZS7FuXsZYXT6yYGCWuDzEoCeSQ8-vx9KjE9KySwKYUWosk7JdLx1YP4fNqRolFMTPBwdSvGiGBVEj88K64SwA5ALtAul_7csaWKfEylxnT92lKrIcGBhdSgPoBwFe1n-xvg4Jc0Pso9CrGGBeaFG6u1cVDkGg9x06ORkwG1qdw')" 
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent flex flex-col justify-end p-5 sm:p-7 text-white">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent flex flex-col justify-end p-5 sm:p-6 text-white">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div className="space-y-1 max-w-xl">
               <div className="flex items-center gap-2">
@@ -158,7 +144,7 @@ export function CuratedVendorsSection({
       {/* 3. Parceiros Oficiais Confirmados (Espaço de Evento + Fotografia Versa Visual) */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="font-headline-sm text-base sm:text-lg text-on-surface font-bold flex items-center gap-2">
+          <h2 className="editorial-section-title flex items-center gap-2">
             <Store className="size-4.5 text-secondary" />
             <span>Equipe & Local Confirmados</span>
           </h2>
@@ -167,7 +153,7 @@ export function CuratedVendorsSection({
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {confirmedVendors.map((vendor) => {
             const isFoto = vendor.id === "ven-02" || vendor.category === "foto";
             const photoUrl = vendorPhotos[vendor.id] || "https://lh3.googleusercontent.com/aida-public/AB6AXuBxLProZGK2qvTEHrFe38y48n-lfMtfMuT4PdRqQm-jDAmca-K41MuliOX9wAo__X8ZhPqDcx6Tv-c5dl8iutefFe1iA5rUCB1wANomF27mADDnMq8_2DwLeMrMw8J_P_RbjgOLWrZ104MdQTFbAMsHCBTjm2b0RLbO8spEI7mQd2gf05gNUdrVbMfPAfUjZppEJO9R4by8aK4_2K3NN_7iTUespyabyt_dSSKBNVwJg0tCxffBoJc";
@@ -191,7 +177,7 @@ export function CuratedVendorsSection({
                         <span className="font-body-md text-xs text-secondary font-bold uppercase tracking-wider block">
                           {vendor.role}
                         </span>
-                        <h3 className="font-headline-sm text-base sm:text-lg text-on-surface font-bold mt-0.5 leading-snug">
+                        <h3 className="editorial-card-title mt-0.5">
                           {vendor.name}
                         </h3>
                         {vendor.address && (
@@ -210,7 +196,7 @@ export function CuratedVendorsSection({
                   </div>
 
                   {/* Mensagem / Contexto */}
-                  <p className="font-body-md text-xs sm:text-[13px] text-on-surface/85 leading-relaxed bg-surface-container-low/70 dark:bg-surface-container/40 p-3 rounded-2xl border border-outline-variant/15">
+                  <p className="editorial-body bg-surface-container-low/70 dark:bg-surface-container/40 p-3 rounded-2xl border border-outline-variant/15">
                     {isFoto
                       ? "Direção fotográfica, cobertura editorial completa de 2 fotógrafos e curadoria visual conduzida por Vinicius Cunha (@v1ncsc)."
                       : "Cenário exclusivo com cerimônia ao ar livre sob jabuticabeiras e salão de recepção integrado com infraestrutura completa."}
@@ -251,7 +237,7 @@ export function CuratedVendorsSection({
       <div className="space-y-4 pt-2">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-outline-variant/20 pt-6">
           <div>
-            <h2 className="font-headline-sm text-base sm:text-lg text-on-surface font-bold flex items-center gap-2">
+            <h2 className="editorial-section-title flex items-center gap-2">
               <Sparkles className="size-4.5 text-secondary" />
               <span>Seus Outros Parceiros Contratados</span>
               <span className="text-xs font-normal text-on-surface-variant font-body-md">
@@ -275,7 +261,7 @@ export function CuratedVendorsSection({
 
         {/* Modal / Card Inline de Adicionar Fornecedor */}
         {isAddingOpen && (
-          <div className="bg-surface-container-lowest dark:bg-card rounded-3xl p-5 sm:p-6 border border-outline-variant/30 shadow-airbnb-card flex flex-col gap-4">
+          <div className="editorial-panel flex flex-col gap-4">
             <div className="flex items-center justify-between pb-2 border-b border-outline-variant/15">
               <span className="text-xs font-bold text-on-surface uppercase tracking-wider">
                 Novo Parceiro ou Fornecedor
@@ -373,14 +359,14 @@ export function CuratedVendorsSection({
             {customVendors.map((vendor) => (
               <div
                 key={vendor.id}
-                className="p-5 rounded-3xl bg-surface-container-lowest dark:bg-card border border-outline-variant/20 shadow-airbnb-card flex flex-col justify-between gap-3.5 hover:shadow-md transition-all duration-300"
+                className="editorial-panel flex flex-col justify-between gap-3.5 hover:shadow-md transition-all duration-300"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <span className="text-[11px] text-secondary font-bold uppercase tracking-wider block">
                       {vendor.role}
                     </span>
-                    <h3 className="font-headline-sm text-base text-on-surface font-bold mt-0.5">
+                    <h3 className="editorial-card-title mt-0.5">
                       {vendor.name}
                     </h3>
                     {vendor.whatsappMessage && (

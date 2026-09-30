@@ -75,3 +75,35 @@ Valores declarados em [src/styles/theme.css](file:///Users/viniciuscunha/3_DEV/w
    * Reset automático de durações de transição e animação em dispositivos com sensibilidade a movimento configurada no sistema operacional.
 8. **Exportação Executiva em PDF (Stitch Desktop & Mobile Reference)**:
    * Geração client-side via jsPDF do Dossiê Executivo completo e da Ficha Rápida de Altar para assessoria e cerimonial.
+
+## 5. Consistência visual — auditoria de 30/09/2026
+
+A referência Warm Editorial Marketplace orienta ritmo, hierarquia e ergonomia. A identidade canônica permanece Playfair Display para títulos e Inter para interface, com a paleta quente existente.
+
+- Fontes base ficam em `@layer base`, permitindo que as classes de cada componente prevaleçam. Os pesos usados são carregados pelo `index.html`.
+- Cores semânticas, incluindo `primary`, `on-primary`, `card`, `background` e `ring`, precisam estar registradas em `@theme` para gerar utilitários Tailwind.
+- As quatro áreas usam `PageHeader`: títulos de 24 px no celular e 30 px a partir de 640 px; descrições de 14 px com entrelinha de 1,625. Referências Visuais é o padrão aprovado, inclusive para a Visão Geral.
+- Intervalos entre blocos internos: 24 px no celular e 32 px em telas maiores. Tokens `space-lg` e `space-xl`: 24 e 32 px.
+- Navegação superior completa aparece a partir de 1280 px. Abaixo disso, o dock mantém as quatro áreas acessíveis; o conteúdo reserva espaço inferior e considera a área segura do dispositivo.
+- Diálogos respeitam a altura dinâmica da tela e permitem rolagem interna. A nova referência usa um único controle de fechar. No visualizador móvel, a imagem preserva sua proporção e as observações permanecem acessíveis por rolagem.
+
+### Validação
+
+- Quatro abas, dois temas e larguras de 320, 390, 768, 1024 e 1440 px: 40 combinações, sem rolagem horizontal da página ou erros JavaScript de execução.
+- Janelas de nova referência, observações, visualizador de foto e compartilhamento verificadas em 320 × 568 px.
+- Inspeção de capturas em celular, tablet e desktop; carregamento de Inter e Playfair Display confirmado no navegador.
+- Build Vite, checagem TypeScript separada e `git diff --check`.
+- Dados canônicos, fotos, marca, arquivos arquivados e formato de persistência preservados.
+
+### Padrão comum entre páginas
+
+Conforme a referência visual indicada por Vini, todas as quatro áreas compartilham a identidade do casal, seguida do mesmo cabeçalho de página. A Visão Geral deixa de usar um hero com escala própria.
+
+- `PageHeader.tsx`: rótulo editorial, título, descrição, ações e divisor.
+- `.page-stack`: intervalo de 24/32 px entre os blocos.
+- `.editorial-panel`: preenchimento de 20/24 px, borda, raio e sombra comuns aos painéis textuais.
+- `.editorial-section-title`: 20/24 px; `.editorial-card-title`: 16/18 px.
+- `.editorial-body`: 14 px; `.editorial-caption`: 12 px. Etiquetas e contadores mantêm seus papéis próprios.
+- Galeria, roteiro e catálogo mantêm suas estruturas funcionais. A altura dos blocos acompanha o conteúdo, sem alturas artificiais para igualar textos de comprimentos distintos.
+
+Verificação complementar: as quatro áreas em 320, 390, 870 e 1440 px, nos dois temas; comparação dos estilos computados de títulos, descrições e intervalos, além de capturas na largura de 870 px usada na anotação de Vini.

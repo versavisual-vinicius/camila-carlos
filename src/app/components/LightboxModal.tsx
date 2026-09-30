@@ -114,7 +114,7 @@ export function LightboxModal({
             <span className="text-white bg-black/50 border border-white/20 text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-sm">
               {currentIndex + 1} / {total}
             </span>
-            <span className="text-xs font-semibold text-white/90 bg-white/10 px-3 py-1 rounded-full hidden sm:inline-block backdrop-blur-sm">
+            <span className="text-xs font-semibold text-white/90 bg-white/10 px-3 py-1 rounded-full hidden md:inline-block backdrop-blur-sm">
               {categoryLabels[item.category] || item.category}
             </span>
           </div>
@@ -152,7 +152,7 @@ export function LightboxModal({
             e.stopPropagation();
             handlePrev();
           }}
-          className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 size-11 sm:size-12 rounded-full bg-surface/90 hover:bg-surface text-on-surface flex items-center justify-center transition-all duration-200 shadow-md hover:scale-105 active:scale-92 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+          className="absolute left-22 md:left-6 top-4 md:top-1/2 md:-translate-y-1/2 z-30 size-10 md:size-12 rounded-full bg-surface/90 hover:bg-surface text-on-surface flex items-center justify-center transition-all duration-200 shadow-md hover:scale-105 active:scale-92 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
           aria-label="Foto anterior"
         >
           <ChevronLeft className="size-6" />
@@ -164,7 +164,7 @@ export function LightboxModal({
             e.stopPropagation();
             handleNext();
           }}
-          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 size-11 sm:size-12 rounded-full bg-surface/90 hover:bg-surface text-on-surface flex items-center justify-center transition-all duration-200 shadow-md hover:scale-105 active:scale-92 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+          className="absolute left-34 md:left-auto md:right-6 top-4 md:top-1/2 md:-translate-y-1/2 z-30 size-10 md:size-12 rounded-full bg-surface/90 hover:bg-surface text-on-surface flex items-center justify-center transition-all duration-200 shadow-md hover:scale-105 active:scale-92 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
           aria-label="Próxima foto"
         >
           <ChevronRight className="size-6" />
@@ -172,20 +172,20 @@ export function LightboxModal({
 
         {/* Main Content Area */}
         <div
-          className="relative max-w-5xl max-h-[85vh] flex flex-col md:flex-row items-center justify-center gap-6 z-10"
+          className="relative w-full max-w-5xl max-h-[calc(100dvh-6rem)] mt-12 overflow-y-auto flex flex-col md:flex-row items-center md:justify-center gap-4 sm:gap-6 z-10"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Main Image */}
-          <div className="relative flex items-center justify-center max-h-[72vh] overflow-hidden rounded-[20px] shadow-2xl bg-black/60 border border-white/10">
+          <div className="relative min-w-0 shrink-0 md:shrink flex items-center justify-center rounded-2xl shadow-2xl bg-black/60 border border-white/10">
             <img
               src={item.imageUrl}
               alt={item.title}
-              className="max-h-[70vh] w-auto object-contain rounded-[18px]"
+              className="max-h-[40dvh] md:max-h-[70dvh] max-w-full w-auto object-contain rounded-2xl"
             />
           </div>
 
           {/* Details Sidebar: Foco na Noiva com Campo Editável */}
-          <div className="w-full md:w-84 flex flex-col justify-between bg-surface/95 dark:bg-[#141312]/95 border border-outline-variant/30 p-5 sm:p-6 rounded-2xl backdrop-blur-md text-on-surface max-h-[70vh] overflow-y-auto shadow-2xl">
+          <div className="w-full md:w-84 shrink-0 flex flex-col justify-between bg-surface/95 dark:bg-[#141312]/95 border border-outline-variant/30 p-5 sm:p-6 rounded-2xl backdrop-blur-md text-on-surface md:max-h-[70dvh] md:overflow-y-auto shadow-2xl">
             <div className="flex flex-col gap-3">
               <div>
                 <div className="flex items-center gap-1.5 text-secondary text-xs font-semibold uppercase tracking-wider mb-1.5">
@@ -249,7 +249,7 @@ export function LightboxModal({
             </div>
 
             {/* Bottom Signature */}
-            <div className="border-t border-outline-variant/20 pt-3.5 mt-5 flex items-center justify-between text-xs text-on-surface-variant">
+            <div className="border-t border-outline-variant/20 pt-4 mt-4 flex flex-wrap gap-2 items-center justify-between text-xs text-on-surface-variant">
               <span className="flex items-center gap-1 text-[11px]">
                 <MapPin className="size-3 text-secondary" />
                 Rio das Ostras · Costa Azul

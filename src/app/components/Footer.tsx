@@ -2,9 +2,9 @@ import { MapPin, Database } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="mt-20 border-t border-outline-variant/20 bg-surface-container-lowest dark:bg-[#141312] py-10 transition-colors shadow-2xs">
+    <footer className="mt-8 sm:mt-12 border-t border-outline-variant/20 bg-surface-container-lowest dark:bg-[#141312] py-10 transition-colors shadow-2xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-5 text-xs text-on-surface-variant">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-5 text-xs text-on-surface-variant">
           <div className="flex items-center gap-3 flex-wrap justify-center sm:justify-start">
             <div className="flex items-center gap-2">
               <img
@@ -31,7 +31,7 @@ export function Footer() {
             </a>
           </div>
 
-          <div className="flex items-center gap-4 text-xs">
+          <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-xs">
             <span className="flex items-center gap-1.5 text-on-surface-variant font-medium">
               <MapPin className="size-3.5 text-secondary" />
               Rio das Ostras & Costa Azul, RJ

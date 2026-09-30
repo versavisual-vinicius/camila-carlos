@@ -393,7 +393,7 @@ export default function App() {
   );
 
   return (
-    <div className="min-h-screen bg-surface font-body-md text-on-surface antialiased transition-colors duration-200 pb-24 md:pb-0">
+    <div className="min-h-screen bg-surface font-body-md text-on-surface antialiased transition-colors duration-200 pb-[calc(6rem+env(safe-area-inset-bottom,0px))] xl:pb-0">
       {/* Toast Notification Provider */}
       <Toaster position="top-center" richColors closeButton />
 
@@ -414,8 +414,7 @@ export default function App() {
 
       {/* Main Container */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        {/* Top Hero Banner: Apenas nas abas internas (Referências, Roteiro, Fornecedores) */}
-        {activeTab !== "visao-geral" && (
+        {/* Identidade do casal compartilhada pelas quatro áreas */}
           <section className="rounded-3xl border border-outline-variant/25 bg-surface-container-lowest dark:bg-card p-5 sm:p-6 shadow-airbnb-card mb-6 sm:mb-8 transition-all duration-300 hover:shadow-md">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-6">
               {/* Couple & Photographer Identification */}
@@ -444,7 +443,7 @@ export default function App() {
               </div>
 
               {/* Triple Metric Counters (Stitch Airbnb Style with Keyboard Access) */}
-              <div className="grid grid-cols-3 gap-2.5 sm:gap-4 min-w-[280px] sm:min-w-[360px]">
+              <div className="grid grid-cols-3 gap-3 sm:gap-4 w-full lg:w-90 lg:shrink-0">
                 <div 
                   onClick={() => setActiveTab("referencias")}
                   onKeyDown={(e) => {
@@ -463,7 +462,7 @@ export default function App() {
                   aria-label="Ver todas as fotos no acervo"
                   aria-selected={activeTab === "referencias"}
                 >
-                  <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-on-surface">{items.length}</span>
+                  <span className="text-xl sm:text-2xl font-bold tabular-nums tracking-tight text-on-surface">{items.length}</span>
                   <span className="mt-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-secondary">FOTOS</span>
                 </div>
                 <div 
@@ -484,7 +483,7 @@ export default function App() {
                   aria-label="Ver fotos favoritas da noiva"
                   aria-selected={activeTab === "referencias"}
                 >
-                  <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-red-500">
+                  <span className="text-xl sm:text-2xl font-bold tabular-nums tracking-tight text-red-500">
                     {likedIds.length}
                   </span>
                   <span className="mt-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-secondary">FAVORITAS</span>
@@ -507,7 +506,7 @@ export default function App() {
                   aria-label="Ver progresso da shot list de altar"
                   aria-selected={activeTab === "roteiro"}
                 >
-                  <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-on-surface">{completedShotCount}/{totalShotCount}</span>
+                  <span className="text-xl sm:text-2xl font-bold tabular-nums tracking-tight text-on-surface">{completedShotCount}/{totalShotCount}</span>
                   <span className="mt-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-secondary">ALTAR</span>
                 </div>
               </div>
@@ -538,7 +537,6 @@ export default function App() {
               </button>
             </div>
           </section>
-        )}
 
         {/* TELA 0: VISÃO GERAL (HOME LEVE EDITORIAL STITCH) */}
         {activeTab === "visao-geral" && (

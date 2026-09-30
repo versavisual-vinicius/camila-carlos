@@ -16,6 +16,26 @@
 }
 
 @theme {
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-on-secondary: var(--on-secondary);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
   --color-surface: var(--surface);
   --color-surface-dim: var(--surface-dim);
   --color-surface-bright: var(--surface-bright);
@@ -39,6 +59,8 @@
   --color-on-error: var(--on-error);
   --color-on-error-container: var(--on-error-container);
 
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-headline: 'Playfair Display', Georgia, serif;
   --font-headline-md: 'Playfair Display', Georgia, serif;
   --font-headline-lg: 'Playfair Display', Georgia, serif;
   --font-headline-sm: 'Playfair Display', Georgia, serif;
@@ -55,11 +77,39 @@
   --spacing-space-xs: 0.25rem;
   --spacing-space-sm: 0.5rem;
   --spacing-space-md: 1rem;
-  --spacing-space-lg: 1.75rem;
-  --spacing-space-xl: 3rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2rem;
   --spacing-margin: 1.25rem;
   --spacing-margin-tablet: 2.5rem;
   --spacing-margin-desktop: 4rem;
   --spacing-gutter: 1.5rem;
   --spacing-gutter-desktop: 2.5rem;
+}
+
+/* Escala compartilhada pelas quatro áreas do caderno editorial. */
+@layer components {
+  .page-stack {
+    @apply flex flex-col gap-6 sm:gap-8;
+  }
+
+  .editorial-panel {
+    @apply rounded-3xl border border-outline-variant/25 bg-surface-container-lowest p-5 sm:p-6;
+    box-shadow: var(--shadow-airbnb-card);
+  }
+
+  .editorial-section-title {
+    @apply font-headline text-xl sm:text-2xl font-bold tracking-tight text-on-surface;
+  }
+
+  .editorial-card-title {
+    @apply font-headline text-base sm:text-lg font-bold leading-snug tracking-tight text-on-surface;
+  }
+
+  .editorial-body {
+    @apply font-body-md text-sm leading-relaxed text-on-surface-variant;
+  }
+
+  .editorial-caption {
+    @apply font-body-md text-xs leading-relaxed text-on-surface-variant;
+  }
 }

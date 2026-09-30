@@ -86,7 +86,7 @@ export function MoodboardCard({
 
         {/* Quick Actions Floating Bar */}
         <div 
-          className="absolute bottom-2.5 right-2.5 z-10 flex items-center gap-1.5 opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200"
+          className="absolute bottom-2.5 right-2.5 z-10 flex items-center gap-1.5 opacity-90 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 transition-opacity duration-200"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Note button */}
