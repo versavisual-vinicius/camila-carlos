@@ -49,7 +49,7 @@ O produto responde a quatro perguntas essenciais:
 ## 4. Locações e Roteiro Territorial
 
 * **Ensaio Pré-Wedding**:
-  * *Locações*: **Bar Thunder** e **Falésias & Orla de Costa Azul** (Rio das Ostras).
+  * *Locações*: 
   * *Elementos*: Roupas, conexões, luz natural e a possibilidade de integrar a moto Harley-Davidson de Carlos conforme o desejo do casal.
 * **Casamento**:
   * *Local Confirmado*: **Espaço Lux** (Rio das Ostras / RJ).
