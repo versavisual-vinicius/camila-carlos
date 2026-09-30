@@ -11,17 +11,10 @@ import {
   ColorScheme
 } from "@vis.gl/react-google-maps";
 import { 
-  MapPin, 
   Navigation, 
   Compass, 
-  SunMedium, 
   Camera, 
-  Key, 
-  ExternalLink, 
-  Sparkles, 
-  Layers, 
-  X,
-  Check
+  Sparkles
 } from "lucide-react";
 
 export interface WeddingLocation {
@@ -206,34 +199,14 @@ interface WeddingInteractiveMapProps {
 }
 
 export function WeddingInteractiveMap({ isDarkMode = false }: WeddingInteractiveMapProps) {
-  // Check env or user-stored demo key
+  // Read env key or local storage
   const envKey = (import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string | undefined) || "";
-  const [apiKey, setApiKey] = useState<string>(() => {
-    return localStorage.getItem("camila_carlos_gmp_api_key") || envKey;
-  });
+  const apiKey = (typeof window !== "undefined" ? localStorage.getItem("camila_carlos_gmp_api_key") : null) || envKey;
 
   const [activeView, setActiveView] = useState<"mapa" | "foto">("mapa");
   const [selectedLocationId, setSelectedLocationId] = useState<string | null>("espaco-lux");
-  const [isKeyDialogOpen, setIsKeyDialogOpen] = useState(false);
-  const [keyInput, setKeyInput] = useState("");
 
   const selectedLocation = WEDDING_LOCATIONS.find((loc) => loc.id === selectedLocationId) || null;
-
-  const handleSaveKey = (e: React.FormEvent) => {
-    e.preventDefault();
-    const cleanKey = keyInput.trim();
-    if (cleanKey) {
-      localStorage.setItem("camila_carlos_gmp_api_key", cleanKey);
-      setApiKey(cleanKey);
-      setIsKeyDialogOpen(false);
-    }
-  };
-
-  const handleRemoveKey = () => {
-    localStorage.removeItem("camila_carlos_gmp_api_key");
-    setApiKey(envKey);
-    setIsKeyDialogOpen(false);
-  };
 
   return (
     <div className="relative w-full rounded-3xl overflow-hidden shadow-airbnb-card bg-surface-container border border-outline-variant/20 flex flex-col">
@@ -255,9 +228,8 @@ export function WeddingInteractiveMap({ isDarkMode = false }: WeddingInteractive
           </p>
         </div>
 
-        {/* View Switcher & Key Config */}
-        <div className="flex items-center gap-2 self-start md:self-auto shrink-0 flex-wrap">
-          {/* Quick Tab: Mapa vs Foto */}
+        {/* View Switcher: Mapa vs Foto */}
+        <div className="flex items-center gap-2 self-start md:self-auto shrink-0">
           <div className="inline-flex items-center bg-surface-container dark:bg-surface-container-high p-1 rounded-full border border-outline-variant/20 text-xs font-semibold">
             <button
               type="button"
@@ -284,25 +256,12 @@ export function WeddingInteractiveMap({ isDarkMode = false }: WeddingInteractive
               <span>Cenário Real</span>
             </button>
           </div>
-
-          {/* Key Button / Status */}
-          <button
-            type="button"
-            onClick={() => setIsKeyDialogOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-outline-variant/30 text-xs font-semibold text-secondary hover:text-on-surface hover:bg-surface-container transition-all"
-            title="Configurar Google Maps API Key / Demo Key"
-          >
-            <Key className="size-3.5 text-secondary" />
-            <span className="hidden sm:inline">
-              {apiKey ? "Chave Ativa" : "Conectar API Key"}
-            </span>
-          </button>
         </div>
       </div>
 
       {/* Main Container: Map or Static Photo */}
       <div className="relative w-full h-[380px] sm:h-[460px] bg-surface-container-lowest overflow-hidden">
-        {activeView === "foto" ? (
+        {activeView === "foto" || !apiKey ? (
           /* View A: High-res Wedding Venue Photo */
           <div className="relative w-full h-full group">
             <div 
@@ -346,7 +305,7 @@ export function WeddingInteractiveMap({ isDarkMode = false }: WeddingInteractive
               </div>
             </div>
           </div>
-        ) : apiKey ? (
+        ) : (
           /* View B: Full Interactive Google Maps Platform with @vis.gl/react-google-maps */
           <div className="w-full h-full relative" style={{ width: "100%", height: "100%" }}>
             <APIProvider 
@@ -376,63 +335,6 @@ export function WeddingInteractiveMap({ isDarkMode = false }: WeddingInteractive
                 ))}
               </Map>
             </APIProvider>
-          </div>
-        ) : (
-          /* View C: Fallback / Zero-Friction Demo Mode (No Key Set Yet) */
-          <div className="relative w-full h-full flex flex-col items-center justify-center p-6 text-center bg-radial from-surface-container-low to-surface-container-high">
-            <div className="max-w-md space-y-3">
-              <div className="size-12 mx-auto rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shadow-xs">
-                <Compass className="size-6" />
-              </div>
-              <h4 className="font-headline-sm text-lg font-bold text-on-surface">
-                Mapa Interativo Pronto para Conexão
-              </h4>
-              <p className="font-body-md text-xs text-secondary leading-relaxed">
-                O componente foi totalmente estruturado com <strong className="text-on-surface font-semibold">@vis.gl/react-google-maps</strong> e <strong className="text-on-surface font-semibold">AdvancedMarker</strong>. Para carregar os azulejos vetoriais ao vivo, utilize sua chave de API ou a chave de demonstração gratuita (Maps Demo Key).
-              </p>
-
-              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => setIsKeyDialogOpen(true)}
-                  className="w-full sm:w-auto px-4 py-2 rounded-xl bg-primary text-on-primary text-xs font-semibold shadow-xs hover:opacity-90 transition-all flex items-center justify-center gap-1.5 active:scale-95"
-                >
-                  <Key className="size-3.5" />
-                  <span>Inserir Chave / Demo Key</span>
-                </button>
-                <a
-                  href="https://mapsplatform.google.com/maps-demo-key?utm_campaign=gmp_git_agentskills_v1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-4 py-2 rounded-xl border border-outline-variant/30 bg-surface-container-lowest dark:bg-card text-on-surface text-xs font-semibold shadow-xs hover:bg-surface-container transition-all flex items-center justify-center gap-1.5"
-                >
-                  <span>Obter Demo Key Grátis</span>
-                  <ExternalLink className="size-3 text-secondary" />
-                </a>
-              </div>
-
-              {/* Direct links to open in external maps */}
-              <div className="pt-3 border-t border-outline-variant/20 flex items-center justify-center gap-2 text-xs font-medium text-secondary">
-                <span>Rotas diretas:</span>
-                <a
-                  href={WEDDING_LOCATIONS[0].mapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline font-semibold"
-                >
-                  Google Maps
-                </a>
-                <span>·</span>
-                <a
-                  href={WEDDING_LOCATIONS[0].wazeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline font-semibold"
-                >
-                  Waze
-                </a>
-              </div>
-            </div>
           </div>
         )}
 
@@ -473,88 +375,6 @@ export function WeddingInteractiveMap({ isDarkMode = false }: WeddingInteractive
           })}
         </div>
       </div>
-
-      {/* Modal / Dialog for Custom API Key or Demo Key */}
-      {isKeyDialogOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="w-full max-w-md rounded-3xl bg-surface-container-lowest dark:bg-card p-6 border border-outline-variant/30 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="size-8 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center">
-                  <Key className="size-4" />
-                </div>
-                <h4 className="font-headline-sm text-base font-bold text-on-surface">
-                  Configuração Google Maps Platform
-                </h4>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIsKeyDialogOpen(false)}
-                className="size-8 rounded-full hover:bg-surface-container flex items-center justify-center text-secondary"
-              >
-                <X className="size-4" />
-              </button>
-            </div>
-
-            <p className="font-body-md text-xs text-secondary leading-relaxed">
-              Você pode inserir sua chave em <code className="px-1.5 py-0.5 rounded bg-surface-container font-mono text-[11px] text-on-surface">VITE_GOOGLE_MAPS_API_KEY</code> no arquivo <code className="px-1.5 py-0.5 rounded bg-surface-container font-mono text-[11px] text-on-surface">.env.local</code> ou colar uma chave de demonstração abaixo para teste instantâneo:
-            </p>
-
-            <form onSubmit={handleSaveKey} className="space-y-3">
-              <div>
-                <label className="block text-xs font-semibold text-on-surface mb-1">
-                  Google Maps API Key / Demo Key:
-                </label>
-                <input
-                  type="text"
-                  value={keyInput}
-                  onChange={(e) => setKeyInput(e.target.value)}
-                  placeholder="AIzaSy..."
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-outline-variant/40 bg-surface-container text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/40 font-mono"
-                />
-              </div>
-
-              <div className="flex items-center justify-between gap-2 pt-2">
-                {apiKey ? (
-                  <button
-                    type="button"
-                    onClick={handleRemoveKey}
-                    className="text-xs text-red-500 hover:underline font-semibold"
-                  >
-                    Desconectar Chave
-                  </button>
-                ) : (
-                  <a
-                    href="https://mapsplatform.google.com/maps-demo-key?utm_campaign=gmp_git_agentskills_v1"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-primary hover:underline font-semibold flex items-center gap-1"
-                  >
-                    <span>Gerar Demo Key Grátis</span>
-                    <ExternalLink className="size-3" />
-                  </a>
-                )}
-
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setIsKeyDialogOpen(false)}
-                    className="px-3 py-1.5 rounded-xl text-xs font-semibold text-secondary hover:bg-surface-container"
-                  >
-                    Cancelar
-                  </button>
-                  <button
-                    type="submit"
-                    className="px-4 py-1.5 rounded-xl bg-primary text-on-primary text-xs font-semibold shadow-xs hover:opacity-90 active:scale-95"
-                  >
-                    Salvar Chave
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
