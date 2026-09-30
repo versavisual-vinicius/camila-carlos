@@ -1,6 +1,7 @@
 import { PageHeader } from "./PageHeader";
 import { useState } from "react";
 import { KeyVendor, OPTIONAL_VENDOR_CATEGORIES } from "@/app/data/shotListData";
+import { WeddingInteractiveMap } from "./WeddingInteractiveMap";
 import { 
   MapPin, 
   Phone, 
@@ -9,7 +10,7 @@ import {
   Trash2, 
   Compass, 
   Check, 
-  X,
+  X, 
   ExternalLink,
   Store,
   Sparkles,
@@ -24,6 +25,7 @@ interface CuratedVendorsSectionProps {
   onUpdateVendor: (id: string, updates: Partial<KeyVendor>) => void;
   onDeleteVendor: (id: string) => void;
   onResetVendors: () => void;
+  isDarkMode?: boolean;
 }
 
 const vendorPhotos: Record<string, string> = {
@@ -36,7 +38,8 @@ export function CuratedVendorsSection({
   onAddVendor,
   onUpdateVendor,
   onDeleteVendor,
-  onResetVendors
+  onResetVendors,
+  isDarkMode = false
 }: CuratedVendorsSectionProps) {
   // Pre-filled confirmed partners
   const confirmedVendors = vendors.filter((v) => !v.isCustom);
@@ -89,57 +92,8 @@ export function CuratedVendorsSection({
           </span>
       </PageHeader>
 
-      {/* 2. Banner Integrado do Local Principal (Espaço Lux com Rota no Mapa) */}
-      <div className="relative w-full rounded-3xl overflow-hidden shadow-airbnb-card bg-surface-container group border border-outline-variant/20">
-        <div 
-          className="w-full h-48 sm:h-60 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-          style={{ 
-            backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuA3o9roN3Kvm4Rku_yH82u1xMkRST50-Ka4f5d6lio0Ei40Qs_HtP5srKmSg82T20B1G6o-zCng1ZS7FuXsZYXT6yYGCWuDzEoCeSQ8-vx9KjE9KySwKYUWosk7JdLx1YP4fNqRolFMTPBwdSvGiGBVEj88K64SwA5ALtAul_7csaWKfEylxnT92lKrIcGBhdSgPoBwFe1n-xvg4Jc0Pso9CrGGBeaFG6u1cVDkGg9x06ORkwG1qdw')" 
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent flex flex-col justify-end p-5 sm:p-6 text-white">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div className="space-y-1 max-w-xl">
-              <div className="flex items-center gap-2">
-                <span className="size-2 rounded-full bg-emerald-400 shrink-0" />
-                <span className="font-body-md text-xs text-emerald-300 font-semibold uppercase tracking-wider">
-                  Cenário Oficial de Cerimônia & Festa
-                </span>
-              </div>
-              <h2 className="font-headline-sm text-xl sm:text-2xl text-white font-bold leading-tight">
-                Espaço Lux & Falésias da Costa Azul — Rio das Ostras
-              </h2>
-              <p className="font-body-md text-xs sm:text-sm text-white/80 leading-normal">
-                Altar sob luz natural ao ar livre · Salão integrado · Rota litorânea nas falésias para pôr do sol
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2.5 self-start sm:self-auto shrink-0">
-              <a
-                href="https://www.google.com/maps/search/?api=1&query=Espa%C3%A7o+Lux+Rio+das+Ostras+RJ"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white text-stone-900 hover:bg-white/90 px-4 py-2 rounded-xl shadow-md transition-all active:scale-95 flex items-center gap-2 text-xs font-semibold"
-                title="Abrir rota no Google Maps"
-              >
-                <Compass className="size-4 text-secondary" />
-                <span>Google Maps</span>
-              </a>
-
-              <a
-                href="https://waze.com/ul?q=Espaço+Lux+Rio+das+Ostras"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white/20 hover:bg-white/30 backdrop-blur-md text-white px-3.5 py-2 rounded-xl border border-white/25 shadow-sm transition-all active:scale-95 flex items-center gap-2 text-xs font-semibold"
-                title="Abrir no Waze"
-              >
-                <Navigation className="size-4" />
-                <span>Waze</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* 2. Mapa Interativo Oficial Google Maps Platform & Cenário */}
+      <WeddingInteractiveMap isDarkMode={isDarkMode} />
 
       {/* 3. Parceiros Oficiais Confirmados (Espaço de Evento + Fotografia Versa Visual) */}
       <div className="space-y-4">

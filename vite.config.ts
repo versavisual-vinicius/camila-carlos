@@ -43,6 +43,9 @@ export default defineConfig({
           if (id.includes('node_modules/@radix-ui') || id.includes('node_modules/vaul') || id.includes('node_modules/sonner')) {
             return 'vendor-ui';
           }
+          if (id.includes('node_modules/@vis.gl/react-google-maps')) {
+            return 'vendor-google-maps';
+          }
         },
       },
     },
